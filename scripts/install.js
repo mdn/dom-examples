@@ -1,5 +1,5 @@
 // define the manifest URL
-  var manifest_url = location.href + "/manifest.webapp";
+  var manifest_url = location.href + "manifest.webapp";
 
 function install(ev) {
   ev.preventDefault();
