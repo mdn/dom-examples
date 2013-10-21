@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "name": "Open Web App",
+  "name": "To-do list",
   "description": "Store to-do items on your device, and be notified when the deadlines are up.",
   "launch_path": "/app-template/index.html",
   "icons": {
