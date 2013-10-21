@@ -137,9 +137,11 @@ window.onload = function() {
       var request = objectStore.add(newItem[0]);        
         request.onsuccess = function(event) {
           var date = new Date(month.value + " " + day.value + ", " + year.value + " " + hours.value + ":" + minutes.value + ":00");
-          alert(date);
-          scheduleAlarm(title.value,date);
-        
+          
+          if(installedFlag = "yes") {
+            scheduleAlarm(title.value,date);
+          }
+          
           note.innerHTML += '<li>New item added to database.</li>';
           title.value = '';
           hours.value = '';
