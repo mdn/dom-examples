@@ -206,17 +206,22 @@ form div input[type="submit"] {
   form div label {
     width: 30%;
   }
+  
+  form input, form select, form label {
+    line-height: 2.5rem;
+    font-size: 2rem;
+  }
 
   form .full-width input {
     width: 50%; 
   }
 
   form .half-width input {
-    width: 30%;
+    width: 50%;
   }
 
   form .third-width select {
-    width: 30%;
+    width: 50%;
   }
   
   #install {
