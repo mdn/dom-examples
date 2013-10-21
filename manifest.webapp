@@ -4,30 +4,30 @@
   "description": "Store to-do items on your device, and be notified when the deadlines are up.",
   "launch_path": "/app-template/index.html",
   "icons": {
-    "128": "/app-template/app-icons/icon-128.png"
+    "128": "/to-do-notifications/img/icon-128.png"
   },
   "developer": {
     "name": "Chris Mills",
-    "url": "http://yourawesomeapp.com"
+    "url": "http://chrisdavidmills.github.io/to-do-notifications/"
   },
   "locales": {
     "es": {
       "description": "Su nueva aplicación impresionante Open Web",
       "developer": {
-        "url": "http://yourawesomeapp.com"
+        "url": "http://chrisdavidmills.github.io/to-do-notifications/"
       }
     },
     "it": {
       "description": "Il vostro nuovo fantastico Open Web App",
       "developer": {
-        "url": "http://yourawesomeapp.com"
+        "url": "http://chrisdavidmills.github.io/to-do-notifications/"
       }
     }
   },
   "default_locale": "en",
   "permissions": {
     "desktop-notification":{
-    
+      "description":  "Need for creating system notifications."
     }, 
     "alarms": {
       "description": "Required to schedule alarm notifications"
