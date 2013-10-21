@@ -2,7 +2,7 @@
   "version": "0.1",
   "name": "To-do list",
   "description": "Store to-do items on your device, and be notified when the deadlines are up.",
-  "launch_path": "/to-do-notifications/index.html",
+  "launch_path": "http://chrisdavidmills.github.io/to-do-notifications/index.html",
   "icons": {
     "128": "/to-do-notifications/img/icon-128.png"
   },
