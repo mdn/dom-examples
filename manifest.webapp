@@ -1,0 +1,21 @@
+{
+  "name": "To Do List",
+  "description": "To Do List allows you to store a list of memory jogging task reminders, persisted on the device (even while offline) using IndexedDB.",
+  "launch_path": "/~cmills/to-do-list/",
+  "icons": {
+    "128": "/~cmills/to-do-list/img/icon-128.png"
+  },
+  "developer": {
+    "name": "Chris Mills",
+    "url": "http://www.conquestofsteel.co.uk"
+  },
+  "default_locale": "en",
+  "permissions": {
+    "desktop-notification": {
+      "description": "Allows the application to display notifications on the user's desktop."
+    }
+    "alarms": {
+      "description": "Required to schedule alarm notifications."
+    }
+  }
+}
