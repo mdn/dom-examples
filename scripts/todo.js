@@ -138,9 +138,8 @@ window.onload = function() {
         request.onsuccess = function(event) {
           var date = new Date(month.value + " " + day.value + ", " + year.value + " " + hours.value + ":" + minutes.value + ":00");
           
-          if(installedFlag = "yes") {
-            scheduleAlarm(title.value,date);
-          }
+          
+          //scheduleAlarm(title.value,date);
           
           note.innerHTML += '<li>New item added to database.</li>';
           title.value = '';
@@ -233,12 +232,15 @@ window.onload = function() {
     
   }
   
-  function scheduleAlarm(title,date) {
-    var data = {
-      alarmTitle: title
-    }
-    var request = navigator.mozAlarms.add(date, "honorTimezone", data);
-  }
+  //function scheduleAlarm(title,date) {
+    //var data = {
+      //alarmTitle: title
+    //}
+    
+    //if(navigator.mozAlarms !== null) {
+      //var request = navigator.mozAlarms.add(date, "honorTimezone", data);
+    //}
+  //}
   
   function createNotification(title) {
 

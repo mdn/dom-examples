@@ -1,6 +1,5 @@
 // define the manifest URL
 var manifest_url = location.href.substring(0, location.href.lastIndexOf("/")) + "/manifest.webapp";
-var installedFlag = "no";
 
 function install(ev) {
   ev.preventDefault();
@@ -23,7 +22,6 @@ var installCheck = navigator.mozApps.checkInstalled(manifest_url);
 installCheck.onsuccess = function() {
   
   if(installCheck.result) {
-    installedFlag = "yes";
     button.style.display = "none";
   } else {
     button.addEventListener('click', install, false);
