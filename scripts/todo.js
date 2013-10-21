@@ -139,7 +139,7 @@ window.onload = function() {
           var date = new Date(month.value + " " + day.value + ", " + year.value + " " + hours.value + ":" + minutes.value + ":00");
           
           
-          //scheduleAlarm(title.value,date);
+          scheduleAlarm(title.value,date);
           
           note.innerHTML += '<li>New item added to database.</li>';
           title.value = '';
@@ -232,15 +232,15 @@ window.onload = function() {
     
   }
   
-  //function scheduleAlarm(title,date) {
-    //var data = {
-      //alarmTitle: title
-    //}
+  function scheduleAlarm(title,date) {
+    var data = {
+      alarmTitle: title
+    }
     
-    //if(navigator.mozAlarms !== null) {
-      //var request = navigator.mozAlarms.add(date, "honorTimezone", data);
-    //}
-  //}
+    if(navigator.mozAlarms !== null) {
+      var request = navigator.mozAlarms.add(date, "honorTimezone", data);
+    }
+  }
   
   function createNotification(title) {
 
