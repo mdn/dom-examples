@@ -122,8 +122,6 @@ window.onload = function() {
       var newItem = [
         { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, passed: 'No' }
       ];
-        
-      console.log(newItem);
 
       var transaction = db.transaction(["toDoList"], "readwrite");
     
@@ -174,13 +172,7 @@ window.onload = function() {
     var dayCheck = now.getDate();
     var monthCheck = now.getMonth();
     var yearCheck = now.getFullYear();
-    
-    console.log(minuteCheck);
-    console.log(hourCheck);
-    console.log(dayCheck);
-    console.log(monthCheck);
-    console.log(yearCheck);
-    
+        
     var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
     objectStore.openCursor().onsuccess = function(event) {
       var cursor = event.target.result;
@@ -240,6 +232,9 @@ window.onload = function() {
   }
   
   function scheduleAlarm(title,date) {
+    var data = {
+      alarmTitle: title
+    }
     var request = navigator.mozAlarms.add(date, "honorTimezone", data);
   }
   

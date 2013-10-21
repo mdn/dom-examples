@@ -25,9 +25,9 @@
     }
   },
   "permissions": {
-    "desktop-notification":{
-      "description":  "Need for creating system notifications."
-    }, 
+    "desktop-notification": {
+      "description": "Need for creating system notifications."
+    },
     "alarms": {
       "description": "Required to schedule alarm notifications"
     }
