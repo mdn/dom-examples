@@ -182,7 +182,7 @@ form div input[type="submit"] {
 
 @media (max-width: 32rem) {
   body {
-    width: 45rem;
+    width: 32rem;
   }
   
   form .full-width {
