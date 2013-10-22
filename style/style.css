@@ -183,6 +183,8 @@ form div input[type="submit"] {
 @media (max-width: 32rem) {
   body {
     width: 100%;
+    border-left: none;
+    border-right: none;
   }
   
   form div {
