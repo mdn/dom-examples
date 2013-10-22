@@ -206,7 +206,8 @@ form div input[type="submit"] {
   }
   
   form div label {
-    width: 30%;
+    width: 36%;
+    padding-left: 1rem;
   }
   
   form input, form select, form label {
