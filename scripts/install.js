@@ -1,6 +1,7 @@
 // get a reference to the install button
 var button = document.getElementById('install');
 
+// if browser has support for installable apps, run the install code; it not, hide the install button
 if('mozApps' in navigator) {
     
     // define the manifest URL
@@ -30,4 +31,6 @@ if('mozApps' in navigator) {
         button.addEventListener('click', install, false);
       };
     };
+} else {
+  button.style.display = "none";
 }
