@@ -1,10 +1,16 @@
+// create a reference to the notifications list in the bottom of the app; we will write database messages into this list by
+//appending list items on to the inner HTML of this variable - this is all the lines that say note.innerHTML += '<li>foo</li>';
 var note = document.getElementById('notifications');
+
+// create an instance of a db object for us to store the IDB data in
 var db;
 
+// create a blank instance of the object that is used to transfer data into the IDB. This is mainly for reference
 var newItem = [
       { taskTitle: "", hours: 0, minutes: 0, day: "", month: "", year: 0, passed: "" }
     ];
-    
+
+// all the variables we need for the app    
 var increment = 0;
 
 var taskList = document.getElementById('task-list');
@@ -41,8 +47,12 @@ window.onload = function() {
   
   request.onsuccess = function(event) {
     note.innerHTML += '<li>Database initialised.</li>';
+    
+    // store the result of grabbing all the data from the database in the db variable. This is used a lot below
     db = request.result;
-    displayData(db);
+    
+    // Run the displayData() function to populate the task list with all the to-do list data already in the IDB
+    displayData();
   };
   
   // This event handles the event whereby a new version of the database needs to be created
@@ -74,15 +84,21 @@ window.onload = function() {
   };
     
   function displayData() {
+    // first clear the content of the task list so that you don't get a huge long list of duplicate stuff each time
+    //the display is updated.
     taskList.innerHTML = "";
   
-    
+    // Open our object store and then get a cursor list of all the different data items in the IDB to iterate through
     var objectStore = db.transaction('toDoList').objectStore('toDoList');
     objectStore.openCursor().onsuccess = function(event) {
       var cursor = event.target.result;
+        // if there is still another cursor to go, keep runing this code
         if(cursor) {
+          
+          // create a list item to put each data item inside when displaying it
           var listItem = document.createElement('li');
           
+          // check which suffix the deadline day of the month needs
           if(cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
             daySuffix = "st";
           } else if(cursor.value.day == 2 || cursor.value.day == 22) {
@@ -93,38 +109,56 @@ window.onload = function() {
             daySuffix = "th";  
           }
           
+          // build the to-do list entry and put it into the list item via innerHTML.
           listItem.innerHTML = cursor.value.taskTitle + ' — ' + cursor.value.hours + ':' + cursor.value.minutes + ', ' + cursor.value.month + ' ' + cursor.value.day + daySuffix + ' ' + cursor.value.year + '.';
+          
+          // put the item item inside the task list
           taskList.appendChild(listItem);  
+          
+          // create a delete button inside each list item, giving it an event handler so that it runs the deleteButton()
+          // function when clicked
           var deleteButton = document.createElement('button');
           listItem.appendChild(deleteButton);
           deleteButton.innerHTML = 'X';
+          // here we are setting a data attribute on our delete button to say what task we want deleted if it is clicked! 
           deleteButton.setAttribute('data-task', cursor.value.taskTitle);
           deleteButton.onclick = function(event) {
             deleteItem(event);
           }
+          
+          // continue on to the next item in the cursor
           cursor.continue();
+        
+        // if there are no more cursor items to iterate through, say so, and exit the function 
         } else {
           note.innerHTML += '<li>Entries all displayed.</li>';
       }
     }
   }
   
+  // give the form submit button an event listener so that when the form is submitted the addData() function is run
   taskForm.addEventListener('submit',addData,false);
   
   function addData(e) {
+    // prevent default - we don't want the form to submit in the conventionl way
     e.preventDefault();
-  
+    
+    // Stop the form submitting if any values are left empty. This is just for browsers that don't support the HTML5 form
+    // required attributes
     if(title.value == '' || hours.value == null || minutes.value == null || day.value == '' || month.value == '' || year.value == null) {
       note.innerHTML += '<li>Data not submitted — form incomplete.</li>';
       return;
     } else {
       
+      // grab the values entered into the form fields and store them in an object ready for being inserted into the IDB
       var newItem = [
         { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, passed: 'No' }
       ];
 
+      // open a read/write db transaction, ready for adding the data
       var transaction = db.transaction(["toDoList"], "readwrite");
     
+      // report on the success of opening the transaction
       transaction.oncomplete = function(event) {
         note.innerHTML += '<li>Transaction opened for task addition.</li>';
       };
@@ -133,15 +167,22 @@ window.onload = function() {
         note.innerHTML += '<li>Transaction not opened due to error. Duplicate items not allowed.</li>';
       };
 
+      // create an object store on the transaction
       var objectStore = transaction.objectStore("toDoList");
+      // add our newItem object to the object store
       var request = objectStore.add(newItem[0]);        
         request.onsuccess = function(event) {
+          // if the addition was successful, build a date object out of our form field entries
           var date = new Date(month.value + " " + day.value + ", " + year.value + " " + hours.value + ":" + minutes.value + ":00");
           
           
+          // run the scheduleAlarm function, which sets an alarm at that date and time
           scheduleAlarm(title.value,date);
           
+          // report the success of our new item going into the database
           note.innerHTML += '<li>New item added to database.</li>';
+          
+          // clear the form, ready for adding the next entry
           title.value = '';
           hours.value = '';
           minutes.value = '';
@@ -150,35 +191,50 @@ window.onload = function() {
           year.value = '';
         };
       };
-    
+      
+      // update the display of data to show the newly added item, by running displayData() again.
       displayData();
     }
   
   function deleteItem(event) {
+    // retrieve the name of the task we want to delete 
     var dataTask = event.target.getAttribute('data-task');
+    
+    // delete the parent of the button, which is the list item, so it no longer is displayed
     event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+    
+    // open a database transaction and delete the task, finding it by the name we retrieved above
     var request = db.transaction(["toDoList"], "readwrite").objectStore("toDoList").delete(dataTask);
+    
+    // report that the data item has been deleted
     request.onsuccess = function(event) {
       note.innerHTML += '<li>Task \"' + dataTask + '\" deleted.</li>';
     };
     
   }
   
-  
+  // this function checks whether the deadline for each task is up or not, and responds appropriately
   function checkDeadlines() {
+    
+    // grab the time and date right now 
     var now = new Date();
     
+    // from the now viariable, store the current minutes, hours, day of the month (getDate is needed for this, as getDay 
+    // returns the day of the week, 1-7), month and year (getFullYear needed; getYear is deprecated, and returns a weird value
+    // that is not much use to anyone!)
     var minuteCheck = now.getMinutes();
     var hourCheck = now.getHours();
     var dayCheck = now.getDate();
     var monthCheck = now.getMonth();
     var yearCheck = now.getFullYear();
-        
+     
+    // again, open a transaction then a cursor to iterate through all the data items in the IDB   
     var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
     objectStore.openCursor().onsuccess = function(event) {
       var cursor = event.target.result;
         if(cursor) {
         
+        // convert the 
         switch(cursor.value.month) {
           case "January":
             var monthNumber = 0;
@@ -237,7 +293,7 @@ window.onload = function() {
       alarmTitle: title
     }
     
-    if(navigator.mozAlarms !== null) {
+    if(navigator.mozAlarms && navigator.mozAlarms !== null) {
       var request = navigator.mozAlarms.add(date, "honorTimezone", data);
     }
   }
