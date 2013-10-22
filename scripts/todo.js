@@ -7,12 +7,10 @@ var db;
 
 // create a blank instance of the object that is used to transfer data into the IDB. This is mainly for reference
 var newItem = [
-      { taskTitle: "", hours: 0, minutes: 0, day: "", month: "", year: 0, passed: "" }
+      { taskTitle: "", hours: 0, minutes: 0, day: "", month: "", year: 0 }
     ];
 
 // all the variables we need for the app    
-var increment = 0;
-
 var taskList = document.getElementById('task-list');
 
 var taskForm = document.getElementById('task-form');
@@ -78,8 +76,6 @@ window.onload = function() {
     objectStore.createIndex("month", "month", { unique: false });
     objectStore.createIndex("year", "year", { unique: false });
     
-    objectStore.createIndex("passed", "passed", { unique: false });
-    
     note.innerHTML += '<li>Object store created.</li>';
   };
     
@@ -94,7 +90,6 @@ window.onload = function() {
       var cursor = event.target.result;
         // if there is still another cursor to go, keep runing this code
         if(cursor) {
-          
           // create a list item to put each data item inside when displaying it
           var listItem = document.createElement('li');
           
@@ -152,7 +147,7 @@ window.onload = function() {
       
       // grab the values entered into the form fields and store them in an object ready for being inserted into the IDB
       var newItem = [
-        { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, passed: 'No' }
+        { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value }
       ];
 
       // open a read/write db transaction, ready for adding the data
@@ -192,12 +187,14 @@ window.onload = function() {
           day.value = '';
           month.value = '';
           year.value = '';
+          
         };
+         
       };
       
       // update the display of data to show the newly added item, by running displayData() again.
-      displayData();
-    }
+      displayData(); 
+    };
   
   function deleteItem(event) {
     // retrieve the name of the task we want to delete 
@@ -222,14 +219,15 @@ window.onload = function() {
     // grab the time and date right now 
     var now = new Date();
     
-    // from the now viariable, store the current minutes, hours, day of the month (getDate is needed for this, as getDay 
-    // returns the day of the week, 1-7), month and year (getFullYear needed; getYear is deprecated, and returns a weird value
-    // that is not much use to anyone!)
+    // from the now variable, store the current minutes, hours, day of the month (getDate is needed for this, as getDay 
+    // returns the day of the week, 1-7), month, year (getFullYear needed; getYear is deprecated, and returns a weird value
+    // that is not much use to anyone!) and seconds
     var minuteCheck = now.getMinutes();
     var hourCheck = now.getHours();
     var dayCheck = now.getDate();
     var monthCheck = now.getMonth();
     var yearCheck = now.getFullYear();
+    var secondsCheck = now.getSeconds();
      
     // again, open a transaction then a cursor to iterate through all the data items in the IDB   
     var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
@@ -237,7 +235,8 @@ window.onload = function() {
       var cursor = event.target.result;
         if(cursor) {
         
-        // convert the 
+        // convert the month names we have installed in the IDB into a month number that JavaScript will understand. 
+        // The JavaScript date object creates month values as a number between 0 and 11.
         switch(cursor.value.month) {
           case "January":
             var monthNumber = 0;
@@ -278,12 +277,18 @@ window.onload = function() {
           default:
           alert('Incorrect month entered in database.');
         }
-        
-          if(+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && cursor.value.passed == 'No') {
+          // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
+          // The + operator in this case converts numbers with leading zeros into their non leading zero equivalents, so e.g.
+          // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
+          // The secondsCheck = 0 check is so that you don't get duplicate notifications for the same task. The notification
+          // will only appear when the seconds is 0, meaning that you won't get more than one notification for each task
+          if(+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && secondsCheck == 0) {
             
+            // If the numbers all do match, run the createNotification() function to create a system notification
             createNotification(cursor.value.taskTitle);
-            updatePassed(cursor.value.taskTitle);
           }
+          
+          // move on and perform the same deadline check on the next cursor item
           cursor.continue();
         }
         
@@ -291,16 +296,22 @@ window.onload = function() {
     
   }
   
+  
+  // Function for scheduling alarms, on systems that do support the alarm API
   function scheduleAlarm(title,date) {
+    // arbitrary alarm data. Here I'm just including the title in case we want to use it some way later
     var data = {
       alarmTitle: title
     }
     
+    // only add the alarm if alarm api is supported and mozAlarms property is not null, meaning the app is installed
+    //  and permissions to use it defined in the manifest.webapp file
     if(navigator.mozAlarms && navigator.mozAlarms !== null) {
       var request = navigator.mozAlarms.add(date, "honorTimezone", data);
     }
   }
   
+  // function for creating the notification
   function createNotification(title) {
 
     // Let's check if the browser supports notifications
@@ -311,7 +322,7 @@ window.onload = function() {
     // Let's check if the user is okay to get some notification
     else if (Notification.permission === "granted") {
       // If it's okay let's create a notification
-      var notification = new Notification('HEY! Your task "' + title + '" is now overdue. Deleting.');
+      var notification = new Notification('HEY! Your task "' + title + '" is now overdue.');
       window.navigator.vibrate(500);
     }
 
@@ -328,7 +339,7 @@ window.onload = function() {
 
         // If the user is okay, let's create a notification
         if (permission === "granted") {
-          var notification = new Notification('HEY! Your task "' + title + '" is now overdue. Deleting');
+          var notification = new Notification('HEY! Your task "' + title + '" is now overdue.');
           window.navigator.vibrate(500);
         }
       });
@@ -338,15 +349,6 @@ window.onload = function() {
     // want to be respectful there is no need to bother him any more.
   }
   
-  function updatePassed(title) {
-    var request = db.transaction(["toDoList"], "readwrite").objectStore("toDoList").delete(title);
-    var removeListItem = document.querySelector('button[data-task="'+title+'"]');
-    removeListItem.parentNode.parentNode.removeChild(removeListItem.parentNode);
-    note.innerHTML += '<li>Deadline passed; item deleted.</li>';
-  }
-  
+  // using a setInterval to run the checkDeadlines() function every second
   setInterval(checkDeadlines, 1000);
-  
-
-
 }
