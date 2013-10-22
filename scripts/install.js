@@ -1,3 +1,6 @@
+// get a reference to the install button
+var button = document.getElementById('install');
+
 if('mozApps' in navigator) {
     
     // define the manifest URL
@@ -17,9 +20,7 @@ if('mozApps' in navigator) {
       };
     };
     
-    // get a reference to the button and call install() on click
-    var button = document.getElementById('install');
-    
+    // if app is already installed, hide button. If not, add event listener to call install() on click
     var installCheck = navigator.mozApps.checkInstalled(manifest_url);
     installCheck.onsuccess = function() {
       
