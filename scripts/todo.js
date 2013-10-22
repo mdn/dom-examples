@@ -140,7 +140,7 @@ window.onload = function() {
   taskForm.addEventListener('submit',addData,false);
   
   function addData(e) {
-    // prevent default - we don't want the form to submit in the conventionl way
+    // prevent default - we don't want the form to submit in the conventional way
     e.preventDefault();
     
     // Stop the form submitting if any values are left empty. This is just for browsers that don't support the HTML5 form
@@ -176,8 +176,11 @@ window.onload = function() {
           var date = new Date(month.value + " " + day.value + ", " + year.value + " " + hours.value + ":" + minutes.value + ":00");
           
           
-          // run the scheduleAlarm function, which sets an alarm at that date and time
-          scheduleAlarm(title.value,date);
+          // If alarms are supported and permissions defined in manifest,run the scheduleAlarm function, which
+          // sets an alarm at that date and time
+          if(navigator.mozAlarms && navigator.mozAlarms !== null) {
+            scheduleAlarm(title.value,date);
+          }
           
           // report the success of our new item going into the database
           note.innerHTML += '<li>New item added to database.</li>';
