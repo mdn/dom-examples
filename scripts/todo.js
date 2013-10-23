@@ -182,11 +182,11 @@ window.onload = function() {
           
           // clear the form, ready for adding the next entry
           title.value = '';
-          hours.value = '';
-          minutes.value = '';
-          day.value = '';
-          month.value = '';
-          year.value = '';
+          hours.value = null;
+          minutes.value = null;
+          day.value = 01;
+          month.value = 'January';
+          year.value = 2020;
           
         };
          
