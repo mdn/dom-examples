@@ -322,7 +322,8 @@ window.onload = function() {
     // Let's check if the user is okay to get some notification
     else if (Notification.permission === "granted") {
       // If it's okay let's create a notification
-      var notification = new Notification('HEY! Your task "' + title + '" is now overdue.');
+      var notification = new Notification('HEY! Your task "' + title + '" is now overdue.', {icon: '../img/icon-128.png'});
+      
       window.navigator.vibrate(500);
     }
 
@@ -339,7 +340,8 @@ window.onload = function() {
 
         // If the user is okay, let's create a notification
         if (permission === "granted") {
-          var notification = new Notification('HEY! Your task "' + title + '" is now overdue.');
+          var notification = new Notification('HEY! Your task "' + title + '" is now overdue.', {icon: '../img/icon-128.png'});
+          notification.icon = '../img/icon-128.png';
           window.navigator.vibrate(500);
         }
       });
