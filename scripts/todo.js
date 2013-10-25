@@ -316,13 +316,16 @@ window.onload = function() {
 
     // Let's check if the browser supports notifications
     if (!"Notification" in window) {
-      alert("This browser does not support desktop notification");
+      console.log("This browser does not support notifications.");
     }
 
     // Let's check if the user is okay to get some notification
     else if (Notification.permission === "granted") {
       // If it's okay let's create a notification
-      var notification = new Notification('HEY! Your task "' + title + '" is now overdue.', {icon: '../img/icon-128.png'});
+      
+      var img = '/to-do-notifications/img/icon-128.png';
+      var text = 'HEY! Your task "' + title + '" is now overdue.';
+      var notification = new Notification('To do list', { body: text, icon: img });
       
       window.navigator.vibrate(500);
     }
@@ -340,8 +343,10 @@ window.onload = function() {
 
         // If the user is okay, let's create a notification
         if (permission === "granted") {
-          var notification = new Notification('HEY! Your task "' + title + '" is now overdue.', {icon: '../img/icon-128.png'});
-          notification.icon = '../img/icon-128.png';
+          var img = '/to-do-notifications/img/icon-128.png';
+          var text = 'HEY! Your task "' + title + '" is now overdue.';
+          var notification = new Notification('To do list', { body: text, icon: img });
+          
           window.navigator.vibrate(500);
         }
       });
