@@ -7,7 +7,7 @@ var db;
 
 // create a blank instance of the object that is used to transfer data into the IDB. This is mainly for reference
 var newItem = [
-      { taskTitle: "", hours: 0, minutes: 0, day: "", month: "", year: 0 }
+      { taskTitle: "", hours: 0, minutes: 0, day: 0, month: "", year: 0, notified: "no" }
     ];
 
 // all the variables we need for the app    
@@ -75,6 +75,8 @@ window.onload = function() {
     objectStore.createIndex("day", "day", { unique: false });
     objectStore.createIndex("month", "month", { unique: false });
     objectStore.createIndex("year", "year", { unique: false });
+
+    objectStore.createIndex("notified", "notified", { unique: false });
     
     note.innerHTML += '<li>Object store created.</li>';
   };
@@ -107,6 +109,11 @@ window.onload = function() {
           // build the to-do list entry and put it into the list item via innerHTML.
           listItem.innerHTML = cursor.value.taskTitle + ' — ' + cursor.value.hours + ':' + cursor.value.minutes + ', ' + cursor.value.month + ' ' + cursor.value.day + daySuffix + ' ' + cursor.value.year + '.';
           
+          if(cursor.value.notified == "yes") {
+            listItem.style.textDecoration = "line-through";
+            listItem.style.color = "rgba(255,0,0,0.7)";
+          }
+
           // put the item item inside the task list
           taskList.appendChild(listItem);  
           
@@ -147,7 +154,7 @@ window.onload = function() {
       
       // grab the values entered into the form fields and store them in an object ready for being inserted into the IDB
       var newItem = [
-        { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value }
+        { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, notified: "no" }
       ];
 
       // open a read/write db transaction, ready for adding the data
@@ -227,7 +234,6 @@ window.onload = function() {
     var dayCheck = now.getDate();
     var monthCheck = now.getMonth();
     var yearCheck = now.getFullYear();
-    var secondsCheck = now.getSeconds();
      
     // again, open a transaction then a cursor to iterate through all the data items in the IDB   
     var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
@@ -282,7 +288,7 @@ window.onload = function() {
           // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
           // The secondsCheck = 0 check is so that you don't get duplicate notifications for the same task. The notification
           // will only appear when the seconds is 0, meaning that you won't get more than one notification for each task
-          if(+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && secondsCheck == 0) {
+          if(+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && cursor.value.notified == "no") {
             
             // If the numbers all do match, run the createNotification() function to create a system notification
             createNotification(cursor.value.taskTitle);
@@ -354,6 +360,31 @@ window.onload = function() {
 
     // At last, if the user already denied any notification, and you 
     // want to be respectful there is no need to bother him any more.
+
+    // now we need to update the value of notified to "yes" in this particular data object, so the
+    // alarm won't be set off on it again
+
+    // first open up a tranaction as usual
+    var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
+
+    // get the to-do list object that has this title as it's title
+    var request = objectStore.get(title);
+
+    request.onsuccess = function() {
+      // grab the data object returned as the result
+      var data = request.result;
+      
+      // update the notified value in the object to "yes"
+      data.notified = "yes";
+      
+      // create another request that inserts the item back into the database
+      var requestUpdate = objectStore.put(data);
+      
+      // when this new request succeeds, run the displayData() function again to update the display
+      requestUpdate.onsuccess = function() {
+        displayData();
+      }
+    }
   }
   
   // using a setInterval to run the checkDeadlines() function every second
