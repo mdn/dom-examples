@@ -174,15 +174,6 @@ window.onload = function() {
       // add our newItem object to the object store
       var request = objectStore.add(newItem[0]);        
         request.onsuccess = function(event) {
-          // if the addition was successful, build a date object out of our form field entries
-          var date = new Date(month.value + " " + day.value + ", " + year.value + " " + hours.value + ":" + minutes.value + ":00");
-          
-          
-          // If alarms are supported and permissions defined in manifest,run the scheduleAlarm function, which
-          // sets an alarm at that date and time
-          if(navigator.mozAlarms && navigator.mozAlarms !== null) {
-            scheduleAlarm(title.value,date);
-          }
           
           // report the success of our new item going into the database
           note.innerHTML += '<li>New item added to database.</li>';
@@ -302,21 +293,6 @@ window.onload = function() {
     
   }
   
-  
-  // Function for scheduling alarms, on systems that do support the alarm API
-  function scheduleAlarm(title,date) {
-    // arbitrary alarm data. Here I'm just including the title in case we want to use it some way later
-    var data = {
-      alarmTitle: title
-    }
-    
-    // only add the alarm if alarm api is supported and mozAlarms property is not null, meaning the app is installed
-    //  and permissions to use it defined in the manifest.webapp file
-    if(navigator.mozAlarms && navigator.mozAlarms !== null) {
-      var request = navigator.mozAlarms.add(date, "honorTimezone", data);
-    }
-  }
-  
   // function for creating the notification
   function createNotification(title) {
 
@@ -362,7 +338,7 @@ window.onload = function() {
     // want to be respectful there is no need to bother him any more.
 
     // now we need to update the value of notified to "yes" in this particular data object, so the
-    // alarm won't be set off on it again
+    // notification won't be set off on it again
 
     // first open up a tranaction as usual
     var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
