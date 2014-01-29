@@ -37,6 +37,9 @@ window.onload = function() {
 
   // Let us open our database
   var request = window.indexedDB.open("toDoList", 4);
+   
+  // Gecko-only IndexedDB temp storage option:
+  // var request = window.indexedDB.open("toDoList", {version: 4, storage: "temporary"});
 
   // these two event handlers act on the database being opened successfully, or not
   request.onerror = function(event) {
@@ -46,7 +49,7 @@ window.onload = function() {
   request.onsuccess = function(event) {
     note.innerHTML += '<li>Database initialised.</li>';
     
-    // store the result of grabbing all the data from the database in the db variable. This is used a lot below
+    // store the result of opening the database in the db variable. This is used a lot below
     db = request.result;
     
     // Run the displayData() function to populate the task list with all the to-do list data already in the IDB
@@ -111,7 +114,7 @@ window.onload = function() {
           
           if(cursor.value.notified == "yes") {
             listItem.style.textDecoration = "line-through";
-            listItem.style.color = "rgba(255,0,0,0.7)";
+            listItem.style.color = "rgba(255,0,0,0.5)";
           }
 
           // put the item item inside the task list
@@ -134,9 +137,9 @@ window.onload = function() {
         // if there are no more cursor items to iterate through, say so, and exit the function 
         } else {
           note.innerHTML += '<li>Entries all displayed.</li>';
+        }
       }
     }
-  }
   
   // give the form submit button an event listener so that when the form is submitted the addData() function is run
   taskForm.addEventListener('submit',addData,false);
@@ -169,7 +172,7 @@ window.onload = function() {
         note.innerHTML += '<li>Transaction not opened due to error. Duplicate items not allowed.</li>';
       };
 
-      // create an object store on the transaction
+      // call an object store that's already been added to the database
       var objectStore = transaction.objectStore("toDoList");
       // add our newItem object to the object store
       var request = objectStore.add(newItem[0]);        
@@ -340,7 +343,7 @@ window.onload = function() {
     // now we need to update the value of notified to "yes" in this particular data object, so the
     // notification won't be set off on it again
 
-    // first open up a tranaction as usual
+    // first open up a transaction as usual
     var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
 
     // get the to-do list object that has this title as it's title
