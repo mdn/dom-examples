@@ -1,0 +1,230 @@
+/* || General layout rules for narrow screens */
+
+html {
+	height: 100%;
+	font-family: sans-serif;
+	font-size: 10px;
+	background-color: black;
+}
+
+body {
+	width: 100%;
+	height: inherit;
+	background-color: #999;
+	background-image: linear-gradient(to top right, rgba(0,0,0,0), rgba(0,0,0,0.5));
+}
+
+h1, h2 {
+  font-size: 4rem;
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  text-shadow: -1px -1px 1px #aaa,
+               0px 2px 1px rgba(0,0,0,0.5),
+               2px 2px 3px rgba(0,0,0,0.7),
+               0px 0px 3px rgba(0,0,0,0.4);
+  margin: 0;
+  padding: 1rem 0;
+}
+
+canvas {
+	width: 100%;
+	height: 60px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.wrapper {
+	height: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+/* || main UI sections */
+
+header {
+  height: 70px;
+}
+
+.main-controls {
+  padding-bottom: 0.7rem;
+  height: 170px;
+}
+
+.sound-clips {
+  box-shadow: inset 0 3px 4px rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.1);
+  height: calc(100% - 240px - 0.7rem);
+  overflow: scroll;
+}
+
+
+/* || button styling */
+
+button {
+    background: #0088cc;
+    background: linear-gradient(to bottom,  #0088cc 0%,#0055cc 100%); 
+    text-shadow: 1px 1px 1px black;  
+    text-align: center;
+    color: white;
+    border: none;
+}
+
+aside button, .main-controls button {    
+    width: 90%;
+    margin: 1rem auto 0.5rem;
+    max-width: 80%;
+    font-size: 1.6rem; 
+    line-height: 3rem;
+    padding: .5rem; 
+    display: block;
+}
+
+button:hover, button:focus {
+	box-shadow: inset 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+button:active {
+	box-shadow: inset 2px 2px 3px rgba(0,0,0,0.7);
+}
+
+/* || Checkbox hack to control information box display */
+
+label {
+	font-family: 'NotoColorEmoji';
+	font-size: 3rem;
+	position: absolute;
+	top: 2px;
+	right: 3px;
+	z-index: 5;
+	cursor: pointer;
+}
+
+input[type=checkbox] {
+   position: absolute;
+   top: -100px;
+}
+
+aside {
+   position: fixed;
+   top: 0;
+   left: 0;
+   text-shadow: 1px 1px 1px black;  
+   width: 100%;
+   height: 100%;
+   transform: translateX(100%);
+   transition: 0.6s all;
+   background-color: #999;
+	background-image: linear-gradient(to top right, rgba(0,0,0,0), rgba(0,0,0,0.5));
+}
+
+aside p {
+	font-size: 1.6rem;
+	line-height: 1.3;
+	padding: 0rem 2rem 1rem;
+	color: white;
+}
+
+
+/* Toggled State of information box */
+
+input[type=checkbox]:checked ~ aside {
+  transform: translateX(0);
+}
+
+/* || Link styles */
+
+a {
+  color: #aaa;	
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+/* audio styling */
+
+.clip {
+	padding: 1rem 0;
+}
+
+audio {
+	width: 90%;
+	display: block;
+	margin: 1rem auto 0.5rem;
+}
+
+article {
+	margin-bottom: 1rem;
+}
+
+article p {
+  color: black;
+  text-shadow: 1px 1px 1px black;
+  font-size: 2rem;
+  line-height: 1.2;
+  display: inline-block;
+  margin: 0;
+  width: 70%;
+  float: left;
+  margin-left: calc(10%/2);
+}
+
+article button {
+  font-size: 1.2rem;
+  line-height: 2;
+  margin-right: calc(10%/2);
+  float: right;
+}
+
+@media (min-width: 481px) {
+  /*CSS for medium width screens*/
+
+  /* || Basic layout changes for the main control buttons */
+
+  .main-controls button {    
+    width: 45%;
+    margin: 1rem 2% 0;
+    float: left;
+  }
+
+  .main-controls {
+  padding-bottom: 0.7rem;
+    height: 125px;
+  }
+
+  .sound-clips {
+    height: calc(100% - 195px - 0.7rem);
+  }
+}
+
+@media (min-width: 481px) and (max-height: 460px) {
+  .sound-clips {
+    height: auto;
+    background-color: #999;
+	background-image: linear-gradient(to top right, rgba(0,0,0,0), rgba(0,0,0,0.5));
+  }
+}
+
+@media all and (min-width: 800px) {
+  /*CSS for wide screens*/
+
+  aside {
+   top: 0;
+   left: 100%;
+   text-shadow: 1px 1px 1px black;  
+   width: 480px;
+   transform: translateX(0);
+   border-left: 2px solid black;
+  }
+
+  /* Toggled State of information box */
+
+  input[type=checkbox]:checked ~ aside {
+    transform: translateX(-480px);
+  }
+
+}
+
+@media (min-width: 1100px) {
+  /*CSS for really wide screens*/
+}
