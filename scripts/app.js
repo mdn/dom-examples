@@ -15,7 +15,7 @@ var canvas = document.querySelector('.visualizer');
 
 // visualiser setup - create web audio api context and canvas
 
-var audioCtx = new AudioContext();
+var audioCtx = new (window.AudioContext || webkitAudioContext)();
 var canvasCtx = canvas.getContext("2d");
 
 //main block for doing the audio recording
