@@ -1,1 +1,1 @@
-window.location.reload()
+alert('Service Worker active');

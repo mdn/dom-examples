@@ -1,9 +1,11 @@
-// scope defaults to "/*"
-navigator.serviceWorker.register("sw.js").then(
-  function(worker) {
-    console.log("success!");
-    serviceWorker.postMessage("Howdy from your installing page.");
-    // To use the serviceWorker immediately, you might call window.location.reload()
-  }).catch(function(e) {
-    console.error("Installing the worker failed");
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js', {
+    scope: '/*'
+  }).then(function(sw) {
+    // registration worked!
+    console.log('Success');
+  }).catch(function() {
+    // registration failed :(
+    console.log('Failtastic');
   });
+}
