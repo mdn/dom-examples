@@ -1,1 +1,0 @@
-alert('Service Worker active');
