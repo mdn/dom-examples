@@ -3,9 +3,9 @@ if ('serviceWorker' in navigator) {
     scope: '/*'
   }).then(function(sw) {
     // registration worked!
-    console.log('Success');
+    console.log('Registration succeeded.');
   }).catch(function() {
     // registration failed :(
-    console.log('Failtastic');
+    console.log('Registration failed.');
   });
 }
