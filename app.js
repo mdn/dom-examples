@@ -41,13 +41,11 @@ return new Promise(function(resolve, reject) {
 // load each set of image, alt text and caption
 
 var imgSection = document.querySelector('section');
-var imgJSON;
 
 window.onload = function() {
   for(i = 0; i<=Gallery.images.length-1; i++) {
-  	imgJSON = Gallery.images[i];
-    imgLoad(imgJSON.url).then(function(response) {
-
+    imgLoad(Gallery.images[i].url).then(function(response) {
+      var imgJSON = Gallery.images[i];
       var myImage = document.createElement('img');
       var myFigure = document.createElement('figure');
       var myCaption = document.createElement('caption');
