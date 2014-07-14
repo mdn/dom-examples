@@ -43,8 +43,8 @@ return new Promise(function(resolve, reject) {
 var imgSection = document.querySelector('section');
 
 window.onload = function() {
+  var imgJSON = Gallery.images[i];
   for(i = 0; i<=imgJSON.length-1; i++) {
-  	var imgJSON = Gallery.images[i];
     imgLoad(imgJSON.url).then(function(response) {
 
       var myImage = document.createElement('img');
