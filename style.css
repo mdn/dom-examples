@@ -23,6 +23,7 @@ figure {
 
 img {
   width: 100%;	
+  border: 2px solid black;
 }
 
 caption {
@@ -30,4 +31,7 @@ caption {
   margin: 0 auto 1rem;
   width: 70%;
   font-size: 1.2rem;
+  padding: 5px;
+  background: #ccc;
+  box-shadow: 1px 1px 1px black;
 }
