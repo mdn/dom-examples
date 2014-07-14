@@ -47,7 +47,7 @@ var imgSection = document.querySelector('section');
 
 window.onload = function() {
   for(i = 0; i<=Gallery.images.length-1; i++) {
-    imgLoad(Gallery.images[i]).then(function(arrayResponse) {
+    imgLoad(Gallery.images[0]).then(function(arrayResponse) {
       var myImage = document.createElement('img');
       var myFigure = document.createElement('figure');
       var myCaption = document.createElement('caption');
