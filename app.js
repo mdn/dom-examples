@@ -47,6 +47,7 @@ window.onload = function() {
   	var imgJSON = Gallery.images[i];
     imgLoad(imgJSON.url).then(function(response) {
       console.log(imgJSON);
+      console.log(i);
       var myImage = document.createElement('img');
       var myFigure = document.createElement('figure');
       var myCaption = document.createElement('caption');
