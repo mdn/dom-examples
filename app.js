@@ -40,12 +40,12 @@ return new Promise(function(resolve, reject) {
 
 // load each set of image, alt text and caption
 
-var imgJSON = Gallery.images;
 var imgSection = document.querySelector('section');
 
 window.onload = function() {
-  for(i = 0; i<imgJSON.length; i++) {
-    imgLoad(imgJSON[i].url).then(function(response) {
+  for(i = 0; i<=imgJSON.length-1; i++) {
+  	var imgJSON = Gallery.images[i];
+    imgLoad(imgJSON.url).then(function(response) {
 
       var myImage = document.createElement('img');
       var myFigure = document.createElement('figure');
@@ -53,8 +53,8 @@ window.onload = function() {
 
       var imageURL = window.URL.createObjectURL(response);
 	  myImage.src = imageURL;
-      myImage.setAttribute('alt', imgJSON[0].alt);
-      myCaption.innerHTML = imgJSON[i].name + ': Taken by ' + imgJSON[i].credit;
+      myImage.setAttribute('alt', imgJSON.alt);
+      myCaption.innerHTML = imgJSON.name + ': Taken by ' + imgJSON.credit;
 
       imgSection.appendChild(myFigure);
       myFigure.appendChild(myImage);
