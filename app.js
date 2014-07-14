@@ -53,7 +53,7 @@ window.onload = function() {
 
       var imageURL = window.URL.createObjectURL(response);
 	  myImage.src = imageURL;
-      myImage.setAttribute('alt', imgJSON[i].alt);
+      myImage.setAttribute('alt', imgJSON[0].alt);
       myCaption.innerHTML = imgJSON[i].name + ': Taken by ' + imgJSON[i].credit;
 
       imgSection.appendChild(myFigure);
@@ -63,5 +63,5 @@ window.onload = function() {
 	}, function(Error) {
 	  console.log(Error);
 	});
-  }
+  };
 };
