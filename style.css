@@ -6,9 +6,11 @@ html, body {
 }
 
 h1 {
-  text-align: center;
-  font-weight: 900;
-  font-size: 4rem;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 197px;
+  background: url(star-wars-logo.jpg) no-repeat center;
 }
 
 section {
