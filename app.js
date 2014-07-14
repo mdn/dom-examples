@@ -44,15 +44,17 @@ var imgSection = document.querySelector('section');
 
 window.onload = function() {
   for(i = 0; i<=Gallery.images.length-1; i++) {
-    imgLoad(Gallery.images[i].url).then(function(response) {
+  	var imgJSON = Gallery.images[i];
+    imgLoad(imgJSON.url).then(function(response) {
+
       var myImage = document.createElement('img');
       var myFigure = document.createElement('figure');
       var myCaption = document.createElement('caption');
       var imageURL = window.URL.createObjectURL(response);
-
+      
 	  myImage.src = imageURL;
-      myImage.setAttribute('alt', Gallery.images[i].alt);
-      myCaption.innerHTML = Gallery.images[i].name + ': Taken by ' + Gallery.images[i].credit;
+      myImage.setAttribute('alt', imgJSON.alt);
+      myCaption.innerHTML = imgJSON.name + ': Taken by ' + imgJSON.credit;
 
       imgSection.appendChild(myFigure);
       myFigure.appendChild(myImage);
