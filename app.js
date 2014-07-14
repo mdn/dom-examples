@@ -47,15 +47,15 @@ var imgSection = document.querySelector('section');
 
 window.onload = function() {
   for(i = 0; i<=Gallery.images.length-1; i++) {
-    imgLoad(Gallery.images[0]).then(function(arrayResponse) {
+    imgLoad(Gallery.images[0]).then(function(response) {
       var myImage = document.createElement('img');
       var myFigure = document.createElement('figure');
       var myCaption = document.createElement('caption');
-      var imageURL = window.URL.createObjectURL(arrayResponse[0]);
+      var imageURL = window.URL.createObjectURL(response[0]);
 
 	  myImage.src = imageURL;
-      myImage.setAttribute('alt', arrayResponse[1].alt);
-      myCaption.innerHTML = arrayResponse[1].name + ': Taken by ' + arrayResponse[1].credit;
+      myImage.setAttribute('alt', response[1].alt);
+      myCaption.innerHTML = response[1].name + ': Taken by ' + response[1].credit;
 
       imgSection.appendChild(myFigure);
       myFigure.appendChild(myImage);
