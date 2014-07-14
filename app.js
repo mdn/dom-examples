@@ -41,17 +41,18 @@ return new Promise(function(resolve, reject) {
 // load each set of image, alt text and caption
 
 var imgSection = document.querySelector('section');
+var imgJSON;
 
 window.onload = function() {
   for(i = 0; i<=Gallery.images.length-1; i++) {
-  	  var imgJSON = Gallery.images[i];
+  	imgJSON = Gallery.images[i];
     imgLoad(imgJSON.url).then(function(response) {
 
       var myImage = document.createElement('img');
       var myFigure = document.createElement('figure');
       var myCaption = document.createElement('caption');
-
       var imageURL = window.URL.createObjectURL(response);
+
 	  myImage.src = imageURL;
       myImage.setAttribute('alt', imgJSON.alt);
       myCaption.innerHTML = imgJSON.name + ': Taken by ' + imgJSON.credit;
