@@ -14,7 +14,7 @@ if ('serviceWorker' in navigator) {
 
 // function for loading each image via XHR
 
-function imgLoad(url) {
+function imgLoad(imgJSON) {
 // return a promise for an image loading
 return new Promise(function(resolve, reject) {	  
   var request = new XMLHttpRequest();
@@ -23,7 +23,10 @@ return new Promise(function(resolve, reject) {
   
   request.onload = function() {
 	    if (request.status == 200) {
-	      resolve(request.response);
+	      var arrayResponse = [];
+	      arrayResponse[0] = request.response;
+	      arrayResponse[1] = imgJSON;
+	      resolve(arrayResponse);
 	    } else {
 	      reject(Error('Image didn\'t load successfully; error code:' + request.statusText));
 	    }
@@ -45,16 +48,16 @@ var imgSection = document.querySelector('section');
 window.onload = function() {
   for(i = 0; i<=Gallery.images.length-1; i++) {
   	var imgJSON = Gallery.images[i];
-    imgLoad(imgJSON.url).then(function(response) {
+    imgLoad(Gallery.images[i]).then(function(arrayResponse) {
 
       var myImage = document.createElement('img');
       var myFigure = document.createElement('figure');
       var myCaption = document.createElement('caption');
-      var imageURL = window.URL.createObjectURL(response);
+      var imageURL = window.URL.createObjectURL(arrayResponse[0]);
 
 	  myImage.src = imageURL;
-      myImage.setAttribute('alt', imgJSON.alt);
-      myCaption.innerHTML = imgJSON.name + ': Taken by ' + imgJSON.credit;
+      myImage.setAttribute('alt', arrayResponse[1].alt);
+      myCaption.innerHTML = arrayResponse[1].name + ': Taken by ' + arrayResponse[1].credit;
 
       imgSection.appendChild(myFigure);
       myFigure.appendChild(myImage);
