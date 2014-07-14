@@ -1,6 +1,15 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-size: 10px;
+  font-family: 'Coustard', serif;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 4rem;
 }
 
 section {
@@ -18,5 +27,7 @@ img {
 
 caption {
   display: block;
-  width: 100%;
+  margin: 0 auto;
+  width: 70%;
+  font-size: 1.2rem;
 }
