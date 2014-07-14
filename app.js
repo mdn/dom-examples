@@ -18,7 +18,7 @@ function imgLoad(imgJSON) {
 // return a promise for an image loading
 return new Promise(function(resolve, reject) {	  
   var request = new XMLHttpRequest();
-  request.open('GET', url);
+  request.open('GET', imgJSON.url);
   request.responseType = 'blob';
   
   request.onload = function() {
