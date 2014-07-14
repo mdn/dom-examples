@@ -23,7 +23,7 @@ figure {
 
 img {
   width: 100%;	
-  border: 2px solid black;
+  box-shadow: 2px 2px 1px black;
 }
 
 caption {
