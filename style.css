@@ -4,8 +4,8 @@ html, body {
 }
 
 section {
-	max-width: 640px;
-	margin: 0 auto;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 figure {
@@ -17,6 +17,6 @@ img {
 }
 
 caption {
-	display: block;
-	width: 100%;
+  display: block;
+  width: 100%;
 }
