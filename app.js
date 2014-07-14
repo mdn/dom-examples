@@ -47,9 +47,9 @@ window.onload = function() {
   for(i = 0; i<imgJSON.length; i++) {
     imgLoad(imgJSON[i].url).then(function(response) {
 
-      var myImage = document.CreateElement('img');
-      var myFigure = document.CreateElement('figure');
-      var myCaption = document.CreateElement('caption');
+      var myImage = document.createElement('img');
+      var myFigure = document.createElement('figure');
+      var myCaption = document.createElement('caption');
 
       var imageURL = window.URL.createObjectURL(response);
 	  myImage.src = imageURL;
