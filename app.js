@@ -44,8 +44,8 @@ var imgSection = document.querySelector('section');
 
 window.onload = function() {
   for(i = 0; i<=Gallery.images.length-1; i++) {
-  	  var imgJSON = Gallery.images;
-    imgLoad(imgJSON[i].url).then(function(response) {
+  	  var imgJSON = Gallery.images[i];
+    imgLoad(imgJSON.url).then(function(response) {
 
       var myImage = document.createElement('img');
       var myFigure = document.createElement('figure');
@@ -53,8 +53,8 @@ window.onload = function() {
 
       var imageURL = window.URL.createObjectURL(response);
 	  myImage.src = imageURL;
-      myImage.setAttribute('alt', imgJSON[i].alt);
-      myCaption.innerHTML = imgJSON[i].name + ': Taken by ' + imgJSON[i].credit;
+      myImage.setAttribute('alt', imgJSON.alt);
+      myCaption.innerHTML = imgJSON.name + ': Taken by ' + imgJSON.credit;
 
       imgSection.appendChild(myFigure);
       myFigure.appendChild(myImage);
