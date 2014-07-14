@@ -14,16 +14,16 @@ if ('serviceWorker' in navigator) {
 
 // function for loading each image via XHR
 
-function imgLoad(url) {
+function imgLoad(imgJSON) {
 // return a promise for an image loading
 return new Promise(function(resolve, reject) {	  
   var request = new XMLHttpRequest();
-  request.open('GET', url);
+  request.open('GET', imgJSON.url);
   request.responseType = 'blob';
   
   request.onload = function() {
 	    if (request.status == 200) {
-	      resolve(request.response);
+	      resolve(request.response, imgJSON);
 	    } else {
 	      reject(Error('Image didn\'t load successfully; error code:' + request.statusText));
 	    }
@@ -44,10 +44,7 @@ var imgSection = document.querySelector('section');
 
 window.onload = function() {
   for(i = 0; i<=Gallery.images.length-1; i++) {
-  	var imgJSON = Gallery.images[i];
-    imgLoad(imgJSON.url).then(function(response) {
-      console.log(imgJSON);
-      console.log(i);
+    imgLoad(Gallery.images[i]).then(function(response, imgJSON) {
       var myImage = document.createElement('img');
       var myFigure = document.createElement('figure');
       var myCaption = document.createElement('caption');
