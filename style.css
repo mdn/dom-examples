@@ -27,7 +27,7 @@ img {
 
 caption {
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 1rem;
   width: 70%;
   font-size: 1.2rem;
 }
