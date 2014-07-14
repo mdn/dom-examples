@@ -1,0 +1,22 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+section {
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+figure {
+  width: 100%;
+}
+
+img {
+  width: 100%;	
+}
+
+caption {
+	display: block;
+	width: 100%;
+}
