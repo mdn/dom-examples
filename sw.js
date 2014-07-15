@@ -7,8 +7,28 @@ this.addEventListener('install', function(event) {
         '/sw-test/app.js',
         '/sw-test/image-list.js',
         '/sw-test/star-wars-logo.jpg',
-        '/sw-test/gallery/*',
+        '/sw-test/gallery/*'
       );
     });
   );
 });
+
+// You could also do
+
+// this.addEventListener('install', function(event) {
+//   var starWarsAssets = new Cache();
+
+//   event.waitUntil(
+//     starWarsAssets.add(
+//       '/sw-test/index.html',
+//       '/sw-test/style.css',
+//       '/sw-test/app.js',
+//       '/sw-test/image-list.js',
+//       '/sw-test/star-wars-logo.jpg',
+//       '/sw-test/gallery/*'
+//     )
+//   )
+
+//   caches.set("v1", starWarsResources);
+
+// )};
