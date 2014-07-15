@@ -9,8 +9,6 @@ this.addEventListener('install', function(event) {
         '/sw-test/star-wars-logo.jpg',
         '/sw-test/gallery/*',
       );
-    }, function(Error) {
-      console.log('Failed to populate cache.');
     });
   );
 });
