@@ -9,6 +9,8 @@ this.addEventListener('install', function(event) {
         '/sw-test/star-wars-logo.jpg',
         '/sw-test/gallery/*'
       );
+
+      console.log('Caching succeeded.');
     });
   );
 });
