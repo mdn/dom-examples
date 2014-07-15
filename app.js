@@ -41,34 +41,6 @@ return new Promise(function(resolve, reject) {
   });
 };
 
-// Function to call random star wars quote
-
-function quoteLoad() {
-// return a promise for a random quote loading
-return new Promise(function(resolve, reject) {	  
-  var request = new XMLHttpRequest();
-  request.withCredentials = true;
-  request.open('GET', 'https://iheartquotes.com/api/v1/random?source=starwars&max_lines=4&max_characters=320', true);
-  request.responseType = 'text';
-  var respText = request.responseText;
-  console.log(respText);
-  request.onload = function() {
-	    if (request.status == 200) {
-	      resolve(request.response);
-	    } else {
-	      reject(Error('Quote didn\'t load successfully; error code:' + request.statusText));
-	    }
-  };
-
-    request.onerror = function() {
-      reject(Error('There was a network error.'));
-  };
-  
-  // Send the request
-  request.send();
-  });
-};
-
 var imgSection = document.querySelector('section');
 var quotePara = document.querySelector('section p');
 
@@ -95,13 +67,6 @@ window.onload = function() {
 	  console.log(Error);
 	});
   };
-  
-  // load random quote and put it into the paragraph inside the section
-  quoteLoad().then(function(response) {
-	  quotePara.innerHTML = response;
-	}, function(Error) {
-	  console.log(Error);
-	});
 
 };
 
