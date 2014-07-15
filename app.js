@@ -41,13 +41,39 @@ return new Promise(function(resolve, reject) {
   });
 };
 
-// load each set of image, alt text and caption
+// Function to call random star wars quote
+
+function quoteLoad() {
+// return a promise for a random quote loading
+return new Promise(function(resolve, reject) {	  
+  var request = new XMLHttpRequest();
+  request.open('GET', 'http://iheartquotes.com/api/v1/random?source=starwars&max_lines=4&max_characters=320');
+  request.responseType = 'text';
+  
+  request.onload = function() {
+	    if (request.status == 200) {
+	      resolve(request.response);
+	    } else {
+	      reject(Error('Quote didn\'t load successfully; error code:' + request.statusText));
+	    }
+  };
+
+    request.onerror = function() {
+      reject(Error('There was a network error.'));
+  };
+  
+  // Send the request
+  request.send();
+  });
+};
 
 var imgSection = document.querySelector('section');
+var quotePara = document.querySelector('section p');
 
 window.onload = function() {
+
+  // load each set of image, alt text, name and caption
   for(i = 0; i<=Gallery.images.length-1; i++) {
-  	var imgJSON = Gallery.images[i];
     imgLoad(Gallery.images[i]).then(function(arrayResponse) {
 
       var myImage = document.createElement('img');
@@ -67,4 +93,13 @@ window.onload = function() {
 	  console.log(Error);
 	});
   };
+  
+  // load random quote and put it into the paragraph inside the section
+  quoteLoad().then(function(response) {
+	  quotePara.innerHTML = response;
+	}, function(Error) {
+	  console.log(Error);
+	});
+
 };
+
