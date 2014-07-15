@@ -32,3 +32,9 @@ this.addEventListener('install', function(event) {
 //   caches.set("v1", starWarsResources);
 
 // )};
+
+this.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request);
+  );
+});
