@@ -47,7 +47,7 @@ function quoteLoad() {
 // return a promise for a random quote loading
 return new Promise(function(resolve, reject) {	  
   var request = new XMLHttpRequest();
-  request.open('GET', 'https://iheartquotes.com/api/v1/random?source=starwars&max_lines=4&max_characters=320');
+  request.open('GET', 'https://iheartquotes.com/api/v1/random?source=starwars&max_lines=4&max_characters=320', true);
   request.responseType = 'text';
   
   request.onload = function() {
