@@ -47,9 +47,11 @@ function quoteLoad() {
 // return a promise for a random quote loading
 return new Promise(function(resolve, reject) {	  
   var request = new XMLHttpRequest();
+  request.withCredentials = true;
   request.open('GET', 'https://iheartquotes.com/api/v1/random?source=starwars&max_lines=4&max_characters=320', true);
   request.responseType = 'text';
-  
+  var respText = request.responseText;
+  console.log(respText);
   request.onload = function() {
 	    if (request.status == 200) {
 	      resolve(request.response);
