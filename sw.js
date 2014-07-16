@@ -13,7 +13,7 @@ this.addEventListener('install', function(event) {
         '/sw-test/gallery/myLittleVader.jpg',
         '/sw-test/gallery/snowTroopers.jpg'
       );
-    });
+    })
   );
 });
 
@@ -39,6 +39,6 @@ this.addEventListener('install', function(event) {
 
 this.addEventListener('fetch', function(event) {
   event.respondWith(
-    caches.match(event.request);
+    caches.match(event.request)
   );
 });
