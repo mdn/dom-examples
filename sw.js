@@ -33,7 +33,7 @@ this.addEventListener('install', function(event) {
 //     )
 //   )
 
-//   caches.set("v1", starWarsResources);
+//   caches.set('v1', starWarsResources);
 
 // )};
 

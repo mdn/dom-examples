@@ -42,7 +42,6 @@ return new Promise(function(resolve, reject) {
 };
 
 var imgSection = document.querySelector('section');
-var quotePara = document.querySelector('section p');
 
 window.onload = function() {
 
