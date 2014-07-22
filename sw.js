@@ -1,3 +1,8 @@
+importScripts("polyfills/idbCacheUtils.js");
+importScripts("polyfills/fetchPolyfill.js");
+importScripts("polyfills/idbCachePolyfill.js");
+importScripts("polyfills/idbCacheStoragePolyfill.js");
+
 this.addEventListener('install', function(event) {
   event.waitUntil(
     caches.create('v1').then(function(cache) {
@@ -49,6 +54,6 @@ this.addEventListener('fetch', function(event) {
       });
     }).catch(function() {
       return caches.match('/sw-test/gallery/myLittleVader.jpg');
-    });
+    })
   );
 });
