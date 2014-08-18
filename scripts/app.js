@@ -36,6 +36,7 @@ if (navigator.getUserMedia) {
 
       	 record.onclick = function() {
       	 	mediaRecorder.start();
+          console.log(mediaRecorder.state);
       	 	console.log("recorder started");
       	 	record.style.background = "red";
       	 	record.style.color = "black";
@@ -43,6 +44,7 @@ if (navigator.getUserMedia) {
 
       	 stop.onclick = function() {
       	 	mediaRecorder.stop();
+          console.log(mediaRecorder.state);
       	 	console.log("recorder stopped");
       	 	record.style.background = "";
       	 	record.style.color = "";
