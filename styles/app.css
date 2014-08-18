@@ -54,7 +54,7 @@ header {
   box-shadow: inset 0 3px 4px rgba(0,0,0,0.7);
   background-color: rgba(0,0,0,0.1);
   height: calc(100% - 240px - 0.7rem);
-  overflow: scroll;
+  overflow: auto;
 }
 
 
