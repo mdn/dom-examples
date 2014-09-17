@@ -43,12 +43,14 @@ this.addEventListener('install', function(event) {
 this.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).catch(function() {
-      return event.default();
-      return caches.get('v1').then(function(cache) {
-        cache.add(event.request);
+      return event.default().then(function(response) {
+        caches.get('v1').then(function(cache) {
+          cache.put(event.request, response.clone());
+          return response;
+        });  
       });
     }).catch(function() {
-      return caches.match('/sw-test/gallery/myLittleVader.jpg');
-    })
+     return caches.match('/sw-test/gallery/myLittleVader.jpg');
+    });
   );
 });
