@@ -41,16 +41,16 @@ this.addEventListener('install', function(event) {
 // )};
 
 this.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request).catch(function() {
-      return event.default().then(function(response) {
-        caches.get('v1').then(function(cache) {
-          cache.put(event.request, response.clone());
-          return response;
-        });  
-      });
-    }).catch(function() {
-     return caches.match('/sw-test/gallery/myLittleVader.jpg');
+  var cachedResponse = caches.match(event.request).catch(function() {
+    return event.default().then(function(response) {
+      caches.get('v1').then(function(cache) {
+        cache.put(event.request, response.clone());
+        return response;
+      });  
     });
-  );
+  }).catch(function() {
+    return caches.match('/sw-test/gallery/myLittleVader.jpg');
+  });
+    
+  event.respondWith(cachedResponse);
 });
