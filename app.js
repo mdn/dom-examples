@@ -8,9 +8,9 @@ if ('serviceWorker' in navigator) {
     console.log('Registration succeeded.');
   }).catch(function(error) {
     // registration failed
-    console.log('Registration failed with ' + error);
+    console.log(error);
   });
-}
+};
 
 // function for loading each image via XHR
 
