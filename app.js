@@ -2,7 +2,7 @@
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw-test/sw.js', {
-    scope: '/*'
+    scope: '/'
   }).then(function() {
     // registration worked
     console.log('Registration succeeded.');
