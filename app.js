@@ -15,29 +15,29 @@ if ('serviceWorker' in navigator) {
 // function for loading each image via XHR
 
 function imgLoad(imgJSON) {
-// return a promise for an image loading
-return new Promise(function(resolve, reject) {	  
-  var request = new XMLHttpRequest();
-  request.open('GET', imgJSON.url);
-  request.responseType = 'blob';
-  
-  request.onload = function() {
-	    if (request.status == 200) {
-	      var arrayResponse = [];
-	      arrayResponse[0] = request.response;
-	      arrayResponse[1] = imgJSON;
-	      resolve(arrayResponse);
-	    } else {
-	      reject(Error('Image didn\'t load successfully; error code:' + request.statusText));
-	    }
-  };
+  // return a promise for an image loading
+  return new Promise(function(resolve, reject) {
+    var request = new XMLHttpRequest();
+    request.open('GET', imgJSON.url);
+    request.responseType = 'blob';
+
+    request.onload = function() {
+      if (request.status == 200) {
+        var arrayResponse = [];
+        arrayResponse[0] = request.response;
+        arrayResponse[1] = imgJSON;
+        resolve(arrayResponse);
+      } else {
+        reject(Error('Image didn\'t load successfully; error code:' + request.statusText));
+      }
+    };
 
     request.onerror = function() {
       reject(Error('There was a network error.'));
-  };
-  
-  // Send the request
-  request.send();
+    };
+
+    // Send the request
+    request.send();
   });
 };
 
@@ -54,7 +54,7 @@ window.onload = function() {
       var myCaption = document.createElement('caption');
       var imageURL = window.URL.createObjectURL(arrayResponse[0]);
 
-	  myImage.src = imageURL;
+      myImage.src = imageURL;
       myImage.setAttribute('alt', arrayResponse[1].alt);
       myCaption.innerHTML = '<strong>' + arrayResponse[1].name + '</strong>: Taken by ' + arrayResponse[1].credit;
 
@@ -62,10 +62,9 @@ window.onload = function() {
       myFigure.appendChild(myImage);
       myFigure.appendChild(myCaption);
 
-	}, function(Error) {
-	  console.log(Error);
-	});
+    }, function(Error) {
+      console.log(Error);
+    });
   };
 
 };
-
