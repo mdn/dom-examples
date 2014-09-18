@@ -6,9 +6,9 @@ if ('serviceWorker' in navigator) {
   }).then(function() {
     // registration worked
     console.log('Registration succeeded.');
-  }).catch(function() {
+  }).catch(function(error) {
     // registration failed
-    console.log('Registration failed.');
+    console.log('Registration failed with ' + error);
   });
 }
 
