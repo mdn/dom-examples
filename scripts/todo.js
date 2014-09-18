@@ -36,21 +36,21 @@ window.onload = function() {
 
 
   // Let us open our database
-  var request = window.indexedDB.open("toDoList", 4);
+  var DBOpenRequest = window.indexedDB.open("toDoList", 4);
    
   // Gecko-only IndexedDB temp storage option:
   // var request = window.indexedDB.open("toDoList", {version: 4, storage: "temporary"});
 
   // these two event handlers act on the database being opened successfully, or not
-  request.onerror = function(event) {
+  DBOpenRequest.onerror = function(event) {
     note.innerHTML += '<li>Error loading database.</li>';
   };
   
-  request.onsuccess = function(event) {
+  DBOpenRequest.onsuccess = function(event) {
     note.innerHTML += '<li>Database initialised.</li>';
     
     // store the result of opening the database in the db variable. This is used a lot below
-    db = request.result;
+    db = DBOpenRequest.result;
     
     // Run the displayData() function to populate the task list with all the to-do list data already in the IDB
     displayData();
@@ -60,7 +60,7 @@ window.onload = function() {
   // Either one has not been created before, or a new version number has been submitted via the
   // window.indexedDB.open line above
   //it is only implemented in recent browsers
-  request.onupgradeneeded = function(event) { 
+  DBOpenRequest.onupgradeneeded = function(event) { 
     var db = event.target.result;
     
     db.onerror = function(event) {
@@ -165,7 +165,7 @@ window.onload = function() {
     
       // report on the success of opening the transaction
       transaction.oncomplete = function(event) {
-        note.innerHTML += '<li>Transaction opened for task addition.</li>';
+        note.innerHTML += '<li>Transaction completed: database modification finished.</li>';
       };
 
       transaction.onerror = function(event) {
@@ -175,8 +175,8 @@ window.onload = function() {
       // call an object store that's already been added to the database
       var objectStore = transaction.objectStore("toDoList");
       // add our newItem object to the object store
-      var request = objectStore.add(newItem[0]);        
-        request.onsuccess = function(event) {
+      var objectStoreRequest = objectStore.add(newItem[0]);        
+        objectStoreRequest.onsuccess = function(event) {
           
           // report the success of our new item going into the database
           note.innerHTML += '<li>New item added to database.</li>';
@@ -347,20 +347,20 @@ window.onload = function() {
     var objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
 
     // get the to-do list object that has this title as it's title
-    var request = objectStore.get(title);
+    var objectStoreTitleRequest = objectStore.get(title);
 
-    request.onsuccess = function() {
+    objectStoreTitleRequest.onsuccess = function() {
       // grab the data object returned as the result
-      var data = request.result;
+      var data = objectStoreTitleRequest.result;
       
       // update the notified value in the object to "yes"
       data.notified = "yes";
       
       // create another request that inserts the item back into the database
-      var requestUpdate = objectStore.put(data);
+      var updateTitleRequest = objectStore.put(data);
       
       // when this new request succeeds, run the displayData() function again to update the display
-      requestUpdate.onsuccess = function() {
+      updateTitleRequest.onsuccess = function() {
         displayData();
       }
     }
