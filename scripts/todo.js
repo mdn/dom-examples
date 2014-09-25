@@ -164,16 +164,25 @@ window.onload = function() {
       var transaction = db.transaction(["toDoList"], "readwrite");
     
       // report on the success of opening the transaction
-      transaction.oncomplete = function(event) {
+      transaction.oncomplete = function() {
         note.innerHTML += '<li>Transaction completed: database modification finished.</li>';
+
+        // update the display of data to show the newly added item, by running displayData() again.
+        displayData(); 
       };
 
-      transaction.onerror = function(event) {
-        note.innerHTML += '<li>Transaction not opened due to error. Duplicate items not allowed.</li>';
+      transaction.onerror = function() {
+        note.innerHTML += '<li>Transaction not opened due to error: ' + transaction.error + '</li>';
       };
 
       // call an object store that's already been added to the database
       var objectStore = transaction.objectStore("toDoList");
+      console.log(objectStore.indexNames);
+      console.log(objectStore.keyPath);
+      console.log(objectStore.name);
+      console.log(objectStore.transaction);
+      console.log(objectStore.autoIncrement);
+
       // add our newItem object to the object store
       var objectStoreRequest = objectStore.add(newItem[0]);        
         objectStoreRequest.onsuccess = function(event) {
@@ -193,26 +202,23 @@ window.onload = function() {
          
       };
       
-      // update the display of data to show the newly added item, by running displayData() again.
-      displayData(); 
     };
   
   function deleteItem(event) {
     // retrieve the name of the task we want to delete 
     var dataTask = event.target.getAttribute('data-task');
-    
-    // delete the parent of the button, which is the list item, so it no longer is displayed
-    event.target.parentNode.parentNode.removeChild(event.target.parentNode);
-    
+
     // open a database transaction and delete the task, finding it by the name we retrieved above
-    var request = db.transaction(["toDoList"], "readwrite").objectStore("toDoList").delete(dataTask);
-    
+    var transaction = db.transaction(["toDoList"], "readwrite");
+    var request = transaction.objectStore("toDoList").delete(dataTask);
+
     // report that the data item has been deleted
-    request.onsuccess = function(event) {
+    transaction.oncomplete = function() {
+      // delete the parent of the button, which is the list item, so it no longer is displayed
+      event.target.parentNode.parentNode.removeChild(event.target.parentNode);
       note.innerHTML += '<li>Task \"' + dataTask + '\" deleted.</li>';
     };
-    
-  }
+  };
   
   // this function checks whether the deadline for each task is up or not, and responds appropriately
   function checkDeadlines() {
