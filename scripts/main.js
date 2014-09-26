@@ -6,7 +6,7 @@ var records = [
       { albumTitle: 'Grace under pressure', year: 1984 },
       { albumTitle: 'Signals', year: 1982 },
       { albumTitle: 'Moving pictures', year: 1981 },
-      { albumTitle: 'Permanent Waves', year: 1980 },
+      { albumTitle: 'Permanent waves', year: 1980 },
       { albumTitle: 'Hemispheres', year: 1978 },
       { albumTitle: 'A farewell to kings', year: 1977 },
       { albumTitle: '2112', year: 1976 },
@@ -20,6 +20,9 @@ var records = [
 var list = document.querySelector('ul');
 var advance = document.querySelector('.advance');
 var useContinue = document.querySelector('.continue');
+var useDelete = document.querySelector('.delete');
+var update = document.querySelector('.update');
+var changeDirection = document.querySelector('.direction');
 
 
 window.onload = function() {
@@ -76,7 +79,10 @@ window.onload = function() {
           var listItem = document.createElement('li');
           listItem.innerHTML = '<strong>' + cursor.value.albumTitle + '</strong>, ' + cursor.value.year;
           list.appendChild(listItem);  
-
+          
+          //console.log(cursor.source);
+          //console.log(cursor.key);
+          //console.log(cursor.primaryKey);
           cursor.continue();
         } else {
           console.log('Entries all displayed.');
@@ -108,6 +114,96 @@ window.onload = function() {
     };
   };
 
+  useDelete.onclick = function() {
+      deleteResult();
+  };
+
+  function deleteResult() {
+    list.innerHTML = '';
+    var transaction = db.transaction(['rushAlbumList'], 'readwrite');
+    var objectStore = transaction.objectStore('rushAlbumList');
+
+    objectStore.openCursor().onsuccess = function(event) {
+      var cursor = event.target.result;
+      if(cursor) {
+        if(cursor.value.albumTitle === 'Grace under pressure') {
+          var request = cursor.delete();
+          request.onsuccess = function() {
+            console.log('Deleted that mediocre album from 1984. Even Power windows is better.');
+          };
+        } else {
+          var listItem = document.createElement('li');
+          listItem.innerHTML = '<strong>' + cursor.value.albumTitle + '</strong>, ' + cursor.value.year;
+          list.appendChild(listItem);   
+        }
+        cursor.continue();        
+      } else {
+        console.log('Entries displayed.');         
+      }
+    };
+  };
+
+  update.onclick = function() {
+      updateResult();
+  };
+
+  function updateResult() {
+    list.innerHTML = '';
+    var transaction = db.transaction(['rushAlbumList'], 'readwrite');
+    var objectStore = transaction.objectStore('rushAlbumList');
+
+    objectStore.openCursor().onsuccess = function(event) {
+      var cursor = event.target.result;
+      if(cursor) {
+        if(cursor.value.albumTitle === 'A farewell to kings') {
+          var updateData = cursor.value;
+          
+          updateData.year = 2050;
+          var request = cursor.update(updateData);
+          request.onsuccess = function() {
+            console.log('A better album year?');
+          };
+        };
+        
+        var listItem = document.createElement('li');
+        listItem.innerHTML = '<strong>' + cursor.value.albumTitle + '</strong>, ' + cursor.value.year;
+        list.appendChild(listItem);   
+        
+        cursor.continue();        
+      } else {
+        console.log('Entries displayed.');         
+      }
+    };
+  };
+
+  changeDirection.onclick = function() {
+    direction();
+  }
+
+  function direction() {
+    list.innerHTML = '';
+    var transaction = db.transaction(['rushAlbumList'], 'readonly');
+    var objectStore = transaction.objectStore('rushAlbumList');
+
+    objectStore.openCursor(null,'prev').onsuccess = function(event) {
+      var cursor = event.target.result;
+        if(cursor) {
+          var listItem = document.createElement('li');
+          listItem.innerHTML = '<strong>' + cursor.value.albumTitle + '</strong>, ' + cursor.value.year;
+          list.appendChild(listItem);  
+          
+          //console.log(cursor.source);
+          //console.log(cursor.key);
+          //console.log(cursor.primaryKey);
+          console.log(cursor.direction);
+          cursor.continue();
+        } else {
+          console.log('Entries displayed backwards.');
+          
+        }
+    };
+
+  };
 
 };
 
