@@ -69,7 +69,7 @@ window.onload = function() {
       var cursor = event.target.result;
         if(cursor) {
           var listItem = document.createElement('li');
-          listItem.innerHTML = cursor.value.albumTitle + ', ' + cursor.value.year;
+          listItem.innerHTML = '<strong>' + cursor.value.albumTitle + '</strong>, ' + cursor.value.year;
           list.appendChild(listItem);  
 
           cursor.continue();
