@@ -83,6 +83,7 @@ window.onload = function() {
           //console.log(cursor.source);
           //console.log(cursor.key);
           //console.log(cursor.primaryKey);
+          //console.log(cursor.value);
           cursor.continue();
         } else {
           console.log('Entries all displayed.');
@@ -177,10 +178,10 @@ window.onload = function() {
   };
 
   changeDirection.onclick = function() {
-    direction();
+    backwards();
   }
 
-  function direction() {
+  function backwards() {
     list.innerHTML = '';
     var transaction = db.transaction(['rushAlbumList'], 'readonly');
     var objectStore = transaction.objectStore('rushAlbumList');
@@ -192,9 +193,6 @@ window.onload = function() {
           listItem.innerHTML = '<strong>' + cursor.value.albumTitle + '</strong>, ' + cursor.value.year;
           list.appendChild(listItem);  
           
-          //console.log(cursor.source);
-          //console.log(cursor.key);
-          //console.log(cursor.primaryKey);
           console.log(cursor.direction);
           cursor.continue();
         } else {
