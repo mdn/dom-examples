@@ -91,6 +91,13 @@ window.onload = function() {
     } else if(checkedValue == "upper") {
       keyRangeValue = IDBKeyRange.upperBound(upperBoundText.value);
     }
+    
+    if(keyRangeValue != null) {
+      console.log(keyRangeValue.lower);
+      console.log(keyRangeValue.upper);
+      console.log(keyRangeValue.lowerOpen);
+      console.log(keyRangeValue.upperOpen);
+    };
 
     list.innerHTML = '';
     var transaction = db.transaction(['fThings'], 'readonly');
