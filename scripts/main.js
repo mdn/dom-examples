@@ -67,9 +67,7 @@ window.onload = function() {
   };
 
   var thControls = document.querySelectorAll('th');
-  console.log(thControls[0]);
   for(i = 0; i < thControls.length; i++) {
-    console.log(thControls[i]);
     var activeThead = thControls[i];
     activeThead.onclick = function(e) {
       activeIndex = e.target.innerHTML;
@@ -114,10 +112,6 @@ window.onload = function() {
                              + '<td>' + cursor.value.age + '</td>';
         tableEntry.appendChild(tableRow);  
         
-        //console.log(cursor.source);
-        //console.log(cursor.key);
-        //console.log(cursor.primaryKey);
-        //console.log(cursor.value);
         cursor.continue();
       } else {
         console.log('Entries all displayed.');    
@@ -126,13 +120,37 @@ window.onload = function() {
   };
 
   function displayDataByIndex(activeIndex) {
-    console.log(activeIndex);
     tableEntry.innerHTML = '';
     var transaction = db.transaction(['contactsList'], 'readonly');
     var objectStore = transaction.objectStore('contactsList');
 
 
     var myIndex = objectStore.index(activeIndex);
+
+    console.log(myIndex.name);
+    console.log(myIndex.objectStore);
+    console.log(myIndex.keyPath);
+    console.log(myIndex.multiEntry);
+    console.log(myIndex.unique);
+    
+    var countRequest = myIndex.count();
+    countRequest.onsuccess = function() {
+      console.log(countRequest.result);
+    }
+    
+    if(activeIndex == 'fName') {
+      var getRequest = myIndex.get('Mr');
+      getRequest.onsuccess = function() {
+        console.log(getRequest.result);
+      }
+    }
+
+    if(activeIndex == 'lName') {
+      var getKeyRequest = myIndex.getKey('Bungle');
+      getKeyRequest.onsuccess = function() {
+        console.log(getKeyRequest.result);
+      }
+    }
      
     myIndex.openCursor().onsuccess = function(event) {
       var cursor = event.target.result;
@@ -147,11 +165,7 @@ window.onload = function() {
                              + '<td>' + cursor.value.phone + '</td>'
                              + '<td>' + cursor.value.age + '</td>';
         tableEntry.appendChild(tableRow);  
-        
-        //console.log(cursor.source);
-        //console.log(cursor.key);
-        //console.log(cursor.primaryKey);
-        //console.log(cursor.value);
+
         cursor.continue();
       } else {
         console.log('Entries all displayed.');    
