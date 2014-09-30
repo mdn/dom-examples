@@ -1,0 +1,75 @@
+html, body {
+  margin: 0;
+  font-family: 'Arvo', serif;
+  font-size: 10px;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Bevan', cursive;
+  font-size: 4rem;
+  letter-spacing: 0.2rem;
+  text-shadow: 1px 1px 1px #eee4fe,
+               2px 2px 1px #eee4fe,
+               3px 3px 1px #7b62ae,
+               4px 4px 1px #7b62ae,
+               5px 5px 1px #261758,
+               6px 6px 1px #261758;
+}
+
+table {
+  width: 75%;
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
+  margin: 0 auto;
+  border-collapse: collapse;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+
+table,thead {
+  background: white;
+}
+
+tbody {
+  border: 1px solid #eee4fe;
+}
+
+thead {
+  border: 1px solid #261758;
+}
+
+th {
+  font-size: 1.7rem;
+  padding: 1.2rem;
+  text-align: left;
+  background: linear-gradient(to bottom,#261758,#666778);
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  cursor: pointer;
+}
+
+th:hover, th:focus {
+  color: #ddd;
+}
+
+th:active {
+  color: #bbb;
+}
+
+td {
+  padding: 1rem;
+  border-left: 1px solid #7b62ae;
+  border-right: 1px solid #7b62ae;
+}
+
+td:first-child {
+  border-left: none;
+}
+
+td:last-child {
+  border-right: none;
+}
+
+tr:nth-child(even) {
+  background: #eee4fe;
+}
