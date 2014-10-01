@@ -74,3 +74,8 @@ td:last-child {
 tr:nth-child(even) {
   background: #eee4fe;
 }
+
+p {
+  font-size: 1.5rem;
+  text-align: center;
+}
