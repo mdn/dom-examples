@@ -50,6 +50,7 @@ th {
 
 th:hover, th:focus {
   color: #ddd;
+  border: 0;
 }
 
 th:active {

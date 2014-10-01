@@ -49,7 +49,7 @@ window.onload = function() {
     objectStore.createIndex('fName', 'fName', { unique: false });
     objectStore.createIndex('jTitle', 'jTitle', { unique: false });
     objectStore.createIndex('company', 'company', { unique: false });
-    objectStore.createIndex('eMail', 'eMail', { unique: false });
+    objectStore.createIndex('eMail', 'eMail', { unique: true });
     objectStore.createIndex('phone', 'phone', { unique: false });
     objectStore.createIndex('age', 'age', { unique: false });
   };
