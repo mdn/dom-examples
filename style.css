@@ -1,0 +1,154 @@
+/* General setup */
+
+* {
+	box-sizing: border-box;
+}
+
+html,body {
+	margin: 0;
+}
+
+html {
+	font-size: 10px;
+	font-family: sans-serif;
+}
+
+/* Typography */
+
+h1 {
+	font-size: 6rem;
+}
+
+p,form,li {
+	font-size: 1.6rem;
+	line-height: 1.5;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+/* Layout and styles */
+
+html {
+	background-color: #FF0000;
+	height: 100%;
+}
+
+body {
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	display: flex;
+    
+    -webkit-box-align: center;
+	-moz-box-align: center;
+	box-align: center;
+	justify-content: center;
+
+    -webkit-box-pack: center;
+	-moz-box-pack: center;
+	box-pack: center;
+    align-items: center;
+
+    height: inherit;
+}
+
+body > .wrapper {
+    width: 90%;
+	max-width: 800px;
+	background-color: rgb(250,250,250);
+	padding: 2rem;
+	position: relative;
+	border: 5px solid black;
+}
+
+body > div > div {
+	width: 300px;
+}
+
+h1 {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	position: absolute;
+	left: 2rem;
+	top: -4.6rem;
+	text-transform: uppercase;
+	color: rgb(250,250,250);
+	text-shadow: 0px -1px 1px black,
+	             0px -2px 1px black,
+	             0px -3px 1px black,
+	             0px -4px 1px black,
+	             0px -5px 1px black;
+}
+
+form div label {
+  float: left;
+  width: 45%;
+  text-align: right;
+}
+
+form div input, form div select {
+	float: right;
+}
+
+form div input {
+	width: 49%;
+	line-height: 1.5;
+}
+
+form div select {
+	width: 50%;
+}
+
+form div option {
+		height: 2rem;
+}
+
+form div {
+	clear: both;
+	margin: 0 auto;
+	width: 70%;
+	padding-bottom: 4rem;
+}
+
+footer {
+	clear: both;
+}
+
+img {
+	position: absolute;
+	bottom: 1rem;
+	left: 1rem;
+}
+
+@media (max-width: 800px) {
+	body > div {
+	  width: 100%;
+	}
+}
+
+@media (max-width: 600px) {
+    h1 {
+      font-size: 3rem;
+      top: -2.2rem;
+    }
+
+	form div label {
+      float: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    form div input, form div select {
+	  float: none;
+	  width: 100%;
+    }
+
+    form div {
+	  padding-bottom: 1.5rem;
+    }
+
+    img {
+	  bottom: -4rem;
+    }
+
+}
