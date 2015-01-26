@@ -3,8 +3,7 @@ onconnect = function(e) {
 
 	port.onmessage = function(e) {
 	  var workerResult = 'Result: ' + (e.data[0] * e.data[1]);
-	  var resultType = e.data[2];
-	  port.postMessage([workerResult,resultType]);
+	  port.postMessage(workerResult);
 	}
 
 	port.start();
