@@ -6,11 +6,6 @@ var result1 = document.querySelector('.result1');
 if (!!window.SharedWorker) {
   var myWorker = new SharedWorker("worker.js");
 
-  myWorker.port.onmessage = function(e) {
-    result2.textContent = e.data;
-    console.log('Message received from worker');
-  }
-
   myWorker.port.start();
 
   first.onchange = function() {
