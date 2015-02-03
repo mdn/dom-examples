@@ -16,11 +16,17 @@ form {
 
 form input {
 	width: 55%;
-	margin-right: 5%;
+}
+
+form label {
+  width: 40%;
+  margin-right: 5%;
 }
 
 form button {
-	width: 35%;
+	width: 60%;
+  display: block;
+  margin: 10px auto 0;
 }
 
 p {
