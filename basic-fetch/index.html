@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Fetch basic example</title>
+
+    <link rel="stylesheet" href="">
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <h1>Fetch basic example</h1>
+
+    <img src="" class="my-image">
+  </body>
+  <script>
+    var myImage = document.querySelector('.my-image');
+
+    fetch('flowers.jpg').then(function(response) {
+      return response.blob();
+    }).then(function(response) {
+      var objectURL = URL.createObjectURL(response);
+      myImage.src = objectURL;
+    });
+
+  </script>
+</html>
