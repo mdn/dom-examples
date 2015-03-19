@@ -1,6 +1,7 @@
 // register service worker
 
 if ('serviceWorker' in navigator) {
+<<<<<<< HEAD
   navigator.serviceWorker.register('/sw.js', {
     scope: '/'
   }).then(function(reg) {
