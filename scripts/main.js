@@ -102,6 +102,11 @@ window.onload = function() {
     list.innerHTML = '';
     var transaction = db.transaction(['fThings'], 'readonly');
     var objectStore = transaction.objectStore('fThings');
+    
+    var countRequest = objectStore.count();
+    countRequest.onsuccess = function() {
+      console.log(countRequest.result);
+    }
 
     objectStore.openCursor(keyRangeValue).onsuccess = function(event) {
       var cursor = event.target.result;
