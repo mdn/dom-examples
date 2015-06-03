@@ -21,70 +21,76 @@ var canvasCtx = canvas.getContext("2d");
 //main block for doing the audio recording
 
 if (navigator.getUserMedia) {
-   console.log('getUserMedia supported.');
-   navigator.getUserMedia (
-      // constraints - only audio needed for this app
-      {
-         audio: true
-      },
+  console.log('getUserMedia supported.');
 
-      // Success callback
-      function(stream) {
-      	 var mediaRecorder = new MediaRecorder(stream);
+  var constraints = { audio: true };
+  var chunks = [];
 
-      	 visualize(stream);
+  var onSuccess = function(stream) {
+    var mediaRecorder = new MediaRecorder(stream);
 
-      	 record.onclick = function() {
-      	 	mediaRecorder.start();
-          console.log(mediaRecorder.state);
-      	 	console.log("recorder started");
-      	 	record.style.background = "red";
-      	 	record.style.color = "black";
-      	 }
+    visualize(stream);
 
-      	 stop.onclick = function() {
-      	 	mediaRecorder.stop();
-          console.log(mediaRecorder.state);
-      	 	console.log("recorder stopped");
-      	 	record.style.background = "";
-      	 	record.style.color = "";
-      	 }
+    record.onclick = function() {
+      mediaRecorder.start();
+      console.log(mediaRecorder.state);
+      console.log("recorder started");
+      record.style.background = "red";
+      record.style.color = "black";
+    }
 
-      	 mediaRecorder.ondataavailable = function(e) {
-           console.log("data available");
+    stop.onclick = function() {
+      mediaRecorder.stop();
+      console.log(mediaRecorder.state);
+      console.log("recorder stopped");
+      record.style.background = "";
+      record.style.color = "";
+      // mediaRecorder.requestData();
+    }
 
-           var clipName = prompt('Enter a name for your sound clip');
+    mediaRecorder.onstop = function(e) {
+      console.log("data available after MediaRecorder.stop() called.");
 
-      	   var clipContainer = document.createElement('article');
-      	   var clipLabel = document.createElement('p');
-           var audio = document.createElement('audio');
-           var deleteButton = document.createElement('button');
-           
-           clipContainer.classList.add('clip');
-           audio.setAttribute('controls', '');
-           deleteButton.innerHTML = "Delete";
-           clipLabel.innerHTML = clipName;
+      var clipName = prompt('Enter a name for your sound clip');
 
-           clipContainer.appendChild(audio);
-           clipContainer.appendChild(clipLabel);
-           clipContainer.appendChild(deleteButton);
-           soundClips.appendChild(clipContainer);
+      var clipContainer = document.createElement('article');
+      var clipLabel = document.createElement('p');
+      var audio = document.createElement('audio');
+      var deleteButton = document.createElement('button');
+     
+      clipContainer.classList.add('clip');
+      audio.setAttribute('controls', '');
+      deleteButton.innerHTML = "Delete";
+      clipLabel.innerHTML = clipName;
 
-           var audioURL = window.URL.createObjectURL(e.data);
-           audio.src = audioURL;
+      clipContainer.appendChild(audio);
+      clipContainer.appendChild(clipLabel);
+      clipContainer.appendChild(deleteButton);
+      soundClips.appendChild(clipContainer);
 
-           deleteButton.onclick = function(e) {
-             evtTgt = e.target;
-             evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
-           }
-      	 }
-      },
+      audio.controls = true;
+      var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      chunks = [];
+      var audioURL = window.URL.createObjectURL(blob);
+      audio.src = audioURL;
+      console.log("recorder stopped");
 
-      // Error callback
-      function(err) {
-         console.log('The following gUM error occured: ' + err);
+      deleteButton.onclick = function(e) {
+        evtTgt = e.target;
+        evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
       }
-   );
+    }
+
+    mediaRecorder.ondataavailable = function(e) {
+      chunks.push(e.data);
+    }
+  }
+
+  var onError = function(err) {
+    console.log('The following error occured: ' + err);
+  }
+
+  navigator.getUserMedia(constraints, onSuccess, onError);
 } else {
    console.log('getUserMedia not supported on your browser!');
 }
