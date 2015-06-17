@@ -10,10 +10,6 @@ if ('serviceWorker' in navigator) {
     } else if(reg.active) {
       console.log('Service worker active');
     }
-
-    reg.installing.onstatechange = function(e) {
-      console.log(e.target.state);
-    }
     
   }).catch(function(error) {
     // registration failed
