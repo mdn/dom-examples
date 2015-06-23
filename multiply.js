@@ -6,8 +6,6 @@ var result1 = document.querySelector('.result1');
 if (!!window.SharedWorker) {
   var myWorker = new SharedWorker("worker.js");
 
-  myWorker.port.start();
-
   first.onchange = function() {
 	myWorker.port.postMessage([first.value,second.value]);
 	console.log('Message posted to worker');

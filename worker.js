@@ -6,5 +6,4 @@ onconnect = function(e) {
 	  port.postMessage(workerResult);
 	}
 
-	port.start();
 }
