@@ -21,7 +21,8 @@ this.addEventListener('fetch', function(event) {
   var response;
   var cachedResponse = caches.match(event.request).catch(function() {
     return fetch(event.request);
-  }).then(function(response) {
+  }).then(function(r) {
+    response = r;
     caches.open('v1').then(function(cache) {
       cache.put(event.request, response);
     });  
