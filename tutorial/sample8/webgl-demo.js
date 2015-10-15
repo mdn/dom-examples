@@ -299,6 +299,7 @@ function updateTexture() {
 //
 function startVideo() {
   videoElement.play();
+  videoElement.muted = true;
   intervalID = setInterval(drawScene, 15);
 }
 
