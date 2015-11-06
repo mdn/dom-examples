@@ -7,4 +7,4 @@ Examples:
 External Pointer Events Demos:
 
 * [Patrick H Lauke's site](http://patrickhlauke.github.io/touch/)
-* [Pointer Events demo](http://limpet.net/pointer.html) described in [Pointer Events now in Firefox Nightly](Pointer Events) by Matt Brubeck and  Jason Weathersby
+* [Pointer Events demo](http://limpet.net/pointer.html) described in Mozilla Hacks article [Pointer Events now in Firefox Nightly](https://hacks.mozilla.org/2015/08/pointer-events-now-in-firefox-nightly/) by Matt Brubeck and  Jason Weathersby
