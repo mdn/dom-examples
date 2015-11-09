@@ -98,7 +98,7 @@ function pointermove_handler(ev) {
  //
  // This function sets the target element's border to "dashed" to visually
  // indicate the target received a move event.
- if (logEvents) log("touchMove", ev);
+ if (logEvents) log("pointerMove", ev);
  update_background(ev);
  ev.target.style.border = "dashed";
 }
