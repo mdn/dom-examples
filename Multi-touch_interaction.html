@@ -34,7 +34,7 @@
 // Log events flag
 var logEvents = false;
 
-// Touch Point caches, one per touch target
+// Event caches, one per touch target
 var evCache1 = new Array();
 var evCache2 = new Array();
 var evCache3 = new Array();
@@ -57,12 +57,12 @@ function clearLog(event) {
 }
 
 function update_background(ev) {
- // Change background color based on the number simultaneous touches
- // in the event's targetTouches list:
- //   white - target element current has no touch points
- //   yellow - one tap (or hold)
- //   pink - two taps
- //   lightblue - more than two taps
+ // Change background color based on the number simultaneous touches/pointers
+ // currently down:
+ //   white - target element has no touch points i.e. no pointers down
+ //   yellow - one pointer down
+ //   pink - two pointers down
+ //   lightblue - three or more pointers down
  var evCache = get_cache(ev);
  switch (evCache.length) {
    case 0:
@@ -86,7 +86,7 @@ function update_background(ev) {
 function pointerdown_handler(ev) {
  // The pointerdown event signals the start of a touch interaction.
  // Save this event for later processing (this could be part of a
- // multi-touch interaction and update the background color
+ // multi-touch interaction) and update the background color
  push_event(ev);
  if (logEvents) log("pointerDown: name = " + ev.target.id, ev);
  update_background(ev);
@@ -96,13 +96,10 @@ function pointermove_handler(ev) {
  // Note: if the user makes more than one "simultaneous" touch, most browsers 
  // fire at least one pointermove event and some will fire several pointermoves.
  //
- // This function sets the target element's border to "dashed" to visualy
+ // This function sets the target element's border to "dashed" to visually
  // indicate the target received a move event.
  if (logEvents) log("touchMove", ev);
  update_background(ev);
-
- // Set the target element's border to dashed to give a clear visual
- // indication the element received a move event.
  ev.target.style.border = "dashed";
 }
 
