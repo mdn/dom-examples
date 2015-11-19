@@ -1,0 +1,32 @@
+body, html {
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: inherit;
+  overflow: hidden;
+}
+
+h1, p {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+div {
+  height: 100px;
+  overflow: auto;
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+  left: 0;
+  background-color: rgba(255,255,255,0.2);
+}
+
+ul {
+  margin: 0;
+}
