@@ -46,7 +46,7 @@ function check_DataTransfer(dt) {
     "setData",
     "clearData"];
 
-  console.log("DataTransfer ...");
+  console.log("DataTransfer ... " + dt);
   
   for (var i=0; i < properties.length; i++) {
     var supported = properties[i] in dt;
@@ -64,10 +64,10 @@ function check_DataTransferItem(dti) {
   var methods = ["getAsFile",
     "getAsString"];
 
-  console.log("DataTransferItem ..." + dti);
+  console.log("DataTransferItem ... " + dti);
 
   for (var i=0; i < properties.length; i++) {
-    if (dti == undefined) {
+    if (dti === undefined) {
       console.log("... items." + properties[i] + " = undefined");
     } else {
       var supported = properties[i] in dti;
@@ -75,7 +75,7 @@ function check_DataTransferItem(dti) {
     }
   }
   for (var i=0; i < methods.length; i++) {
-    if (dti == undefined) {
+    if (dti === undefined) {
       console.log("... items." + methods[i] + "() = undefined");
     } else {
       var supported = typeof dti[methods[i]] == "function";
@@ -90,10 +90,10 @@ function check_DataTransferItemList(dtil) {
     "remove",
     "clear"];
 
-  console.log("DataTransferItemList ..." + dtil);
+  console.log("DataTransferItemList ... " + dtil);
 
   for (var i=0; i < properties.length; i++) {
-    if (dtil == undefined) {
+    if (dtil === undefined) {
       console.log("... items." + properties[i] + " = undefined");
     } else {
       var supported = properties[i] in dtil;
@@ -101,7 +101,7 @@ function check_DataTransferItemList(dtil) {
     }
   }
   for (var i=0; i < methods.length; i++) {
-    if (dtil == undefined) {
+    if (dtil === undefined) {
       console.log("... items." + methods[i] + "() = undefined");
     } else {
       var supported = typeof dtil[methods[i]] == "function";
@@ -113,7 +113,7 @@ function dragstart_handler(ev) {
   ev.dataTransfer.dropEffect = "move";
   check_DragEvents();
   var dt = ev.dataTransfer;
-  if (dt == undefined) {
+  if (dt === undefined) {
     console.log("DataTransfer is NOT supported."); 
   } else {
     // Make sure there is at least one item
@@ -126,13 +126,18 @@ function dragover_handler(ev) {
   ev.preventDefault();
 }
 function drop_handler(ev) {
-  var dti = ev.dataTransfer.items;
-  if (dti == undefined) {
+  if (ev.dataTransfer === undefined) {
     console.log("DataTransferItem NOT supported."); 
     console.log("DataTransferItemList NOT supported."); 
   } else {
-    check_DataTransferItem(dti[0]);
-    check_DataTransferItemList(dti);
+    var dti = ev.dataTransfer.items;
+    if (dti === undefined) {
+      console.log("DataTransferItem NOT supported."); 
+      console.log("DataTransferItemList NOT supported."); 
+    } else {
+      check_DataTransferItem(dti[0]);
+      check_DataTransferItemList(dti);
+    }
   }
 }
 </script>
