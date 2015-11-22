@@ -91,6 +91,8 @@ function dragend_handler(ev) {
     console.log("Browser does not support DataTransferItem interface");
     return;
   }
+  // Restore source's border
+  ev.target.style.border = "solid black";
   // Remove all of the items from the list.
   dti.clear();
 }
