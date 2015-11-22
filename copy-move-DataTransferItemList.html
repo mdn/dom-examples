@@ -27,20 +27,27 @@
 <script>
 function dragstart_handler(ev) {
   console.log("dragStart");
-  // Change the source element's background color to signify drag has started
-  ev.currentTarget.style.border = "dashed";
   var dti = ev.dataTransfer.items;
   if (dti === undefined || dti == null) {
     console.log("Browser does not support DataTransferItem interface");
     return;
   }
+  // Change the source element's background color to signify drag has started
+  ev.currentTarget.style.border = "dashed";
   // Add the id of the drag source element to the drag data payload so
   // it is available when the drop event is fired
   dti.add(ev.target.id, "text/plain");
+  // Tell the browser both copy and move are possible
+  ev.effectAllowed = "copyMove";
 }
 
 function dragover_handler(ev) {
   console.log("dragOver");
+  var dti = ev.dataTransfer.items;
+  if (dti === undefined || dti == null) {
+    console.log("Browser does not support DataTransferItem interface");
+    return;
+  }
   // Change the target element's border to signify a drag over event
   // has occurred
   ev.currentTarget.style.background = "lightblue";
