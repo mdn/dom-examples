@@ -35,7 +35,6 @@ function dragstart_handler(ev) {
  // it is available when the drop event is fired
  ev.dataTransfer.setData("text", ev.target.id);
 }
-
 function dragover_handler(ev) {
  console.log("dragOver");
  // Change the target element's border to signify a drag over event
@@ -43,7 +42,6 @@ function dragover_handler(ev) {
  ev.currentTarget.style.background = "lightblue";
  ev.preventDefault();
 }
-
 function drop_handler(ev) {
   console.log("Drop");
   ev.preventDefault();
@@ -60,15 +58,22 @@ function drop_handler(ev) {
    ev.target.appendChild(nodeCopy);
   }
 }
+function dragend_handler(ev) {
+  console.log("dragEnd");
+  // Restore source's border
+  ev.target.style.border = "solid black";
+  // Remove all of the drag data
+  ev.dataTransfer.clearData();
+}
 </script>
 </head>
 <body>
 <h1>Drag and Drop: Copy and Move elements with <code>DataTransfer</code></h1>
- <div draggable="true" id="src_copy" ondragstart="dragstart_handler(event);">
+ <div draggable="true" id="src_copy" ondragstart="dragstart_handler(event);" ondragend="dragend_handler(event);">
      Select this element and drag to the <strong>Copy Drop Zone</strong>.
  </div>
  <div id="dest_copy" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"><strong>Copy Drop Zone</strong></div>
- <div draggable="true" id="src_move" ondragstart="dragstart_handler(event);">
+ <div draggable="true" id="src_move" ondragstart="dragstart_handler(event);" ondragend="dragend_handler(event);">
      Select this element and drag to the <strong>Move Drop Zone</strong>.
  </div>
  <div id="dest_move" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"><strong>Move Drop Zone</strong></div>
