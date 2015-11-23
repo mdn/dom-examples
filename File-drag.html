@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<title>Demo: Drag and Drop files</title>
+<!-- 
+   This example demonstrates using the HTML Drag and Drop's DataTransfer
+   and DataTransferItemList interfaces to drag files from the platform's
+   file manger and drop them in an HTML document.
+-->
+<style>
+  div {
+    margin: 0em;
+    padding: 2em;
+  }
+  #drop_zone {
+    border: 5px solid blue;
+    width:  200px;
+    height: 100px;
+  }
+</style>
+<script>
+function dragover_handler(ev) {
+  console.log("dragOver");
+  // Prevent default select and drag behavior
+  ev.preventDefault();
+}
+function drop_handler(ev) {
+  console.log("Drop");
+  ev.preventDefault();
+  // If dropped items aren't files, reject them
+  var dt = ev.dataTransfer;
+  if (dt.items) {
+    // Use DataTransferItemList interface to access the file(s)
+    for (var i=0; i < dt.items.length; i++) {
+      if (dt.items[i].kind == "file") {
+        var f = dt.items[i].getAsFile();
+        console.log("... file[" + i + "].name = " + f.name);
+      }
+    }
+  } else {
+    // Use DataTransfer interface to access the file(s)
+    for (var i=0; i < dt.files.length; i++) {
+      console.log("... file[" + i + "].name = " + dt.files[i].name);
+    }
+  }
+}
+function dragend_handler(ev) {
+  console.log("dragEnd");
+  // Remove all of the drag data
+  var dt = ev.dataTransfer;
+  if (dt.items) {
+    // Use DataTransferItemList interface to remove the drag data
+    for (var i = 0; i < dt.items.length; i++) {
+      dt.items.remove(i);
+    }
+  } else {
+    // Use DataTransfer interface to remove the drag data
+    ev.dataTransfer.clearData();
+  }
+}
+</script>
+</head>
+<body>
+<h1>Drag and drop files</h1>
+ <div id="drop_zone" ondrop="drop_handler(event);" ondragover="dragover_handler(event);" ondragend="dragend_handler(event);"><strong>Drag one or more files to this Drop Zone ...</strong></div>
+</body>
+</html>
