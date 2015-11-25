@@ -1,6 +1,6 @@
 {
-  "name": "WebSpeech",
-  "description": "Web Speech API demo",
+  "name": "SpeechRec",
+  "description": "Web Speech API  speech recognition demo",
   "type": "privileged",
   "launch_path": "/index.html",
   "icons": {
