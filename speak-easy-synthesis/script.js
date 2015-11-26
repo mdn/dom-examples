@@ -1,8 +1,14 @@
 var synth = window.speechSynthesis;
 
 var inputForm = document.querySelector('form');
-var inputTxt = document.querySelector('input');
+var inputTxt = document.querySelector('.txt');
 var voiceSelect = document.querySelector('select');
+
+var pitch = document.querySelector('#pitch');
+var pitchValue = document.querySelector('.pitch-value');
+var rate = document.querySelector('#rate');
+var rateValue = document.querySelector('.rate-value');
+
 
 var voices = synth.getVoices();
 
@@ -24,6 +30,16 @@ inputForm.onsubmit = function(event) {
       utterThis.voice = voices[i];
     }
   }
+  utterThis.pitch = pitch.value;
+  utterThis.rate = rate.value;
   synth.speak(utterThis);
   inputTxt.blur();
+}
+
+pitch.onchange = function() {
+  pitchValue.textContent = pitch.value;
+}
+
+rate.onchange = function() {
+  rateValue.textContent = rate.value;
 }
