@@ -42,3 +42,7 @@ recognition.onspeechend = function() {
 recognition.onnomatch = function(event) {
   diagnostic.textContent = 'I didnt recognise that color.';
 }
+
+recognition.onerror = function(event) {
+  diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
+}

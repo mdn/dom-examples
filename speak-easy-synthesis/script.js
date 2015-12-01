@@ -9,20 +9,28 @@ var pitchValue = document.querySelector('.pitch-value');
 var rate = document.querySelector('#rate');
 var rateValue = document.querySelector('.rate-value');
 
+var voices = [];
 
-var voices = synth.getVoices();
+function populateVoiceList() {
+  voices = synth.getVoices();
 
-for(i = 0; i < voices.length ; i++) {
-  var option = document.createElement('option');
-  option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
-  
-  if(voices[i].default) {
-    option.textContent += ' -- DEFAULT';
+  for(i = 0; i < voices.length ; i++) {
+    var option = document.createElement('option');
+    option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+    
+    if(voices[i].default) {
+      option.textContent += ' -- DEFAULT';
+    }
+
+    option.setAttribute('data-lang', voices[i].lang);
+    option.setAttribute('data-name', voices[i].name);
+    voiceSelect.appendChild(option);
   }
+}
 
-  option.setAttribute('data-lang', voices[i].lang);
-  option.setAttribute('data-name', voices[i].name);
-  voiceSelect.appendChild(option);
+populateVoiceList();
+if (speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = populateVoiceList;
 }
 
 inputForm.onsubmit = function(event) {
