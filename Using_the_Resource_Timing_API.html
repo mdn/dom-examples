@@ -24,7 +24,7 @@ function buffer_full(event) {
 }
 
 function display_buffer_count() {
-  if (performance == undefined) {
+  if (performance === undefined) {
     log("= Buffer Count: peformance NOT supported");
     return;
   }
@@ -34,7 +34,7 @@ function display_buffer_count() {
 }
 
 function clear_resource_timings() {
-  if (performance == undefined) {
+  if (performance === undefined) {
     log("= performance.clearResourceTimings(): peformance NOT supported");
     return;
   }
@@ -57,7 +57,7 @@ function clear_resource_timings() {
 }
 
 function set_resource_timing_buffer_size(n) {
-  if (performance == undefined) {
+  if (performance === undefined) {
     log("= performance.setResourceTimingBufferSize(): peformance NOT supported");
     return;
   }
@@ -75,13 +75,13 @@ function set_resource_timing_buffer_size(n) {
 function display_size_data(){
   // Check for support of the PerformanceEntry.*size properties and print their values
   // if supported.
-  if (performance == undefined) {
+  if (performance === undefined) {
     log("= Display Size Data: peformance NOT supported");
     return;
   }
 
   var list = performance.getEntriesByType("resource");
-  if (list == undefined) {
+  if (list === undefined) {
     log("= Display Size Data: peformance.getEntriesByType() is  NOT supported");
     return;
   }
