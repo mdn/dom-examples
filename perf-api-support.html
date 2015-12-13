@@ -3,11 +3,14 @@
 <title>Feature test: Web Performance interfaces</title>
 <!--
   This application displays Yes/No support for Web Performance APIs:
-  * Performance (includes PerformanceMark and PerformanceMeasure extensions)
-  * PerformanceEntry (includes PerformanceResoureTiming extensions)
+  * Performance
+  * PerformanceEntry
+  * PerformanceMark
+  * PerformanceMeasure
   * PerformanceNavigation
   * PerformanceObserver
   * PerformanceObserverEntryList
+  * PerformanceResourceTiming
   * PerformanceTiming
 
   These APIs are defined in the following standards:
@@ -91,6 +94,94 @@ function check_Performance() {
     // check each method
     if (i == 0) log("= Methods");
     check_method("... ", methods[i], performance);
+  }
+}
+
+function check_PerformanceResourceTiming() {
+  // Check PerformanceResourceTiming support
+  if (performance === undefined) {
+    log_error("PerformanceResourceTiming interface: performance NOT defined in global context");
+    return;
+  }
+  if (window.PerformanceResourceTiming === undefined) {
+    log_error("PerformanceResourceTiming interface: window.PerformanceResourceTiming NOT defined");
+    return;
+  }
+  // Defined in: Resource Timing
+  var properties = 
+   ["duration",
+    "entryType",
+    "name",
+    "startTime"];
+  
+  log("<strong>PerformanceResourceTiming interfaces</strong>");
+
+  var perfEntries = performance.getEntriesByType("resource");
+  var entry = perfEntries[0];
+  for (var i=0; i < properties.length; i++) {
+    // check each property
+    if (i == 0) log("= Properties ");
+    check_property("... ", properties[i], entry);
+  }
+}
+
+function check_PerformanceMark() {
+  // Check PerformanceMark support
+  if (performance === undefined) {
+    log_error("PerformanceMark interface: performance NOT defined in global context");
+    return;
+  }
+  if (window.PerformanceMark === undefined) {
+    log_error("PerformanceMark interface: window.PerformanceMark NOT defined");
+    return;
+  }
+  // Defined in: User Timing
+  var properties = 
+   ["duration",
+    "entryType",
+    "name",
+    "startTime"];
+  
+  log("<strong>PerformanceMark interfaces</strong>");
+  performance.mark("mark-1");
+
+  var perfEntries = performance.getEntriesByType("mark");
+  var entry = perfEntries[0];
+  for (var i=0; i < properties.length; i++) {
+    // check each property
+    if (i == 0) log("= Properties ");
+    check_property("... ", properties[i], entry);
+  }
+}
+
+function check_PerformanceMeasure() {
+  // Check PerformanceMeasure support
+  if (performance === undefined) {
+    log_error("PerformanceMeasure interface: performance NOT defined in global context");
+    return;
+  }
+  if (window.PerformanceMeasure === undefined) {
+    log_error("PerformanceMeasure interface: window.PerformanceMeasure NOT defined");
+    return;
+  }
+  // Defined in: User Timing
+  var properties = 
+   ["duration",
+    "entryType",
+    "name",
+    "startTime"];
+  
+  log("<strong>PerformanceMeasure interfaces</strong>");
+  performance.mark("mark-1");
+  performance.mark("mark-2");
+  performance.measure("measure-1", "mark-1", "mark-2");
+
+  var perfEntries = performance.getEntriesByType("measure");
+  var entry = perfEntries[0];
+  for (var i=0; i < properties.length; i++) {
+    // check each property
+    if (i == 0) log("= Properties ");
+    check_property("... ", properties[i], entry);
   }
 }
 
@@ -321,6 +412,9 @@ function check_all(ev) {
 <button id="log" onclick="check_Performance(event);">Performance</button>
 <p></p>
 <button id="log" onclick="check_PerformanceEntry(event);">PerformanceEntry</button>
+<button id="log" onclick="check_PerformanceResourceTiming(event);">PerformanceResourceTiming</button>
+<button id="log" onclick="check_PerformanceMark(event);">PerformanceMark</button>
+<button id="log" onclick="check_PerformanceMeasure(event);">PerformanceMeasure</button>
 <p></p>
 <button id="log" onclick="check_PerformanceTiming(event);">PerformanceTiming</button>
 <p></p>
