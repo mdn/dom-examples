@@ -5,6 +5,7 @@
   This application displays Yes/No support for Web Performance APIs:
   * Performance
   * PerformanceEntry
+  * PerformanceFrameTiming
   * PerformanceMark
   * PerformanceMeasure
   * PerformanceNavigation
@@ -20,7 +21,7 @@
   * Resource Timing (L1)
   * User Timing (L1, L2)
 
-  * @TODO: PerformanceNavigationTiming, PerformanceFameTiming, Navigator, WorkerNavigator
+  * @TODO: PerformanceNavigationTiming, Navigator, WorkerNavigator
 -->
 <meta name="viewport" content="width=device-width">
 <script>
@@ -55,7 +56,7 @@ function check_method(prefix, name, obj) {
     log_error(prefix + name + "() = " + (supported ? "Yes" : "NOT Supported"));
 }
 
-function check_Performance() {
+function check_Performance(ev) {
   // Check performance support
   if (performance === undefined) {
     log_error("Performance interface: performance NOT defined in global context");
@@ -97,7 +98,7 @@ function check_Performance() {
   }
 }
 
-function check_PerformanceResourceTiming() {
+function check_PerformanceResourceTiming(ev) {
   // Check PerformanceResourceTiming support
   if (performance === undefined) {
     log_error("PerformanceResourceTiming interface: performance NOT defined in global context");
@@ -125,7 +126,7 @@ function check_PerformanceResourceTiming() {
   }
 }
 
-function check_PerformanceMark() {
+function check_PerformanceMark(ev) {
   // Check PerformanceMark support
   if (performance === undefined) {
     log_error("PerformanceMark interface: performance NOT defined in global context");
@@ -154,7 +155,7 @@ function check_PerformanceMark() {
   }
 }
 
-function check_PerformanceMeasure() {
+function check_PerformanceMeasure(ev) {
   // Check PerformanceMeasure support
   if (performance === undefined) {
     log_error("PerformanceMeasure interface: performance NOT defined in global context");
@@ -185,7 +186,35 @@ function check_PerformanceMeasure() {
   }
 }
 
-function check_PerformanceEntry() {
+function check_PerformanceFrameTiming(ev) {
+  // Check PerformanceFrameTiming support
+  if (performance === undefined) {
+    log_error("PerformanceFrameTiming interface: performance NOT defined in global context");
+    return;
+  }
+  if (window.PerformanceFrameTiming === undefined) {
+    log_error("PerformanceFrameTiming interface: window.PerformanceFrameTiming NOT defined");
+    return;
+  }
+  // Defined in: User Timing
+  var properties = 
+   ["duration",
+    "entryType",
+    "name",
+    "startTime"];
+  
+  log("<strong>PerformanceFrameTiming interfaces</strong>");
+
+  var perfEntries = performance.getEntriesByType("frame");
+  var entry = perfEntries[0];
+  for (var i=0; i < properties.length; i++) {
+    // check each property
+    if (i == 0) log("= Properties ");
+    check_property("... ", properties[i], entry);
+  }
+}
+
+function check_PerformanceEntry(ev) {
   // Check PerformanceEntry support
   if (performance === undefined) {
     log_error("PerformanceEntry interface: performance NOT defined in global context");
@@ -245,7 +274,7 @@ function check_PerformanceEntry() {
   }
 }
 
-function check_PerformanceTiming() {
+function check_PerformanceTiming(ev) {
   // Check performance support
   if (performance === undefined) {
     log_error("PerformanceTiming interface: performance NOT defined in global context");
@@ -296,7 +325,7 @@ function check_PerformanceTiming() {
   }
 }
 
-function check_PerformanceNavigation() {
+function check_PerformanceNavigation(ev) {
   // Check performance support
   if (performance === undefined) {
     log_error("PerformanceNavigation interface: performance NOT defined in global context");
@@ -329,7 +358,7 @@ function check_PerformanceNavigation() {
 // Flag for observer
 var printObserver = false;
 
-function check_PerformanceObserver() {
+function check_PerformanceObserver(ev) {
   if (window.PerformanceObserver === undefined) {
     log_error("PerformanceObserver interface: NOT supported");
     return;
@@ -401,6 +430,7 @@ function check_all(ev) {
   check_PerformanceResourceTiming(ev);
   check_PerformanceMark(ev);
   check_PerformanceMeasure(ev);
+  check_PerformanceFrameTiming(ev);
   check_PerformanceTiming(ev);
   check_PerformanceNavigation(ev);
   check_PerformanceObserver(ev);
@@ -418,6 +448,7 @@ function check_all(ev) {
 <button id="log" onclick="check_PerformanceResourceTiming(event);">PerformanceResourceTiming</button>
 <button id="log" onclick="check_PerformanceMark(event);">PerformanceMark</button>
 <button id="log" onclick="check_PerformanceMeasure(event);">PerformanceMeasure</button>
+<button id="log" onclick="check_PerformanceFrameTiming(event);">PerformanceFrameTiming</button>
 <p></p>
 <button id="log" onclick="check_PerformanceTiming(event);">PerformanceTiming</button>
 <p></p>
