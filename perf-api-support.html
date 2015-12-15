@@ -108,22 +108,53 @@ function check_PerformanceResourceTiming(ev) {
     log_error("PerformanceResourceTiming interface: window.PerformanceResourceTiming NOT defined");
     return;
   }
+  var perfEntries = performance.getEntriesByType("resource");
+  var entry = perfEntries[0];
+  if (! entry instanceof PerformanceResourceTiming) {
+    log_error("PerformanceResourceTiming interface: NO PerformanceResourceTiming objects to check");
+    return;
+  }
+
   // Defined in: Resource Timing
   var properties = 
    ["duration",
     "entryType",
     "name",
-    "startTime"];
+    "startTime",
+    "connectEnd",
+    "connectStart",
+    "decodedBodySize",
+    "domainLookupEnd",
+    "domainLookupStart",
+    "encodedBodySize",
+    "fetchStart",
+    "initiatorType",
+    "nextHopProtocol",
+    "redirectEnd",
+    "redirectStart",
+    "requestStart",
+    "responseEnd",
+    "responseStart",
+    "secureConnectionStart",
+    "transferSize",
+    "workerStart"];
   
   log("<strong>PerformanceResourceTiming interfaces</strong>");
 
-  var perfEntries = performance.getEntriesByType("resource");
-  var entry = perfEntries[0];
   for (var i=0; i < properties.length; i++) {
     // check each property
     if (i == 0) log("= Properties ");
     check_property("... ", properties[i], entry);
   }
+
+  var methods = ["toJSON"];
+
+  for (var i=0; i < methods.length; i++) {
+    // check each method
+    if (i == 0) log("= Methods");
+    check_method("... ", methods[i], entry);
+  }
+  
 }
 
 function check_PerformanceMark(ev) {
@@ -220,36 +251,23 @@ function check_PerformanceEntry(ev) {
     log_error("PerformanceEntry interface: performance NOT defined in global context");
     return;
   }
+  if (window.PerformanceEntry === undefined) {
+    log_error("PerformanceEntry interface: PerformanceEntry NOT defined");
+    return;
+  }
   // PerformanceEntry interface's properties and methods
   // Defined in: Performance Timeline, Resource Timing, User Timing standards
   var properties = 
-   ["connectEnd",
-    "connectStart",
-    "decodedBodySize",
-    "domainLookupEnd",
-    "domainLookupStart",
-    "duration",
-    "encodedBodySize",
+   ["duration",
     "entryType",
-    "fetchStart",
-    "initiatorType",
     "name",
-    "nextHopProtocol",
-    "redirectEnd",
-    "redirectStart",
-    "requestStart",
-    "responseEnd",
-    "responseStart",
-    "secureConnectionStart",
-    "startTime",
-    "transferSize",
-    "workerStart"];
+    "startTime"];
 
   var methods = ["toJSON"];
 
   if (performance.getEntriesByType === undefined) {
     // PerformanceEntry isn't defined
-    log_error("PerformanceEntry interface: PerformanceEntry NOT supported");
+    log_error("PerformanceEntry interface: performance.getEntriesByType NOT supported");
     return;
   }
 
@@ -258,10 +276,10 @@ function check_PerformanceEntry(ev) {
     log_error("PerformanceEntry interface: there are NO PerformanceEntry objects to check");
     return;
   }
+  var entry = perfEntries[0];
 
   log("<strong>PerformanceEntry interfaces</strong>");
 
-  var entry = perfEntries[0];
   for (var i=0; i < properties.length; i++) {
     // check each property
     if (i == 0) log("= Properties ");
@@ -442,20 +460,23 @@ function check_all(ev) {
 <button onclick="check_all(event);">Check All APIs</button>
 <button onclick="clear_output(event);">Clear output</button>
 <p></p>
-<button id="log" onclick="check_Performance(event);">Performance</button>
-<p></p>
-<button id="log" onclick="check_PerformanceEntry(event);">PerformanceEntry</button>
-<button id="log" onclick="check_PerformanceResourceTiming(event);">PerformanceResourceTiming</button>
-<button id="log" onclick="check_PerformanceMark(event);">PerformanceMark</button>
-<button id="log" onclick="check_PerformanceMeasure(event);">PerformanceMeasure</button>
-<button id="log" onclick="check_PerformanceFrameTiming(event);">PerformanceFrameTiming</button>
-<p></p>
-<button id="log" onclick="check_PerformanceTiming(event);">PerformanceTiming</button>
-<p></p>
-<button id="log" onclick="check_PerformanceNavigation(event);">PerformanceNavigation</button>
-<p></p>
-<button id="log" onclick="check_PerformanceObserver(event);">PerformanceObserver</button>
-<p></p>
+<p><em>Base</em> interfaces:
+ <button onclick="check_Performance(event);">Performance</button>
+ <button onclick="check_PerformanceEntry(event);">PerformanceEntry</button>
+</p>
+<p>PerfEntry extensions:
+ <button onclick="check_PerformanceFrameTiming(event);">PerformanceFrameTiming</button>
+ <button onclick="check_PerformanceMark(event);">PerformanceMark</button>
+ <button onclick="check_PerformanceMeasure(event);">PerformanceMeasure</button>
+ <button onclick="check_PerformanceResourceTiming(event);">PerformanceResourceTiming</button>
+</p>
+<p>Performance extensions:
+ <button onclick="check_PerformanceTiming(event);">PerformanceTiming</button>
+ <button onclick="check_PerformanceNavigation(event);">PerformanceNavigation</button>
+</p>
+<p><em>New</em> Interfaces:
+ <button onclick="check_PerformanceObserver(event);">PerformanceObserver</button>
+</p>
 <output></output>
 </body>
 </html>
