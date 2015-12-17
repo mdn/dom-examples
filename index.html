@@ -1,71 +1,58 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>Web dictaphone</title>
-	
-	<!--[if le IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-      <script src="scripts/respond.js"></script>
-    <![endif]-->
-    
-    
-    <link href='http://fonts.googleapis.com/css?family=Dancing+Script:700' rel='stylesheet' type='text/css'>
-	<link href="styles/normalize.css" rel="stylesheet" type="text/css">
-	
-	<link href="styles/app.css" rel="stylesheet" type="text/css">
-	
-</head>
-<body>
-  <div class="wrapper">
-    
-    <header>
-      <h1>Web dictaphone</h1>
-    </header>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Web dictaphone</title>	
+    <link href="styles/app.css" rel="stylesheet" type="text/css">
+    <link href="styles/install-button.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
 
-    <section class="main-controls">
-      <canvas class="visualizer"></canvas>
-      <div id="buttons">
-        <button class="record">Record</button>
-        <button class="stop">Stop</button>
-      </div>
+    <div class="wrapper">
 
-    </section>
+      <header>
+        <h1>Web dictaphone</h1>
+      </header>
 
-    <section class="sound-clips">
+      <section class="main-controls">
+        <canvas class="visualizer"></canvas>
+        <div id="buttons">
+          <button class="record">Record</button>
+          <button class="stop">Stop</button>
+        </div>
+      </section>
 
-      <article class="clip">
-        <audio controls></audio>
-        <p>Sample clip name</p>
-        <button class="delete">Delete</button>
-      </article>
+      <section class="sound-clips">
 
-    </section>
+        <!--<article class="clip">
+          <audio controls></audio>
+          <p>Sample clip name</p>
+          <button class="delete">Delete</button>
+        </article>-->
 
-  </div>
+      </section>
 
-  <label for="toggle">❔</label>
-  <input type="checkbox" id="toggle">
-  <aside>
-    <h2>Information</h2>
+    </div>
 
-    <p>Web dictaphone is built using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator.getUserMedia">getUserMedia</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder_API">MediaRecorder API</a>, which provides an easier way to capture Media streams.</p>
+    <label for="toggle">❔</label>
+    <input type="checkbox" id="toggle">
+    <aside>
+      <h2>Information</h2>
 
-    <p>MediaRecorder API currently only works in Firefox 25 (desktop/mobile) and Firefox OS 2.0. gUM and Web Audio have wider support.</p>
+      <p>Web dictaphone is built using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator.getUserMedia">getUserMedia</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder_API">MediaRecorder API</a>, which provides an easier way to capture Media streams.</p>
 
-    <p>Icon courtesy of <a href="http://findicons.com/search/microphone">Find Icons</a>. Thanks to <a href="http://soledadpenades.com/">Sole</a> for the Oscilloscope code!</p>
+      <p>MediaRecorder API currently only works in Firefox 25 (desktop/mobile) and Firefox OS 2.0. gUM and Web Audio have wider support.</p>
 
-    <button id="install-btn">Install app</button>
-  </aside>
+      <p>Icon courtesy of <a href="http://findicons.com/search/microphone">Find Icons</a>. Thanks to <a href="http://soledadpenades.com/">Sole</a> for the Oscilloscope code!</p>
 
-  <!-- The following element pulls in the script for the default template functionality -->
-      
+      <button id="install-btn">Install app</button>
+    </aside>
+
     <script src="scripts/install.js"></script>  
 
     <!-- Below is your custom application script -->
-
     <script src="scripts/app.js"></script>
-	
-</body>
+
+  </body>
 </html>
