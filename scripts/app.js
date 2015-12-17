@@ -36,7 +36,6 @@ if (navigator.getUserMedia) {
       console.log(mediaRecorder.state);
       console.log("recorder started");
       record.style.background = "red";
-      record.style.color = "black";
     }
 
     stop.onclick = function() {
@@ -61,6 +60,7 @@ if (navigator.getUserMedia) {
       clipContainer.classList.add('clip');
       audio.setAttribute('controls', '');
       deleteButton.innerHTML = "Delete";
+      deleteButton.className = 'delete';
       clipLabel.innerHTML = clipName;
 
       clipContainer.appendChild(audio);
