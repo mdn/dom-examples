@@ -150,6 +150,12 @@ input[type=checkbox]:checked ~ aside {
   transform: translateX(0);
 }
 
+/* Cursor when clip name is clicked over */
+
+.clip p {
+  cursor: pointer;
+}
+
 /* Adjustments for wider screens */
 @media all and (min-width: 800px) {
   /* Don't take all the space as readability is lost when line length
