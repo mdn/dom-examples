@@ -3,6 +3,7 @@
 <title>Feature test: Web Performance interfaces</title>
 <!--
   This application displays Yes/No support for Web Performance APIs:
+  * Beacon (Navigator, WorkerNavigator)
   * Performance
   * PerformanceEntry
   * PerformanceFrameTiming
@@ -15,13 +16,14 @@
   * PerformanceTiming
 
   These APIs are defined in the following standards:
+  * Beacon (L1)
   * High Resolution Time (L1, L2)
   * Navigation Timing (L1)
   * Performance Timeline (L1, L2)
   * Resource Timing (L1)
   * User Timing (L1, L2)
 
-  * @TODO: PerformanceNavigationTiming, Navigator, WorkerNavigator
+  * @TODO: PerformanceNavigationTiming
 -->
 <meta name="viewport" content="width=device-width">
 <script>
@@ -373,6 +375,32 @@ function check_PerformanceNavigation(ev) {
   }
 }
 
+function check_Beacon(ev) {
+  // Check Beacon support
+
+  log("<strong>Beacon interfaces</strong>");
+
+  if (navigator === undefined)
+    log_error("Beacon: navigator NOT defined in global context");
+  if (navigator.sendBeacon === undefined)
+    log_error("Beacon: navigator.sendBeacon NOT supported");
+
+  check_method("... navigator.", "sendBeacon", navigator);
+
+  // Check the worker's WorkerNavigation and sendBeacon() support
+  var myWorker = new Worker("worker-beacon.js");
+  myWorker.postMessage("prime the pump ...");
+  myWorker.onmessage = function(e) {
+    // The worker checks support for some interfaces and returns the results
+    var msg = e.data;
+    var support = msg.substring((msg.length - 2), msg.length);
+    if (support.toString() === "No") 
+      log_error("... Worker: " + msg);
+    else
+      log("... Worker: " + msg);
+  };
+}
+
 // Flag for observer
 var printObserver = false;
 
@@ -443,15 +471,23 @@ function clear_output(ev) {
 }
 
 function check_all(ev) {
+  // Base interfaces
   check_Performance(ev);
   check_PerformanceEntry(ev);
-  check_PerformanceResourceTiming(ev);
+
+  // PerformanceEntry extensions
+  check_PerformanceFrameTiming(ev);
   check_PerformanceMark(ev);
   check_PerformanceMeasure(ev);
-  check_PerformanceFrameTiming(ev);
+  check_PerformanceResourceTiming(ev);
+
+  // Performancey extensions
   check_PerformanceTiming(ev);
   check_PerformanceNavigation(ev);
+
+  // Other (newer) interfaces
   check_PerformanceObserver(ev);
+  check_Beacon(ev);
 }
 
 </script>
@@ -474,8 +510,9 @@ function check_all(ev) {
  <button onclick="check_PerformanceTiming(event);">PerformanceTiming</button>
  <button onclick="check_PerformanceNavigation(event);">PerformanceNavigation</button>
 </p>
-<p><em>New</em> Interfaces:
+<p><em>Other</em> Interfaces:
  <button onclick="check_PerformanceObserver(event);">PerformanceObserver</button>
+ <button onclick="check_Beacon(event);">Beacon</button>
 </p>
 <output></output>
 </body>
