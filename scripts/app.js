@@ -13,6 +13,10 @@ var stop = document.querySelector('.stop');
 var soundClips = document.querySelector('.sound-clips');
 var canvas = document.querySelector('.visualizer');
 
+// disable stop button while not recording
+
+stop.disabled = true;
+
 // visualiser setup - create web audio api context and canvas
 
 var audioCtx = new (window.AudioContext || webkitAudioContext)();
@@ -36,6 +40,9 @@ if (navigator.getUserMedia) {
       console.log(mediaRecorder.state);
       console.log("recorder started");
       record.style.background = "red";
+
+      stop.disabled = false;
+      record.disabled = true;
     }
 
     stop.onclick = function() {
@@ -45,6 +52,9 @@ if (navigator.getUserMedia) {
       record.style.background = "";
       record.style.color = "";
       // mediaRecorder.requestData();
+
+      stop.disabled = true;
+      record.disabled = false;
     }
 
     mediaRecorder.onstop = function(e) {
