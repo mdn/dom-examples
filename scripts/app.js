@@ -60,8 +60,8 @@ if (navigator.getUserMedia) {
     mediaRecorder.onstop = function(e) {
       console.log("data available after MediaRecorder.stop() called.");
 
-      var clipName = prompt('Enter a name for your sound clip');
-
+      var clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
+      console.log(clipName);
       var clipContainer = document.createElement('article');
       var clipLabel = document.createElement('p');
       var audio = document.createElement('audio');
@@ -69,9 +69,14 @@ if (navigator.getUserMedia) {
      
       clipContainer.classList.add('clip');
       audio.setAttribute('controls', '');
-      deleteButton.innerHTML = "Delete";
+      deleteButton.innerHTML = 'Delete';
       deleteButton.className = 'delete';
-      clipLabel.innerHTML = clipName;
+
+      if(clipName === null) {
+        clipLabel.innerHTML = 'My unnamed clip';
+      } else {
+        clipLabel.innerHTML = clipName;
+      }
 
       clipContainer.appendChild(audio);
       clipContainer.appendChild(clipLabel);
@@ -88,6 +93,16 @@ if (navigator.getUserMedia) {
       deleteButton.onclick = function(e) {
         evtTgt = e.target;
         evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+      }
+
+      clipLabel.onclick = function() {
+        var existingName = clipLabel.innerHTML;
+        var newClipName = prompt('Enter a new name for your sound clip?');
+        if(newClipName === null) {
+          clipLabel.innerHTML = existingName;
+        } else {
+          clipLabel.innerHTML = newClipName;
+        }
       }
     }
 
