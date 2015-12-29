@@ -9,6 +9,7 @@
   * PerformanceFrameTiming
   * PerformanceMark
   * PerformanceMeasure
+  * PerformanceNavigationTiming
   * PerformanceNavigation
   * PerformanceObserver
   * PerformanceObserverEntryList
@@ -18,12 +19,10 @@
   These APIs are defined in the following standards:
   * Beacon (L1)
   * High Resolution Time (L1, L2)
-  * Navigation Timing (L1)
+  * Navigation Timing (L1, L2)
   * Performance Timeline (L1, L2)
   * Resource Timing (L1)
   * User Timing (L1, L2)
-
-  * @TODO: PerformanceNavigationTiming
 -->
 <meta name="viewport" content="width=device-width">
 <script>
@@ -375,6 +374,50 @@ function check_PerformanceNavigation(ev) {
   }
 }
 
+function check_PerformanceNavigationTiming(ev) {
+  // Check PerformanceNavigationTiming support
+  if (window.PerformanceNavigationTiming === undefined) {
+    log_error("PerformanceNavigationTiming interface: window.PerformanceNavigationTiming NOT supported");
+    return;
+  }
+  var perfEntries = performance.getEntriesByType("navigation");
+  var entry = perfEntries[0];
+  if (! entry instanceof PerformanceNavigationTiming) {
+    log_error("PerformanceNavigationTiming interface: NO PerformanceNavigationTiming objects to check");
+    return;
+  }
+
+  // Defined in: Navigation Timing L2
+  var properties = 
+   ["domComplete",
+    "domContentLoadedEventEnd",
+    "domContentLoadedEventStart",
+    "domInteractive",
+    "loadEventEnd",
+    "loadEventStart",
+    "redirectCount",
+    "type",
+    "unloadEventEnd",
+    "unloadEventStart"];
+  
+  log("<strong>PerformanceResourceTiming interfaces</strong>");
+
+  for (var i=0; i < properties.length; i++) {
+    // check each property
+    if (i == 0) log("= Properties ");
+    check_property("... ", properties[i], entry);
+  }
+
+  var methods = ["toJSON"];
+
+  for (var i=0; i < methods.length; i++) {
+    // check each method
+    if (i == 0) log("= Methods");
+    check_method("... ", methods[i], entry);
+  }
+  
+}
+
 function check_Beacon(ev) {
   // Check Beacon support
 
@@ -486,6 +529,7 @@ function check_all(ev) {
   check_PerformanceNavigation(ev);
 
   // Other (newer) interfaces
+  check_PerformanceNavigationTiming(ev);
   check_PerformanceObserver(ev);
   check_Beacon(ev);
 }
@@ -511,6 +555,7 @@ function check_all(ev) {
  <button onclick="check_PerformanceNavigation(event);">PerformanceNavigation</button>
 </p>
 <p><em>Other</em> Interfaces:
+ <button onclick="check_PerformanceNavigationTiming(event);">PerformanceNavigationTiming</button>
  <button onclick="check_PerformanceObserver(event);">PerformanceObserver</button>
  <button onclick="check_Beacon(event);">Beacon</button>
 </p>
