@@ -49,12 +49,10 @@ function canvasDraw() {
 // pointer lock object forking for cross browser
 
 canvas.requestPointerLock = canvas.requestPointerLock ||
-           canvas.mozRequestPointerLock ||
-           canvas.webkitRequestPointerLock;
+           canvas.mozRequestPointerLock;
 
 document.exitPointerLock = document.exitPointerLock ||
-         document.mozExitPointerLock ||
-         document.webkitExitPointerLock;
+         document.mozExitPointerLock;
 //document.exitPointerLock();
 
 
@@ -68,12 +66,10 @@ canvas.onclick = function() {
 // Hook pointer lock state change events for different browsers
 document.addEventListener('pointerlockchange', lockChangeAlert, false);
 document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
-document.addEventListener('webkitpointerlockchange', lockChangeAlert, false);
 
 function lockChangeAlert() {
   if(document.pointerLockElement === canvas ||
-  document.mozPointerLockElement === canvas ||
-  document.webkitPointerLockElement === canvas) {
+  document.mozPointerLockElement === canvas) {
     console.log('The pointer lock status is now locked');
     document.addEventListener("mousemove", canvasLoop, false);
   } else {
@@ -93,12 +89,10 @@ function lockChangeAlert() {
 function canvasLoop(e) {
   var movementX = e.movementX ||
       e.mozMovementX          ||
-      e.webkitMovementX       ||
       0;
 
   var movementY = e.movementY ||
       e.mozMovementY      ||
-      e.webkitMovementY   ||
       0;
 
   x += movementX;
