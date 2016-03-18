@@ -69,13 +69,13 @@ if (navigator.getUserMedia) {
      
       clipContainer.classList.add('clip');
       audio.setAttribute('controls', '');
-      deleteButton.innerHTML = 'Delete';
+      deleteButton.textContent = 'Delete';
       deleteButton.className = 'delete';
 
       if(clipName === null) {
-        clipLabel.innerHTML = 'My unnamed clip';
+        clipLabel.textContent = 'My unnamed clip';
       } else {
-        clipLabel.innerHTML = clipName;
+        clipLabel.textContent = clipName;
       }
 
       clipContainer.appendChild(audio);
@@ -96,12 +96,12 @@ if (navigator.getUserMedia) {
       }
 
       clipLabel.onclick = function() {
-        var existingName = clipLabel.innerHTML;
+        var existingName = clipLabel.textContent;
         var newClipName = prompt('Enter a new name for your sound clip?');
         if(newClipName === null) {
-          clipLabel.innerHTML = existingName;
+          clipLabel.textContent = existingName;
         } else {
-          clipLabel.innerHTML = newClipName;
+          clipLabel.textContent = newClipName;
         }
       }
     }
