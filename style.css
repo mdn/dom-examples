@@ -1,29 +1,29 @@
 html {
-	background-color: #7D2663;
-	font-family: sans-serif;
+  background-color: #7D2663;
+  font-family: sans-serif;
 }
 
 h1 {
-	margin: 0;
-	font-size: 15vw;
-	letter-spacing: -0.2rem;
-	position: absolute;
-	top: 0;
-	z-index: -1;
+  margin: 0;
+  font-size: 15vw;
+  letter-spacing: -0.2rem;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
 
 p {
-	margin: 0 0 1rem 0;
+  margin: 0 0 1rem 0;
 }
 
 .controls {
-	padding: 4vw;
-	width: 75%;
-	margin: 3vw auto;
-	background-color: rgba(255,255,255,0.7);
-	border: 5px solid black;
-	opacity: 0.3;
-	transition: 1s all;
+  padding: 4vw;
+  width: 75%;
+  margin: 3vw auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 5px solid black;
+  opacity: 0.3;
+  transition: 1s all;
 }
 
 .controls:hover, .controls:focus {
@@ -31,7 +31,7 @@ p {
 }
 
 .controls label, .controls p, .controls input {
-	font-size: 3vw;
+  font-size: 3vw;
 }
 
 .controls div {
