@@ -10,6 +10,11 @@ Note that [permissions are required](https://developer.mozilla.org/en-US/docs/We
 
 Note also that to get this code running successfully on Chrome/Chrome mobile, you'll need to run the code through a web server (localhost will work.)
 
+##Phrase matcher demo
+The same comments as above apply to this demo too — this is another demo that relies on speech recognition, written for a research team at the University of Nebraska at Kearney.
+
+[Run phrase matcher demo live](http://mdn.github.io/web-speech-api/phrase-matcher/)
+
 ## Speak easy synthesis demo
 [Run synthesis demo live](http://mdn.github.io/web-speech-api/speak-easy-synthesis/)
 
