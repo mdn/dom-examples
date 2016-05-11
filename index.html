@@ -31,13 +31,12 @@
     
     function iframeLoaded() {
       otherWindow.postMessage('Hello from the main page!', '*', [channel.port2]);
-
     }
 
     channel.port1.onmessage = handleMessage;
     function handleMessage(e) {
       	para.innerHTML = e.data;
     }
-    
+
   </script>
 </html>
