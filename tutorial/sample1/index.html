@@ -27,6 +27,7 @@
           gl.clearDepth(1.0);                 // Clear everything
           gl.enable(gl.DEPTH_TEST);           // Enable depth testing
           gl.depthFunc(gl.LEQUAL);            // Near things obscure far things
+          gl.clear(gl.COLOR_BUFFER_BIT);      // Clear the color buffer with specified clear color
         }
       }
 
