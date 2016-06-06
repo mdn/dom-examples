@@ -3,7 +3,7 @@ var gl;
 
 var cubeVerticesBuffer;
 var cubeVerticesTextureCoordBuffer;
-var cubeVerticesIndexBuffer;
+var cubeVerticesNormalBuffer;
 var cubeVerticesIndexBuffer;
 var cubeRotation = 0.0;
 var lastCubeUpdateTime = 0;
