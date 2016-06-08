@@ -6,8 +6,8 @@ if (!!window.SharedWorker) {
   var myWorker = new SharedWorker("worker.js");
 
   squareNumber.onchange = function() {
-    myWorker.port.postMessage([squareNumber.value,squareNumber.value]);
-	console.log('Message posted to worker');
+    myWorker.port.postMessage([squareNumber.value, squareNumber.value]);
+    console.log('Message posted to worker');
   }
 
   myWorker.port.onmessage = function(e) {
