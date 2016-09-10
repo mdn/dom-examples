@@ -15,7 +15,7 @@ if ('serviceWorker' in navigator) {
     // registration failed
     console.log('Registration failed with ' + error);
   });
-};
+}
 
 // function for loading each image via XHR
 
@@ -44,14 +44,14 @@ function imgLoad(imgJSON) {
     // Send the request
     request.send();
   });
-};
+}
 
 var imgSection = document.querySelector('section');
 
 window.onload = function() {
 
   // load each set of image, alt text, name and caption
-  for(i = 0; i<=Gallery.images.length-1; i++) {
+  for(var i = 0; i<=Gallery.images.length-1; i++) {
     imgLoad(Gallery.images[i]).then(function(arrayResponse) {
 
       var myImage = document.createElement('img');
@@ -70,6 +70,5 @@ window.onload = function() {
     }, function(Error) {
       console.log(Error);
     });
-  };
-
+  }
 };
