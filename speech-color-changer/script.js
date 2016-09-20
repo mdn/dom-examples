@@ -28,7 +28,7 @@ recognition.onresult = function(event) {
   // Each SpeechRecognitionResult object contains SpeechRecognitionAlternative objects that contain individual results.
   // These also have getters so they can be accessed like arrays.
   // The second [0] returns the SpeechRecognitionAlternative at position 0.
-  // We then return the transcript property of the SpeechRecognitionAlternative object 
+  // We then return the transcript property of the SpeechRecognitionAlternative object
   var color = event.results[0][0].transcript;
   diagnostic.textContent = 'Result received: ' + color + '.';
   bg.style.backgroundColor = color;
@@ -40,7 +40,7 @@ recognition.onspeechend = function() {
 }
 
 recognition.onnomatch = function(event) {
-  diagnostic.textContent = 'I didnt recognise that color.';
+  diagnostic.textContent = "I didn't recognise that color.";
 }
 
 recognition.onerror = function(event) {
