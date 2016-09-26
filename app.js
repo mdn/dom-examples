@@ -14,23 +14,9 @@ var x = 50;
 var y = 50;
 
 function canvasDraw() {
-  if (x > canvas.width + 20) {
-    x = 0;  
-  }
-  if (y > canvas.height + 20) {
-    y = 0;  
-  }  
-  if (x < -20) {
-    x = canvas.width;
-  }
-  if (y < -20) {
-    y = canvas.height;
-  }
-
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "#f00";
-  
   ctx.beginPath();
   ctx.arc(x, y, 20, 0, degToRad(360), true);
   ctx.fill();
@@ -77,6 +63,18 @@ tracker.style.backgroundColor = 'white';
 function canvasLoop(e) {
   x += e.movementX || 0;
   y += e.movementY || 0;
+  if (x > canvas.width + 20) {
+    x = 0;  
+  }
+  if (y > canvas.height + 20) {
+    y = 0;  
+  }  
+  if (x < -20) {
+    x = canvas.width;
+  }
+  if (y < -20) {
+    y = canvas.height;
+  }
 
   canvasDraw();
 
