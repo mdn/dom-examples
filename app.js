@@ -52,13 +52,7 @@ function lockChangeAlert() {
   }
 }
 
-var tracker = document.createElement('p');
-var body = document.querySelector('body');
-body.appendChild(tracker);
-tracker.style.position = 'absolute';
-tracker.style.top = '0';
-tracker.style.right = '10px';
-tracker.style.backgroundColor = 'white';
+var tracker = document.getElementById('tracker');
 
 var animation;
 function updatePosition(e) {

@@ -18,6 +18,13 @@ canvas {
 	margin: 0 auto 50px;
 }
 
+#tracker {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	background-color: white;
+}
+
 h1 {
 	font-size: 200%;
 }
