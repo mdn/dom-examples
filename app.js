@@ -1,5 +1,7 @@
 // helper function
 
+const RADIUS = 20;
+
 function degToRad(degrees) {
   var result = Math.PI / 180 * degrees;
   return result;
@@ -18,7 +20,7 @@ function canvasDraw() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "#f00";
   ctx.beginPath();
-  ctx.arc(x, y, 20, 0, degToRad(360), true);
+  ctx.arc(x, y, RADIUS, 0, degToRad(360), true);
   ctx.fill();
 }
 canvasDraw();
@@ -58,17 +60,17 @@ var animation;
 function updatePosition(e) {
   x += e.movementX;
   y += e.movementY;
-  if (x > canvas.width + 20) {
-    x = 0;  
+  if (x > canvas.width + RADIUS) {
+    x = -RADIUS;
   }
-  if (y > canvas.height + 20) {
-    y = 0;  
+  if (y > canvas.height + RADIUS) {
+    y = -RADIUS;
   }  
-  if (x < -20) {
-    x = canvas.width;
+  if (x < -RADIUS) {
+    x = canvas.width + RADIUS;
   }
-  if (y < -20) {
-    y = canvas.height;
+  if (y < -RADIUS) {
+    y = canvas.height + RADIUS;
   }
   tracker.textContent = "X position: " + x + ", Y position: " + y;
 
