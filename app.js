@@ -76,7 +76,7 @@ function updatePosition(e) {
   if (y < -20) {
     y = canvas.height;
   }
-  tracker.innerHTML = "X position: " + x + ', Y position: ' + y;
+  tracker.textContent = "X position: " + x + ", Y position: " + y;
 
   if (!animation) {
     animation = requestAnimationFrame(function() {
