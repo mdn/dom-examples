@@ -45,10 +45,10 @@ function lockChangeAlert() {
   if (document.pointerLockElement === canvas ||
       document.mozPointerLockElement === canvas) {
     console.log('The pointer lock status is now locked');
-    document.addEventListener("mousemove", canvasLoop, false);
+    document.addEventListener("mousemove", updatePosition, false);
   } else {
     console.log('The pointer lock status is now unlocked');  
-    document.removeEventListener("mousemove", canvasLoop, false);
+    document.removeEventListener("mousemove", updatePosition, false);
   }
 }
 
@@ -60,9 +60,10 @@ tracker.style.top = '0';
 tracker.style.right = '10px';
 tracker.style.backgroundColor = 'white';
 
-function canvasLoop(e) {
-  x += e.movementX || 0;
-  y += e.movementY || 0;
+var animation;
+function updatePosition(e) {
+  x += e.movementX;
+  y += e.movementY;
   if (x > canvas.width + 20) {
     x = 0;  
   }
@@ -75,10 +76,12 @@ function canvasLoop(e) {
   if (y < -20) {
     y = canvas.height;
   }
-
-  canvasDraw();
-
-  var animation = requestAnimationFrame(canvasLoop);
-
   tracker.innerHTML = "X position: " + x + ', Y position: ' + y;
+
+  if (!animation) {
+    animation = requestAnimationFrame(function() {
+      animation = null;
+      canvasDraw();
+    });
+  }
 }
