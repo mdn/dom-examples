@@ -7,15 +7,8 @@ function degToRad(degrees) {
 
 // setup of the canvas
 
-window.addEventListener('load', eventWindowLoaded, false);
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext('2d');
-
-function eventWindowLoaded() {
-  var spaceship = new Image();
-  spaceship.src = "spaceship.png"
-  canvasDraw();
-}
 
 var x = 50;
 var y = 50;
@@ -45,6 +38,7 @@ function canvasDraw() {
   ctx.arc(x, y, 20, 0, degToRad(360), true);
   ctx.fill();
 }
+canvasDraw();
 
 // pointer lock object forking for cross browser
 
