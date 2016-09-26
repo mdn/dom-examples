@@ -81,16 +81,8 @@ function lockChangeAlert() {
   tracker.style.backgroundColor = 'white';
 
 function canvasLoop(e) {
-  var movementX = e.movementX ||
-      e.mozMovementX          ||
-      0;
-
-  var movementY = e.movementY ||
-      e.mozMovementY      ||
-      0;
-
-  x += movementX;
-  y += movementY; 
+  x += e.movementX || 0;
+  y += e.movementY || 0;
 
   canvasDraw();
 
