@@ -4,7 +4,6 @@ html, body {
 }
 
 html {
-	font-size: 10px;
 	font-family: sans-serif;
 }
 
@@ -14,15 +13,18 @@ canvas {
 	border: 1px solid black;
 }
 
-div {
-	width: 80%;
-	margin: 0 auto;
+.information {
+	width: 640px;
+	margin: 0 auto 50px;
+}
+
+#tracker {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	background-color: white;
 }
 
 h1 {
-  font-size: 3.6rem;
-}
-
-p {
-  font-size: 1.7rem;	
+	font-size: 200%;
 }

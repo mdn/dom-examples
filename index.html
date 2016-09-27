@@ -3,20 +3,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Pointer lock demo</title>
-    <link type="text/css" rel="stylesheet" href="style.css">
-
+  <link type="text/css" rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="information">
-	  <h1>Pointer lock demo</h1>
+    <h1>Pointer lock demo</h1>
 
-	  <p>This demo demonstrates usage of the pointer lock API. Click on the canvas area and your mouse will directly control the ball inside the canvas, not your mouse pointer. You can press escape to return to the standard expected state.</p>
+    <p>This demo demonstrates usage of the pointer lock API. Click on the canvas area and your mouse will directly control the ball inside the canvas, not your mouse pointer. You can press escape to return to the standard expected state.</p>
   </div>
 
-	  <canvas width="640" height="360">
-	    Your browser does not support HTML5 canvas
-	  </canvas>
+  <canvas width="640" height="360">
+    Your browser does not support HTML5 canvas
+  </canvas>
+  <div id="tracker"></div>
 
+  <script src="app.js"></script>
 </body>
-   <script src="app.js"></script>
 </html>
