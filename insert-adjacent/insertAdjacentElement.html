@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+  <title>insertAdjacentElement() demo</title>
+  <style>
+    div {
+      width: 50px;
+      height: 50px;
+      margin: 3px;
+      border: 3px solid black;
+      display: inline-block;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+<p>Click colored box to select it, then use the first two buttons below to insert elements before and after your selection.</p>
+
+<section>
+  <div></div><div></div><div></div><div></div>
+</section>
+
+<button class="before">Insert before</button>
+<button class="after">Insert after</button>
+<button class="reset">Reset demo</button>
+
+</body>
+
+<script>
+
+  var beforeBtn = document.querySelector('.before');
+  var afterBtn = document.querySelector('.after');
+  var resetBtn = document.querySelector('.reset');
+
+  var container = document.querySelector('section');
+
+  var activeElem;
+
+  resetBtn.addEventListener('click', function() {
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    for(i = 0; i <=3; i++) {
+      var tempDiv = document.createElement('div');
+      container.appendChild(tempDiv);
+      setListener(tempDiv);
+    }
+  });
+
+  beforeBtn.addEventListener('click', function() {
+    var tempDiv = document.createElement('div');
+    tempDiv.style.backgroundColor = randomColor();
+    activeElem.insertAdjacentElement('beforebegin',tempDiv);
+    setListener(tempDiv);
+  });
+
+  afterBtn.addEventListener('click', function() {
+    var tempDiv = document.createElement('div');
+    tempDiv.style.backgroundColor = randomColor();
+    activeElem.insertAdjacentElement('afterend',tempDiv);
+    setListener(tempDiv);
+  });
+
+  function setListener(elem) {
+    elem.addEventListener('click', function() {
+      var allElems = document.querySelectorAll('section div');
+        for(i = 0; i < allElems.length; i++) {
+            allElems[i].style.border = '3px solid black';
+        } 
+      elem.style.border = '3px solid aqua';
+      activeElem = elem;
+    })
+  };
+
+  function randomColor() {
+    function random() {
+      var result = Math.floor(Math.random() * 255);
+      return result;
+    }
+
+    return 'rgb(' + random() + ',' + random() + ',' + random() + ')';
+  }
+
+  function init() {
+    var initElems = document.querySelectorAll('section div');
+    for(i = 0; i < initElems.length; i++) {
+      setListener(initElems[i]);
+    }
+  };
+
+  init();
+
+</script>
+
+</html>

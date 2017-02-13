@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+  <title>insertAdjacentText() demo</title>
+  <style>
+    section p {
+      font-size: 1.1rem;
+      color: blue;
+    }
+
+    input {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<p>Enter some text to add, then use the first two buttons below to insert your text after the existing text.</p>
+
+<section>
+  <p>This is my text</p>
+</section>
+
+<input type="text"><br>
+<button class="before">Insert before</button>
+<button class="after">Insert after</button>
+<button class="reset">Reset demo</button>
+
+</body>
+
+<script>
+
+  var beforeBtn = document.querySelector('.before');
+  var afterBtn = document.querySelector('.after');
+  var resetBtn = document.querySelector('.reset');
+
+  var para = document.querySelector('section p');
+  var initContent = para.textContent;
+
+  var textInput = document.querySelector('input');
+
+  resetBtn.addEventListener('click', function() {
+    para.textContent = initContent;
+    textInput.value = '';
+  });
+
+  beforeBtn.addEventListener('click', function() {
+    para.insertAdjacentText('afterbegin',textInput.value);
+  });
+
+  afterBtn.addEventListener('click', function() {
+    para.insertAdjacentText('beforeend',textInput.value);
+  });
+
+</script>
+
+</html>
