@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang=en>
+<title>Feature tests for DnD interfaces</title>
+<meta name="viewport" content="width=device-width">
+<style>
+  div {
+    margin: 0em;
+    padding: 2em;
+  }
+  #source {
+    color: blue;
+    border: 1px solid black;
+  }
+  #target {
+    border: 1px solid black;
+  }
+</style>
+<script>
+function check_DragEvents() {
+  // Check for support of the Drag event types
+  var events = ["ondrag",
+    "ondragstart",
+    "ondragend",
+    "ondragover",
+    "ondragenter",
+    "ondragleave",
+    "ondragexit",
+    "ondrop"];
+
+  console.log("Drag Event Types...");
+  
+  for (var i=0; i < events.length; i++) {
+    var supported = events[i] in window;
+    console.log("... " + events[i] + " = " + (supported ? "Yes" : "No"));
+  }
+}
+function check_DataTransfer(dt) {
+  // Check the DataTransfer object's methods and properties
+  var properties = ["dropEffect",
+    "effectAllowed",
+    "types",
+    "files",
+    "items"];
+  var methods = ["setDragImage",
+    "getData",
+    "setData",
+    "clearData"];
+
+  console.log("DataTransfer ... " + dt);
+  
+  for (var i=0; i < properties.length; i++) {
+    var supported = properties[i] in dt;
+    console.log("... dataTransfer." + properties[i] + " = " + (supported ? "Yes" : "No"));
+  }
+  for (var i=0; i < methods.length; i++) {
+    var supported = typeof dt[methods[i]] == "function";
+    console.log("... dataTransfer." + methods[i] + "() = " + (supported ? "Yes" : "No"));
+  }
+}
+function check_DataTransferItem(dti) {
+  // Check the DataTransferItem object's methods and properties
+  var properties = ["kind",
+    "type"];
+  var methods = ["getAsFile",
+    "getAsString"];
+
+  console.log("DataTransferItem ... " + dti);
+
+  for (var i=0; i < properties.length; i++) {
+    if (dti === undefined) {
+      console.log("... items." + properties[i] + " = undefined");
+    } else {
+      var supported = properties[i] in dti;
+      console.log("... items." + properties[i] + " = " + (supported ? "Yes" : "No"));
+    }
+  }
+  for (var i=0; i < methods.length; i++) {
+    if (dti === undefined) {
+      console.log("... items." + methods[i] + "() = undefined");
+    } else {
+      var supported = typeof dti[methods[i]] == "function";
+      console.log("... items." + methods[i] + "() = " + (supported ? "Yes" : "No"));
+    }
+  }
+}
+function check_DataTransferItemList(dtil) {
+  // Check the DataTransferItemList object's methods and properties
+  var properties = ["length"];
+  var methods = ["add",
+    "remove",
+    "clear"];
+
+  console.log("DataTransferItemList ... " + dtil);
+
+  for (var i=0; i < properties.length; i++) {
+    if (dtil === undefined) {
+      console.log("... items." + properties[i] + " = undefined");
+    } else {
+      var supported = properties[i] in dtil;
+      console.log("... items." + properties[i] + " = " + (supported ? "Yes" : "No"));
+    }
+  }
+  for (var i=0; i < methods.length; i++) {
+    if (dtil === undefined) {
+      console.log("... items." + methods[i] + "() = undefined");
+    } else {
+      var supported = typeof dtil[methods[i]] == "function";
+      console.log("... items." + methods[i] + "() = " + (supported ? "Yes" : "No"));
+    }
+  }
+}
+function dragstart_handler(ev) {
+  ev.dataTransfer.dropEffect = "move";
+  check_DragEvents();
+  var dt = ev.dataTransfer;
+  if (dt === undefined) {
+    console.log("DataTransfer is NOT supported."); 
+  } else {
+    // Make sure there is at least one item
+    dt.setData("text/plain", "Move this.");
+    check_DataTransfer(dt);
+  }
+}
+function dragover_handler(ev) {
+  ev.dataTransfer.dropEffect = "move";
+  ev.preventDefault();
+}
+function drop_handler(ev) {
+  if (ev.dataTransfer === undefined) {
+    console.log("DataTransferItem NOT supported."); 
+    console.log("DataTransferItemList NOT supported."); 
+  } else {
+    var dti = ev.dataTransfer.items;
+    if (dti === undefined) {
+      console.log("DataTransferItem NOT supported."); 
+      console.log("DataTransferItemList NOT supported."); 
+    } else {
+      check_DataTransferItem(dti[0]);
+      check_DataTransferItemList(dti);
+    }
+  }
+}
+</script>
+<body>
+<h1>Log support of DnD objects' methods and properties</h1>
+ <div>
+   <p id="source" ondragstart="dragstart_handler(event);" draggable="true">
+     Select this element, drag it to the Drop Zone and then release the mouse. The console log will contain data about the DnD interfaces supported.</p>
+ </div>
+ <div id="target" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">Drop Zone</div>
+</body>
+</html>

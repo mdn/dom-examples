@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<title>Using Drag and Drop API to copy and move elements</title>
+<!-- 
+   This example demonstrates using various HTML Drag and Drop interfaces including:
+   * Global "draggable" attribute
+   * Event handlers for dragstart, dragover and drop
+   * Global event handlers for ondragstart, ondragover and ondrop
+   * Using the DataTransfer interface to copy and move elements (<div>)
+-->
+<style>
+  div {
+    margin: 0em;
+    padding: 2em;
+  }
+  #src_copy, #src_move  {
+    color: blue;
+    border: 5px solid black;
+    width: 300px;
+    height: 50;
+  }
+  #dest_copy, #dest_move {
+    border: 5px solid blue;
+    width: 300px;
+    height: 50;
+  }
+</style>
+<script>
+function dragstart_handler(ev) {
+ console.log("dragStart");
+ // Change the source element's background color to signify drag has started
+ ev.currentTarget.style.border = "dashed";
+ // Add the id of the drag source element to the drag data payload so
+ // it is available when the drop event is fired
+ ev.dataTransfer.setData("text", ev.target.id);
+ // Tell the browser both copy and move are possible
+ ev.effectAllowed = "copyMove";
+}
+function dragover_handler(ev) {
+ console.log("dragOver");
+ // Change the target element's border to signify a drag over event
+ // has occurred
+ ev.currentTarget.style.background = "lightblue";
+ ev.preventDefault();
+}
+function drop_handler(ev) {
+  console.log("Drop");
+  ev.preventDefault();
+  // Get the id of drag source element (that was added to the drag data
+  // payload by the dragstart event handler)
+  var id = ev.dataTransfer.getData("text");
+  // Only Move the element if the source and destination ids are both "move"
+  if (id == "src_move" && ev.target.id == "dest_move")
+    ev.target.appendChild(document.getElementById(id));
+  // Copy the element if the source and destination ids are both "copy"
+  if (id == "src_copy" && ev.target.id == "dest_copy") {
+   var nodeCopy = document.getElementById(id).cloneNode(true);
+   nodeCopy.id = "newId";
+   ev.target.appendChild(nodeCopy);
+  }
+}
+function dragend_handler(ev) {
+  console.log("dragEnd");
+  // Restore source's border
+  ev.target.style.border = "solid black";
+  // Remove all of the drag data
+  ev.dataTransfer.clearData();
+}
+</script>
+</head>
+<body>
+<h1>Drag and Drop: Copy and Move elements with <code>DataTransfer</code></h1>
+ <div draggable="true" id="src_copy" ondragstart="dragstart_handler(event);" ondragend="dragend_handler(event);">
+     Select this element and drag to the <strong>Copy Drop Zone</strong>.
+ </div>
+ <div id="dest_copy" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"><strong>Copy Drop Zone</strong></div>
+ <div draggable="true" id="src_move" ondragstart="dragstart_handler(event);" ondragend="dragend_handler(event);">
+     Select this element and drag to the <strong>Move Drop Zone</strong>.
+ </div>
+ <div id="dest_move" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"><strong>Move Drop Zone</strong></div>
+</body>
+</html>
