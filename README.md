@@ -5,6 +5,8 @@ The "drag-and-drop" directory is for examples and demos of the [HTML Drag and Dr
 
 The "insert-adjacent" directory contains simple demos for [insertAdjacentElement](http://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentElement.html) and [insertAdjacentText](http://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentText.html).
 
+The "matchmedia" directory contains a simple demo to test matchMedia functionality. See [Window.matchMedia](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) for more details. [Run the demo live](http://mdn.github.io/dom-examples/matchmedia/).
+
 The "performance-apis" directory is for examples and demos of the [Web Performance APIs](https://www.w3.org/wiki/Web_Performance/Publications).
 
 The "pointerevents" directory is for examples and demos of the [Pointer Events](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) standard.
