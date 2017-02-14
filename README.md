@@ -1,6 +1,8 @@
 # dom-examples
 Code examples that accompany various MDN DOM and Web API documentation pages
 
+The "channel-messaging-basic" directory contains a simple example demonstrating the basics of channel messaging; see [Channel Messaging API](https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API) or [run the example live](http://mdn.github.io/dom-examples/channel-messaging-basic/).
+
 The "drag-and-drop" directory is for examples and demos of the [HTML Drag and Drop](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) standard.
 
 The "insert-adjacent" directory contains simple demos for [insertAdjacentElement](http://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentElement.html) and [insertAdjacentText](http://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentText.html).
