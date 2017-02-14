@@ -1,0 +1,30 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-family: sans-serif;
+}
+
+canvas {
+	display: block;
+	margin: 0 auto;
+	border: 1px solid black;
+}
+
+.information {
+	width: 640px;
+	margin: 0 auto 50px;
+}
+
+#tracker {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	background-color: white;
+}
+
+h1 {
+	font-size: 200%;
+}
