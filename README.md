@@ -18,3 +18,5 @@ The "pointerevents" directory is for examples and demos of the [Pointer Events](
 The "pointer-lock" directory contains a simple demo to show usage of the Pointer Lock API. You can find more explanation of how the demo works at the main MDN [Pointer Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API) page. [Run the demo live](http://mdn.github.io/dom-examples/pointer-lock/).
 
 The "touchevents" directory is for examples and demos of the [Touch Events](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events) standard.
+
+The "web-storage" directory contains a simple demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](http://mdn.github.io/dom-examples/web-storage/).
