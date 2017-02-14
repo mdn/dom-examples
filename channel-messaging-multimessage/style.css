@@ -1,0 +1,46 @@
+html,body {
+	margin: 0;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+body {
+  width: 90%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+form {
+  width: 60%;
+  margin: 10px auto;
+}
+
+form input {
+	width: 55%;
+}
+
+form label {
+  width: 40%;
+  margin-right: 5%;
+}
+
+form button {
+	width: 60%;
+  display: block;
+  margin: 10px auto 0;
+}
+
+p {
+  margin: 10px 0;
+}
+
+h1, p {
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Lobster Two', cursive;
+}
+
+ul {
+  width: 90%;
+}
