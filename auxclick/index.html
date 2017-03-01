@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>auxclick demo</title>
+  <style>
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      height: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    button {
+      border: 0;
+      background-color: white;
+      font-size: 10vw;
+      display: block;
+      width: 100%;
+    }
+
+    h1 {
+      letter-spacing: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button><h1>Click me!</h1></button>
+
+
+  <script>
+
+  var button = document.querySelector('button');
+  var html = document.querySelector('html');
+
+  function random(number) {
+    return Math.floor(Math.random() * number);
+  }
+
+  button.onclick = function() {
+    var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+    button.style.backgroundColor = rndCol;
+  };
+
+  button.onauxclick = function(e) {
+    e.preventDefault();
+    var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+    button.style.color = rndCol;
+  }
+
+  </script>
+
+
+</body>
+
+</html>
