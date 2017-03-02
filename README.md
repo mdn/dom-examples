@@ -19,7 +19,7 @@ The "pointerevents" directory is for examples and demos of the [Pointer Events](
 
 The "pointer-lock" directory contains a simple demo to show usage of the Pointer Lock API. You can find more explanation of how the demo works at the main MDN [Pointer Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API) page. [Run the demo live](http://mdn.github.io/dom-examples/pointer-lock/).
 
-The server-sent-events directory contains a very simple SSE demo that uses PHP to create the server. You can find more information in our [Using server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) article.
+The server-sent-events directory contains a very simple SSE demo that uses PHP to create the server. You can find more information in our [Using server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) article. To run the demo you'll need to serve the files from a server that supports PHP; [MAMP](https://www.mamp.info/en/) is a good PHP test server environment.
 
 The "touchevents" directory is for examples and demos of the [Touch Events](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events) standard.
 
