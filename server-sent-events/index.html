@@ -1,0 +1,31 @@
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Server-sent events demo</title>
+</head>
+<body>
+
+  <ul>
+  </ul>
+
+<script>
+  var evtSource = new EventSource('sse.php');
+  var eventList = document.querySelector('ul');
+
+  evtSource.onmessage = function(e) {
+    var newElement = document.createElement("li");
+
+    newElement.textContent = "message: " + e.data;
+    eventList.appendChild(newElement);
+  }
+
+  // evtSource.addEventListener("ping", function(e) {
+  //   var newElement = document.createElement("li");
+  //
+  //   var obj = JSON.parse(e.data);
+  //   newElement.innerHTML = "ping at " + obj.time;
+  //   eventList.appendChild(newElement);
+  // }, false);
+</script>
+</body>
+</html>
