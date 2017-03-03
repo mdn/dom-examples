@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <title>MediaError Example</title>
+    <script src="main.js"></script>
+    <link href="main.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="contents">
+      <p>A quick example for the use of the <code>MediaError</code> object, as
+       returned by <code>HTMLMediaElement</code> objects. Choose a file
+       (one which generates an error and one which doesn't).</p>
+      <audio controls autoplay id="audio"></audio>
+
+      <div id="credits"><a href="http://audionautix.com">Music by audionautix.com</a>;
+      <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US">licensed CC-BY 3.0</a></div>
+      
+      <div id="controlbar">
+        <button id="buttonMissingFile">Missing File</button>
+        <button id="buttonGoodFile">Valid File</button>
+      </div>
+      
+      <div id="log"></div>
+    </div>
+  </body>
+</html>
