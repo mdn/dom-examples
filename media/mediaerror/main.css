@@ -1,0 +1,18 @@
+#contents {
+	width: 600px;
+	font: 14px "Open Sans", sans-serif;
+}
+
+#credits {
+	padding: 0 0 10px 0;
+	font: italic 10px "Open Sans", sans-serif;
+}
+
+#controls {
+	border: 1px solid black;
+}
+
+#log {
+	font: 14px monospace;
+	padding: 6px 0;
+}
