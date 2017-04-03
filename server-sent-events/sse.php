@@ -20,8 +20,9 @@ while (1) {
     $counter = rand(1, 10);
   }
 
-  ob_end_flush();
+  while (ob_get_level() > 0) {
+    ob_end_flush();
+  }
   flush();
   sleep(1);
 }
-?>
