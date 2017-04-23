@@ -66,3 +66,6 @@ rate.onchange = function() {
   rateValue.textContent = rate.value;
 }
 
+voiceSelect.onchange = function(){
+  speak();
+}
