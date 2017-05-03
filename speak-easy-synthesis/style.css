@@ -63,3 +63,12 @@ label {
   float: right;
   width: 81%;
 }
+
+.controls {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.controls button {
+  padding: 10px;
+}

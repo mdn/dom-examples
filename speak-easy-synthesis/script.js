@@ -35,25 +35,25 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = populateVoiceList;
 }
 
+function speak(){
+  if(inputTxt.value !== ''){
+    var utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+    var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+    for(i = 0; i < voices.length ; i++) {
+      if(voices[i].name === selectedOption) {
+        utterThis.voice = voices[i];
+      }
+    }
+    utterThis.pitch = pitch.value;
+    utterThis.rate = rate.value;
+    synth.speak(utterThis);
+  }
+}
+
 inputForm.onsubmit = function(event) {
   event.preventDefault();
 
-  var utterThis = new SpeechSynthesisUtterance(inputTxt.value);
-  var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
-  for(i = 0; i < voices.length ; i++) {
-    if(voices[i].name === selectedOption) {
-      utterThis.voice = voices[i];
-    }
-  }
-  utterThis.pitch = pitch.value;
-  utterThis.rate = rate.value;
-  synth.speak(utterThis);
-
-  utterThis.onpause = function(event) {
-    var char = event.utterance.text.charAt(event.charIndex);
-    console.log('Speech paused at character ' + event.charIndex + ' of "' +
-    event.utterance.text + '", which is "' + char + '".');
-  }
+  speak();
 
   inputTxt.blur();
 }
@@ -64,4 +64,8 @@ pitch.onchange = function() {
 
 rate.onchange = function() {
   rateValue.textContent = rate.value;
+}
+
+voiceSelect.onchange = function(){
+  speak();
 }
