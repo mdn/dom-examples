@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fetch controller signal observer example</title>
+    <style>
+      .wrapper {
+        width: 70%;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      video {
+        max-width: 100%;
+      }
+
+      video, .abort {
+        display: none;
+      }
+
+      progress {
+        display: block;
+        width: 100%;
+      }
+
+      div div {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Simple offline video player</h1>
+
+    <div class="wrapper">
+      <div class="controls">
+        <progress></progress>
+        <button class="download">Download video</button>
+        <button class="abort">Cancel download</button>
+        <p class="reports"></p>
+      </div>
+      <video controls src="">
+        <p>Your browser doesn't support HTML5 video.</p>
+      </video>
+      <p>Sintel © copyright Blender Foundation | <a href="http://www.sintel.org">www.sintel.org</a>.</p>
+    </div>
+  </body>
+  <script>
+    var url = 'http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4';
+
+    var controller = new FetchController();
+    var signal = controller.signal;
+    var progress = document.querySelector('progress');
+    var video = document.querySelector('video');
+    var downloadBtn = document.querySelector('.download');
+    var abortBtn = document.querySelector('.abort');
+    var reports = document.querySelector('.reports');
+
+    downloadBtn.addEventListener('click', fetchVideo);
+    abortBtn.addEventListener('click', function() {
+      controller.abort()
+      reports.textContent = 'Download aborted';
+    });
+
+    function fetchVideo() {
+      abortBtn.style.display = 'inline';
+      reports.textContent = 'Video downloading';
+      fetch(url, {
+        signal,
+        observe(observer) {
+          observer.onresponseprogress = function(e) {
+            console.log(e.total);
+            progress.max = e.total;
+            progress.value = e.loaded;
+          };
+
+          observer.onstatechange = function(e) {
+            if (observer.state = 'complete') {
+              video.style.display = 'block';
+              abortBtn.style.display = 'none';
+              reports.textContent = 'Download complete';
+            }
+          }
+        }
+      }).then(function(response) {
+        response.blob().then(function(myBlob) {
+          var objectURL = URL.createObjectURL(myBlob);
+          video.src = objectURL;
+        });
+        console.log(response.bodyUsed);
+      });
+    }
+
+  </script>
+</html>
