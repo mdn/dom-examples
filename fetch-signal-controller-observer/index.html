@@ -105,7 +105,7 @@
           video.setAttribute('controls', '');
           video.src = objectURL;
           videoWrapper.appendChild(video);
-          window.clearTimeout(progressAnim);
+          clearTimeout(progressAnim);
 
           videoWrapper.style.display = 'block';
           abortBtn.style.display = 'none';
