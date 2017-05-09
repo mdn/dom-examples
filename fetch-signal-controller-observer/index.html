@@ -56,6 +56,7 @@
     var reports = document.querySelector('.reports');
 
     var progressAnim;
+    var animCount = 0;
 
     downloadBtn.addEventListener('click', fetchVideo);
     abortBtn.addEventListener('click', function() {
@@ -75,27 +76,9 @@
             progress.value = e.loaded;
           };
 
-          observer.onstatechange = function(e) {
+          observer.onstatechange = function() {
             if (observer.state = 'complete') {
-              var animCount = 0;
-              progressAnim = setTimeout(dotsAnim, 300);
-
-
-              function dotsAnim() {
-                if(animCount === 0) {
-                  reports.textContent = 'Download complete; waiting for video player to be constructed';
-                  animCount++;
-                } else if(animCount === 1) {
-                  reports.textContent = 'Download complete; waiting for video player to be constructed.';
-                  animCount++;
-                } else if(animCount === 2) {
-                  reports.textContent = 'Download complete; waiting for video player to be constructed..';
-                  animCount++;
-                } else {
-                  reports.textContent = 'Download complete; waiting for video player to be constructed...';
-                  animCount = 0;
-                }
-              }
+              runAnimation();
             }
           }
         }
@@ -107,7 +90,7 @@
           video.setAttribute('controls', '');
           video.src = objectURL;
           videoWrapper.appendChild(video);
-          clearTimeout(progressAnim);
+          clearInterval(progressAnim);
 
           videoWrapper.style.display = 'block';
           abortBtn.style.display = 'none';
@@ -116,6 +99,24 @@
         });
         console.log(response.bodyUsed);
       });
+    }
+
+    function runAnimation() {
+      progressAnim = setInterval(function() {
+        if(animCount === 0) {
+          reports.textContent = 'Download complete; waiting for video player to be constructed';
+          animCount++;
+        } else if(animCount === 1) {
+          reports.textContent = 'Download complete; waiting for video player to be constructed.';
+          animCount++;
+        } else if(animCount === 2) {
+          reports.textContent = 'Download complete; waiting for video player to be constructed..';
+          animCount++;
+        } else {
+          reports.textContent = 'Download complete; waiting for video player to be constructed...';
+          animCount = 0;
+        }
+      }, 300);
     }
 
   </script>
