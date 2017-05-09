@@ -78,13 +78,13 @@
 
           observer.onstatechange = function() {
             if (observer.state = 'complete') {
-              runAnimation();
+              reports.textContent = 'Download complete';
             }
           }
         }
       }).then(function(response) {
         response.blob().then(function(myBlob) {
-          clearInterval(progressAnim);
+          runAnimation();
           var objectURL = URL.createObjectURL(myBlob);
 
           var video = document.createElement('video');
@@ -95,6 +95,7 @@
           videoWrapper.style.display = 'block';
           abortBtn.style.display = 'none';
 
+          clearInterval(progressAnim);
           reports.textContent = 'Video ready to play';
         });
         console.log(response.bodyUsed);
