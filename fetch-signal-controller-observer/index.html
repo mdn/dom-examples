@@ -14,7 +14,7 @@
         max-width: 100%;
       }
 
-      video, .abort {
+      .videoWrapper, .abort {
         display: none;
       }
 
@@ -40,11 +40,9 @@
         <p class="reports"></p>
       </div>
       <div class="videoWrapper">
-        <video controls src="">
-          <p>Your browser doesn't support HTML5 video.</p>
-        </video>
+
       </div>
-      <p>Sintel © copyright Blender Foundation | <a href="http://www.sintel.org">www.sintel.org</a>.</p>
+      <p>Sintel © copyright Blender Foundation | <a href="http://www.sintel.org/">www.sintel.org</a>.</p>
     </div>
   </body>
   <script>
@@ -88,7 +86,7 @@
 
           var video = document.createElement('video');
           video.setAttribute('controls', '');
-          video.setAttribute('src', objectURL);
+          video.src = objectURL;
           videoWrapper.appendChild(video);
 
           videoWrapper.style.display = 'block';
