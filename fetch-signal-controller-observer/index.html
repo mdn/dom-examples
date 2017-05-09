@@ -84,13 +84,13 @@
         }
       }).then(function(response) {
         response.blob().then(function(myBlob) {
+          clearInterval(progressAnim);
           var objectURL = URL.createObjectURL(myBlob);
 
           var video = document.createElement('video');
           video.setAttribute('controls', '');
           video.src = objectURL;
           videoWrapper.appendChild(video);
-          clearInterval(progressAnim);
 
           videoWrapper.style.display = 'block';
           abortBtn.style.display = 'none';
