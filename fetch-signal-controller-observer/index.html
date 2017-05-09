@@ -89,6 +89,7 @@
           var video = document.createElement('video');
           video.setAttribute('controls', '');
           video.setAttribute('src', objectURL);
+          videoWrapper.appendChild(video);
 
           videoWrapper.style.display = 'block';
           abortBtn.style.display = 'none';
