@@ -56,6 +56,8 @@
     var abortBtn = document.querySelector('.abort');
     var reports = document.querySelector('.reports');
 
+    var progressAnim;
+
     downloadBtn.addEventListener('click', fetchVideo);
     abortBtn.addEventListener('click', function() {
       controller.abort()
@@ -76,7 +78,22 @@
 
           observer.onstatechange = function(e) {
             if (observer.state = 'complete') {
-              reports.textContent = 'Download complete';
+              var animCount = 0;
+              progressAnim = window.setTimeout(function() {
+                if(animCount = 0) {
+                  reports.textContent = 'Download complete; waiting for video player to be constructed';
+                  animCount++;
+                } else if(animCount = 1) {
+                  reports.textContent = 'Download complete; waiting for video player to be constructed.';
+                  animCount++;
+                } else if(animCount = 2) {
+                  reports.textContent = 'Download complete; waiting for video player to be constructed..';
+                  animCount++;
+                } else {
+                  reports.textContent = 'Download complete; waiting for video player to be constructed...';
+                  animCount = 0;
+                }
+              }, 300)
             }
           }
         }
@@ -88,6 +105,7 @@
           video.setAttribute('controls', '');
           video.src = objectURL;
           videoWrapper.appendChild(video);
+          window.cancelTimeOut(progressAnim);
 
           videoWrapper.style.display = 'block';
           abortBtn.style.display = 'none';
