@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Fetch json example</title>
+
+    <link rel="stylesheet" href="style.css">
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <h1>Fetch json example</h1>
+    <ul>
+    </ul>
+
+  </body>
+  <script>
+    var myList = document.querySelector('ul');
+
+    fetch('products.json')
+    .then(function(response) { return response.json(); })
+    .then(function(json) {
+      for(var i = 0; i < json.products.length; i++) {
+        var listItem = document.createElement('li');
+        listItem.innerHTML = '<strong>' + json.products[i].Name + '</strong>';
+        listItem.innerHTML +=' can be found in ' + json.products[i].Location + '.';
+        listItem.innerHTML +=' Cost: <strong>£' + json.products[i].Price + '</strong>';
+        myList.appendChild(listItem);
+      }
+    });
+
+  </script>
+</html>

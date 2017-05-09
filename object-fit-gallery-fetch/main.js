@@ -1,26 +1,24 @@
 var thumbs = document.querySelectorAll('.thumb');
 var mainImg = document.querySelector('.main');
 
-for(i = 1; i <= thumbs.length ; i++) {
+for(var i = 1; i <= thumbs.length ; i++) {
   var requestObj = 'images/pic' + i + '.jpg';
-  retrieveImage(requestObj,i-1);
+  retrieveImage(requestObj, i - 1);
 }
 
-function retrieveImage(requestObj,imageNo) {
-  fetch(requestObj).then(response =>
-    response.blob()
-  ).then(response =>
-    displayImage(imageNo,response)
-  );
+function retrieveImage(requestObj, imageNo) {
+  fetch(requestObj)
+  .then(response => response.blob())
+  .then(blob => displayImage(imageNo, blob));
 }
 
-function displayImage(imageNo,response) {
-  var objectURL = URL.createObjectURL(response);
-  thumbs[imageNo].setAttribute('src',objectURL);
+function displayImage(imageNo, blob) {
+  var objectURL = URL.createObjectURL(blob);
+  thumbs[imageNo].setAttribute('src', objectURL);
   thumbs[imageNo].onclick = function() {
-    mainImg.setAttribute('src',objectURL);
+    mainImg.setAttribute('src', objectURL);
     mainImg.className = 'blowup';
-    for(i = 0; i < thumbs.length; i++) {
+    for(var i = 0; i < thumbs.length; i++) {
       thumbs[i].className = 'thumb darken';
     }
   }
@@ -49,7 +47,7 @@ function displayImage(imageNo,response) {
 
 mainImg.onclick = function() {
   mainImg.className = 'main';
-  for(i = 0; i < thumbs.length; i++) {
+  for(var i = 0; i < thumbs.length; i++) {
     thumbs[i].className = 'thumb';
   }
 }

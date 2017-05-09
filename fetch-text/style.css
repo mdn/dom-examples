@@ -1,0 +1,44 @@
+html {
+  font-family: sans-serif;
+}
+
+h1,h2 {
+  text-align: center;
+}
+
+article {
+  width: 400px;
+  min-height: 480px;
+  margin: 0 auto;
+  padding: 10px;
+  background-image: repeating-linear-gradient(to bottom, transparent 1px, transparent 20px, rgb(0,0,150) 21px),
+                    linear-gradient(to bottom right, white, #ccc);
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.7);
+  line-height: 1.5;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  width: 480px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+
+li {
+  float: left;
+  width: 33%;
+}
+
+ul li a {
+  display: block;
+  text-align: center;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+ul li a:hover, ul li a:focus {
+  text-decoration: none;
+}

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
 
-    <title>Fetch basic example</title>
+    <title>Fetch Request example</title>
 
     <link rel="stylesheet" href="">
     <!--[if lt IE 9]>
@@ -14,23 +14,20 @@
   </head>
 
   <body>
-    <h1>Fetch basic example</h1>
+    <h1>Fetch Request example</h1>
+    <img src="">
 
-    <img src="" class="my-image">
   </body>
   <script>
-    var myImage = document.querySelector('.my-image');
+    var myImage = document.querySelector('img');
+    var myRequest = new Request('flowers.jpg');
 
-    fetch('flowers.jpg')
-    .then(function(response) {
-      if (!response.ok) return new Error(response);
-      return response.blob();
-    })
+    fetch(myRequest)
+    .then(function(response) { return response.blob(); })
     .then(function(myBlob) {
       var objectURL = URL.createObjectURL(myBlob);
       myImage.src = objectURL;
-    })
-    .catch(function(err) { console.log(err); });
+    });
 
   </script>
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Fetch basic response example</title>
+
+    <link rel="stylesheet" href="">
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <h1>Fetch basic response example</h1>
+    <img src="">
+
+  </body>
+  <script>
+    var myImage = document.querySelector('img');
+
+    var myRequest = new Request('flowers.jpg');
+
+    fetch(myRequest)
+    .then(function(response) {
+      console.log(response.type);
+      console.log(response.url);
+      console.log(response.useFinalURL);
+      console.log(response.status);
+      console.log(response.ok);
+      console.log(response.statusText);
+      console.log(response.headers);
+      return response.blob();
+    })
+    .then(function(myBlob) {
+      var objectURL = URL.createObjectURL(myBlob);
+      myImage.src = objectURL;
+    });
+
+    var myBlob = new Blob();
+    var init = { "status" : 200 , "statusText" : "SuperSmashingGreat!" }
+    var myResponse = new Response(myBlob, init);
+
+  </script>
+</html>
