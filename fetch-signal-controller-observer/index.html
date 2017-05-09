@@ -40,9 +40,8 @@
         <p class="reports"></p>
       </div>
       <div class="videoWrapper">
-
+        <p>Sintel © copyright Blender Foundation | <a href="http://www.sintel.org/">www.sintel.org</a>.</p>
       </div>
-      <p>Sintel © copyright Blender Foundation | <a href="http://www.sintel.org/">www.sintel.org</a>.</p>
     </div>
   </body>
   <script>
@@ -79,21 +78,24 @@
           observer.onstatechange = function(e) {
             if (observer.state = 'complete') {
               var animCount = 0;
-              progressAnim = setTimeout(function() {
-                if(animCount = 0) {
+              progressAnim = setTimeout(dotsAnim, 300);
+
+
+              function dotsAnim() {
+                if(animCount === 0) {
                   reports.textContent = 'Download complete; waiting for video player to be constructed';
                   animCount++;
-                } else if(animCount = 1) {
+                } else if(animCount === 1) {
                   reports.textContent = 'Download complete; waiting for video player to be constructed.';
                   animCount++;
-                } else if(animCount = 2) {
+                } else if(animCount === 2) {
                   reports.textContent = 'Download complete; waiting for video player to be constructed..';
                   animCount++;
                 } else {
                   reports.textContent = 'Download complete; waiting for video player to be constructed...';
                   animCount = 0;
                 }
-              }, 300);
+              }
             }
           }
         }
