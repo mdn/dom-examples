@@ -79,7 +79,7 @@
           observer.onstatechange = function(e) {
             if (observer.state = 'complete') {
               var animCount = 0;
-              progressAnim = window.setTimeout(function() {
+              progressAnim = setTimeout(function() {
                 if(animCount = 0) {
                   reports.textContent = 'Download complete; waiting for video player to be constructed';
                   animCount++;
@@ -93,7 +93,7 @@
                   reports.textContent = 'Download complete; waiting for video player to be constructed...';
                   animCount = 0;
                 }
-              }, 300)
+              }, 300);
             }
           }
         }
@@ -105,7 +105,7 @@
           video.setAttribute('controls', '');
           video.src = objectURL;
           videoWrapper.appendChild(video);
-          window.cancelTimeOut(progressAnim);
+          window.clearTimeout(progressAnim);
 
           videoWrapper.style.display = 'block';
           abortBtn.style.display = 'none';
