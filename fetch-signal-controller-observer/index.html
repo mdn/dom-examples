@@ -39,9 +39,11 @@
         <button class="abort">Cancel download</button>
         <p class="reports"></p>
       </div>
-      <video controls src="">
-        <p>Your browser doesn't support HTML5 video.</p>
-      </video>
+      <div class="videoWrapper">
+        <video controls src="">
+          <p>Your browser doesn't support HTML5 video.</p>
+        </video>
+      </div>
       <p>Sintel © copyright Blender Foundation | <a href="http://www.sintel.org">www.sintel.org</a>.</p>
     </div>
   </body>
@@ -51,7 +53,7 @@
     var controller = new FetchController();
     var signal = controller.signal;
     var progress = document.querySelector('progress');
-    var video = document.querySelector('video');
+    var videoWrapper = document.querySelector('videoWrapper');
     var downloadBtn = document.querySelector('.download');
     var abortBtn = document.querySelector('.abort');
     var reports = document.querySelector('.reports');
@@ -76,8 +78,6 @@
 
           observer.onstatechange = function(e) {
             if (observer.state = 'complete') {
-              video.style.display = 'block';
-              abortBtn.style.display = 'none';
               reports.textContent = 'Download complete';
             }
           }
@@ -85,7 +85,15 @@
       }).then(function(response) {
         response.blob().then(function(myBlob) {
           var objectURL = URL.createObjectURL(myBlob);
-          video.src = objectURL;
+
+          var video = document.createElement('video');
+          video.setAttribute('controls', '');
+          video.setAttribute('src', objectURL);
+
+          videoWrapper.style.display = 'block';
+          abortBtn.style.display = 'none';
+
+          reports.textContent = 'Video ready to play';
         });
         console.log(response.bodyUsed);
       });
