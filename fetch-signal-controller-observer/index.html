@@ -83,8 +83,9 @@
           }
         }
       }).then(function(response) {
+        runAnimation();
         response.blob().then(function(myBlob) {
-          runAnimation();
+          clearInterval(progressAnim);
           var objectURL = URL.createObjectURL(myBlob);
 
           var video = document.createElement('video');
@@ -95,7 +96,6 @@
           videoWrapper.style.display = 'block';
           abortBtn.style.display = 'none';
 
-          clearInterval(progressAnim);
           reports.textContent = 'Video ready to play';
         });
         console.log(response.bodyUsed);
