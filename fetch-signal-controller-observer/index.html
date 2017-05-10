@@ -61,6 +61,7 @@
     var animCount = 0;
 
     downloadBtn.addEventListener('click', fetchVideo);
+
     abortBtn.addEventListener('click', function() {
       controller.abort();
       reports.textContent = 'Download aborted';
@@ -107,6 +108,8 @@
           reports.textContent = 'Video ready to play';
         });
         console.log(response.bodyUsed);
+      }).catch(e) {
+        reports.textContent = 'Download error: ' + e.message;
       });
     }
 
