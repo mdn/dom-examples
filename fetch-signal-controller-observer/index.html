@@ -108,9 +108,9 @@
           reports.textContent = 'Video ready to play';
         });
         console.log(response.bodyUsed);
-      }).catch(e) {
+      }).catch(function(e) {
         reports.textContent = 'Download error: ' + e.message;
-      });
+      })
     }
 
     function runAnimation() {
