@@ -12,3 +12,4 @@ A repository of Fetch examples. See [https://developer.mozilla.org/en-US/docs/We
 * [Fetch text example](fetch-text/)
 * [Fetch text example with Request object and Init object](fetch-with-init-then-request/)
 * [object-fit gallery with fetched images](object-fit-gallery-fetch/)
+* [Fetch example showing experimental usage of fetch signal/controller/observer](fetch-signal-controller-observer/)
