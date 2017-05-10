@@ -60,7 +60,7 @@
 
     downloadBtn.addEventListener('click', fetchVideo);
     abortBtn.addEventListener('click', function() {
-      controller.abort()
+      controller.abort();
       reports.textContent = 'Download aborted';
     });
 
@@ -71,7 +71,7 @@
         signal,
         observe(observer) {
           observer.onresponseprogress = function(e) {
-            console.log(e.total);
+            console.log(e);
             progress.max = e.total;
             progress.value = e.loaded;
           };
