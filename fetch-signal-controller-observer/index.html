@@ -49,6 +49,8 @@
 
     var controller = new FetchController();
     var signal = controller.signal;
+    var controller.follow(signal);
+
     var progress = document.querySelector('progress');
     var videoWrapper = document.querySelector('.videoWrapper');
     var downloadBtn = document.querySelector('.download');
@@ -71,6 +73,12 @@
         signal,
         observe(observer) {
           observer.onresponseprogress = function(e) {
+            console.log(e);
+            progress.max = e.total;
+            progress.value = e.loaded;
+          };
+
+          observer.onrequestprogress = function(e) {
             console.log(e);
             progress.max = e.total;
             progress.value = e.loaded;
