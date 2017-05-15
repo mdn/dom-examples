@@ -13,6 +13,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "matchmedia" directory contains a simple demo to test matchMedia functionality. See [Window.matchMedia](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) for more details. [Run the demo live](http://mdn.github.io/dom-examples/matchmedia/).
 
+* The "mediaquerylist" directory contains a simple demo to test more advanced matchMedia/mediaquerylist functionality. See [MediaQueryList](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList) for more details. [Run the demo live](http://mdn.github.io/dom-examples/mediaquerylist/).
+
 * The "media" directory contains examples and demos showing how to use HTML and DOM [media elements and APIs](https://developer.mozilla.org/en-US/docs/Web/Media).
 
 * The "performance-apis" directory is for examples and demos of the [Web Performance APIs](https://www.w3.org/wiki/Web_Performance/Publications).
