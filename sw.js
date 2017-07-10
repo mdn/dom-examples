@@ -20,8 +20,9 @@ this.addEventListener('fetch', function(event) {
   event.respondWith(caches.match(event.request).catch(function() {
     return fetch(event.request);
   }).then(function(response) {
+    let responseClone = response.clone();
     caches.open('v1').then(function(cache) {
-      cache.put(event.request, response);
+      cache.put(event.request, responseClone);
     });
     return response.clone();
   }).catch(function() {
