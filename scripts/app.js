@@ -12,6 +12,7 @@ var record = document.querySelector('.record');
 var stop = document.querySelector('.stop');
 var soundClips = document.querySelector('.sound-clips');
 var canvas = document.querySelector('.visualizer');
+var mainSection = document.querySelector('.main-controls');
 
 // disable stop button while not recording
 
@@ -130,13 +131,12 @@ function visualize(stream) {
 
   source.connect(analyser);
   //analyser.connect(audioCtx.destination);
-  
-  WIDTH = canvas.width
-  HEIGHT = canvas.height;
 
   draw()
 
   function draw() {
+    WIDTH = canvas.width
+    HEIGHT = canvas.height;
 
     requestAnimationFrame(draw);
 
@@ -174,3 +174,7 @@ function visualize(stream) {
   }
 }
 
+window.onresize = function() {
+  canvas.width = mainSection.offsetWidth;
+}
+window.onresize();
