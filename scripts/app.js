@@ -1,11 +1,3 @@
-// fork getUserMedia for multiple browser versions, for the future
-// when more browsers support MediaRecorder
-
-navigator.getUserMedia = ( navigator.getUserMedia ||
-                       navigator.webkitGetUserMedia ||
-                       navigator.mozGetUserMedia ||
-                       navigator.msGetUserMedia);
-
 // set up basic variables for app
 
 var record = document.querySelector('.record');
@@ -25,7 +17,7 @@ var canvasCtx = canvas.getContext("2d");
 
 //main block for doing the audio recording
 
-if (navigator.getUserMedia) {
+if (navigator.mediaDevices.getUserMedia) {
   console.log('getUserMedia supported.');
 
   var constraints = { audio: true };
@@ -116,7 +108,8 @@ if (navigator.getUserMedia) {
     console.log('The following error occured: ' + err);
   }
 
-  navigator.getUserMedia(constraints, onSuccess, onError);
+  navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
+
 } else {
    console.log('getUserMedia not supported on your browser!');
 }
@@ -177,4 +170,5 @@ function visualize(stream) {
 window.onresize = function() {
   canvas.width = mainSection.offsetWidth;
 }
+
 window.onresize();

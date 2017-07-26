@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Web dictaphone</title>	
+    <title>Web dictaphone</title>
     <link href="styles/app.css" rel="stylesheet" type="text/css">
     <link href="styles/install-button.css" rel="stylesheet" type="text/css">
   </head>
@@ -25,15 +25,6 @@
 
       <section class="sound-clips">
 
-        <!-- This is left here as a helper for testing the style of the clips
-        If you want to edit their appearance without having to record clips,
-        uncomment this and reload the page. Remember to comment it again when done!
-        <article class="clip">
-          <audio controls></audio>
-          <p>Sample clip name</p>
-          <button class="delete">Delete</button>
-        </article>
-        -->
 
       </section>
 
@@ -46,14 +37,14 @@
 
       <p>Web dictaphone is built using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator.getUserMedia">getUserMedia</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder_API">MediaRecorder API</a>, which provides an easier way to capture Media streams.</p>
 
-      <p>MediaRecorder API currently only works in Firefox 25 (desktop/mobile) and Firefox OS 2.0. gUM and Web Audio have wider support.</p>
-
       <p>Icon courtesy of <a href="http://findicons.com/search/microphone">Find Icons</a>. Thanks to <a href="http://soledadpenades.com/">Sole</a> for the Oscilloscope code!</p>
 
       <button id="install-btn">Install app</button>
     </aside>
 
-    <script src="scripts/install.js"></script>  
+    <script src="scripts/install.js"></script>
+
+    <script src="scripts/mediaDevices-getUserMedia-polyfill.js"></script>
 
     <!-- Below is your custom application script -->
     <script src="scripts/app.js"></script>
