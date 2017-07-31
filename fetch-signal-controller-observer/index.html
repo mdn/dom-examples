@@ -85,7 +85,7 @@
           };
 
           observer.onstatechange = function() {
-            if (observer.state == 'complete') {
+            if (observer.state === 'complete') {
               reports.textContent = 'Download complete';
             }
           }
