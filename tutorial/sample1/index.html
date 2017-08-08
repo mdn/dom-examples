@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="../webgl.css" type="text/css">
 
-    <script type="text/JavaScript">
+    <script>
       var canvas;
       var gl;
 
@@ -21,14 +21,15 @@
         initWebGL(canvas);      // Initialize the GL context
 
         // Only continue if WebGL is available and working
-
-        if (gl) {
-          gl.clearColor(0.0, 0.0, 0.0, 1.0);  // Set clear color to black, fully opaque
-          gl.clearDepth(1.0);                 // Clear everything
-          gl.enable(gl.DEPTH_TEST);           // Enable depth testing
-          gl.depthFunc(gl.LEQUAL);            // Near things obscure far things
-          gl.clear(gl.COLOR_BUFFER_BIT);      // Clear the color buffer with specified clear color
+        if (!gl) {
+          return;
         }
+        
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);  // Set clear color to black, fully opaque
+        gl.clearDepth(1.0);                 // Clear everything
+        gl.enable(gl.DEPTH_TEST);           // Enable depth testing
+        gl.depthFunc(gl.LEQUAL);            // Near things obscure far things
+        gl.clear(gl.COLOR_BUFFER_BIT);      // Clear the color buffer with specified clear color
       }
 
       //
@@ -38,13 +39,7 @@
       // WebGL isn't available or could not be initialized.
       //
       function initWebGL() {
-        gl = null;
-
-        try {
-          gl = canvas.getContext("experimental-webgl");
-        }
-        catch(e) {
-        }
+         gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
 
         // If we don't have a GL context, give up now
 
