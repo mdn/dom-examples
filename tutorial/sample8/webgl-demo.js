@@ -57,7 +57,11 @@ function start() {
     // Start listening for the canplaythrough event, so we don't
     // start playing the video until we can do so without stuttering
 
-    videoElement.addEventListener("canplaythrough", startVideo, true);
+    if (videoElement.readyState > 3) {
+      startVideo();
+    } else {
+      videoElement.addEventListener("canplaythrough", startVideo, true);
+    }
 
     // Start listening for the ended event, so we can stop the
     // animation when the video is finished playing.
