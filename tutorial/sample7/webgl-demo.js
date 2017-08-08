@@ -371,7 +371,7 @@ function initShaders() {
   // If creating the shader program failed, alert
 
   if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-    alert("Unable to initialize the shader program: " + gl.getProgramInfoLog(shader));
+    alert("Unable to initialize the shader program: " + gl.getProgramInfoLog(shaderProgram));
   }
 
   gl.useProgram(shaderProgram);
