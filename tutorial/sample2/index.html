@@ -1,38 +1,15 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
     <title>WebGL Demo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="../webgl.css" type="text/css">
-    <script src="../sylvester.js" type="text/javascript"></script>
-    <script src="../glUtils.js" type="text/javascript"></script>
-    <script src="webgl-demo.js" type="text/javascript"></script>
-
-    <!-- Fragment shader program -->
-
-    <script id="shader-fs" type="x-shader/x-fragment">
-        void main(void) {
-            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-        }
-    </script>
-
-    <!-- Vertex shader program -->
-
-    <script id="shader-vs" type="x-shader/x-vertex">
-      attribute vec3 aVertexPosition;
-
-      uniform mat4 uMVMatrix;
-      uniform mat4 uPMatrix;
-
-      void main(void) {
-        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-      }
-    </script>
   </head>
 
-  <body onload="start()">
-    <canvas id="glcanvas" width="640" height="480">
-      Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
-    </canvas>
+  <body>
+    <canvas id="glcanvas" width="640" height="480"></canvas>
   </body>
+
+  <script src="../gl-matrix.js"></script>
+  <script src="webgl-demo.js"></script>
 </html>
