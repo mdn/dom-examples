@@ -38,7 +38,7 @@ function clear_resource_timings() {
     log("= performance.clearResourceTimings(): peformance NOT supported");
     return;
   }
-  // Check if Performance.clearResourceTiming() is supported 
+  // Check if Performance.clearResourceTiming() is supported
   log ("= Print performance.clearResourceTimings()");
   var supported = typeof performance.clearResourceTimings == "function";
   if (supported) {
@@ -50,7 +50,7 @@ function clear_resource_timings() {
   }
   // getEntries should now return zero
   var p = performance.getEntriesByType("resource");
-  if (p.length == 0)  
+  if (p.length == 0)
     log("... Performance data buffer cleared");
   else
     log("... Performance data buffer NOT cleared (still have `" + p.length + "` items");
@@ -61,7 +61,7 @@ function set_resource_timing_buffer_size(n) {
     log("= performance.setResourceTimingBufferSize(): peformance NOT supported");
     return;
   }
-  // Check if Performance.setResourceTimingBufferSize() is supported 
+  // Check if Performance.setResourceTimingBufferSize() is supported
   log ("= performance.setResourceTimingBufferSize()");
   var supported = typeof performance.setResourceTimingBufferSize == "function";
   if (supported) {
@@ -137,7 +137,7 @@ function calculate_load_times() {
     log("... TCP time = " + t);
 
     // Secure connection time
-    t = (resources[i].secureConnectionStart > 0) ? "0" : (resources[i].connectEnd - resources[i].secureConnectionStart);
+    t = (resources[i].secureConnectionStart > 0) ? (resources[i].connectEnd - resources[i].secureConnectionStart) : "0";
     log("... Secure connection time = " + t);
 
     // Response time
@@ -145,15 +145,15 @@ function calculate_load_times() {
     log("... Response time = " + t);
 
     // Fetch until response end
-    t = (resources[i].fetchStart > 0) ? "0" : (resources[i].responseEnd - resources[i].fetchStart);
+    t = (resources[i].fetchStart > 0) ? (resources[i].responseEnd - resources[i].fetchStart) : "0";
     log("... Fetch until response end time = " + t);
 
     // Request start until reponse end
-    t = (resources[i].requestStart > 0) ? "0" : (resources[i].responseEnd - resources[i].requestStart);
+    t = (resources[i].requestStart > 0) ? (resources[i].responseEnd - resources[i].requestStart) : "0";
     log("... Request start until response end time = " + t);
 
     // Start until reponse end
-    t = (resources[i].startTime > 0) ? "0" : (resources[i].responseEnd - resources[i].startTime);
+    t = (resources[i].startTime > 0) ? (resources[i].responseEnd - resources[i].startTime) : "0";
     log("... Start until response end time = " + t);
   }
 }
@@ -164,7 +164,7 @@ function init() {
   image1.src = "https://developer.mozilla.org/static/img/opengraph-logo.png";
   var image2 = new Image();
   image2.src = "http://mozorg.cdn.mozilla.net/media/img/firefox/firefox-256.e2c1fc556816.jpg"
- 
+
   // Set a callback if the resource buffer becomes filled
   performance.onresourcetimingbufferfull = buffer_full;
 }
