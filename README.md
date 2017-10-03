@@ -1,6 +1,8 @@
 # dom-examples
 Code examples that accompany various MDN DOM and Web API documentation pages.
 
+* The "abort-api" directory contains an example of how to use the "Abort API" (aka [AbortSignal](https://dom.spec.whatwg.org/#interface-AbortSignal) and [AbortController](https://dom.spec.whatwg.org/#interface-abortcontroller)). [Run the example live](https://mdn.github.io/dom-examples/abort-api/).
+
 * The "auxclick" directory contains a simple example demonstrating the new <code>auxclick</code> event type. See [GlobalEventHandlers.auxclick](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onauxclick) for more details, or [run the example live](https://mdn.github.io/dom-examples/auxclick/).
 
 * The "channel-messaging-basic" directory contains a simple example demonstrating the basics of channel messaging; see [Channel Messaging API](https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API) or [run the example live](http://mdn.github.io/dom-examples/channel-messaging-basic/).
