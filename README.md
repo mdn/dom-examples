@@ -27,6 +27,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "server-sent-events" directory contains a very simple SSE demo that uses PHP to create the server. You can find more information in our [Using server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) article. To run the demo you'll need to serve the files from a server that supports PHP; [MAMP](https://www.mamp.info/en/) is a good PHP test server environment.
 
+* The "streams" directory contains demos of the Streams API for using low-level I/O processing.
+
 * The "touchevents" directory is for examples and demos of the [Touch Events](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events) standard.
 
 * The "web-storage" directory contains a simple demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](http://mdn.github.io/dom-examples/web-storage/).
