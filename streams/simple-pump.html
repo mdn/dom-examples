@@ -1,0 +1,51 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple Stream Pump</title>
+</head>
+<body>
+<h1>Simple Stream Pump</h1>
+<p>The left tortoise is the original, the right one is created using a custom stream.</p>
+<img src="tortoise.png" width="150" height="84" alt="Tortoise Original">
+<img src="tortoise.png" width="150" height="84" alt="Tortoise Copy" id="target">
+<script>
+  const image = document.getElementById('target');
+
+  // Fetch the original image
+  fetch('./tortoise.png')
+  // Retrieve its body as ReadableStream
+  .then(response => response.body)
+  .then(body => {
+    const reader = body.getReader();
+
+    return new ReadableStream({
+      start(controller) {
+        return pump();
+
+        function pump() {
+          return reader.read().then(({ done, value }) => {
+            // When no more data needs to be consumed, close the stream
+            if (done) {
+              controller.close();
+              return;
+            }
+
+            // Enqueue the next data chunk into our target stream
+            controller.enqueue(value);
+            return pump();
+          });
+        }
+      }
+    })
+  })
+  .then(stream => new Response(stream))
+  .then(response => response.blob())
+  .then(blob => URL.createObjectURL(blob))
+  .then(url => console.log(image.src = url))
+  .catch(err => console.error(err));
+</script>
+</body>
+</html>
