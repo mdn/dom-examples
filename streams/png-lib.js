@@ -1,3 +1,29 @@
+// Initialize CRC Table
+const CRC_TABLE = createCrcTable();
+
+function createCrcTable() {
+  const crcTable = [];
+  for (let n = 0; n < 256; n += 1) {
+    let c = n;
+    for (let k = 0; k < 8; k += 1) {
+      c = ((c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
+    }
+    crcTable[n] = c;
+  }
+
+  return crcTable;
+}
+
+function crc32(uint8Array) {
+  let crc = 0 ^ (-1);
+
+  for (const byte of uint8Array) {
+    crc = (crc >>> 8) ^ CRC_TABLE[(crc ^ byte) & 0xFF];
+  }
+
+  return (crc ^ (-1)) >>> 0;
+}
+
 function paeth(a, b, c) {
   const p = a + b - c;
   const pa = Math.abs(p - a);
@@ -110,6 +136,8 @@ class PngGrayScaleStreamSource {
               throw new TypeError('PNG is missing IDAT chunk');
             }
 
+            const crcStart = position + 4;
+
             // Extract the data from the PNG stream
             const bytesPerCol = 4;
             const bytesPerRow = this._width * bytesPerCol + 1;
@@ -132,9 +160,9 @@ class PngGrayScaleStreamSource {
             this._writeString(target, position + 4, 'IDAT');
             buffer.set(result, position + 8);
 
-            position += dataSize + 8;
+            position += result.byteLength + 8;
 
-            const chunkCrc = source.getUint32(position);
+            const chunkCrc = crc32(new Uint8Array(target.buffer, crcStart, position - crcStart));
             target.setUint32(position, chunkCrc);
             position += 4;
 
@@ -142,14 +170,20 @@ class PngGrayScaleStreamSource {
             break;
           }
           case 'end': {
-            target.setUint8(position, source.getUint8(position));
-            position += 1;
+            // Write IEND chunk
+            target.setUint32(position, 0);
+            position += 4;
+            this._writeString(target, position, "IEND");
+            position += 4;
+            target.setUint32(position, 2923585666);
+            position += 4;
+
+            controller.enqueue(buffer.subarray(0, position));
+            controller.close();
+            return;
           }
         }
       }
-
-      controller.enqueue(buffer);
-      controller.close();
     });
   }
 
