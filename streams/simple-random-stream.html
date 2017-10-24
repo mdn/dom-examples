@@ -68,7 +68,7 @@
     return string;
   }
 
-  let stream = new ReadableStream({
+  const stream = new ReadableStream({
     start(controller) {
       interval = setInterval(() => {
         let string = randomChars();
@@ -118,7 +118,7 @@
       charsReceived += value.length;
       const chunk = value;
       let listItem = document.createElement('li');
-      listItem.textContent = 'Received ' + charsReceived + ' characters so far. Current chunk = ' + chunk;
+      listItem.textContent = 'Read ' + charsReceived + ' characters so far. Current chunk = ' + chunk;
       list2.appendChild(listItem);
 
       result += chunk;
