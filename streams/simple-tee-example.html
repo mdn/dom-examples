@@ -1,0 +1,132 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Simple random stream</title>
+    <style>
+      .tee1 {
+        float: left;
+        width: 50%;
+      }
+
+      .tee2 {
+        float: right;
+        width: 50%;
+      }
+
+      button {
+        display: block;
+      }
+    </style>
+</head>
+<body>
+<h1>Simple Tee example</h1>
+
+<button>Cancel string generation</button>
+
+<div class="custom">
+  <h2>Custom stream output</h2>
+  <ul>
+
+  </ul>
+</div>
+
+<div class="tee1">
+  <h2>Tee 1 output</h2>
+  <ul>
+
+  </ul>
+</div>
+
+<div class="tee2">
+  <h2>Tee 2 output</h2>
+  <ul>
+
+  </ul>
+</div>
+
+<script>
+  // Store reference to lists, paragraph and button
+  const list1 = document.querySelector('.custom ul');
+  const list2 = document.querySelector('.tee1 ul');
+  const list3 = document.querySelector('.tee2 ul');
+  const button = document.querySelector('button');
+
+  // create empty string in which to store result
+  let result = "";
+
+  // function to generate random character string
+  function randomChars() {
+    let string = "";
+    let choices = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+
+    for (let i = 0; i < 8; i++) {
+      string += choices.charAt(Math.floor(Math.random() * choices.length));
+    }
+    return string;
+  }
+
+  const stream = new ReadableStream({
+    start(controller) {
+      interval = setInterval(() => {
+        let string = randomChars();
+
+        // Add the string to the stream
+        controller.enqueue(string);
+
+        // show it on the screen
+        let listItem = document.createElement('li');
+        listItem.textContent = string;
+        list1.appendChild(listItem);
+      }, 1000);
+
+      button.addEventListener('click', function() {
+        clearInterval(interval);
+        teeStream();
+        controller.close();
+      })
+    },
+    pull(controller) {
+      // We don't really need a pull in this example
+    },
+    cancel() {
+      // This is called if the reader cancels,
+      // so we should stop generating strings
+      clearInterval(interval);
+    }
+  });
+
+  function teeStream() {
+    const teedOff = stream.tee();
+    fetchStream(teedOff[0], list2);
+    fetchStream(teedOff[1], list3);
+  }
+
+  function fetchStream(stream, list) {
+    const reader = stream.getReader();
+    let charsReceived = 0;
+
+    // read() returns a promise that resolves
+    // when a value has been received
+    reader.read().then(function processText({ done, value }) {
+      // Result objects contain two properties:
+      // done  - true if the stream has already given you all its data.
+      // value - some data. Always undefined when done is true.
+      if (done) {
+        console.log("Stream complete");
+        return;
+      }
+
+      // value for fetch streams is a Uint8Array
+      charsReceived += value.length;
+      const chunk = value;
+      let listItem = document.createElement('li');
+      listItem.textContent = 'Read ' + charsReceived + ' characters so far. Current chunk = ' + chunk;
+      list.appendChild(listItem);
+
+      // Read some more, and call this function again
+      return reader.read().then(processText);
+    });
+  }
+</script>
+</body>
+</html>
