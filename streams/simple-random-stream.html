@@ -100,7 +100,7 @@
 
   function fetchStream() {
     const reader = stream.getReader();
-    let bytesReceived = 0;
+    let charsReceived = 0;
 
     // read() returns a promise that resolves
     // when a value has been received
@@ -115,10 +115,10 @@
       }
 
       // value for fetch streams is a Uint8Array
-      bytesReceived += value.length;
+      charsReceived += value.length;
       const chunk = value;
       let listItem = document.createElement('li');
-      listItem.textContent = 'Received ' + bytesReceived + ' bytes of data so far. Current chunk = ' + chunk;
+      listItem.textContent = 'Received ' + charsReceived + ' characters so far. Current chunk = ' + chunk;
       list2.appendChild(listItem);
 
       result += chunk;
