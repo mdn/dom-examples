@@ -1,29 +1,11 @@
-// Initialize CRC Table
-const CRC_TABLE = createCrcTable();
+/**
+ * This file contains logic to grayscale a PNG from a ReadableStream.
+ */
 
-function createCrcTable() {
-  const crcTable = [];
-  for (let n = 0; n < 256; n += 1) {
-    let c = n;
-    for (let k = 0; k < 8; k += 1) {
-      c = ((c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
-    }
-    crcTable[n] = c;
-  }
 
-  return crcTable;
-}
-
-function crc32(uint8Array) {
-  let crc = 0 ^ (-1);
-
-  for (const byte of uint8Array) {
-    crc = (crc >>> 8) ^ CRC_TABLE[(crc ^ byte) & 0xFF];
-  }
-
-  return (crc ^ (-1)) >>> 0;
-}
-
+/**
+ * Remove Paeth filter from three data points.
+ */
 function paeth(a, b, c) {
   const p = a + b - c;
   const pa = Math.abs(p - a);
@@ -31,10 +13,15 @@ function paeth(a, b, c) {
   const pc = Math.abs(p - c);
   if (pa <= pb && pa <= pc) return a;
   if (pb <= pc) return b;
+
   return c;
 }
 
-class PngGrayScaleStreamSource {
+
+/**
+ * A source of a ReadableStream to create a grayscale PNG.
+ */
+class GrayscalePNGSource {
   /**
    * @param {ReadableStream} rs
    */
@@ -162,7 +149,7 @@ class PngGrayScaleStreamSource {
 
             position += result.byteLength + 8;
 
-            const chunkCrc = crc32(new Uint8Array(target.buffer, crcStart, position - crcStart));
+            const chunkCrc = crc32(chunkName, result);
             target.setUint32(position, chunkCrc);
             position += 4;
 
@@ -229,6 +216,12 @@ class PngGrayScaleStreamSource {
     string.split('').forEach((char, index) => dataView.setUint8(position + index, char.charCodeAt(0)));
   }
 
+  /**
+   * Retrieves the PNG's color type.
+   *
+   * @param {number} number A number representing the color type.
+   * @return {string} A string naming the color type.
+   */
   _colorType(number) {
     switch (number) {
       case 0: return 'grayscale';

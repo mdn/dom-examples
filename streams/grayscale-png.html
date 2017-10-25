@@ -12,6 +12,7 @@
 <img src="tortoise.png" width="150" height="84">
 <img src="tortoise.png" width="150" height="84" id="target">
 <script src="pako.min.js"></script>
+<script src="crc32.js"></script>
 <script src="png-lib.js"></script>
 <script type="application/javascript">
   const image = document.getElementById('target');
@@ -21,7 +22,7 @@
   // Retrieve its body as ReadableStream
   .then(response => response.body)
   // Create a gray-scaled PNG stream out of the original
-  .then(body => new Response(new ReadableStream(new PngGrayScaleStreamSource(body))))
+  .then(body => new Response(new ReadableStream(new GrayscalePNGSource(body))))
   .then(newResponse => newResponse.blob())
   .then(blob => URL.createObjectURL(blob))
   .then(url => image.src = url)
