@@ -1,0 +1,81 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    img { float: left; }
+    table { width: 600px; }
+    th { text-align: left }
+    thead th { border-bottom: 1px solid #ddd; padding: 5px 0; }
+  </style>
+</head>
+<body>
+<h1>Unpack Chunks of a PNG</h1>
+<p>The PNG shown left gets read by a stream and then transformed to a stream of PNG chunks. By this, the PNG can be processed before the fetch is complete.</p>
+<img src="png-logo.png" width="640" height="480">
+<table>
+  <thead>
+  <tr>
+    <th width="300">Stream</th>
+    <th>Sent chunk type</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+<script src="crc32.js"></script>
+<script src="png-chunks.js"></script>
+<script src="png-transform-stream.js"></script>
+<script type="application/javascript">
+  const tbody = document.getElementsByTagName('tbody')[0];
+  function logReadableStream(name, rs) {
+    const [rs1, rs2] = rs.tee();
+    const reader = rs2.getReader();
+    let i = 0;
+
+    pump();
+
+    function pump() {
+      return reader.read().then(({ done, value }) => {
+        const tr = document.createElement('tr');
+        tbody.appendChild(tr);
+        const th = document.createElement('th');
+        th.appendChild(document.createTextNode(name));
+        tr.appendChild(th);
+        if (done) {
+          const tdClose = document.createElement('td');
+          tdClose.appendChild(document.createTextNode('Closed'))
+          tr.appendChild(tdClose);
+          console.log('Closed %s.', name);
+          return;
+        }
+        const tdChunk = document.createElement('td');
+        tdChunk.appendChild(document.createTextNode(value.constructor.name))
+        tr.appendChild(tdChunk);
+        console.log('Chunk %d of %s: %o', i += 1, name, value);
+
+        return pump();
+      })
+    }
+
+    return rs1;
+  }
+
+
+  // Fetch the original image
+  fetch('png-logo.png')
+  // Retrieve its body as ReadableStream
+  .then(response => response.body)
+  // Create a gray-scaled PNG stream out of the original
+  .then(rs => logReadableStream('Fetch Response Stream', rs))
+  .then(body => body.pipeThrough(new PNGTransformStream()))
+  .then(rs => logReadableStream('PNG Chunk Stream', rs))
+
+</script>
+</body>
+</html>
