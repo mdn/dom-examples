@@ -84,7 +84,7 @@
 
       button.addEventListener('click', function() {
         clearInterval(interval);
-        fetchStream();
+        readStream();
         controller.close();
       })
     },
@@ -98,7 +98,7 @@
     }
   });
 
-  function fetchStream() {
+  function readStream() {
     const reader = stream.getReader();
     let charsReceived = 0;
 
@@ -114,7 +114,6 @@
         return;
       }
 
-      // value for fetch streams is a Uint8Array
       charsReceived += value.length;
       const chunk = value;
       let listItem = document.createElement('li');

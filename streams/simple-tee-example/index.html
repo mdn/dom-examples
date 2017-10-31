@@ -97,11 +97,11 @@
 
   function teeStream() {
     const teedOff = stream.tee();
-    fetchStream(teedOff[0], list2);
-    fetchStream(teedOff[1], list3);
+    readStream(teedOff[0], list2);
+    readStream(teedOff[1], list3);
   }
 
-  function fetchStream(stream, list) {
+  function readStream(stream, list) {
     const reader = stream.getReader();
     let charsReceived = 0;
 
@@ -116,7 +116,6 @@
         return;
       }
 
-      // value for fetch streams is a Uint8Array
       charsReceived += value.length;
       const chunk = value;
       let listItem = document.createElement('li');
