@@ -67,14 +67,14 @@
   }
 
 
-  // Fetch the original image
-  fetch('png-logo.png')
-  // Retrieve its body as ReadableStream
-  .then(response => response.body)
-  // Create a gray-scaled PNG stream out of the original
-  .then(rs => logReadableStream('Fetch Response Stream', rs))
-  .then(body => body.pipeThrough(new PNGTransformStream()))
-  .then(rs => logReadableStream('PNG Chunk Stream', rs))
+// Fetch the original image
+fetch('png-logo.png')
+// Retrieve its body as ReadableStream
+.then(response => response.body)
+// Create a gray-scaled PNG stream out of the original
+.then(rs => logReadableStream('Fetch Response Stream', rs))
+.then(body => body.pipeThrough(new PNGTransformStream()))
+.then(rs => logReadableStream('PNG Chunk Stream', rs))
 
 </script>
 </body>

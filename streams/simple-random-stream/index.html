@@ -3,12 +3,12 @@
     <meta charset="UTF-8">
     <title>Simple random stream</title>
     <style>
-      .custom {
+      .input {
         float: left;
         width: 50%;
       }
 
-      .fetch {
+      .output {
         float: right;
         width: 50%;
       }
@@ -25,17 +25,17 @@
 <body>
 <h1>Simple random stream</h1>
 
-<button>Cancel string generation</button>
+<button>Stop string generation</button>
 
-<div class="custom">
-  <h2>Custom stream output</h2>
+<div class="input">
+  <h2>Custom stream input</h2>
   <ul>
 
   </ul>
 </div>
 
-<div class="fetch">
-  <h2>Fetch stream output</h2>
+<div class="output">
+  <h2>Reading custom stream</h2>
   <ul>
 
   </ul>
@@ -49,8 +49,8 @@
 
 <script>
   // Store reference to lists, paragraph and button
-  const list1 = document.querySelector('.custom ul');
-  const list2 = document.querySelector('.fetch ul');
+  const list1 = document.querySelector('.input ul');
+  const list2 = document.querySelector('.output ul');
   const para = document.querySelector('p');
   const button = document.querySelector('button');
 
