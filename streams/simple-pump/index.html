@@ -17,9 +17,8 @@
   // Fetch the original image
   fetch('./tortoise.png')
   // Retrieve its body as ReadableStream
-  .then(response => response.body)
-  .then(body => {
-    const reader = body.getReader();
+  .then(response => {
+    const reader = response.body.getReader();
 
     return new ReadableStream({
       start(controller) {
