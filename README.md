@@ -9,7 +9,9 @@ Tap the screen then say a colour — the grammar string contains a large number 
 This current works only on Chrome/Chrome Mobile. To get this code running successfully, you'll need to run the code through a web server (localhost will work.)
 
 ## Phrase matcher demo
-The same comments as above apply to this demo too — this is another demo that relies on speech recognition, written for a research team at the University of Nebraska at Kearney.
+Speak the phrase and then see if the recognition engine successfully recognises it — this is another demo that relies on speech recognition, written for a research team at the University of Nebraska at Kearney.
+
+This current works only on Chrome/Chrome Mobile. To get this code running successfully, you'll need to run the code through a web server (localhost will work.)
 
 [Run phrase matcher demo live](https://mdn.github.io/web-speech-api/phrase-matcher/)
 
@@ -17,3 +19,5 @@ The same comments as above apply to this demo too — this is another demo that 
 [Run synthesis demo live](https://mdn.github.io/web-speech-api/speak-easy-synthesis/)
 
 Type words in the input then submit the form to hear it spoken. You can also select the different voices available on the system, and alter the rate and pitch.
+
+This currently works in Chrome and Firefox.
