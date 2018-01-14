@@ -42,10 +42,10 @@ function speak(){
     }
     if (inputTxt.value !== '') {
     var utterThis = new SpeechSynthesisUtterance(inputTxt.value);
-    utterThis.onend = function (evaent) {
+    utterThis.onend = function (event) {
         console.log('SpeechSynthesisUtterance.onend');
     }
-    utterThis.onerror = function (evaent) {
+    utterThis.onerror = function (event) {
         console.error('SpeechSynthesisUtterance.onerror');
     }
     var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
