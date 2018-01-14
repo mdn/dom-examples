@@ -36,8 +36,18 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
 }
 
 function speak(){
-  if(inputTxt.value !== ''){
+    if (synth.speaking) {
+        console.error('speechSynthesis.speaking');
+        return;
+    }
+    if (inputTxt.value !== '') {
     var utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+    utterThis.onend = function (evaent) {
+        console.log('SpeechSynthesisUtterance.onend');
+    }
+    utterThis.onerror = function (evaent) {
+        console.error('SpeechSynthesisUtterance.onerror');
+    }
     var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
     for(i = 0; i < voices.length ; i++) {
       if(voices[i].name === selectedOption) {
