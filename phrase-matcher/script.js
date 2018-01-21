@@ -3,7 +3,7 @@ var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
 var phrases = [
-  'i love to sing because it\'s fun',
+  'I love to sing because it\'s fun',
   'where are you going',
   'can I call you tomorrow',
   'why did you talk while I was talking',
