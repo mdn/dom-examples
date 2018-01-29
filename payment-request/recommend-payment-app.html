@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
+  <meta charset="UTF-8">
   <title>Recommend a Payment App when User Has No Apps</title>
   <!--
     If you select to pay with TommyPay on this merchant page, it tries to call 
@@ -34,7 +35,13 @@
     <button id="checkout-button">Checkout</button>
   </div>
   
-  <div id="error">
+  <div id="success">
+    <p>
+      Payment Request success. Demo complete. No payment has been taken.
+    </p>
+  </div>  
+
+  <div id="legacy">
     <p>
       The Payment Request API is unsupported or was cancelled or failed.
       Here we can proceed with a fallback (not implemented for this demo).
@@ -45,7 +52,8 @@
     
     var checkoutButton = document.getElementById('checkout-button');
     var introPanel = document.getElementById('intro');
-    var errorPanel = document.getElementById('error');
+    var successPanel = document.getElementById('success');
+    var legacyPanel = document.getElementById('legacy');
 
     // Feature detection
     if (window.PaymentRequest) {
@@ -54,12 +62,17 @@
 
       checkoutButton.addEventListener('click', function() {
 
-        var request = new PaymentRequest(buildSupportedPaymentMethodNames(),
+        var request = new PaymentRequest(buildSupportedPaymentMethodData(),
           buildShoppingCartDetails());
 
         request.show().then(function(paymentResponse) {
           // Here we would process the payment. For this demo, simulate immediate success:
-          paymentResponse.complete('success');
+          paymentResponse.complete('success')
+            .then(function() {
+                // For demo purposes:
+                introPanel.style.display = 'none';
+                successPanel.style.display = 'block';
+              });
 
         }).catch(function(error) {
 
@@ -71,28 +84,30 @@
             // the checkout process can continue seamlessly.
 
             window.location.href =
-            'https://tommythorsen.github.io/webpayments-demo/payment-apps/tommypay/signup/?redirect_url=' +
-              encodeURI(window.location.href);
+              'https://tommythorsen.github.io/webpayments-demo/payment-apps/tommypay/signup/?redirect_url=' +
+                encodeURI(window.location.href);
 
           } else {
             // Other kinds of errors; cancelled or failed payment. For demo purposes:
             introPanel.style.display = 'none';
-            errorPanel.style.display = 'block';
+            legacyPanel.style.display = 'block';
           }
 
         });        
       });
     } else {
-      // Payment Request is unsupported. For demo purposes:
-      introPanel.style.display = 'none';
-      errorPanel.style.display = 'block';
+      
+      // Payment Request is unsupported
+      checkoutButton.addEventListener('click', function() {
+        // For demo purposes:
+        introPanel.style.display = 'none';
+        legacyPanel.style.display = 'block';
+      });
     }
 
     function buildSupportedPaymentMethodData() {
       return [{
         supportedMethods: 'https://tommypay.no/pay'
-      }, {
-        supportedMethods: 'basic-card'
       }];
     }
 

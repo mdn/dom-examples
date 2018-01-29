@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
+  <meta charset="UTF-8">
   <title>Feature Detect Support for Payment Request API</title>
   <!--
     If the user's browser supports PaymentRequest, the merchant page updates 
@@ -67,10 +68,12 @@
 
         request.show().then(function(paymentResponse) {
           // Here we would process the payment. For this demo, simulate immediate success:
-          paymentResponse.complete('success');
-          // For demo purposes:
-          introPanel.style.display = 'none';
-          successPanel.style.display = 'block';
+          paymentResponse.complete('success')
+          .then(function() {
+              // For demo purposes:
+              introPanel.style.display = 'none';
+              successPanel.style.display = 'block';
+            });
 
         }).catch(function(error) {
           // Handle cancelled or failed payment. For demo purposes:

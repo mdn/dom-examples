@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
+  <meta charset="UTF-8">
   <title>Pre-authorize Transaction</title>
   <!--
     Some use cases (e.g. paying for fuel at a service station) involve pre-authorization 
@@ -77,7 +78,8 @@
           if (res) {
             // The payment handler has pre-authorized a transaction with some
             // static amount (e.g. USD $1.00). For demo purposes:
-
+            introPanel.style.display = 'none';
+            successPanel.style.display = 'block';
             
           } else {
             // Pre-authorization failed or payment handler not installed.

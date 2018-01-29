@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
+  <meta charset="UTF-8">
   <title>Check Whether User Can Make Payment Before All Prices Are Known</title>
   <!--
     If the checkout flow needs to know whether `PaymentRequest.canMakePayment()` will 
@@ -69,7 +70,7 @@
       var shouldCallPaymentRequest = true;
 
       // Make a dummy payment request to check if user can make payment
-      new PaymentRequest(supportedPaymentMethods,
+      new PaymentRequest(buildSupportedPaymentMethodData(),
           {total: {label: 'Stub', amount: {currency: 'USD', value: '0.01'}}})
         .canMakePayment()
         .then(function(result) {
@@ -83,7 +84,16 @@
 
       checkoutButton.addEventListener('click', function() {
         callServerToRetrieveCheckoutDetails();
-      }
+      });
+
+    } else {
+
+      checkoutButton.addEventListener('click', function() {
+        // For demo purposes
+        introPanel.style.display = 'none';
+        legacyPanel.style.display = 'block';
+      });
+
     }
  
     function callServerToRetrieveCheckoutDetails() {
@@ -104,10 +114,12 @@
 
         request.show().then(function(paymentResponse) {
           // Here we would process the payment. For this demo, simulate immediate success:
-          paymentResponse.complete('success');
-          // For demo purposes:
-          introPanel.style.display = 'none';
-          successPanel.style.display = 'block';
+          paymentResponse.complete('success')
+            .then(function() {
+              // For demo purposes:
+              introPanel.style.display = 'none';
+              successPanel.style.display = 'block';
+            });
 
         }).catch(function(error) {
           // Handle cancelled/failed payment. Fall back to legacy form. For demo purposes:
