@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <title>Recommend a Payment App when User Has No Apps</title>
+  <!--
+    If you select to pay with TommyPay on this merchant page, it tries to call 
+    `PaymentRequest.show()`, while intercepting the NOT_SUPPORTED_ERR exception. If this 
+    payment method is not supported, it redirects to the signup page for TommyPay.
+  -->
+  <meta name="viewport" content="width=device-width">
+  <style>
+    #success,
+    #legacy {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Recommend a Payment App when User Has No Apps</h1>
+
+  <div id="intro">
+    <p>
+      In this example, if you select to pay with TommyPay on this merchant page, it tries to 
+      call <code>PaymentRequest.show()</code>, while intercepting the 
+      <code>NOT_SUPPORTED_ERR exception</code>. If this payment method is not supported, 
+      it redirects to the signup page for TommyPay.
+    </p>      
+    <p>
+      For the purposes of the demo, imagine you have chosen an item and
+      now you need to check out.
+    </p>
+    
+    <button id="checkout-button">Checkout</button>
+  </div>
+  
+  <div id="error">
+    <p>
+      The Payment Request API is unsupported or was cancelled or failed.
+      Here we can proceed with a fallback (not implemented for this demo).
+    </p>
+  </div>
+
+  <script type="text/javascript">
+    
+    var checkoutButton = document.getElementById('checkout-button');
+    var introPanel = document.getElementById('intro');
+    var errorPanel = document.getElementById('error');
+
+    // Feature detection
+    if (window.PaymentRequest) {
+
+      // Payment Request is supported in this browser, so we can proceed to use it
+
+      checkoutButton.addEventListener('click', function() {
+
+        var request = new PaymentRequest(buildSupportedPaymentMethodNames(),
+          buildShoppingCartDetails());
+
+        request.show().then(function(paymentResponse) {
+          // Here we would process the payment. For this demo, simulate immediate success:
+          paymentResponse.complete('success');
+
+        }).catch(function(error) {
+
+          if (error.code == DOMException.NOT_SUPPORTED_ERR) {
+
+            // TommyPay not supported. Redirect to the signup page for TommyPay.
+            // We pass the url to the current page as redirect_url to the signup page, so that 
+            // the signup page can redirect back to this page upon successful signup, so that 
+            // the checkout process can continue seamlessly.
+
+            window.location.href =
+            'https://tommythorsen.github.io/webpayments-demo/payment-apps/tommypay/signup/?redirect_url=' +
+              encodeURI(window.location.href);
+
+          } else {
+            // Other kinds of errors; cancelled or failed payment. For demo purposes:
+            introPanel.style.display = 'none';
+            errorPanel.style.display = 'block';
+          }
+
+        });        
+      });
+    } else {
+      // Payment Request is unsupported. For demo purposes:
+      introPanel.style.display = 'none';
+      errorPanel.style.display = 'block';
+    }
+
+    function buildSupportedPaymentMethodData() {
+      return [{
+        supportedMethods: 'https://tommypay.no/pay'
+      }, {
+        supportedMethods: 'basic-card'
+      }];
+    }
+
+    function buildShoppingCartDetails() {
+      // Hardcoded for demo purposes:
+      return {
+        id: 'order-123',
+        displayItems: [
+          {
+            label: 'Example item',
+            amount: {currency: 'USD', value: '1.00'}
+          }
+        ],
+        total: {
+          label: 'Total',
+          amount: {currency: 'USD', value: '1.00'}
+        }
+      };
+    }
+  </script>
+</body>
+</html>

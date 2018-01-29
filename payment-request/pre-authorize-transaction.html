@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <title>Pre-authorize Transaction</title>
+  <!--
+    Some use cases (e.g. paying for fuel at a service station) involve pre-authorization 
+    of payment. One way to do this is through a Payment Handler (see the Payment Handler 
+    API). At time of writing, that specification includes a CanMakePayment that a Payment 
+    Handler could make use of to return authorization status.
+  -->
+  <meta name="viewport" content="width=device-width">
+  <style>
+    #success,
+    #legacy {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pre-authorize Transaction</h1>
+
+  <div id="intro">
+    <p>
+        Some use cases (e.g., paying for fuel at a service station) involve 
+        pre-authorization of payment. One way to do this is through a Payment Handler 
+        (see the <a href="https://www.w3.org/TR/payment-handler/">Payment Handler API</a>). 
+        Currently that specification includes a <code>CanMakePayment</code> that a 
+        Payment Handler could make use of, to return authorization status.
+    </p>
+    
+    <button id="preauthorize-button">Pre-authorize</button>
+  </div>
+  
+  <div id="success">
+    <p>
+      Payment Request success. Demo complete. No payment has been taken.
+    </p>
+  </div>
+
+  <div id="legacy">
+    <p>
+      The Payment Request API is unsupported or was cancelled or failed, 
+      so here we can proceed with our legacy web form (not implemented for this demo).
+    </p>
+  </div>
+
+  <script type="text/javascript">
+    
+    var preauthorizeButton = document.getElementById('preauthorize-button');
+    var introPanel = document.getElementById('intro');
+    var successPanel = document.getElementById('success');
+    var legacyPanel = document.getElementById('legacy');
+
+    // Feature detection
+    if (window.PaymentRequest) {
+
+      // Payment Request is supported in this browser, so we can proceed to use it
+
+      preauthorizeButton.addEventListener('click', function() {
+        
+        var request = new PaymentRequest(buildSupportedPaymentMethodData(),
+          buildShoppingCartDetails());
+ 
+        /*
+         * The canMakePayment() event will be handled by the Payment Handler.
+         * The payment handler would include the following code:
+         * 
+         * self.addEventListener('canmakepayment', function(evt) {
+         *   // Pre-authorize here.
+         *   let preAuthSuccess = ...;
+         *   evt.respondWith(preAuthSuccess);
+         * });
+         */
+        request.canMakePayment().then(function(response) {
+          
+          if (res) {
+            // The payment handler has pre-authorized a transaction with some
+            // static amount (e.g. USD $1.00). For demo purposes:
+
+            
+          } else {
+            // Pre-authorization failed or payment handler not installed.
+            // For demo purposes:
+            introPanel.style.display = 'none';
+            legacyPanel.style.display = 'block';  
+          }
+
+        }).catch(function(error) {
+          // Cancellation or error. For demo purposes:
+          introPanel.style.display = 'none';
+          legacyPanel.style.display = 'block';
+        });        
+      });
+    } else {
+
+      // Payment Request is unsupported
+      preauthorizeButton.addEventListener('click', function() {
+        // For demo purposes:
+        introPanel.style.display = 'none';
+        legacyPanel.style.display = 'block';
+      });
+    }
+
+    function buildSupportedPaymentMethodData() {
+      // Example supported payment methods:
+      return [
+        {
+          supportedMethods: 'https://example.com/preauth'
+        }
+      ];
+    }
+
+    function buildShoppingCartDetails() {
+      // Hardcoded for demo purposes:
+      return {
+        id: 'order-123',
+        displayItems: [
+          {
+            label: 'Example item',
+            amount: {currency: 'USD', value: '1.00'}
+          }
+        ],
+        total: {
+          label: 'Total',
+          amount: {currency: 'USD', value: '1.00'}
+        }
+      };
+    }
+  </script>
+</body>
+</html>

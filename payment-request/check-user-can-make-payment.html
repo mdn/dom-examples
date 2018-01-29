@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <title>Check Whether User Can Make Payment Before All Prices Are Known</title>
+  <!--
+    If the checkout flow needs to know whether `PaymentRequest.canMakePayment()` will 
+    return true even before all line items and their prices are known, then you can 
+    instantiate PaymentRequest with dummy data and pre-query `.canMakePayment()`.
+    
+    If you call `.canMakePayment()` multiple times, keep in mind that the first parameter 
+    to the PaymentRequest constructor should contain the same method names and data.
+  -->
+  <meta name="viewport" content="width=device-width">
+  <style>
+    #success,
+    #legacy {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Check Whether User Can Make Payment Before All Prices Are Known</h1>
+
+  <div id="intro">
+    <p>
+      If the checkout flow needs to know whether <code>PaymentRequest.canMakePayment()</code> 
+      will return true even before all line items and their prices are known, then you can 
+      instantiate PaymentRequest with dummy data and pre-query <code>.canMakePayment()</code>. 
+    </p>
+    <p>
+      If you call <code>.canMakePayment()</code> multiple times, keep in mind that the first 
+      parameter to the PaymentRequest constructor should contain the same method names and data.
+    </p>      
+    <p>
+      Please note that no payments will be taken, this is just a front-end demo. 
+      If you would like to try entering card details, you can use dummy data,
+      for example the card number <code>4111 1111 1111 1111</code>.
+    </p>
+
+    <button id="checkout-button">Checkout</button>
+  </div>
+  
+  <div id="success">
+    <p>
+      Payment Request success. Demo complete. No payment has been taken.
+    </p>
+  </div>
+
+  <div id="legacy">
+    <p>
+      The Payment Request API is unsupported or was cancelled or failed, 
+      so here we can proceed with our legacy web form (not implemented for this demo).
+    </p>
+  </div>
+
+  <script type="text/javascript">
+    
+    var checkoutButton = document.getElementById('checkout-button');
+    var introPanel = document.getElementById('intro');
+    var successPanel = document.getElementById('success');
+    var legacyPanel = document.getElementById('legacy');
+
+    // Feature detection
+    if (window.PaymentRequest) {
+
+      // Payment Request is supported in this browser, so we can proceed to use it
+
+      var shouldCallPaymentRequest = true;
+
+      // Make a dummy payment request to check if user can make payment
+      new PaymentRequest(supportedPaymentMethods,
+          {total: {label: 'Stub', amount: {currency: 'USD', value: '0.01'}}})
+        .canMakePayment()
+        .then(function(result) {
+          shouldCallPaymentRequest = result;
+        }).catch(function(error) {
+          console.log(error);
+          // The user may have turned off query ability in their privacy settings.
+          // Let's use PaymentRequest by default & fallback to legacy web form checkout.
+          shouldCallPaymentRequest = true;
+        });
+
+      checkoutButton.addEventListener('click', function() {
+        callServerToRetrieveCheckoutDetails();
+      }
+    }
+ 
+    function callServerToRetrieveCheckoutDetails() {
+      // Here we would call to the server with the chosen line items, to retrieve
+      // a `Checkout` object with all of the prices and shipping options.
+      // But for the purposes of this demo, we will skip that and proceed immediately.    
+      onServerCheckoutDetailsRetrieved(buildShoppingCartDetails());
+    }
+
+    function onServerCheckoutDetailsRetrieved(checkoutObject) {
+      // The server has constructed the `Checkout` object. Now we know all of the prices 
+      // and shipping options.
+
+      if (shouldCallPaymentRequest) {
+
+        var request = new PaymentRequest(buildSupportedPaymentMethodData(),
+          checkoutObject);
+
+        request.show().then(function(paymentResponse) {
+          // Here we would process the payment. For this demo, simulate immediate success:
+          paymentResponse.complete('success');
+          // For demo purposes:
+          introPanel.style.display = 'none';
+          successPanel.style.display = 'block';
+
+        }).catch(function(error) {
+          // Handle cancelled/failed payment. Fall back to legacy form. For demo purposes:
+          introPanel.style.display = 'none';
+          legacyPanel.style.display = 'block';
+        });
+
+      } else {
+        // Fall back to legacy form. (We could redirect, but) for demo purposes:
+        introPanel.style.display = 'none';
+        legacyPanel.style.display = 'block';
+      }
+
+    }
+
+    function buildSupportedPaymentMethodData() {
+      // Example supported payment methods:
+      return [{
+        supportedMethods: 'basic-card',
+        data: {
+          supportedNetworks: ['visa', 'mastercard'],
+          supportedTypes: ['debit', 'credit']
+        }
+      }];
+    }
+
+    function buildShoppingCartDetails() {
+      // Hardcoded for demo purposes:
+      return {
+        id: 'order-123',
+        displayItems: [
+          {
+            label: 'Example item',
+            amount: {currency: 'USD', value: '1.00'}
+          }
+        ],
+        total: {
+          label: 'Total',
+          amount: {currency: 'USD', value: '1.00'}
+        },
+        shippingOptions: [
+          {  
+            id: 'example-shipping',
+            label: 'Example Shipping (2-3 Days)',
+            amount: {currency: 'USD', value: '0.50'}
+          }
+        ]
+      };
+    }
+  </script>
+</body>
+</html>
