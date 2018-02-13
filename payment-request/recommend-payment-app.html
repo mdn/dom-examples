@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <title>Recommend a Payment App when User Has No Apps</title>
   <!--
-    If you select to pay with TommyPay on this merchant page, it tries to call 
+    If you select to pay with BobPay on this merchant page, it tries to call 
     `PaymentRequest.show()`, while intercepting the NOT_SUPPORTED_ERR exception. If this 
-    payment method is not supported, it redirects to the signup page for TommyPay.
+    payment method is not supported, it redirects to the download page for BobPay.
   -->
   <meta name="viewport" content="width=device-width">
   <style>
@@ -22,10 +22,10 @@
 
   <div id="intro">
     <p>
-      In this example, if you select to pay with TommyPay on this merchant page, it tries to 
+      In this example, if you select to pay with BobPay on this merchant page, it tries to 
       call <code>PaymentRequest.show()</code>, while intercepting the 
       <code>NOT_SUPPORTED_ERR exception</code>. If this payment method is not supported, 
-      it redirects to the signup page for TommyPay.
+      it redirects to the download page for BobPay.
     </p>      
     <p>
       For the purposes of the demo, imagine you have chosen an item and
@@ -78,14 +78,13 @@
 
           if (error.code == DOMException.NOT_SUPPORTED_ERR) {
 
-            // TommyPay not supported. Redirect to the signup page for TommyPay.
-            // We pass the url to the current page as redirect_url to the signup page, so that 
-            // the signup page can redirect back to this page upon successful signup, so that 
-            // the checkout process can continue seamlessly.
+            // BobPay not currently supported. Usually we might now wish to redirect
+            // to a signup page and we could pass our current URL so it could redirect 
+            // (or link) back to this page afterwards. For this demo, we are just 
+            // redirecting to the BobPay download page.
 
             window.location.href =
-              'https://tommythorsen.github.io/webpayments-demo/payment-apps/tommypay/signup/?redirect_url=' +
-                encodeURI(window.location.href);
+              'https://bobpay.xyz/#download';
 
           } else {
             // Other kinds of errors; cancelled or failed payment. For demo purposes:
@@ -107,7 +106,7 @@
 
     function buildSupportedPaymentMethodData() {
       return [{
-        supportedMethods: 'https://tommypay.no/pay'
+        supportedMethods: 'https://emerald-eon.appspot.com/bobpay'
       }];
     }
 
