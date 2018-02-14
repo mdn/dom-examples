@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="UTF-8">
+  <title>Show Additional User Interface After Successful Payment</title>
+  <!--
+    If the merchant desires to collect additional information not part of the API 
+    (e.g., additional delivery instructions), the merchant can show a page with 
+    additional <input type="text"> fields after the checkout.
+  -->
+  <meta name="viewport" content="width=device-width">
+  <style>
+    #additional-details,
+    #success,
+    #legacy {
+      display: none;
+    }
+    textarea {
+      display: block;
+      margin: 1em 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Show Additional User Interface After Successful Payment</h1>
+
+  <div id="intro">
+    <p>
+      If the merchant desires to collect additional information not part of the API 
+      (e.g., additional delivery instructions), the merchant can show a page with 
+      additional <code>&lt;input&gt;</code> fields after the checkout..
+    </p>
+    <p>
+      For the purposes of the demo, imagine you have chosen an item and now you need to 
+      check out. Please note that no payments will be taken, this is just a front-end 
+      demo. If you would like to try entering card details, you can use dummy data,
+      for example the card number <code>4111 1111 1111 1111</code>.
+    </p>
+
+    <button id="checkout-button">Checkout</button>
+
+  </div>
+  
+  <div id="additional-details">
+    <label for="additional-delivery-instructions">Additional delivery instructions</label>
+    <textarea id="additional-delivery-instructions" value=""></textarea>
+    <button id="confirm-button">Confirm order</button>
+  </div>
+
+  <div id="success">
+    <p>
+      Payment Request success. Demo complete. No payment has been taken.
+    </p>
+  </div>
+
+  <div id="legacy">
+    <p>
+      The Payment Request API is unsupported or was cancelled or failed, 
+      so here we can proceed with our legacy web form (not implemented for this demo).
+    </p>
+  </div>
+
+  <script type="text/javascript">
+    
+    var checkoutButton = document.getElementById('checkout-button');
+    var confirmButton = document.getElementById('confirm-button');
+    var introPanel = document.getElementById('intro');
+    var additionalDetailsPanel = document.getElementById('additional-details');
+    var successPanel = document.getElementById('success');
+    var legacyPanel = document.getElementById('legacy');
+
+    // Feature detection
+    if (window.PaymentRequest) {
+
+      // Payment Request is supported in this browser, so we can proceed to use it
+
+      checkoutButton.addEventListener('click', function() {
+        // Every click on the checkout button should use a new instance of PaymentRequest 
+        // object, because PaymentRequest.show() can be called only once per instance.
+        var request = new PaymentRequest(buildSupportedPaymentMethodData(),
+          buildShoppingCartDetails());
+
+        request.show().then(function(paymentResponse) {
+          // Here we would process the payment. For this demo, simulate immediate success:
+          paymentResponse.complete('success')
+            .then(function() {
+              // Request additional shipping address details
+              introPanel.style.display = 'none';
+              additionalDetailsPanel.style.display = 'block';
+            });
+
+        }).catch(function(error) {
+          // Handle cancelled or failed payment. For demo purposes:
+          introPanel.style.display = 'none';
+          legacyPanel.style.display = 'block';
+
+        });        
+      });
+    } else {
+
+      // Payment Request is unsupported
+      checkoutButton.addEventListener('click', function() {
+        // Here we would process the additional details. For demo purposes:
+        introPanel.style.display = 'none';
+        legacyPanel.style.display = 'block';
+      });
+    }
+
+    confirmButton.addEventListener('click', function() {
+      // For demo purposes:
+      additionalDetailsPanel.style.display = 'none';
+      successPanel.style.display = 'block';
+    });
+
+    function buildSupportedPaymentMethodData() {
+      // Example supported payment methods:
+      return [{
+        supportedMethods: 'basic-card',
+        data: {
+          supportedNetworks: ['visa', 'mastercard'],
+          supportedTypes: ['debit', 'credit']
+        }
+      }];
+    }
+
+    function buildShoppingCartDetails() {
+      // Hardcoded for demo purposes:
+      return {
+        id: 'order-123',
+        displayItems: [
+          {
+            label: 'Example item',
+            amount: {currency: 'USD', value: '1.00'}
+          }
+        ],
+        total: {
+          label: 'Total',
+          amount: {currency: 'USD', value: '1.00'}
+        }
+      };
+    }
+  </script>
+</body>
+</html>

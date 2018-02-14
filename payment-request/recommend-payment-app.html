@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="UTF-8">
+  <title>Recommend a Payment App when User Has No Apps</title>
+  <!--
+    If you select to pay with BobPay on this merchant page, it tries to call 
+    `PaymentRequest.show()`, while intercepting the NOT_SUPPORTED_ERR exception. If this 
+    payment method is not supported, it redirects to the download page for BobPay.
+  -->
+  <meta name="viewport" content="width=device-width">
+  <style>
+    #success,
+    #legacy {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Recommend a Payment App when User Has No Apps</h1>
+
+  <div id="intro">
+    <p>
+      In this example, if you select to pay with BobPay on this merchant page, it tries to 
+      call <code>PaymentRequest.show()</code>, while intercepting the 
+      <code>NOT_SUPPORTED_ERR exception</code>. If this payment method is not supported, 
+      it redirects to the download page for BobPay.
+    </p>      
+    <p>
+      For the purposes of the demo, imagine you have chosen an item and
+      now you need to check out.
+    </p>
+    
+    <button id="checkout-button">Checkout</button>
+  </div>
+  
+  <div id="success">
+    <p>
+      Payment Request success. Demo complete. No payment has been taken.
+    </p>
+  </div>  
+
+  <div id="legacy">
+    <p>
+      The Payment Request API is unsupported or was cancelled or failed.
+      Here we can proceed with a fallback (not implemented for this demo).
+    </p>
+  </div>
+
+  <script type="text/javascript">
+    
+    var checkoutButton = document.getElementById('checkout-button');
+    var introPanel = document.getElementById('intro');
+    var successPanel = document.getElementById('success');
+    var legacyPanel = document.getElementById('legacy');
+
+    // Feature detection
+    if (window.PaymentRequest) {
+
+      // Payment Request is supported in this browser, so we can proceed to use it
+
+      checkoutButton.addEventListener('click', function() {
+
+        var request = new PaymentRequest(buildSupportedPaymentMethodData(),
+          buildShoppingCartDetails());
+
+        request.show().then(function(paymentResponse) {
+          // Here we would process the payment. For this demo, simulate immediate success:
+          paymentResponse.complete('success')
+            .then(function() {
+                // For demo purposes:
+                introPanel.style.display = 'none';
+                successPanel.style.display = 'block';
+              });
+
+        }).catch(function(error) {
+
+          if (error.code == DOMException.NOT_SUPPORTED_ERR) {
+
+            // BobPay not currently supported. Usually we might now wish to redirect
+            // to a signup page and we could pass our current URL so it could redirect 
+            // (or link) back to this page afterwards. For this demo, we are just 
+            // redirecting to the BobPay download page.
+
+            window.location.href =
+              'https://bobpay.xyz/#download';
+
+          } else {
+            // Other kinds of errors; cancelled or failed payment. For demo purposes:
+            introPanel.style.display = 'none';
+            legacyPanel.style.display = 'block';
+          }
+
+        });        
+      });
+    } else {
+      
+      // Payment Request is unsupported
+      checkoutButton.addEventListener('click', function() {
+        // For demo purposes:
+        introPanel.style.display = 'none';
+        legacyPanel.style.display = 'block';
+      });
+    }
+
+    function buildSupportedPaymentMethodData() {
+      return [{
+        supportedMethods: 'https://emerald-eon.appspot.com/bobpay'
+      }];
+    }
+
+    function buildShoppingCartDetails() {
+      // Hardcoded for demo purposes:
+      return {
+        id: 'order-123',
+        displayItems: [
+          {
+            label: 'Example item',
+            amount: {currency: 'USD', value: '1.00'}
+          }
+        ],
+        total: {
+          label: 'Total',
+          amount: {currency: 'USD', value: '1.00'}
+        }
+      };
+    }
+  </script>
+</body>
+</html>

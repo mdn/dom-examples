@@ -19,6 +19,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "media" directory contains examples and demos showing how to use HTML and DOM [media elements and APIs](https://developer.mozilla.org/en-US/docs/Web/Media).
 
+* The "payment-request" directory contains examples of the Payment Request API.
+
 * The "performance-apis" directory is for examples and demos of the [Web Performance APIs](https://www.w3.org/wiki/Web_Performance/Publications).
 
 * The "pointerevents" directory is for examples and demos of the [Pointer Events](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) standard.

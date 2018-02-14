@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="UTF-8">
+  <title>Customize the Payment Request Button Depending on Whether User Can Make Payments</title>
+  <!--
+    Depending on whether the user can make a fast payment or needs to add payment credentials 
+    first, the title of the checkout button changes between "Fast Checkout with W3C" and 
+    "Setup W3C Checkout". In both cases, the checkout button calls PaymentRequest.show().
+  -->
+  <meta name="viewport" content="width=device-width">
+  <style>
+    #success,
+    #legacy {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Customize the Payment Request Button Depending on Whether User Can Make Payments</h1>
+
+  <div id="intro">
+    <p>
+      In this example, depending on whether the user can make a fast payment or needs to add 
+      payment credentials first, the title of the checkout button changes between 
+      "W3C Checkout" and "Fast W3C Checkout". This is determined using 
+      <code>PaymentRequest.canMakePayment()</code>. In both cases, the checkout button calls 
+      <code>PaymentRequest.show()</code>.
+    </p>
+    <p>
+      For the purposes of the demo, imagine you have chosen an item and
+      now you need to check out. Please note that no payments will be taken, this is just a 
+      front-end demo. If you would like to try entering card details, you can use dummy data,
+      for example the card number <code>4111 1111 1111 1111</code>.
+    </p>
+
+    <button id="checkout-button">Checkout</button>
+  </div>
+  
+  <div id="success">
+    <p>
+      Payment Request success. Demo complete. No payment has been taken.
+    </p>
+  </div>
+
+  <div id="legacy">
+    <p>
+      The Payment Request API is unsupported or was cancelled or failed.
+      Here we can proceed with a fallback (not implemented for this demo).
+    </p>
+  </div>
+
+  <script type="text/javascript">
+    
+    var checkoutButton = document.getElementById('checkout-button');
+    var introPanel = document.getElementById('intro');
+    var successPanel = document.getElementById('success');
+    var legacyPanel = document.getElementById('legacy');
+
+    // Feature detection
+    if (window.PaymentRequest) {
+
+      // Payment Request is supported in this browser, so we can proceed to use it
+
+      var request = new PaymentRequest(buildSupportedPaymentMethodData(),
+        buildShoppingCartDetails());
+
+      request.canMakePayment().then(function(canMakeAFastPayment) {
+        if (canMakeAFastPayment) {
+          checkoutButton.innerText = 'Fast W3C Checkout';
+        } else {
+          checkoutButton.innerText = 'W3C Checkout';
+        }
+      }).catch(function(error) {
+        // The user may have turned off the querying functionality in their privacy settings. 
+        // We do not know whether they can make a fast payment, so pick a generic title.
+        checkoutButton.innerText = 'W3C Checkout';
+      });
+
+      checkoutButton.addEventListener('click', function() {
+        
+        request.show().then(function(paymentResponse) {
+          // Here we would process the payment. For this demo, simulate immediate success:
+          paymentResponse.complete('success')
+            .then(function() {
+              // For demo purposes:
+              introPanel.style.display = 'none';
+              successPanel.style.display = 'block';
+            });
+
+        }).catch(function(error) {
+          // Handle cancelled or failed payment. For demo purposes:
+          introPanel.style.display = 'none';
+          legacyPanel.style.display = 'block';
+
+        });        
+      });
+
+    } else {
+
+      // Payment Request is unsupported
+      checkoutButton.addEventListener('click', function() {
+        // For demo purposes:
+        introPanel.style.display = 'none';
+        legacyPanel.style.display = 'block';
+      });
+    }
+
+    function buildSupportedPaymentMethodData() {
+      // Example supported payment methods:
+      return [{
+        supportedMethods: 'basic-card',
+        data: {
+          supportedNetworks: ['visa', 'mastercard'],
+          supportedTypes: ['debit', 'credit']
+        }
+      }];
+    }
+
+    function buildShoppingCartDetails() {
+      // Hardcoded for demo purposes:
+      return {
+        id: 'order-123',
+        displayItems: [
+          {
+            label: 'Example item',
+            amount: {currency: 'USD', value: '1.00'}
+          }
+        ],
+        total: {
+          label: 'Total',
+          amount: {currency: 'USD', value: '1.00'}
+        }
+      };
+    }
+  </script>
+</body>
+</html>
