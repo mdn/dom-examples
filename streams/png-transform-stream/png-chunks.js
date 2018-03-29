@@ -142,6 +142,54 @@ class sRGBChunk extends PNGChunk {
 }
 
 /**
+ * A bKGD chunk containing the PNG's background color.
+ */
+class bKGDChunk extends PNGChunk {
+  constructor({ data }) {
+    super({ name: 'bKGD', data });
+    const dv = new DataView(data);
+    if (data.byteLength === 1) {
+      defineDataViewProperty(this, 'paletteColor', dv, 8, 0);
+    } else if (data.byteLength === 2) {
+      defineDataViewProperty(this, 'gray', dv, 16, 0);
+    } else {
+      defineDataViewProperty(this, 'red', dv, 16, 0);
+      defineDataViewProperty(this, 'green', dv, 16, 2);
+      defineDataViewProperty(this, 'blue', dv, 16, 4);
+    }
+  }
+}
+
+/**
+ * A pHYs chunk containing physical pixel dimensions.
+ */
+class pHYsChunk extends PNGChunk {
+  constructor({ data }) {
+    super({ name: 'pHYs', data });
+    const dv = new DataView(data);
+    defineDataViewProperty(this, 'pixelsPerUnitX', dv, 32, 0);
+    defineDataViewProperty(this, 'pixelsPerUnitY', dv, 32, 4);
+    defineDataViewProperty(this, 'unit', dv, 8, 8);
+  }
+}
+
+/**
+ * A tIME chunk gives the time of the last image modification.
+ */
+class tIMEChunk extends PNGChunk {
+  constructor({ data }) {
+    super({ name: 'tIME', data });
+    const dv = new DataView(data);
+    defineDataViewProperty(this, 'year', dv, 16, 0);
+    defineDataViewProperty(this, 'month', dv, 8, 2);
+    defineDataViewProperty(this, 'day', dv, 8, 3);
+    defineDataViewProperty(this, 'hour', dv, 8, 4);
+    defineDataViewProperty(this, 'minute', dv, 8, 5);
+    defineDataViewProperty(this, 'second', dv, 8, 6);
+  }
+}
+
+/**
  * Function to create a PNG chunk from its name and data.
  *
  * @param {string} name The PNG chunk's name.
@@ -160,6 +208,12 @@ function createChunk({ name, data }) {
       return new tEXtChunk({ data });
     case 'sRGB':
       return new sRGBChunk({ data });
+    case 'bKGD':
+      return new bKGDChunk({ data });
+    case 'pHYs':
+      return new pHYsChunk({ data });
+    case 'tIME':
+      return new tIMEChunk({ data });
     default:
       return new PNGChunk({ name, data });
   }
