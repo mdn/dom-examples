@@ -17,34 +17,38 @@
   // Fetch the original image
   fetch('./tortoise.png')
   // Retrieve its body as ReadableStream
-  .then(response => {
-    const reader = response.body.getReader();
+  .then(response => response.body)
+  .then(rs => {
+    const reader = rs.getReader();
 
     return new ReadableStream({
-      start(controller) {
-        return pump();
+      async start(controller) {
+        while (true) {
+          const { done, value } = await reader.read();
 
-        function pump() {
-          return reader.read().then(({ done, value }) => {
-            // When no more data needs to be consumed, close the stream
-            if (done) {
-              controller.close();
-              return;
-            }
+          // When no more data needs to be consumed, break the reading
+          if (done) {
+            break;
+          }
 
-            // Enqueue the next data chunk into our target stream
-            controller.enqueue(value);
-            return pump();
-          });
+          // Enqueue the next data chunk into our target stream
+          controller.enqueue(value);
         }
+
+        // Close the stream
+        controller.close();
+        reader.releaseLock();
       }
     })
   })
-  .then(stream => new Response(stream))
+  // Create a new response out of the stream
+  .then(rs => new Response(rs))
+  // Create an object URL for the response
   .then(response => response.blob())
   .then(blob => URL.createObjectURL(blob))
-  .then(url => console.log(image.src = url))
-  .catch(err => console.error(err));
+  // Update image
+  .then(url => image.src = url)
+  .catch(console.error);
 </script>
 </body>
 </html>
