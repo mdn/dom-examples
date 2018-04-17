@@ -79,19 +79,34 @@ window.onload = function() {
 
   function displayData() {
     checkedValue = document.querySelector('input[name="value"]:checked').value;
-    
-    if(checkedValue == "none") {
-      keyRangeValue = null;
-    } else if(checkedValue == "only") {
-      keyRangeValue = IDBKeyRange.only(onlyText.value);
-    } else if(checkedValue == "range") {
-      keyRangeValue = IDBKeyRange.bound(rangeLowerText.value, rangeUpperText.value, false, false);
-    } else if(checkedValue == "lower") {
-      keyRangeValue = IDBKeyRange.lowerBound(lowerBoundText.value);
-    } else if(checkedValue == "upper") {
-      keyRangeValue = IDBKeyRange.upperBound(upperBoundText.value);
+    var filterIndex = document.querySelector('input[name="filterIndex"]:checked').value;
+
+    if (filterIndex=="fThing") {
+      if(checkedValue == "none") {
+        keyRangeValue = null;
+      } else if(checkedValue == "only") {
+        keyRangeValue = IDBKeyRange.only(onlyText.value);
+      } else if(checkedValue == "range") {
+        keyRangeValue = IDBKeyRange.bound(rangeLowerText.value, rangeUpperText.value, false, false);
+      } else if(checkedValue == "lower") {
+        keyRangeValue = IDBKeyRange.lowerBound(lowerBoundText.value);
+      } else if(checkedValue == "upper") {
+        keyRangeValue = IDBKeyRange.upperBound(upperBoundText.value);
+      }
+    } else { //filterIndex=="fRating"
+        if(checkedValue == "none") {
+          keyRangeValue = null;
+        } else if(checkedValue == "only") {
+          keyRangeValue = IDBKeyRange.only(parseFloat(onlyText.value));
+        } else if(checkedValue == "range") {
+          keyRangeValue = IDBKeyRange.bound(parseFloat(rangeLowerText.value), parseFloat(rangeUpperText.value), false, false);
+        } else if(checkedValue == "lower") {
+          keyRangeValue = IDBKeyRange.lowerBound(parseFloat(lowerBoundText.value));
+        } else if(checkedValue == "upper") {
+          keyRangeValue = IDBKeyRange.upperBound(parseFloat(upperBoundText.value));
+        }
     }
-    
+        
     if(keyRangeValue != null) {
       console.log(keyRangeValue.lower);
       console.log(keyRangeValue.upper);
@@ -107,6 +122,9 @@ window.onload = function() {
     countRequest.onsuccess = function() {
       console.log(countRequest.result);
     }
+
+    //iterate over the fRating index instead of the object store:
+    if (filterIndex=="fRating") {objectStore = objectStore.index("fRating");}
 
     objectStore.openCursor(keyRangeValue).onsuccess = function(event) {
       var cursor = event.target.result;
