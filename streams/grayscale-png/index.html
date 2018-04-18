@@ -22,11 +22,15 @@
   // Retrieve its body as ReadableStream
   .then(response => response.body)
   // Create a gray-scaled PNG stream out of the original
-  .then(body => new Response(new ReadableStream(new GrayscalePNGSource(body))))
-  .then(newResponse => newResponse.blob())
+  .then(rs => rs.pipeThrough(new TransformStream(new GrayscalePNGTransformer())))
+  // Create a new response out of the stream
+  .then(rs => new Response(rs))
+  // Create an object URL for the response
+  .then(response => response.blob())
   .then(blob => URL.createObjectURL(blob))
+  // Update image
   .then(url => image.src = url)
-  .catch(err => console.error(err));
+  .catch(console.error);
 
 </script>
 </body>
