@@ -26,7 +26,7 @@
 
     newElement.textContent = "message: " + e.data;
     eventList.appendChild(newElement);
-  }
+  };
 
   evtSource.onerror = function() {
     console.log("EventSource failed.");
@@ -35,7 +35,7 @@
   button.onclick = function() {
     console.log('Connection closed');
     evtSource.close();
-  }
+  };
 
   // evtSource.addEventListener("ping", function(e) {
   //   var newElement = document.createElement("li");
