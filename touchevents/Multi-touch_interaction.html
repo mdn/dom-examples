@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
 <!--
-  This app demonstrates using the Touch Events touch event types (touchstart, 
+  This app demonstrates using the Touch Events touch event types (touchstart,
   touchmove, touchcancel and touchend) for the following interaction:
    1. Single touch
    2. Two (simultaneous) touches
@@ -49,7 +49,7 @@ function enableLog(ev) {
 
 function log(name, ev, printTargetIds) {
   var o = document.getElementsByTagName('output')[0];
-  var s = name + ": touches = " + ev.touches.length + 
+  var s = name + ": touches = " + ev.touches.length +
                 " ; targetTouches = " + ev.targetTouches.length +
                 " ; changedTouches = " + ev.changedTouches.length;
   o.innerHTML += s + " <br>";
@@ -61,7 +61,7 @@ function log(name, ev, printTargetIds) {
     }
     o.innerHTML += s;
   }
-} 
+}
 
 function clearLog(event) {
  var o = document.getElementsByTagName('output')[0];
@@ -119,10 +119,10 @@ function handle_pinch_zoom(ev) {
 }
 
 function start_handler(ev) {
- // If the user makes simultaneious touches, the browser will fire a 
- // separate touchstart event for each touch point. Thus if there are 
- // three simultaneous touches, the first touchstart event will have 
- // targetTouches length of one, the second event will have a length 
+ // If the user makes simultaneious touches, the browser will fire a
+ // separate touchstart event for each touch point. Thus if there are
+ // three simultaneous touches, the first touchstart event will have
+ // targetTouches length of one, the second event will have a length
  // of two, and so on.
  ev.preventDefault();
  // Cache the touch points for later processing of 2-touch pinch/zoom
@@ -136,7 +136,7 @@ function start_handler(ev) {
 }
 
 function move_handler(ev) {
- // Note: if the user makes more than one "simultaneous" touches, most browsers 
+ // Note: if the user makes more than one "simultaneous" touches, most browsers
  // fire at least one touchmove event and some will fire several touchmoves.
  // Consequently, an application might want to "ignore" some touchmoves.
  //
@@ -194,7 +194,7 @@ function init() {
  <div id="target3"> Tap, Hold or Swipe me 3</div>
  <div id="target4"> Tap, Hold or Swipe me 4</div>
 
- <!-- UI for logging/bebugging -->
+ <!-- UI for logging/debugging -->
  <button id="log" onclick="enableLog(event);">Start/Stop event logging</button>
  <button id="clearlog" onclick="clearLog(event);">Clear the log</button>
  <p></p>
