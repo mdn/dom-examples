@@ -11,7 +11,7 @@ var phrases = [
   'where are you going',
   'have a great day',
   'she sells seashells on the seashore'
-]
+];
 
 var phrasePara = document.querySelector('.phrase');
 var resultPara = document.querySelector('.result');
@@ -29,6 +29,8 @@ function testSpeech() {
   testBtn.textContent = 'Test in progress';
 
   var phrase = phrases[randomPhrase()];
+  // To ensure case consistency while checking with the returned output text
+  phrase = phrase.toLowerCase();
   phrasePara.textContent = phrase;
   resultPara.textContent = 'Right or wrong?';
   resultPara.style.background = 'rgba(0,0,0,0.2)';
@@ -100,12 +102,12 @@ function testSpeech() {
   }
   
   recognition.onsoundstart = function(event) {
-      //Fired when any sound — recognisable speech or not — has been detected.
+      //Fired when any sound â€” recognisable speech or not â€” has been detected.
       console.log('SpeechRecognition.onsoundstart');
   }
   
   recognition.onsoundend = function(event) {
-      //Fired when any sound — recognisable speech or not — has stopped being detected.
+      //Fired when any sound â€” recognisable speech or not â€” has stopped being detected.
       console.log('SpeechRecognition.onsoundend');
   }
   
