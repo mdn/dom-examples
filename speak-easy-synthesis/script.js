@@ -12,7 +12,12 @@ var rateValue = document.querySelector('.rate-value');
 var voices = [];
 
 function populateVoiceList() {
-  voices = synth.getVoices();
+  voices = synth.getVoices().sort(function (a, b) {
+      const aname = a.name.toUpperCase(), bname = b.name.toUpperCase();
+      if ( aname < bname ) return -1;
+      else if ( aname == bname ) return 0;
+      else return +1;
+  });
   var selectedIndex = voiceSelect.selectedIndex < 0 ? 0 : voiceSelect.selectedIndex;
   voiceSelect.innerHTML = '';
   for(i = 0; i < voices.length ; i++) {
