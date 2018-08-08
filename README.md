@@ -10,19 +10,19 @@ if you are having problems getting your code to do anything. You need to change 
 
 To start server for this project, you can use a lightweight tool: [https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb)
 
-Or if you have python on your machine, you can just do as follow:
+Or if you have [Python](https://python.org/) on your machine, you can just do as follow:
 
-1. cd to project
-2. run commands below:
+1. cd to the project's parent directory
+2. run the commands below:
 
-python 2
+## Python 2
 ```
 python -m SimpleHTTPServer 8001
 ```
 
-python 3
+## Python 3
 ```
 python3 -m http.server 8001
 ```
 
-then you just open: [http://127.0.0.1:8001/index.html](http://127.0.0.1:8001/index.html)
+then you just open: [http://localhost:8001/sw-test/](http://localhost:8001/sw-test/)
