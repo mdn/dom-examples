@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
-
     <title>My page title</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Lobster+Two' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="style.css">
@@ -12,23 +11,28 @@
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-
   <body>
-    <ul>
-      
-    </ul>
+    <ul></ul>
   </body>
   <script>
-  var list = document.querySelector('ul');
+    var list = document.querySelector('ul');
+    var port2;
+    
+    // Listen for the intial port transfer message
+    window.addEventListener('message', initPort);
 
-  onmessage = function(e) {
-    var listItem = document.createElement('li');
-    listItem.textContent = e.data;
-  	list.appendChild(listItem);
-  	// e.ports[0] is channel.port2, sent from the main frame
-  	e.ports[0].postMessage('Message received by IFrame: "' + e.data + '"');
-  }
-  
+    // Setup the transfered port
+    function initPort(e) {
+      port2 = e.ports[0];
+      port2.onmessage = onMessage;
+    }
 
+    // Handle messages received on port2
+    function onMessage(e) {
+      var listItem = document.createElement('li');
+      listItem.textContent = e.data;
+      list.appendChild(listItem);
+      port2.postMessage('Message received by IFrame: "' + e.data + '"');
+    }
   </script>
 </html>
