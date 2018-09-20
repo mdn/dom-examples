@@ -81,9 +81,7 @@
         }).then(function(myBlob) {
           var video = document.createElement('video');
           video.setAttribute('controls', '');
-          if ('srcObject' in video)
-            video.srcObject = myBlob;
-          else video.src = URL.createObjectURL(myBlob);
+          video.src = URL.createObjectURL(myBlob);
           videoWrapper.appendChild(video);
 
           videoWrapper.style.display = 'block';
