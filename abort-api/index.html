@@ -45,8 +45,7 @@
   <script>
     var url = 'sintel.mp4';
 
-    var controller = new AbortController();
-    var signal = controller.signal;
+    var controller, signal;
 
     var videoWrapper = document.querySelector('.videoWrapper');
     var downloadBtn = document.querySelector('.download');
@@ -61,20 +60,30 @@
     abortBtn.addEventListener('click', function() {
       controller.abort();
       console.log('Download aborted');
+      downloadBtn.style.display = 'inline';
     });
 
     function fetchVideo() {
+      controller = new AbortController;
+      signal = controller.signal;
+      downloadBtn.style.display = 'none';
       abortBtn.style.display = 'inline';
-      reports.textContent = 'Video downloading';
+      reports.textContent = 'Video awaiting download...';
       fetch(url, {signal}).then(function(response) {
         runAnimation();
-        response.blob().then(function(myBlob) {
+        setTimeout(() => console.log('Body used: ', response.bodyUsed), 1)
+        return response.blob().finally(() => {
           clearInterval(progressAnim);
-          var objectURL = URL.createObjectURL(myBlob);
-
+          progressAnim = undefined;
+          controller = undefined;
+          signal = undefined;
+          animCount = 0;
+        }).then(function(myBlob) {
           var video = document.createElement('video');
           video.setAttribute('controls', '');
-          video.src = objectURL;
+          if ('srcObject' in video)
+            video.srcObject = myBlob;
+          else video.src = URL.createObjectURL(myBlob);
           videoWrapper.appendChild(video);
 
           videoWrapper.style.display = 'block';
@@ -83,7 +92,6 @@
 
           reports.textContent = 'Video ready to play';
         });
-        console.log(response.bodyUsed);
       }).catch(function(e) {
         reports.textContent = 'Download error: ' + e.message;
       })
@@ -91,18 +99,11 @@
 
     function runAnimation() {
       progressAnim = setInterval(function() {
-        if(animCount === 0) {
-          reports.textContent = 'Download complete; waiting for video player to be constructed';
-          animCount++;
-        } else if(animCount === 1) {
-          reports.textContent = 'Download complete; waiting for video player to be constructed.';
-          animCount++;
-        } else if(animCount === 2) {
-          reports.textContent = 'Download complete; waiting for video player to be constructed..';
-          animCount++;
-        } else {
-          reports.textContent = 'Download complete; waiting for video player to be constructed...';
-          animCount = 0;
+        switch (animCount++ & 3) {
+          case 0: reports.textContent = 'Download occuring; waiting for video player to be constructed'; break;
+          case 1: reports.textContent = 'Download occuring; waiting for video player to be constructed.'; break;
+          case 2: reports.textContent = 'Download occuring; waiting for video player to be constructed..'; break;
+          case 3: reports.textContent = 'Download occuring; waiting for video player to be constructed...'; break;
         }
       }, 300);
     }
