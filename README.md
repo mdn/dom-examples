@@ -12,6 +12,6 @@ See below for links to the live versions of each example:
 * [Basic Fetch example with returned Response properties](https://mdn.github.io/fetch-examples/fetch-response/)
 * [Fetch cloned Response example](https://mdn.github.io/fetch-examples/fetch-response-clone/)
 * [Fetch text example](https://mdn.github.io/fetch-examples/fetch-text/)
-* [Fetch text example with Request object and Init object](https://mdn.github.io/fetch-examples/fetch-with-init-then-request/)
+* [Fetch example with Request object and Init object](https://mdn.github.io/fetch-examples/fetch-with-init-then-request/)
 * [object-fit gallery with fetched images](https://mdn.github.io/fetch-examples/object-fit-gallery-fetch/)
 * [Fetch example showing experimental usage of fetch signal/controller/observer](https://mdn.github.io/fetch-examples/fetch-signal-controller-observer/)
