@@ -1,6 +1,6 @@
 onmessage = function(e) {
-  console.log('Message received from main script');
+  console.log('Worker: Message received from main script');
   var workerResult = 'Result: ' + (e.data[0] * e.data[1]);
-  console.log('Posting message back to main script');
+  console.log('Worker: Posting message back to main script');
   postMessage(workerResult);
 }
