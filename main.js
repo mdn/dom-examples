@@ -12,16 +12,16 @@ if (window.Worker) { // Check if Browser supports the Worker api.
 
 	first.onchange = function() {
 	  myWorker.postMessage([first.value,second.value]); // Sending message as an array to the worker
-	  console.log('Main [first.onchange]: Message posted to worker');
+	  console.log('Main (first.onchange): Message posted to worker');
 	}
 
 	second.onchange = function() {
 	  myWorker.postMessage([first.value,second.value]);
-	  console.log('Main [second.onchange]: Message posted to worker');
+	  console.log('Main (second.onchange): Message posted to worker');
 	}
 
 	myWorker.onmessage = function(e) {
 		result.textContent = e.data;
-		console.log('Main [myWorker.onmessage]: Message received from worker');
+		console.log('Main (myWorker.onmessage): Message received from worker');
 	}
 }
