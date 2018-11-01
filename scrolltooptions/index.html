@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ScrollToOptions example</title>
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      body {
+        width: 60%;
+        margin: 0;
+      }
+
+      p {
+        width: 3000px;
+        font-size: 2rem;
+        letter-spacing: 1px;
+        line-height: 1.5;
+      }
+
+      form {
+        background: white;
+        width: 300px;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+      }
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      div:first-of-type {
+        margin-top: 10px;
+      }
+
+      fieldset, legend {
+        border-radius: 5px;
+      }
+
+      legend {
+        background: black;
+        color: white;
+        padding: 5px;
+      }
+    </style>
+    <script defer src="main.js"></script>
+  </head>
+  <body>
+    <section>
+      <form>
+        <fieldset>
+          <legend>Choose position to scroll to!</legend>
+          <div><label for="left">Left (number)</label>
+               <input id="left" name="left" type="number"></div>
+          <div><label for="top">Top (number)</label>
+              <input id="top" name="top" type="number"></div>
+          <div><label for="scroll">Smooth scroll?</label>
+              <input id="scroll" name="scroll" type="checkbox"></div>
+          <div>
+            <button>Scroll</button>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sodales, mauris in interdum dictum, libero libero tristique lacus, eget rutrum sem est tincidunt dui. In hac habitasse platea dictumst. Ut est tortor, consequat sit amet leo ut, maximus sagittis ante. Sed at lectus mauris. In enim diam, sodales non gravida vitae, ullamcorper gravida leo. Aenean pulvinar dictum ipsum non tristique. Curabitur quis tortor suscipit, dictum libero a, sagittis odio. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+    <p>Donec quis felis libero. Fusce sit amet pellentesque quam. Integer quis volutpat dui. Sed dictum viverra dictum. Nullam placerat et felis ut varius. Curabitur mollis vehicula commodo. Suspendisse viverra sit amet nulla sit amet malesuada.</p>
+
+    <p>Suspendisse potenti. Nunc commodo vel elit vel malesuada. Nulla non ante nec arcu malesuada congue. In ut condimentum nulla. Mauris suscipit est sit amet metus rhoncus, eget porttitor mauris convallis. Nulla sit amet cursus mi, et tincidunt dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce molestie felis at justo sollicitudin, non condimentum orci pellentesque. Quisque in ante at mauris porttitor ornare nec et velit. Aliquam mi orci, volutpat sit amet fringilla sed, mollis nec lorem. Nunc sit amet convallis turpis, eu auctor dui. Etiam auctor mi in lorem faucibus, vel feugiat libero tempus. Nulla facilisi. Proin facilisis libero nisl, eu mollis est ullamcorper in. Nam ullamcorper mollis odio, eu vehicula magna ornare vitae. Mauris nec pharetra augue.</p>
+
+    <p>Aliquam interdum, augue ullamcorper posuere consequat, dolor libero vehicula tellus, et dapibus orci ipsum vel leo. Maecenas molestie fringilla magna mollis luctus. Donec ultricies eleifend feugiat. Curabitur quis venenatis metus, tincidunt vestibulum augue. Integer non mollis mauris. Aenean bibendum consectetur varius. Duis eget odio quis magna tristique tristique ac vitae neque. Nulla facilisi. Praesent eu facilisis ipsum, eu convallis nisl. Pellentesque congue tempor massa at aliquam.</p>
+
+    <p>Ut pulvinar ex at ante dictum, vitae iaculis dui pretium. Suspendisse rhoncus condimentum tortor ac mollis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam vulputate tristique purus quis bibendum. Donec feugiat mattis sodales. Suspendisse eu auctor ligula. Donec quis justo odio. Praesent sed suscipit est. Nulla posuere nisl ac placerat vestibulum. Integer vulputate, sapien non luctus ultrices, nibh enim ullamcorper lorem, ut semper ligula tellus quis turpis. Etiam interdum lectus ac auctor rhoncus. Sed nulla nulla, ullamcorper pulvinar nisl vitae, varius dapibus mi. Sed augue nulla, efficitur in consectetur et, hendrerit ut purus. Aenean laoreet eros a leo gravida tempor. Mauris at mauris mauris.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sodales, mauris in interdum dictum, libero libero tristique lacus, eget rutrum sem est tincidunt dui. In hac habitasse platea dictumst. Ut est tortor, consequat sit amet leo ut, maximus sagittis ante. Sed at lectus mauris. In enim diam, sodales non gravida vitae, ullamcorper gravida leo. Aenean pulvinar dictum ipsum non tristique. Curabitur quis tortor suscipit, dictum libero a, sagittis odio. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+    <p>Donec quis felis libero. Fusce sit amet pellentesque quam. Integer quis volutpat dui. Sed dictum viverra dictum. Nullam placerat et felis ut varius. Curabitur mollis vehicula commodo. Suspendisse viverra sit amet nulla sit amet malesuada.</p>
+
+    <p>Suspendisse potenti. Nunc commodo vel elit vel malesuada. Nulla non ante nec arcu malesuada congue. In ut condimentum nulla. Mauris suscipit est sit amet metus rhoncus, eget porttitor mauris convallis. Nulla sit amet cursus mi, et tincidunt dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce molestie felis at justo sollicitudin, non condimentum orci pellentesque. Quisque in ante at mauris porttitor ornare nec et velit. Aliquam mi orci, volutpat sit amet fringilla sed, mollis nec lorem. Nunc sit amet convallis turpis, eu auctor dui. Etiam auctor mi in lorem faucibus, vel feugiat libero tempus. Nulla facilisi. Proin facilisis libero nisl, eu mollis est ullamcorper in. Nam ullamcorper mollis odio, eu vehicula magna ornare vitae. Mauris nec pharetra augue.</p>
+
+    <p>Aliquam interdum, augue ullamcorper posuere consequat, dolor libero vehicula tellus, et dapibus orci ipsum vel leo. Maecenas molestie fringilla magna mollis luctus. Donec ultricies eleifend feugiat. Curabitur quis venenatis metus, tincidunt vestibulum augue. Integer non mollis mauris. Aenean bibendum consectetur varius. Duis eget odio quis magna tristique tristique ac vitae neque. Nulla facilisi. Praesent eu facilisis ipsum, eu convallis nisl. Pellentesque congue tempor massa at aliquam.</p>
+
+    <p>Ut pulvinar ex at ante dictum, vitae iaculis dui pretium. Suspendisse rhoncus condimentum tortor ac mollis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam vulputate tristique purus quis bibendum. Donec feugiat mattis sodales. Suspendisse eu auctor ligula. Donec quis justo odio. Praesent sed suscipit est. Nulla posuere nisl ac placerat vestibulum. Integer vulputate, sapien non luctus ultrices, nibh enim ullamcorper lorem, ut semper ligula tellus quis turpis. Etiam interdum lectus ac auctor rhoncus. Sed nulla nulla, ullamcorper pulvinar nisl vitae, varius dapibus mi. Sed augue nulla, efficitur in consectetur et, hendrerit ut purus. Aenean laoreet eros a leo gravida tempor. Mauris at mauris mauris.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sodales, mauris in interdum dictum, libero libero tristique lacus, eget rutrum sem est tincidunt dui. In hac habitasse platea dictumst. Ut est tortor, consequat sit amet leo ut, maximus sagittis ante. Sed at lectus mauris. In enim diam, sodales non gravida vitae, ullamcorper gravida leo. Aenean pulvinar dictum ipsum non tristique. Curabitur quis tortor suscipit, dictum libero a, sagittis odio. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+    <p>Donec quis felis libero. Fusce sit amet pellentesque quam. Integer quis volutpat dui. Sed dictum viverra dictum. Nullam placerat et felis ut varius. Curabitur mollis vehicula commodo. Suspendisse viverra sit amet nulla sit amet malesuada.</p>
+
+    <p>Suspendisse potenti. Nunc commodo vel elit vel malesuada. Nulla non ante nec arcu malesuada congue. In ut condimentum nulla. Mauris suscipit est sit amet metus rhoncus, eget porttitor mauris convallis. Nulla sit amet cursus mi, et tincidunt dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce molestie felis at justo sollicitudin, non condimentum orci pellentesque. Quisque in ante at mauris porttitor ornare nec et velit. Aliquam mi orci, volutpat sit amet fringilla sed, mollis nec lorem. Nunc sit amet convallis turpis, eu auctor dui. Etiam auctor mi in lorem faucibus, vel feugiat libero tempus. Nulla facilisi. Proin facilisis libero nisl, eu mollis est ullamcorper in. Nam ullamcorper mollis odio, eu vehicula magna ornare vitae. Mauris nec pharetra augue.</p>
+
+    <p>Aliquam interdum, augue ullamcorper posuere consequat, dolor libero vehicula tellus, et dapibus orci ipsum vel leo. Maecenas molestie fringilla magna mollis luctus. Donec ultricies eleifend feugiat. Curabitur quis venenatis metus, tincidunt vestibulum augue. Integer non mollis mauris. Aenean bibendum consectetur varius. Duis eget odio quis magna tristique tristique ac vitae neque. Nulla facilisi. Praesent eu facilisis ipsum, eu convallis nisl. Pellentesque congue tempor massa at aliquam.</p>
+
+    <p>Ut pulvinar ex at ante dictum, vitae iaculis dui pretium. Suspendisse rhoncus condimentum tortor ac mollis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam vulputate tristique purus quis bibendum. Donec feugiat mattis sodales. Suspendisse eu auctor ligula. Donec quis justo odio. Praesent sed suscipit est. Nulla posuere nisl ac placerat vestibulum. Integer vulputate, sapien non luctus ultrices, nibh enim ullamcorper lorem, ut semper ligula tellus quis turpis. Etiam interdum lectus ac auctor rhoncus. Sed nulla nulla, ullamcorper pulvinar nisl vitae, varius dapibus mi. Sed augue nulla, efficitur in consectetur et, hendrerit ut purus. Aenean laoreet eros a leo gravida tempor. Mauris at mauris mauris.</p>
+  </body>
+</html>
