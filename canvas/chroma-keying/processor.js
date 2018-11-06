@@ -29,11 +29,11 @@ let processor = {
       let frame = this.ctx1.getImageData(0, 0, this.width, this.height);
           let l = frame.data.length / 4;
   
-      for (let i = 0; i &lt; l; i++) {
+      for (let i = 0; i < l; i++) {
         let r = frame.data[i * 4 + 0];
         let g = frame.data[i * 4 + 1];
         let b = frame.data[i * 4 + 2];
-        if (g &gt; 100 &amp;&amp; r &gt; 100 &amp;&amp; b &lt; 43)
+        if (g > 100 && r > 100 && b < 43)
           frame.data[i * 4 + 3] = 0;
       }
       this.ctx2.putImageData(frame, 0, 0);
@@ -42,4 +42,3 @@ let processor = {
   };
   
   processor.doLoad();
-  
