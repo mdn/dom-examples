@@ -40,5 +40,7 @@ let processor = {
       return;
     }
   };
-  
+
+document.addEventListener("load", () => {
   processor.doLoad();
+});
