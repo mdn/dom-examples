@@ -5,6 +5,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "auxclick" directory contains a simple example demonstrating the new <code>auxclick</code> event type. See [GlobalEventHandlers.auxclick](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onauxclick) for more details, or [run the example live](https://mdn.github.io/dom-examples/auxclick/).
 
+* The "canvas" directory contains an example "chroma-keying" demonstrating how to use the Canvas API to manipulate videos: see [Manipulating video using canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Manipulating_video_using_canvas) or [run the example live](http://mdn.github.io/dom-examples/canvas/chroma-keying/).
+
 * The "channel-messaging-basic" directory contains a simple example demonstrating the basics of channel messaging; see [Channel Messaging API](https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API) or [run the example live](http://mdn.github.io/dom-examples/channel-messaging-basic/).
 
 * The "channel-messaging-multimessage" directory contains another channel messaging demo, showing how multiple messages can be sent between browsing contexts. See [Channel Messaging API](https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API) for more details. [Run the demo live](http://mdn.github.io/dom-examples/channel-messaging-multimessage/).
