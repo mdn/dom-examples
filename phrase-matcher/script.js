@@ -56,7 +56,7 @@ function testSpeech() {
     // These also have getters so they can be accessed like arrays.
     // The second [0] returns the SpeechRecognitionAlternative at position 0.
     // We then return the transcript property of the SpeechRecognitionAlternative object 
-    var speechResult = event.results[0][0].transcript;
+    var speechResult = event.results[0][0].transcript.toLowerCase();
     diagnosticPara.textContent = 'Speech received: ' + speechResult + '.';
     if(speechResult === phrase) {
       resultPara.textContent = 'I heard the correct phrase!';
