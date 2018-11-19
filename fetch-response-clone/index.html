@@ -32,19 +32,34 @@
     var image2 = document.querySelector('.img2');
 
     fetch('flowers.jpg')
-    .then(function(response) {
-      var response2 = response.clone();
-
-      response.blob().then(function(myBlob) {
-        var objectURL = URL.createObjectURL(myBlob);
-        image1.src = objectURL;
-      });
-
-      response2.blob().then(function(myBlob) {
-        var objectURL = URL.createObjectURL(myBlob);
-        image2.src = objectURL;
-      });
+    .then(function(response1) {
+      if (!response1.ok) {
+        showError(image1, "HTTP error, status = " + response1.status);
+      } else {
+        var response2 = response1.clone();
+        useResponse(response1, image1);
+        useResponse(response2, image2);
+      }
     });
+
+    function useResponse(response, image) {
+      response.blob()
+      .then(function(myBlob) {
+        var objectURL = URL.createObjectURL(myBlob);
+        image.src = objectURL;
+      })
+      .catch(function(error) {
+          showError(image, error.message);
+      });
+    }
+
+    function showError(image, errorMessage) {
+      var p = document.createElement('p');
+      p.appendChild(
+        document.createTextNode('Error: ' + errorMessage)
+      );
+      document.body.insertBefore(p, image);
+    }
 
   </script>
 </html>

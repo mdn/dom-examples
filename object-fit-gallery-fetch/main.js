@@ -8,8 +8,16 @@ for(var i = 1; i <= thumbs.length ; i++) {
 
 function retrieveImage(requestObj, imageNo) {
   fetch(requestObj)
-  .then(response => response.blob())
-  .then(blob => displayImage(imageNo, blob));
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("HTTP error, status = " + response.status);
+    }
+    return response.blob();
+  })
+  .then(blob => displayImage(imageNo, blob))
+  .catch(error => {
+    thumbs[imageNo].title = 'Image load failed: ' + error.message;
+  });
 }
 
 function displayImage(imageNo, blob) {
