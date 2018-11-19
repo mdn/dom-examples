@@ -40,9 +40,20 @@
       var myRequest = new Request(pageId + '.txt');
 
       fetch(myRequest)
-      .then(function(response) { return response.text() })
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error("HTTP error, status = " + response.status);
+        }
+        return response.text();
+      })
       .then(function(text) {
         myArticle.innerHTML = text;
+      })
+      .catch(function(error) {
+        myArticle.innerHTML = '';
+        myArticle.appendChild(
+          document.createTextNode('Error: ' + error.message)
+        );
       });
     }
 
