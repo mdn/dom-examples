@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>screenX/screenTop and ScreenY/ScreenLeft example</title>
+    <style>
+      canvas {
+        display: block;
+        margin: 50px auto;
+      }
+    </style>
+  </head>
+
+<body>
+
+  <p></p>
+  <canvas>
+    <p>Your browser doesn't support canvas. Boo hoo!</p>
+  </canvas>
+
+  <script>
+    const canvasElem = document.querySelector('canvas');
+    let width = canvasElem.width = 640;
+    let height = canvasElem.height = 480
+    let ctx = canvasElem.getContext('2d');
+
+    function degToRad(degrees) {
+      return degrees * Math.PI / 180;
+    };
+
+    const pElem = document.querySelector('p');
+
+    let initialTop, initialLeft;
+
+    if(!window.screenLeft) {
+      window.screenLeft = window.screenX;
+      window.screenTop = window.screenY;
+    }
+
+    initialLeft = window.screenLeft + canvasElem.offsetLeft;
+    initialTop = window.screenTop + canvasElem.offsetTop;
+
+    function positionElem() {
+      let newLeft = window.screenLeft + canvasElem.offsetLeft;
+      let newTop = window.screenTop + canvasElem.offsetTop;
+
+      let leftUpdate = initialLeft - newLeft;
+      let topUpdate = initialTop - newTop;
+
+      ctx.fillStyle = 'rgb(0, 0, 0)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = 'rgb(0, 0, 255)';
+      ctx.beginPath();
+      ctx.arc(leftUpdate + (width/2), topUpdate + (height/2) + 35, 50, degToRad(0), degToRad(360), false);
+      ctx.fill();
+
+      pElem.textContent = 'Window.screenLeft: ' + window.screenX + ', Window.screenTop:' + window.screenY;
+
+      window.requestAnimationFrame(positionElem);
+    }
+
+    window.requestAnimationFrame(positionElem);
+  </script>
+
+</body>
+</html>
