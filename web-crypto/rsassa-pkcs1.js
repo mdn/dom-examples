@@ -1,27 +1,22 @@
 (function() {
 
-  const signatureValue = document.querySelector(".rsassa-pkcs1 .signature-value");
-  const signButton = document.querySelector(".rsassa-pkcs1 .sign-button");
-  const verifyButton = document.querySelector(".rsassa-pkcs1 .verify-button");
-  const messageBox = document.querySelector(".rsassa-pkcs1 #message");
   let signature;
 
   function getMessageEncoding() {
+    const messageBox = document.querySelector(".rsassa-pkcs1 #message");
     let message = messageBox.value;
     let enc = new TextEncoder();
     return enc.encode(message);
   }
 
   async function signMessage(privateKey) {
+    const signatureValue = document.querySelector(".rsassa-pkcs1 .signature-value");
     signatureValue.classList.remove("valid");
     signatureValue.classList.remove("invalid");
 
     let encoded = getMessageEncoding();
     signature = await window.crypto.subtle.sign(
-      {
-        name: "RSA-PSS",
-        saltLength: 128,
-      },
+      "RSASSA-PKCS1-v1_5",
       privateKey,
       encoded
     );
@@ -31,18 +26,16 @@
   }
 
   async function verifyMessage(publicKey) {
+    const signatureValue = document.querySelector(".rsassa-pkcs1 .signature-value");
     signatureValue.classList.remove("valid");
     signatureValue.classList.remove("invalid");
 
     let encoded = getMessageEncoding();
     let result = await window.crypto.subtle.verify(
-        {
-            name: "RSA-PSS",
-            saltLength: 128,
-        },
-        publicKey,
-        signature,
-        encoded
+      "RSASSA-PKCS1-v1_5",
+      publicKey,
+      signature,
+      encoded
     );
 
     if (result) {
@@ -52,22 +45,22 @@
     }
   }
 
-  const generateSignVerifyKey = window.crypto.subtle.generateKey(
+  generateSignVerifyKey = window.crypto.subtle.generateKey(
     {
-      name: "RSA-PSS",
+      name: "RSASSA-PKCS1-v1_5",
       modulusLength: 2048,
       publicExponent: new Uint8Array([1, 0, 1]),
       hash: "SHA-256",
     },
     true,
     ["sign", "verify"]
-  );
-
-  generateSignVerifyKey.then((keyPair) => {
+  ).then((keyPair) => {
+    const signButton = document.querySelector(".rsassa-pkcs1 .sign-button");
     signButton.addEventListener("click", () => {
       signMessage(keyPair.privateKey);
     });
-  
+
+    const verifyButton = document.querySelector(".rsassa-pkcs1 .verify-button");
     verifyButton.addEventListener("click", () => {
       verifyMessage(keyPair.publicKey);
     });

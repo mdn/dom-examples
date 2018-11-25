@@ -3,22 +3,22 @@
   let signature;
 
   function getMessageEncoding() {
-    const messageBox = document.querySelector(".rsa-pss #message");
+    const messageBox = document.querySelector(".ecdsa #message");
     let message = messageBox.value;
     let enc = new TextEncoder();
     return enc.encode(message);
   }
 
   async function signMessage(privateKey) {
-    const signatureValue = document.querySelector(".rsa-pss .signature-value");
+    const signatureValue = document.querySelector(".ecdsa .signature-value");
     signatureValue.classList.remove("valid");
     signatureValue.classList.remove("invalid");
 
     let encoded = getMessageEncoding();
     signature = await window.crypto.subtle.sign(
       {
-        name: "RSA-PSS",
-        saltLength: 128,
+        name: "ECDSA",
+        hash: {name: "SHA-384"},
       },
       privateKey,
       encoded
@@ -29,15 +29,15 @@
   }
 
   async function verifyMessage(publicKey) {
-    const signatureValue = document.querySelector(".rsa-pss .signature-value");
+    const signatureValue = document.querySelector(".ecdsa .signature-value");
     signatureValue.classList.remove("valid");
     signatureValue.classList.remove("invalid");
 
     let encoded = getMessageEncoding();
     let result = await window.crypto.subtle.verify(
       {
-        name: "RSA-PSS",
-        saltLength: 128,
+        name: "ECDSA",
+        hash: {name: "SHA-384"},
       },
       publicKey,
       signature,
@@ -53,20 +53,18 @@
 
   window.crypto.subtle.generateKey(
     {
-      name: "RSA-PSS",
-      modulusLength: 2048,
-      publicExponent: new Uint8Array([1, 0, 1]),
-      hash: "SHA-256",
+      name: "ECDSA",
+      namedCurve: "P-384"
     },
     true,
     ["sign", "verify"]
   ).then((keyPair) => {
-    const signButton = document.querySelector(".rsa-pss .sign-button");
+    const signButton = document.querySelector(".ecdsa .sign-button");
     signButton.addEventListener("click", () => {
       signMessage(keyPair.privateKey);
     });
 
-    const verifyButton = document.querySelector(".rsa-pss .verify-button");
+    const verifyButton = document.querySelector(".ecdsa .verify-button");
     verifyButton.addEventListener("click", () => {
       verifyMessage(keyPair.publicKey);
     });
