@@ -16,10 +16,6 @@ h1 {
 	margin-left: .5rem;
 }
 
-h2 {
-	margin-bottom: 0;
-}
-
 .description, .sign-verify {
 	margin: 0 .5rem;
 }
@@ -34,7 +30,7 @@ h2 {
 	margin-bottom: 2rem;
 }
 
-input {
+.sign-verify-controls > * {
 	margin: .5rem 0;
 }
 
@@ -64,11 +60,11 @@ input[type="button"] {
   content: ' ✓';
 }
 
-/* whole page grid */
+/* Whole page grid */
 main {
 	display: grid;
 	grid-template-columns: 32rem 1fr;
-	grid-template-rows: 4rem 2fr 2fr 2fr 2fr;
+	grid-template-rows: 4rem 1fr;
 }
 
 h1 {
@@ -76,35 +72,20 @@ h1 {
 	grid-row: 1;
 }
 
-.description {
-	grid-column: 2;
-	grid-row: 2/4;
-}
-
-.rsassa-pkcs1 {
+.examples {
 	grid-column: 1;
 	grid-row: 2;
 }
 
-.rsa-pss {
-	grid-column: 1;
-	grid-row: 3;
-}
-
-.ecdsa {
-	grid-column: 1;
-	grid-row: 4;
-}
-
-.hmac {
-	grid-column: 1;
-	grid-row: 5;
+.description {
+	grid-column: 2;
+	grid-row: 2;
 }
 
 /* sign-verify controls grid */
 .sign-verify-controls {
 	display: grid;
-	grid-template-columns: 4fr 5rem;
+	grid-template-columns: 1fr 5rem;
 	grid-template-rows: 1fr 1fr;
 }
 

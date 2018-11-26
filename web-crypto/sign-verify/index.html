@@ -27,62 +27,63 @@
         </ul>
       </section>
 
-      <section class="sign-verify rsassa-pkcs1">
-        <h2 class="sign-verify-heading">RSASSA-PKCS1-v1_5</h2>
-        <section class="sign-verify-controls">
-          <div class="message-control">
-            <label for="message">Enter a message to sign:</label>
-            <input type="text" id="message" name="message" size="25"
-                   value="The owl hoots at midnight">
-          </div>
-          <div class="signature">Signature:<span class="signature-value"></span></div>
-          <input class="sign-button" type="button" value="Sign">
-          <input class="verify-button" type="button" value="Verify">
+      <section class="examples">
+        <section class="sign-verify rsassa-pkcs1">
+          <h2 class="sign-verify-heading">RSASSA-PKCS1-v1_5</h2>
+          <section class="sign-verify-controls">
+            <div class="message-control">
+              <label for="message">Enter a message to sign:</label>
+              <input type="text" id="message" name="message" size="25"
+                     value="The owl hoots at midnight">
+            </div>
+            <div class="signature">Signature:<span class="signature-value"></span></div>
+            <input class="sign-button" type="button" value="Sign">
+            <input class="verify-button" type="button" value="Verify">
+          </section>
+        </section>
+
+        <section class="sign-verify rsa-pss">
+          <h2 class="sign-verify-heading">RSA-PSS</h2>
+          <section class="sign-verify-controls">
+            <div class="message-control">
+              <label for="message">Enter a message to sign:</label>
+              <input type="text" id="message" name="message" size="25"
+                     value="The tiger prowls at dawn">
+            </div>
+            <div class="signature">Signature:<span class="signature-value"></span></div>
+            <input class="sign-button" type="button" value="Sign">
+            <input class="verify-button" type="button" value="Verify">
+          </section>
+        </section>
+
+        <section class="sign-verify ecdsa">
+          <h2 class="sign-verify-heading">ECDSA</h2>
+          <section class="sign-verify-controls">
+            <div class="message-control">
+              <label for="message">Enter a message to sign:</label>
+              <input type="text" id="message" name="message" size="25"
+                     value="The eagle flies at twilight">
+            </div>
+            <div class="signature">Signature:<span class="signature-value"></span></div>
+            <input class="sign-button" type="button" value="Sign">
+            <input class="verify-button" type="button" value="Verify">
+          </section>
+        </section>
+
+        <section class="sign-verify hmac">
+          <h2 class="sign-verify-heading">HMAC</h2>
+          <section class="sign-verify-controls">
+            <div class="message-control">
+              <label for="message">Enter a message to sign:</label>
+              <input type="text" id="message" name="message" size="25"
+                     value="The bunny hops at teatime">
+            </div>
+            <div class="signature">Signature:<span class="signature-value"></span></div>
+            <input class="sign-button" type="button" value="Sign">
+            <input class="verify-button" type="button" value="Verify">
+          </section>
         </section>
       </section>
-
-      <section class="sign-verify rsa-pss">
-        <h2 class="sign-verify-heading">RSA-PSS</h2>
-        <section class="sign-verify-controls">
-          <div class="message-control">
-            <label for="message">Enter a message to sign:</label>
-            <input type="text" id="message" name="message" size="25"
-                   value="The tiger prowls at dawn">
-          </div>
-          <div class="signature">Signature:<span class="signature-value"></span></div>
-          <input class="sign-button" type="button" value="Sign">
-          <input class="verify-button" type="button" value="Verify">
-        </section>
-      </section>
-
-      <section class="sign-verify ecdsa">
-        <h2 class="sign-verify-heading">ECDSA</h2>
-        <section class="sign-verify-controls">
-          <div class="message-control">
-            <label for="message">Enter a message to sign:</label>
-            <input type="text" id="message" name="message" size="25"
-                   value="The eagle flies at twilight">
-          </div>
-          <div class="signature">Signature:<span class="signature-value"></span></div>
-          <input class="sign-button" type="button" value="Sign">
-          <input class="verify-button" type="button" value="Verify">
-        </section>
-      </section>
-
-      <section class="sign-verify hmac">
-        <h2 class="sign-verify-heading">HMAC</h2>
-        <section class="sign-verify-controls">
-          <div class="message-control">
-            <label for="message">Enter a message to sign:</label>
-            <input type="text" id="message" name="message" size="25"
-                   value="The bunny hops at teatime">
-          </div>
-          <div class="signature">Signature:<span class="signature-value"></span></div>
-          <input class="sign-button" type="button" value="Sign">
-          <input class="verify-button" type="button" value="Verify">
-        </section>
-      </section>
-
     </main>
 
   </body>
