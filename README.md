@@ -39,4 +39,6 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "touchevents" directory is for examples and demos of the [Touch Events](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events) standard.
 
+* The "web-crypto" directory contains examples of how to use the [Web Crypto API](https://developer.mozilla.org/docs/Web/API/Web_Crypto_API).
+
 * The "web-storage" directory contains a simple demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](http://mdn.github.io/dom-examples/web-storage/).
