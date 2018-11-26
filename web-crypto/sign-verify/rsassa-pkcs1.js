@@ -1,7 +1,14 @@
 (function() {
 
+  /*
+  Store the calculated signature here, so we can verify it later.
+  */
   let signature;
 
+  /*
+  Fetch the contents of the "message" textbox, and encode it
+  in a form we can use for sign operation.
+  */
   function getMessageEncoding() {
     const messageBox = document.querySelector(".rsassa-pkcs1 #message");
     let message = messageBox.value;
@@ -9,6 +16,10 @@
     return enc.encode(message);
   }
 
+  /*
+  Get the encoded message-to-sign, sign it and display a representation
+  of the first part of it in the "signature" element.
+  */
   async function signMessage(privateKey) {
     const signatureValue = document.querySelector(".rsassa-pkcs1 .signature-value");
     signatureValue.classList.remove("valid");
@@ -25,6 +36,11 @@
     signatureValue.textContent = buffer;
   }
 
+  /*
+  Fetch the encoded message-to-sign and verify it against the stored signature.
+  * If it checks out, set the "valid" class on the signature.
+  * Otherwise set the "invalid" class.
+  */
   async function verifyMessage(publicKey) {
     const signatureValue = document.querySelector(".rsassa-pkcs1 .signature-value");
     signatureValue.classList.remove("valid");
@@ -45,6 +61,10 @@
     }
   }
 
+  /*
+  Generate a sign/verify key, then set up event listeners
+  on the "Sign" and "Verify" buttons.
+  */
   generateSignVerifyKey = window.crypto.subtle.generateKey(
     {
       name: "RSASSA-PKCS1-v1_5",
