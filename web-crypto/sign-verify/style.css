@@ -1,0 +1,110 @@
+/* General setup */
+
+* {
+	box-sizing: border-box;
+}
+
+html,body {
+	font-family: sans-serif;
+	line-height: 1.2rem;
+}
+
+/* Layout and styles */
+
+h1 {
+	color: green;
+	margin-left: .5rem;
+}
+
+.description, .sign-verify {
+	margin: 0 .5rem;
+}
+
+.description > p {
+	margin-top: 0;
+}
+
+.sign-verify {
+	box-shadow: -1px 2px 5px gray;
+	padding: .2rem .5rem;
+	margin-bottom: 2rem;
+}
+
+.sign-verify-controls > * {
+	margin: .5rem 0;
+}
+
+input[type="button"] {
+	width: 5rem;
+}
+
+.signature-value {
+	padding-left: .5rem;
+	font-size: .8rem;
+}
+
+/* Validity CSS */
+.valid {
+	color: green;
+}
+
+.invalid {
+	color: red;
+}
+
+.invalid::after {
+	 content: ' ✖';
+}
+
+.valid::after {
+  content: ' ✓';
+}
+
+/* Whole page grid */
+main {
+	display: grid;
+	grid-template-columns: 32rem 1fr;
+	grid-template-rows: 4rem 1fr;
+}
+
+h1 {
+	grid-column: 1/2;
+	grid-row: 1;
+}
+
+.examples {
+	grid-column: 1;
+	grid-row: 2;
+}
+
+.description {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+/* sign-verify controls grid */
+.sign-verify-controls {
+	display: grid;
+	grid-template-columns: 1fr 5rem;
+	grid-template-rows: 1fr 1fr;
+}
+
+.message-control {
+	grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.signature {
+	grid-column-start: 1;
+  grid-row-start: 2;
+}
+
+.sign-button {
+	grid-column-start: 2;
+  grid-row-start: 1;
+}
+
+.verify-button {
+	grid-column-start: 2;
+  grid-row-start: 2;
+}
