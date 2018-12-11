@@ -29,7 +29,7 @@
     signature = await window.crypto.subtle.sign(
       {
         name: "RSA-PSS",
-        saltLength: 128,
+        saltLength: 32,
       },
       privateKey,
       encoded
@@ -53,7 +53,7 @@
     let result = await window.crypto.subtle.verify(
       {
         name: "RSA-PSS",
-        saltLength: 128,
+        saltLength: 32,
       },
       publicKey,
       signature,
