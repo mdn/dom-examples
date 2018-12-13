@@ -62,7 +62,7 @@
   window.crypto.subtle.generateKey(
     {
       name: "HMAC",
-      hash: {name: "SHA-384"}
+      hash: {name: "SHA-512"}
     },
     true,
     ["sign", "verify"]
