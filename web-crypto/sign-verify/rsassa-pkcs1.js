@@ -59,7 +59,7 @@
   Generate a sign/verify key, then set up event listeners
   on the "Sign" and "Verify" buttons.
   */
-  generateSignVerifyKey = window.crypto.subtle.generateKey(
+  window.crypto.subtle.generateKey(
     {
       name: "RSASSA-PKCS1-v1_5",
       modulusLength: 4096,
