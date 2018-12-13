@@ -22,8 +22,7 @@
   */
   async function signMessage(privateKey) {
     const signatureValue = document.querySelector(".rsassa-pkcs1 .signature-value");
-    signatureValue.classList.remove("valid");
-    signatureValue.classList.remove("invalid");
+    signatureValue.classList.remove("valid", "invalid");
 
     let encoded = getMessageEncoding();
     signature = await window.crypto.subtle.sign(
@@ -43,8 +42,7 @@
   */
   async function verifyMessage(publicKey) {
     const signatureValue = document.querySelector(".rsassa-pkcs1 .signature-value");
-    signatureValue.classList.remove("valid");
-    signatureValue.classList.remove("invalid");
+    signatureValue.classList.remove("valid", "invalid");
 
     let encoded = getMessageEncoding();
     let result = await window.crypto.subtle.verify(
