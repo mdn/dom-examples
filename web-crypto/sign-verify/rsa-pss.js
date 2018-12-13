@@ -58,11 +58,7 @@
       encoded
     );
 
-    if (result) {
-      signatureValue.classList.add("valid");
-    } else {
-      signatureValue.classList.add("invalid");
-    }
+    signatureValue.classList.add(result ? "valid" : "invalid");
   }
 
   /*
