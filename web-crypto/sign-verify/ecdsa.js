@@ -1,4 +1,4 @@
-(function() {
+(() => {
 
   /*
   Store the calculated signature here, so we can verify it later.
