@@ -34,6 +34,10 @@
       encoded
     );
 
+    signatureValue.classList.add('fade-in');
+    signatureValue.addEventListener('animationend', () => {
+      signatureValue.classList.remove('fade-in');
+    });
     let buffer = new Uint8Array(signature, 0, 10);
     signatureValue.textContent = buffer;
   }

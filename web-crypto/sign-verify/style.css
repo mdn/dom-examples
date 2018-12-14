@@ -108,3 +108,17 @@ h1 {
     grid-column-start: 2;
     grid-row-start: 2;
 }
+
+/* Animate output display */
+.fade-in {
+    animation: fadein .5s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
