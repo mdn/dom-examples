@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web Crypto API example</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <main>
+      <h1>Web Crypto: encrypt/decrypt</h1>
+
+      <section class="description">
+        <p>This page shows the use of the <code>encrypt()</code> and <code>decrypt()</code> functions of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>. It contains four separate examples, one for each encryption algorithm supported:</p>
+        <ul>
+          <li>"RSA-OAEP"</li>
+          <li>"AES-CTR"</li>
+          <li>"AES-CBC"</li>
+          <li>"AES-GCM"</li>
+        </ul>
+        <hr/>
+        <p>Each example has five components:</p>
+        <ul>
+          <li>A text box containing a message to encrypt.</li>
+          <li>A representation of the ciphertext.</li>
+          <li>A box that will contain the decrypted ciphertext.</li>
+          <li>An "Encrypt" button: this encrypts the text box contents, displays part of the ciphertext, and stores the complete ciphertext.</li>
+          <li>A "Decrypt" button: this decrypts the ciphertext and writes the result into the "Decrypted" box.</li>
+        </ul>
+        <p>Try it:</p>
+        <ul>
+          <li>Press "Encrypt". The ciphertext should appear.</li>
+          <li>Press "Decrypt". The decrypted text should appear, and match the original message.</li>
+          <li>Edit the text box contents.</li>
+          <li>Press "Encrypt" again. A different ciphertext should appear.</li>
+        </ul>
+      </section>
+
+      <section class="examples">
+        <section class="encrypt-decrypt rsa-oaep">
+          <h2 class="encrypt-decrypt-heading">RSA-OAEP</h2>
+          <section class="encrypt-decrypt-controls">
+            <div class="message-control">
+              <label for="message">Enter a message to encrypt:</label>
+              <input type="text" id="message" name="message" size="25"
+                     value="The owl hoots at midnight">
+            </div>
+            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
+            <div class="decrypted">Decrypted:<span class="decrypted-value"></span></div>
+            <input class="encrypt-button" type="button" value="Encrypt">
+            <input class="decrypt-button" type="button" value="Decrypt">
+          </section>
+        </section>
+
+        <section class="encrypt-decrypt aes-ctr">
+          <h2 class="encrypt-decrypt-heading">AES-CTR</h2>
+          <section class="encrypt-decrypt-controls">
+            <div class="message-control">
+              <label for="message">Enter a message to encrypt:</label>
+              <input type="text" id="message" name="message" size="25"
+                     value="The tiger prowls at dawn">
+            </div>
+            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
+            <div class="decrypted">Decrypted:<span class="decrypted-value"></span></div>
+            <input class="encrypt-button" type="button" value="Encrypt">
+            <input class="decrypt-button" type="button" value="Decrypt">
+          </section>
+        </section>
+
+        <section class="encrypt-decrypt aes-cbc">
+          <h2 class="encrypt-decrypt-heading">AES-CBC</h2>
+          <section class="encrypt-decrypt-controls">
+            <div class="message-control">
+              <label for="message">Enter a message to encrypt:</label>
+              <input type="text" id="message" name="message" size="25"
+                     value="The eagle flies at twilight">
+            </div>
+            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
+            <div class="decrypted">Decrypted:<span class="decrypted-value"></span></div>
+            <input class="encrypt-button" type="button" value="Encrypt">
+            <input class="decrypt-button" type="button" value="Decrypt">
+          </section>
+        </section>
+
+        <section class="encrypt-decrypt aes-gcm">
+          <h2 class="encrypt-decrypt-heading">AES-GCM</h2>
+          <section class="encrypt-decrypt-controls">
+            <div class="message-control">
+              <label for="message">Enter a message to encrypt:</label>
+              <input type="text" id="message" name="message" size="25"
+                     value="The bunny hops at teatime">
+            </div>
+            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
+            <div class="decrypted">Decrypted:<span class="decrypted-value"></span></div>
+            <input class="encrypt-button" type="button" value="Encrypt">
+            <input class="decrypt-button" type="button" value="Decrypt">
+          </section>
+        </section>
+
+      </section>
+    </main>
+
+  </body>
+  <script src="rsa-oaep.js"></script>
+  <script src="aes-cbc.js"></script>
+  <script src="aes-ctr.js"></script>
+  <script src="aes-gcm.js"></script>
+</html>
