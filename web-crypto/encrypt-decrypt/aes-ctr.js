@@ -1,14 +1,14 @@
 (() => {
 
   /*
-  Store the calculated signature here, so we can verify it later.
+  Store the calculated ciphertext and counter here, so we can decrypt it later.
   */
   let ciphertext;
   let counter;
 
   /*
   Fetch the contents of the "message" textbox, and encode it
-  in a form we can use for encrypt operation.
+  in a form we can use for the encrypt operation.
   */
   function getMessageEncoding() {
     const messageBox = document.querySelector(".aes-ctr #message");
@@ -18,8 +18,8 @@
   }
 
   /*
-  Get the encoded message-to-sign, sign it and display a representation
-  of the first part of it in the "signature" element.
+  Get the encoded message, encrypt it and display a representation
+  of the ciphertext in the "Ciphertext" element.
   */
   async function encryptMessage(key) {
     let encoded = getMessageEncoding();
@@ -44,9 +44,8 @@
   }
 
   /*
-  Fetch the encoded message-to-sign and verify it against the stored signature.
-  * If it checks out, set the "valid" class on the signature.
-  * Otherwise set the "invalid" class.
+  Fetch the encoded message and decrypt it.
+  Write the decrypted message into the "Decrypted" box.
   */
   async function decryptMessage(key) {
     let encoded = getMessageEncoding();
@@ -70,8 +69,8 @@
   }
 
   /*
-  Generate a sign/verify key, then set up event listeners
-  on the "Sign" and "Verify" buttons.
+  Generate an encryption key, then set up event listeners
+  on the "Encrypt" and "Decrypt" buttons.
   */
   window.crypto.subtle.generateKey(
     {
