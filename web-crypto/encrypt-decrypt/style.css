@@ -65,7 +65,7 @@ h1 {
     grid-row: 2;
 }
 
-/* sign-verify controls grid */
+/* encrypt-decrypt controls grid */
 .encrypt-decrypt-controls {
     display: grid;
     grid-template-columns: 1fr 5rem;
