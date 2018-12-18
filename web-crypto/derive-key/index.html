@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web Crypto API example</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <main>
+      <h1>Web Crypto: deriveKey</h1>
+
+      <section class="description">
+        <p>This page shows the use of the <code>deriveKey()</code> function of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>. It contains two separate examples:, one for PBKDF2 and one for ECDH.</p>
+
+        <p>It's important to note that although both treated as key derivation functions, PBKDF2 and ECDH have very different use cases and characteristics.</p>
+
+        <hr/>
+        <h2>PBKDF2 example</h2>
+        <p>The PBKDF2 algorithm is suitable for deriving a secret key from a relatively low-entropy input, such as a password.</p>
+
+        <p>When the user clicks "Encrypt" the example prompts the user for a password and then derives an AES key from the password using PBKDF2. It then uses that key to encrypt the message, and writes a representation of the ciphertext into the "Ciphertext" output.</p>
+
+        <p>When the user clicks "Decrypt" the example prompts the user for the password and derives an AES key from the password using PBKDF2. It then uses that key to decrypt the ciphertext, and writes a representation of the decrypted message into the "Decrypted" output.</p>
+
+        <p>If the "Decrypt" password doesn't match the original, decryption will fail and an error is shown.</p>
+
+        <hr/>
+        <h2>ECDH example</h2>
+        <p>The ECDH algorithm is more commonly called a "key agreement" algorithm. It enables two parties (conventionally called "Alice" and "Bob"), each of whom has a public/private key pair, to establish a shared secret key.</p>
+
+        <p>With this example we've created two key pairs, one for Alice and one for Bob. Alice derives an AES key using her private key and Bob's public key. Bob independently derives the same key using his private key and Alice's public key.</p>
+
+        <p>When you click "Encrypt" the example uses Alice's copy of the key to encrypt a message for Bob.</p>
+
+        <p>When you click "Decrypt" the example uses Bob's copy of the key to decrypt the message.</p>
+
+      </section>
+
+      <section class="examples">
+        <section class="derive-key pbkdf2">
+          <h2>PBKDF2</h2>
+          <section class="derive-key-controls">
+            <div class="message-control">
+              <label for="message">Enter a message to encrypt:</label>
+              <input type="text" id="message" name="message" size="25"
+                     value="The bunny hops at teatime">
+            </div>
+            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
+            <div class="decrypted">Decrypted:<span class="decrypted-value"></span></div>
+
+            <input class="encrypt-button" type="button" value="Encrypt">
+            <input class="decrypt-button" type="button" value="Decrypt">
+
+          </section>
+        </section>
+
+        <section class="derive-key ecdh">
+          <h2>ECDH</h2>
+          <section class="derive-key-controls">
+            <div class="message-control">
+              <label for="message">Enter a message to encrypt:</label>
+              <input type="text" id="message" name="message" size="25"
+                     value="The bunny hops at teatime">
+            </div>
+            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
+            <div class="decrypted">Decrypted:<span class="decrypted-value"></span></div>
+
+            <input class="encrypt-button" type="button" value="Encrypt">
+            <input class="decrypt-button" type="button" value="Decrypt">
+
+          </section>
+        </section>
+
+      </section>
+    </main>
+
+  </body>
+  <script src="ecdh.js"></script>
+  <script src="pbkdf2.js"></script>
+</html>
