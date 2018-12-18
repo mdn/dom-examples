@@ -40,7 +40,7 @@ input[type="button"] {
 
 .signature-value {
     padding-left: .5rem;
-    font-size: .8rem;
+    font-family: monospace;
 }
 
 /* Validity CSS */
