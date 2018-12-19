@@ -11,17 +11,17 @@
       <h1>Web Crypto: deriveKey</h1>
 
       <section class="description">
-        <p>This page shows the use of the <code>deriveKey()</code> function of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>. It contains two separate examples:, one for PBKDF2 and one for ECDH.</p>
+        <p>This page shows how to use the <code>deriveKey()</code> function of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>. It contains two separate examples, one for PBKDF2 and one for ECDH.</p>
 
-        <p>It's important to note that although both treated as key derivation functions, PBKDF2 and ECDH have very different use cases and characteristics.</p>
+        <p>It's important to note that although both are defined in the API as key derivation functions, PBKDF2 and ECDH have very different use cases and characteristics.</p>
 
         <hr/>
         <h2>PBKDF2 example</h2>
-        <p>The PBKDF2 algorithm is suitable for deriving a secret key from a relatively low-entropy input, such as a password.</p>
+        <p>The PBKDF2 algorithm is used here to derive a secret key from a password.</p>
 
-        <p>When the user clicks "Encrypt" the example prompts the user for a password and then derives an AES key from the password using PBKDF2. It then uses that key to encrypt the message, and writes a representation of the ciphertext into the "Ciphertext" output.</p>
+        <p>When you click "Encrypt" the example prompts you for a password and then derives an AES key from the password using PBKDF2. It then uses that key to encrypt the message, and writes a representation of the ciphertext into the "Ciphertext" output.</p>
 
-        <p>When the user clicks "Decrypt" the example prompts the user for the password and derives an AES key from the password using PBKDF2. It then uses that key to decrypt the ciphertext, and writes a representation of the decrypted message into the "Decrypted" output.</p>
+        <p>When you click "Decrypt" the example prompts you for the password and derives an AES key from the password using PBKDF2. It then uses that key to decrypt the ciphertext, and writes a representation of the decrypted message into the "Decrypted" output.</p>
 
         <p>If the "Decrypt" password doesn't match the original, decryption will fail and an error is shown.</p>
 
