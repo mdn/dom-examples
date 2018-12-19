@@ -82,8 +82,8 @@
   - our ECDH private key
   - their ECDH public key
   */
-  async function deriveSecretKey(privateKey, publicKey) {
-    let secretKey = await window.crypto.subtle.deriveKey(
+  function deriveSecretKey(privateKey, publicKey) {
+    return window.crypto.subtle.deriveKey(
       {
         name: "ECDH",
         public: publicKey
@@ -96,7 +96,6 @@
       false,
       ["encrypt", "decrypt"]
     );
-    return secretKey;
   }
 
   async function setup() {
