@@ -1,7 +1,7 @@
 (() => {
 
   /*
-  Store the calculated ciphertext and counter here, so we can decrypt it later.
+  Store the calculated ciphertext and counter here, so we can decrypt the message later.
   */
   let ciphertext;
   let counter;
