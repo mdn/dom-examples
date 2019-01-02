@@ -49,7 +49,7 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy3Xo3U13dc+xojwQYWoJLCbOQ5fOVY8Llnqc
   in a form we can use for the encrypt operation.
   */
   function getMessageEncoding() {
-    const messageBox = document.querySelector(".spki #message");
+    const messageBox = document.querySelector("#spki-message");
     const message = messageBox.value;
     const enc = new TextEncoder();
     return enc.encode(message);

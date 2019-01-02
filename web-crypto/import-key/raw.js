@@ -22,7 +22,7 @@
   in a form we can use for the encrypt operation.
   */
   function getMessageEncoding() {
-    const messageBox = document.querySelector(".raw #message");
+    const messageBox = document.querySelector("#raw-message");
     const message = messageBox.value;
     const enc = new TextEncoder();
     return enc.encode(message);

@@ -33,7 +33,7 @@
     in a form we can use for the sign operation.
     */
     function getMessageEncoding() {
-      const messageBox = document.querySelector(".jwk #message");
+      const messageBox = document.querySelector("#jwk-message");
       const message = messageBox.value;
       const enc = new TextEncoder();
       return enc.encode(message);

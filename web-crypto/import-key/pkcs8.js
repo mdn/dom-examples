@@ -52,7 +52,7 @@ MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDD0tPV/du2vftjvXj1t/gXTK39sNBV
   in a form we can use for the sign operation.
   */
   function getMessageEncoding() {
-    const messageBox = document.querySelector(".pkcs8 #message");
+    const messageBox = document.querySelector("#pkcs8-message");
     const message = messageBox.value;
     const enc = new TextEncoder();
     return enc.encode(message);
