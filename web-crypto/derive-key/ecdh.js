@@ -7,7 +7,7 @@
   in a form we can use for the encrypt operation.
   */
   function getMessageEncoding() {
-    let message = document.querySelector(".ecdh #message").value;
+    let message = document.querySelector("#ecdh-message").value;
     let enc = new TextEncoder();
     return enc.encode(message);
   }

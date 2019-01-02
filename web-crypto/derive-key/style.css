@@ -76,7 +76,7 @@ h1 {
     grid-template-rows: 1fr 1fr 1fr;
 }
 
-.message {
+.message-control {
     grid-column-start: 1;
     grid-row-start: 1;
 }
