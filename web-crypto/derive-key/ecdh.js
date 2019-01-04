@@ -98,8 +98,10 @@
     );
   }
 
-  async function setup() {
-    // Generate 2 ECDH key pairs: one for Alice and one for Bob.
+  async function agreeSharedSecretKey() {
+    // Generate 2 ECDH key pairs: one for Alice and one for Bob
+    // In more normal usage, they would generate their key pairs
+    // separately and exchange public keys securely
     let alicesKeyPair = await window.crypto.subtle.generateKey(
       {
         name: "ECDH",
@@ -137,6 +139,6 @@
     });
   }
 
-  setup();
+  agreeSharedSecretKey();
 
 })();
