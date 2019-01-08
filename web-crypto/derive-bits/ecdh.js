@@ -8,7 +8,7 @@
         public: publicKey
       },
       privateKey,
-      128
+      256
     );
 
     const buffer = new Uint8Array(sharedSecret, 0, 5);

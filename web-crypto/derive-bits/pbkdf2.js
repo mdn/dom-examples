@@ -48,4 +48,5 @@
   deriveBitsButton.addEventListener("click", () => {
     getDerivedBits();
   });
+
 })();
