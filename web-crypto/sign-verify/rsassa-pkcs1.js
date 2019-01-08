@@ -10,7 +10,7 @@
   in a form we can use for sign operation.
   */
   function getMessageEncoding() {
-    const messageBox = document.querySelector(".rsassa-pkcs1 #message");
+    const messageBox = document.querySelector("#rsassa-pkcs1-message");
     let message = messageBox.value;
     let enc = new TextEncoder();
     return enc.encode(message);
