@@ -16,6 +16,13 @@
       225,57,197,175,71,80,209];
 
   /*
+  The unwrapped secret key.
+  */
+  let secretKey;
+
+  const encryptButton = document.querySelector(".raw .encrypt-button");
+
+  /*
   Convert an array of byte values to an ArrayBuffer.
   */
   function bytesToArrayBuffer(bytes) {
@@ -103,7 +110,7 @@
   Get the encoded message, encrypt it and display a representation
   of the ciphertext in the "Ciphertext" element.
   */
-  async function encryptMessage(key) {
+  async function encryptMessage() {
     const encoded = getMessageEncoding();
     // iv will be needed for decryption
     const iv = window.crypto.getRandomValues(new Uint8Array(12));
@@ -112,7 +119,7 @@
         name: "AES-GCM",
         iv: iv
       },
-      key,
+      secretKey,
       encoded
     );
 
@@ -126,19 +133,42 @@
   }
 
   /*
+  Hide and disable the encrypt button if key unwrapping failed.
+  */
+  function resetEncryptButton() {
+    encryptButton.setAttribute("disabled", true);
+    encryptButton.classList.add("hidden");
+  }
+
+  /*
+  Show and enable the encrypt button if key unwrapping succeeded.
+  */
+  function enableEncryptButton() {
+    encryptButton.classList.add('fade-in');
+    encryptButton.addEventListener('animationend', () => {
+      encryptButton.classList.remove('fade-in');
+    });
+    encryptButton.removeAttribute("disabled");
+    encryptButton.classList.remove("hidden");
+  }
+
+  /*
   When the user clicks "Unwrap Key"
   - unwrap the key
-  - enable the "Encrypt" button
-  - add a listener to "Encrypt" that uses the key.
+  - if unwrapping succeeded, enable the "Encrypt" button
   */
   const unwrapKeyButton = document.querySelector(".raw .unwrap-key-button");
   unwrapKeyButton.addEventListener("click", async () => {
-    const secretKey = await unwrapSecretKey(wrappedKeyBytes);
-    const encryptButton = document.querySelector(".raw .encrypt-button");
-    encryptButton.removeAttribute("disabled");
-    encryptButton.addEventListener("click", () => {
-      encryptMessage(secretKey);
-    });
+    try {
+      secretKey = await unwrapSecretKey(wrappedKeyBytes);
+      enableEncryptButton();
+    }
+    catch(e) {
+      resetEncryptButton();
+      alert("Incorrect password");
+    }
   });
+
+  encryptButton.addEventListener("click", encryptMessage);
 
 })();

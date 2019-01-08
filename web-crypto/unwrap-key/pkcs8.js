@@ -80,6 +80,13 @@
     33,110,126,170,25,234,45,165,180,210,193,120,247,155,127];
 
   /*
+  The unwrapped signing key.
+  */
+  let signingKey;
+
+  const signButton = document.querySelector(".pkcs8 .sign-button");
+
+  /*
   Convert an array of byte values to an ArrayBuffer.
   */
   function bytesToArrayBuffer(bytes) {
@@ -176,14 +183,14 @@
   Get the encoded message-to-sign, sign it and display a representation
   of the first part of it in the "signature" element.
   */
-  async function signMessage(privateKey) {
+  async function signMessage() {
     const encoded = getMessageEncoding();
     const signature = await window.crypto.subtle.sign(
       {
         name: "RSA-PSS",
         saltLength: 32,
       },
-      privateKey,
+      signingKey,
       encoded
     );
 
@@ -196,20 +203,43 @@
     signatureValue.textContent = `${buffer}...[${signature.byteLength} bytes total]`;
   }
 
+    /*
+    Hide and disable the sign button if key unwrapping failed.
+    */
+    function resetSignButton() {
+      signButton.setAttribute("disabled", true);
+      signButton.classList.add("hidden");
+    }
+
+    /*
+    Show and enable the sign button if key unwrapping succeeded.
+    */
+    function enableSignButton() {
+      signButton.classList.add('fade-in');
+      signButton.addEventListener('animationend', () => {
+        signButton.classList.remove('fade-in');
+      });
+      signButton.removeAttribute("disabled");
+      signButton.classList.remove("hidden");
+    }
+
   /*
   When the user clicks "Unwrap Key"
   - unwrap the key
-  - enable the "Sign" button
-  - add a listener to "Sign" that uses the key.
+  - if unwrapping succeeded, enable the "Sign" button
   */
   const unwrapKeyButton = document.querySelector(".pkcs8 .unwrap-key-button");
   unwrapKeyButton.addEventListener("click", async () => {
-    const privateKey = await unwrapPrivateKey(wrappedKeyBytes);
-    const signButton = document.querySelector(".pkcs8 .sign-button");
-    signButton.removeAttribute("disabled");
-    signButton.addEventListener("click", () => {
-      signMessage(privateKey);
-    });
+    try {
+      signingKey = await unwrapPrivateKey(wrappedKeyBytes);
+      enableSignButton();
+    }
+    catch(e) {
+      resetSignButton();
+      alert("Incorrect password");
+    }
   });
+
+  signButton.addEventListener("click", signMessage);
 
 })();

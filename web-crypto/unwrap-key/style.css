@@ -39,6 +39,15 @@ h1 {
     font-family: monospace;
 }
 
+.sign-button, .encrypt-button {
+    background-color: green;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
 /* Whole page grid */
 main {
     display: grid;
