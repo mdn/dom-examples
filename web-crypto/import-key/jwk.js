@@ -11,6 +11,13 @@
     };
 
     /*
+    The unwrapped signing key.
+    */
+    let signingKey;
+
+    const signButton = document.querySelector(".jwk .sign-button");
+
+    /*
     Import a JSON Web Key format EC private key, to use for ECDSA signing.
     Takes a string containing the JSON Web Key, and returns a Promise
     that will resolve to a CryptoKey representing the private key.
@@ -43,14 +50,14 @@
     Get the encoded message-to-sign, sign it and display a representation
     of the first part of it in the "signature" element.
     */
-    async function signMessage(privateKey) {
+    async function signMessage() {
       const encoded = getMessageEncoding();
       const signature = await window.crypto.subtle.sign(
         {
           name: "ECDSA",
           hash: "SHA-512"
         },
-        privateKey,
+        signingKey,
         encoded
       );
 
@@ -64,19 +71,28 @@
     }
 
     /*
+    Show and enable the sign button.
+    */
+    function enableSignButton() {
+      signButton.classList.add('fade-in');
+      signButton.addEventListener('animationend', () => {
+        signButton.classList.remove('fade-in');
+      });
+      signButton.removeAttribute("disabled");
+      signButton.classList.remove("hidden");
+    }
+
+    /*
     When the user clicks "Import Key"
     - import the key
     - enable the "Sign" button
-    - add a listener to "Sign" that uses the key.
     */
     const importKeyButton = document.querySelector(".jwk .import-key-button");
     importKeyButton.addEventListener("click", async () => {
-      const privateKey = await importPrivateKey(jwkEcKey);
-      const signButton = document.querySelector(".jwk .sign-button");
-      signButton.removeAttribute("disabled");
-      signButton.addEventListener("click", () => {
-        signMessage(privateKey);
-      });
+      signingKey = await importPrivateKey(jwkEcKey);
+      enableSignButton();
     });
+
+    signButton.addEventListener("click", signMessage);
 
 })();

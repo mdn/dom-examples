@@ -1,5 +1,16 @@
 (() => {
 
+  const pemEncodedKey = `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy3Xo3U13dc+xojwQYWoJLCbOQ5fOVY8LlnqcJm1W1BFtxIhOAJWohiHuIRMctv7dzx47TLlmARSKvTRjd0dF92jx/xY20Lz+DXp8YL5yUWAFgA3XkO3LSJgEOex10NB8jfkmgSb7QIudTVvbbUDfd5fwIBmCtaCwWx7NyeWWDb7A9cFxj7EjRdrDaK3ux/ToMLHFXVLqSL341TkCf4ZQoz96RFPUGPPLOfvN0x66CM1PQCkdhzjE6U5XGE964ZkkYUPPsy6Dcie4obhW4vDjgUmLzv0z7UD010RLIneUgDE2FqBfY/C+uWigNPBPkkQ+Bv/UigS6dHqTCVeD5wgyBQIDAQAB
+-----END PUBLIC KEY-----`;
+
+  /*
+  The unwrapped signing key.
+  */
+  let encryptionKey;
+
+  const encryptButton = document.querySelector(".spki .encrypt-button");
+
   /*
   Convert a string into an ArrayBuffer
   from https://developers.google.com/web/updates/2012/06/How-to-convert-ArrayBuffer-to-and-from-String
@@ -12,10 +23,6 @@
     }
     return buf;
   }
-
-  const pemEncodedKey = `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy3Xo3U13dc+xojwQYWoJLCbOQ5fOVY8LlnqcJm1W1BFtxIhOAJWohiHuIRMctv7dzx47TLlmARSKvTRjd0dF92jx/xY20Lz+DXp8YL5yUWAFgA3XkO3LSJgEOex10NB8jfkmgSb7QIudTVvbbUDfd5fwIBmCtaCwWx7NyeWWDb7A9cFxj7EjRdrDaK3ux/ToMLHFXVLqSL341TkCf4ZQoz96RFPUGPPLOfvN0x66CM1PQCkdhzjE6U5XGE964ZkkYUPPsy6Dcie4obhW4vDjgUmLzv0z7UD010RLIneUgDE2FqBfY/C+uWigNPBPkkQ+Bv/UigS6dHqTCVeD5wgyBQIDAQAB
------END PUBLIC KEY-----`;
 
   /*
   Import a PEM encoded RSA public key, to use for RSA-OAEP encryption.
@@ -59,13 +66,13 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy3Xo3U13dc+xojwQYWoJLCbOQ5fOVY8Llnqc
   Get the encoded message, encrypt it and display a representation
   of the ciphertext in the "Ciphertext" element.
   */
-  async function encryptMessage(key) {
+  async function encryptMessage() {
     const encoded = getMessageEncoding();
     const ciphertext = await window.crypto.subtle.encrypt(
       {
         name: "RSA-OAEP"
       },
-      key,
+      encryptionKey,
       encoded
     );
 
@@ -79,19 +86,28 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy3Xo3U13dc+xojwQYWoJLCbOQ5fOVY8Llnqc
   }
 
   /*
+  Show and enable the encrypt button.
+  */
+  function enableEncryptButton() {
+    encryptButton.classList.add('fade-in');
+    encryptButton.addEventListener('animationend', () => {
+      encryptButton.classList.remove('fade-in');
+    });
+    encryptButton.removeAttribute("disabled");
+    encryptButton.classList.remove("hidden");
+  }
+
+  /*
   When the user clicks "Import Key"
   - import the key
   - enable the "Encrypt" button
-  - add a listener to "Encrypt" that uses the key.
   */
   const importKeyButton = document.querySelector(".spki .import-key-button");
   importKeyButton.addEventListener("click", async () => {
-    const publicKey = await importPublicKey(pemEncodedKey);
-    const encryptButton = document.querySelector(".spki .encrypt-button");
-    encryptButton.removeAttribute("disabled");
-    encryptButton.addEventListener("click", () => {
-      encryptMessage(publicKey);
-    });
+    encryptionKey = await importPublicKey(pemEncodedKey);
+    enableEncryptButton();
   });
+
+  encryptButton.addEventListener("click", encryptMessage);
 
 })();

@@ -3,6 +3,13 @@
   const rawKey = window.crypto.getRandomValues(new Uint8Array(16));
 
   /*
+  The imported secret key.
+  */
+  let secretKey;
+
+  const encryptButton = document.querySelector(".raw .encrypt-button");
+
+  /*
   Import an AES secret key from an ArrayBuffer containing the raw bytes.
   Takes an ArrayBuffer string containing the bytes, and returns a Promise
   that will resolve to a CryptoKey representing the secret key.
@@ -32,7 +39,7 @@
   Get the encoded message, encrypt it and display a representation
   of the ciphertext in the "Ciphertext" element.
   */
-  async function encryptMessage(key) {
+  async function encryptMessage() {
     const encoded = getMessageEncoding();
     // iv will be needed for decryption
     const iv = window.crypto.getRandomValues(new Uint8Array(12));
@@ -41,7 +48,7 @@
         name: "AES-GCM",
         iv: iv
       },
-      key,
+      secretKey,
       encoded
     );
 
@@ -54,20 +61,29 @@
     ciphertextValue.textContent = `${buffer}...[${ciphertext.byteLength} bytes total]`;
   }
 
+    /*
+    Show and enable the encrypt button.
+    */
+    function enableEncryptButton() {
+      encryptButton.classList.add('fade-in');
+      encryptButton.addEventListener('animationend', () => {
+        encryptButton.classList.remove('fade-in');
+      });
+      encryptButton.removeAttribute("disabled");
+      encryptButton.classList.remove("hidden");
+    }
+
   /*
   When the user clicks "Import Key"
   - import the key
   - enable the "Encrypt" button
-  - add a listener to "Encrypt" that uses the key.
   */
   const importKeyButton = document.querySelector(".raw .import-key-button");
   importKeyButton.addEventListener("click", async () => {
-    const secretKey = await importSecretKey(rawKey);
-    const encryptButton = document.querySelector(".raw .encrypt-button");
-    encryptButton.removeAttribute("disabled");
-    encryptButton.addEventListener("click", () => {
-      encryptMessage(secretKey);
-    });
+    secretKey = await importSecretKey(rawKey);
+    enableEncryptButton();
   });
+
+  encryptButton.addEventListener("click", encryptMessage);
 
 })();
