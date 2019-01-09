@@ -101,8 +101,8 @@
   The key material is a password supplied by the user.
   */
   function getKeyMaterial() {
-    let password = window.prompt("Enter your password");
-    let enc = new TextEncoder();
+    const password = window.prompt("Enter your password");
+    const enc = new TextEncoder();
     return window.crypto.subtle.importKey(
       "raw",
       enc.encode(password),
