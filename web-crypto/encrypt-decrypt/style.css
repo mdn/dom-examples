@@ -16,7 +16,7 @@ h1 {
     margin-left: .5rem;
 }
 
-.description, .sign-verify {
+.description, .encrypt-decrypt {
     margin: 0 .5rem;
 }
 
@@ -24,13 +24,13 @@ h1 {
     margin-top: 0;
 }
 
-.sign-verify {
+.encrypt-decrypt {
     box-shadow: -1px 2px 5px gray;
     padding: .2rem .5rem;
     margin-bottom: 2rem;
 }
 
-.sign-verify-controls > * {
+.encrypt-decrypt-controls > * {
     margin: .5rem 0;
 }
 
@@ -38,26 +38,9 @@ input[type="button"] {
     width: 5rem;
 }
 
-.signature-value {
+.ciphertext-value, .decrypted-value {
     padding-left: .5rem;
     font-family: monospace;
-}
-
-/* Validity CSS */
-.valid {
-    color: green;
-}
-
-.invalid {
-    color: red;
-}
-
-.invalid::after {
-    content: ' ✖';
-}
-
-.valid::after {
-    content: ' ✓';
 }
 
 /* Whole page grid */
@@ -82,11 +65,11 @@ h1 {
     grid-row: 2;
 }
 
-/* sign-verify controls grid */
-.sign-verify-controls {
+/* encrypt-decrypt controls grid */
+.encrypt-decrypt-controls {
     display: grid;
     grid-template-columns: 1fr 5rem;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 .message-control {
@@ -94,17 +77,22 @@ h1 {
     grid-row-start: 1;
 }
 
-.signature {
+.ciphertext {
     grid-column-start: 1;
     grid-row-start: 2;
 }
 
-.sign-button {
+.decrypted {
+    grid-column-start: 1;
+    grid-row-start: 3;
+}
+
+.encrypt-button {
     grid-column-start: 2;
     grid-row-start: 1;
 }
 
-.verify-button {
+.decrypt-button {
     grid-column-start: 2;
     grid-row-start: 2;
 }
