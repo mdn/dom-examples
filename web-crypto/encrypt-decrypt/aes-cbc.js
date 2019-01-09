@@ -23,6 +23,7 @@
   */
   async function encryptMessage(key) {
     let encoded = getMessageEncoding();
+    // The iv must never be reused with a given key.
     iv = window.crypto.getRandomValues(new Uint8Array(16));
     ciphertext = await window.crypto.subtle.encrypt(
       {
