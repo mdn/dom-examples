@@ -203,25 +203,25 @@
     signatureValue.textContent = `${buffer}...[${signature.byteLength} bytes total]`;
   }
 
-    /*
-    Hide and disable the sign button if key unwrapping failed.
-    */
-    function resetSignButton() {
-      signButton.setAttribute("disabled", true);
-      signButton.classList.add("hidden");
-    }
+  /*
+  Hide and disable the sign button if key unwrapping failed.
+  */
+  function resetSignButton() {
+    signButton.setAttribute("disabled", true);
+    signButton.classList.add("hidden");
+  }
 
-    /*
-    Show and enable the sign button if key unwrapping succeeded.
-    */
-    function enableSignButton() {
-      signButton.classList.add('fade-in');
-      signButton.addEventListener('animationend', () => {
-        signButton.classList.remove('fade-in');
-      });
-      signButton.removeAttribute("disabled");
-      signButton.classList.remove("hidden");
-    }
+  /*
+  Show and enable the sign button if key unwrapping succeeded.
+  */
+  function enableSignButton() {
+    signButton.classList.add('fade-in');
+    signButton.addEventListener('animationend', () => {
+      signButton.classList.remove('fade-in');
+    });
+    signButton.removeAttribute("disabled");
+    signButton.classList.remove("hidden");
+  }
 
   /*
   When the user clicks "Unwrap Key"
