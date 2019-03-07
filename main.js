@@ -3,7 +3,7 @@ const second = document.querySelector('#number2');
 
 const result = document.querySelector('.result');
 
-if (!!window.Worker) {
+if (window.Worker) {
 	const myWorker = new Worker("worker.js");
 
 	first.onchange = function() {
@@ -20,4 +20,6 @@ if (!!window.Worker) {
 		result.textContent = e.data;
 		console.log('Message received from worker');
 	}
+} else {
+	console.log('Your browser doesn\'t support web workers.')
 }
