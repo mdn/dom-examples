@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ReportingObserver demo: Deprecation report</title>
+  <meta charset="utf-8">
+  <style>
+    video {
+      display: block;
+      border: 2px solid black;
+      margin: 0 auto;
+    }
+
+  </style>
+</head>
+<body>
+  <video controls>
+    <p>Video not supported in your browser.</p>
+  </video>
+
+  <button>Show reports</button>
+
+  <div class="output"></div>
+
+  <script>
+    // Get reference to button
+    const reportBtn = document.querySelector('button');
+
+    // Set up function to display reports
+    function displayReports(reports) {
+      const outputElem = document.querySelector('.output');
+      const list = document.createElement('ul');
+      outputElem.appendChild(list);
+
+      for(let i = 0; i < reports.length; i++) {
+        let listItem = document.createElement('li');
+        let textNode = document.createTextNode('Report ' + (i + 1) + ', type: ' + reports[i].type);
+        listItem.appendChild(textNode);
+        let innerList = document.createElement('ul');
+        listItem.appendChild(innerList);
+        list.appendChild(listItem);
+
+        for (let key in reports[i].body) {
+          let innerListItem = document.createElement('li');
+          let keyValue = reports[i].body[key];
+          innerListItem.textContent = key + ': ' + keyValue;
+          innerList.appendChild(innerListItem);
+        }
+      }
+    }
+
+    // Set up reporting observer
+    let options = {
+      types: ['deprecation'],
+      buffered: true
+    }
+
+    let observer = new ReportingObserver(function(reports, observer) {
+      reportBtn.onclick = () => displayReports(reports);
+    }, options);
+
+    // try to use old-style getUserMedia
+    const videoElem = document.querySelector('video');
+
+    const constraints = {
+      audio: true,
+      video: {
+        width: 480,
+        height: 320
+      }
+    }
+
+    observer.observe();
+
+    if(navigator.mozGetUserMedia) {
+      navigator.mozGetUserMedia(
+        constraints,
+        success,
+        failure);
+    } else {
+      navigator.getUserMedia(
+        constraints,
+        success,
+        failure);
+    }
+
+    let takenRecords = observer.takeRecords();
+    console.log(takenRecords);
+
+    if(navigator.mozGetUserMedia) {
+      navigator.mozGetUserMedia(
+        constraints,
+        success,
+        failure);
+    } else {
+      navigator.getUserMedia(
+        constraints,
+        success,
+        failure);
+    }
+
+    // observer.disconnect();
+
+    function success(stream) {
+      videoElem.srcObject = stream;
+      videoElem.onloadedmetadata = () => videoElem.play();
+    }
+
+    function failure(e) {
+      console.log('The following gUM error occured: ' + e)
+    }
+  </script>
+
+</body>
+</html>

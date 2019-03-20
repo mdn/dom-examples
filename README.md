@@ -29,6 +29,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "pointer-lock" directory contains a simple demo to show usage of the Pointer Lock API. You can find more explanation of how the demo works at the main MDN [Pointer Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API) page. [Run the demo live](http://mdn.github.io/dom-examples/pointer-lock/).
 
+* The "reporting-api" directory contains a couple of simple demos to show usage of the Reprting API. You can find more explanation of how the API works in the main MDN [Reporting API](https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API) docs. [Run the deprecation report demo live](http://mdn.github.io/dom-examples/reporting-api/deprecation_report.html).
+
 * The "screenleft-screentop" directory contains a demo to show how you could use the [Window.screenLeft](https://developer.mozilla.org/en-US/docs/Web/API/Window/screenLeft) and [Window.screenTop](https://developer.mozilla.org/en-US/docs/Web/API/Window/screenTop) properties to draw a circle on a canvas that always stays in the same physical place on the screen when you move your browser window. [Run the demo live](http://mdn.github.io/dom-examples/screenleft-screentop/).
 
 * The "scrolltooptions" directory contains a demo to show how you could use the [ScrollToOptions](https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions) dictionary along with the [Window.ScrollTo()](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo) method to programmatically scroll a web page. [Run the demo live](http://mdn.github.io/dom-examples/scrolltooptions/).

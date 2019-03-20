@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ReportingObserver demo: Intervention report</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <button>Show reports</button>
+
+  <div class="output"></div>
+
+  <script>
+    // Get reference to button
+    const reportBtn = document.querySelector('button');
+
+    // Set up function to display reports
+    function displayReports(reports) {
+      const outputElem = document.querySelector('.output');
+      const list = document.createElement('ul');
+      outputElem.appendChild(list);
+
+      for(let i = 0; i < reports.length; i++) {
+        let listItem = document.createElement('li');
+        let textNode = document.createTextNode('Report ' + (i + 1) + ', type: ' + reports[i].type);
+        listItem.appendChild(textNode);
+        let innerList = document.createElement('ul');
+        listItem.appendChild(innerList);
+        list.appendChild(listItem);
+
+        for (let key in reports[i].body) {
+          let innerListItem = document.createElement('li');
+          let keyValue = reports[i].body[key];
+          innerListItem.textContent = key + ': ' + keyValue;
+          innerList.appendChild(innerListItem);
+        }
+      }
+    }
+
+    // Set up reporting observer
+    let options = {
+      types: ['intervention'],
+      buffered: true
+    }
+
+    let observer = new ReportingObserver(function(reports, observer) {
+      reportBtn.onclick = () => displayReports(reports);
+    }, options);
+
+    observer.observe();
+
+    // try to autoplay some sound
+    let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let myArrayBuffer = audioCtx.createBuffer(2, audioCtx.sampleRate * 3, audioCtx.sampleRate);
+
+    for (let channel = 0; channel < myArrayBuffer.numberOfChannels; channel++) {
+      let nowBuffering = myArrayBuffer.getChannelData(channel);
+      for (let i = 0; i < myArrayBuffer.length; i++) {
+        nowBuffering[i] = Math.random() * 2 - 1;
+      }
+    }
+  </script>
+
+</body>
+</html>
