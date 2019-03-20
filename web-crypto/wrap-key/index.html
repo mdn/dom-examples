@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web Crypto API example</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <main>
+      <h1>Web Crypto: wrapKey</h1>
+
+      <section class="description">
+        <p>This page shows the use of the <code>wrapKey()</code> function of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>.</p>
+        <p>On page load, it generates four keys:</p>
+        <ul>
+          <li>An AES-GCM secret key</li>
+          <li>An RSA-PSS signing key pair</li>
+          <li>An RSA-OAEP encryption key pair</li>
+          <li>An ECDSA signing key pair</li>
+        </ul>
+        <p>It provides four buttons across the top:</p>
+        <ul>
+          <li>Wrap the AES-GCM key in raw format</li>
+          <li>Wrap the RSA-PSS private key in PKCS #8 format</li>
+          <li>Wrap the RSA-OAEP public key in SubjectPublicKeyInfo format</li>
+          <li>Wrap the ECDSA private key in JWK format</li>
+        </ul>
+        <p>"Wrapping" a key essentially means exporting it in an encrypted form. So in all four cases, when you click the button you'll be asked for a password, and we will derive a symmetric key from the password, which we will use to encrypt the key after it is exported.</p>
+        <p>The exported, encrypted key is written to the area below the buttons.</p>
+      </section>
+
+      <section class="examples">
+        <section class="buttons">
+          <input class="raw wrap-key-button" type="button" value="Wrap AES-GCM key as raw">
+          <input class="pkcs8 wrap-key-button" type="button" value="Wrap RSA-PSS key as PKCS #8">
+          <input class="spki wrap-key-button" type="button" value="Wrap RSA-OAEP key as SPKI">
+          <input class="jwk wrap-key-button" type="button" value="Wrap ECDSA key as JWK">
+        </section>
+        <section class="output">
+          <pre class="wrapped-key"></pre>
+        </section>
+      </section>
+
+    </main>
+
+  </body>
+  <script src="raw.js"></script>
+  <script src="pkcs8.js"></script>
+  <script src="spki.js"></script>
+  <script src="jwk.js"></script>
+</html>

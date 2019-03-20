@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web Crypto API example</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <main>
+      <h1>Web Crypto: unwrapKey</h1>
+
+      <section class="description">
+        <p>This page shows the use of the <code>unwrapKey()</code> function of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>. It contains two separate examples:</p>
+        <ul>
+          <li>Raw/AES-GCM/AES-KW: unwrap an AES-GCM encryption key, that was encrypted using AES-KW and exported in "raw" format.</li>
+          <li>PKCS #8/RSA-PSS/AES-GCM:  unwrap an RSA-PSS signing key, that was encrypted using AES-GCM and exported in "pkcs8" format.</li>
+        </ul>
+        <p>Both examples have the same structure: you get a message and a button labeled "Unwrap Key".</p>
+        <p>If you click "Unwrap Key" then the example unwraps its particular key. First it will ask for a password: the password you must enter is <strong>correct horse battery staple</strong>. It uses the password to derive the key that was used to encrypt the wrapped key. It then unwraps the wrapped key. If you get the password wrong, unwrapping will fail.</p>
+        <p>If unwrapping was successful, a new button is displayed, that enables you to use the unwrapped key. For "raw/AES-GCM" the new button is labeled "Encrypt", and for "pkcs8/RSA-PSS" it's labeled "Sign". You can click the new button to use the unwrapped key to perform the appropriate operation and display the result.</p>
+      </section>
+
+      <section class="examples">
+
+        <section class="unwrap-key raw">
+          <h2 class="unwrap-key-heading">Raw/AES-GCM/AES-KW</h2>
+          <section class="unwrap-key-controls">
+            <div class="message-control">
+              <label for="raw-message">Enter a message to encrypt:</label>
+              <input type="text" id="raw-message" name="message" size="25"
+                     value="The owl hoots at midnight">
+            </div>
+            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
+            <input class="unwrap-key-button" type="button" value="Unwrap Key">
+            <input class="encrypt-button hidden" type="button" value="Encrypt" disabled>
+          </section>
+        </section>
+
+        <section class="unwrap-key pkcs8">
+          <h2 class="unwrap-key-heading">PKCS #8/RSA-PSS/AES-GCM</h2>
+          <section class="unwrap-key-controls">
+            <div class="message-control">
+              <label for="pkcs8-message">Enter a message to sign:</label>
+              <input type="text" id="pkcs8-message" name="message" size="25"
+                     value="The tiger prowls at dawn">
+            </div>
+            <div class="signature">Signature:<span class="signature-value"></span></div>
+            <input class="unwrap-key-button" type="button" value="Unwrap Key">
+            <input class="sign-button hidden" type="button" value="Sign" disabled>
+          </section>
+        </section>
+
+      </section>
+    </main>
+
+  </body>
+  <script src="raw.js"></script>
+  <script src="pkcs8.js"></script>
+</html>

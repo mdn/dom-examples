@@ -10,7 +10,7 @@
   in a form we can use for sign operation.
   */
   function getMessageEncoding() {
-    const messageBox = document.querySelector(".hmac #message");
+    const messageBox = document.querySelector("#hmac-message");
     let message = messageBox.value;
     let enc = new TextEncoder();
     return enc.encode(message);
@@ -35,8 +35,8 @@
     signatureValue.addEventListener('animationend', () => {
       signatureValue.classList.remove('fade-in');
     });
-    let buffer = new Uint8Array(signature, 0, 10);
-    signatureValue.textContent = buffer;
+    let buffer = new Uint8Array(signature, 0, 5);
+    signatureValue.textContent = `${buffer}...[${signature.byteLength} bytes total]`;
   }
 
   /*

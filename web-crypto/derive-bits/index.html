@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web Crypto API example</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <main>
+      <h1>Web Crypto: deriveBits</h1>
+
+      <section class="description">
+        <p>This page shows how to use the <code>deriveBits()</code> function of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>. It contains two separate examples, one for PBKDF2 and one for ECDH.</p>
+
+        <p>It's important to note that although both are defined in the API as key derivation functions, PBKDF2 and ECDH have very different use cases and characteristics.</p>
+
+        <hr/>
+        <h2>PBKDF2 example</h2>
+        <p>The PBKDF2 algorithm is used here to derive some bits from a password.</p>
+        <p>When you click "Derive bits" the example prompts you for a password and then derives some bits from the password using PBKDF2, and a representation of the derived bits is displayed.</p>
+
+        <hr/>
+        <h2>ECDH example</h2>
+        <p>The ECDH algorithm is more commonly called a "key agreement" algorithm. It enables two parties (conventionally called "Alice" and "Bob"), each of whom has a public/private key pair, to establish a shared secret key.</p>
+        <p>With this example we've created two ECDH key pairs, one for Alice and one for Bob.</p>
+        <p>When you click "Derive bits" the example uses Alice's private key and Bob's public key to derive a shared secret, and a representation of the shared secret is displayed.</p>
+
+      </section>
+
+      <section class="examples">
+
+        <section class="derive-bits pbkdf2">
+          <h2>PBKDF2</h2>
+          <section class="derive-bits-controls">
+            <div class="derived-bits">Derived bits:<span class="derived-bits-value"></span></div>
+            <input class="derive-bits-button" type="button" value="Derive bits">
+          </section>
+        </section>
+
+        <section class="derive-bits ecdh">
+          <h2>ECDH</h2>
+          <section class="derive-bits-controls">
+            <div class="derived-bits">Shared secret:<span class="derived-bits-value"></span></div>
+            <input class="derive-bits-button" type="button" value="Derive bits">
+          </section>
+        </section>
+
+      </section>
+    </main>
+
+  </body>
+  <script src="pbkdf2.js"></script>
+  <script src="ecdh.js"></script>
+</html>

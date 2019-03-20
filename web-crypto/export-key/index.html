@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web Crypto API example</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <main>
+      <h1>Web Crypto: exportKey</h1>
+
+      <section class="description">
+        <p>This page shows the use of the <code>exportKey()</code> function of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>.</p>
+        <p>On page load, it generates four keys:</p>
+        <ul>
+          <li>An AES-GCM secret key</li>
+          <li>An RSA-PSS signing key pair</li>
+          <li>An RSA-OAEP encryption key pair</li>
+          <li>An ECDSA signing key pair</li>
+        </ul>
+        <p>It provides four buttons across the top:</p>
+        <ul>
+          <li>Export the AES-GCM key in raw format</li>
+          <li>Export the RSA-PSS private key in PKCS #8 format</li>
+          <li>Export the RSA-OAEP public key in SubjectPublicKeyInfo format</li>
+          <li>Export the ECDSA private key in JWK format</li>
+        </ul>
+        <p>The exported key is written to the area below the buttons. PKCS #8 and SubjectPublicKeyInfo formats are further encoded as PEM objects.</p>
+      </section>
+
+      <section class="examples">
+        <section class="buttons">
+          <input class="raw export-key-button" type="button" value="Export AES-GCM key as raw">
+          <input class="pkcs8 export-key-button" type="button" value="Export RSA-PSS key as PKCS #8">
+          <input class="spki export-key-button" type="button" value="Export RSA-OAEP key as SPKI">
+          <input class="jwk export-key-button" type="button" value="Export ECDSA key as JWK">
+        </section>
+        <section class="output">
+          <pre class="exported-key"></pre>
+        </section>
+      </section>
+
+    </main>
+
+  </body>
+  <script src="raw.js"></script>
+  <script src="pkcs8.js"></script>
+  <script src="spki.js"></script>
+  <script src="jwk.js"></script>
+</html>

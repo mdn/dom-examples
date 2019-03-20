@@ -1,0 +1,72 @@
+/* General setup */
+
+* {
+    box-sizing: border-box;
+}
+
+html,body {
+    font-family: sans-serif;
+    line-height: 1.2rem;
+}
+
+/* Layout and styles */
+
+h1 {
+    color: green;
+    margin-left: .5rem;
+}
+
+.description, .examples {
+    margin: 0 .5rem;
+}
+
+.description > p {
+    margin-top: 0;
+}
+
+.output {
+    box-shadow: inset 0 0 3px 1px black;
+    height: 100%;
+}
+
+.exported-key {
+    padding: 1em;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* Whole page grid */
+main {
+    display: grid;
+    grid-template-columns: 48rem 1fr;
+    grid-template-rows: 4rem 1fr;
+}
+
+h1 {
+    grid-column: 1/2;
+    grid-row: 1;
+}
+
+.examples {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.description {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+/* Animate output display */
+.fade-in {
+    animation: fadein .5s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

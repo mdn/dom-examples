@@ -16,7 +16,7 @@ h1 {
     margin-left: .5rem;
 }
 
-.description, .sign-verify {
+.description, .derive-bits {
     margin: 0 .5rem;
 }
 
@@ -24,46 +24,25 @@ h1 {
     margin-top: 0;
 }
 
-.sign-verify {
+.derive-bits {
     box-shadow: -1px 2px 5px gray;
-    padding: .2rem .5rem;
+    padding: .5rem;
     margin-bottom: 2rem;
-}
-
-.sign-verify-controls > * {
-    margin: .5rem 0;
 }
 
 input[type="button"] {
     width: 5rem;
 }
 
-.signature-value {
+.derived-bits-value {
     padding-left: .5rem;
     font-family: monospace;
-}
-
-/* Validity CSS */
-.valid {
-    color: green;
-}
-
-.invalid {
-    color: red;
-}
-
-.invalid::after {
-    content: ' ✖';
-}
-
-.valid::after {
-    content: ' ✓';
 }
 
 /* Whole page grid */
 main {
     display: grid;
-    grid-template-columns: 32rem 1fr;
+    grid-template-columns: 40rem 1fr;
     grid-template-rows: 4rem 1fr;
 }
 
@@ -82,31 +61,21 @@ h1 {
     grid-row: 2;
 }
 
-/* sign-verify controls grid */
-.sign-verify-controls {
+/* derive-bits controls grid */
+.derive-bits-controls {
     display: grid;
     grid-template-columns: 1fr 5rem;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr;
 }
 
-.message-control {
+.derived-bits {
     grid-column-start: 1;
     grid-row-start: 1;
 }
 
-.signature {
-    grid-column-start: 1;
-    grid-row-start: 2;
-}
-
-.sign-button {
+.derive-bits-button {
     grid-column-start: 2;
     grid-row-start: 1;
-}
-
-.verify-button {
-    grid-column-start: 2;
-    grid-row-start: 2;
 }
 
 /* Animate output display */

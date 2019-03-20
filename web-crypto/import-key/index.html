@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web Crypto API example</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <main>
+      <h1>Web Crypto: importKey</h1>
+
+      <section class="description">
+        <p>This page shows the use of the <code>importKey()</code> function of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>. It contains four separate examples, one for each import format supported:</p>
+        <ul>
+          <li>Raw</li>
+          <li>PKCS #8</li>
+          <li>SubjectPublicKeyInfo</li>
+          <li>JSON Web Key</li>
+        </ul>
+        <p>Each example has the same structure: you get a message a button labeled "Import Key".</p>
+        <p>If you click "Import Key" then the example imports a particular key:</p>
+        <ul>
+          <li>For "Raw", an AES encryption key.</li>
+          <li>For "PKCS #8", an RSA private signing key.</li>
+          <li>For "SubjectPublicKeyInfo", an RSA public encryption key.</li>
+          <li>For "JSON Web Key", an EC private signing key.</li>
+        </ul>
+        <p>A new button is then displayed, labeled "Sign" or "Encrypt", depending on the key that was imported. You can click it to use the imported key to perform the appropriate operation and display the result.</p>
+      </section>
+
+      <section class="examples">
+
+        <section class="import-key raw">
+          <h2 class="import-key-heading">Raw</h2>
+          <section class="import-key-controls">
+            <div class="message-control">
+              <label for="raw-message">Enter a message to encrypt:</label>
+              <input type="text" id="raw-message" name="message" size="25"
+                     value="The owl hoots at midnight">
+            </div>
+            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
+            <input class="import-key-button" type="button" value="Import Key">
+            <input class="encrypt-button hidden" type="button" value="Encrypt" disabled>
+          </section>
+        </section>
+
+        <section class="import-key pkcs8">
+          <h2 class="import-key-heading">PKCS #8</h2>
+          <section class="import-key-controls">
+            <div class="message-control">
+              <label for="pkcs8-message">Enter a message to sign:</label>
+              <input type="text" id="pkcs8-message" name="message" size="25"
+                     value="The tiger prowls at dawn">
+            </div>
+            <div class="signature">Signature:<span class="signature-value"></span></div>
+            <input class="import-key-button" type="button" value="Import Key">
+            <input class="sign-button hidden" type="button" value="Sign" disabled>
+          </section>
+        </section>
+
+        <section class="import-key spki">
+          <h2 class="import-key-heading">SubjectPublicKeyInfo</h2>
+          <section class="import-key-controls">
+            <div class="message-control">
+              <label for="spki-message">Enter a message to encrypt:</label>
+              <input type="text" id="spki-message" name="message" size="25"
+                     value="The eagle flies at twilight">
+            </div>
+            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
+            <input class="import-key-button" type="button" value="Import Key">
+            <input class="encrypt-button hidden" type="button" value="Encrypt" disabled>
+          </section>
+        </section>
+
+        <section class="import-key jwk">
+          <h2 class="import-key-heading">JSON Web Key</h2>
+          <section class="import-key-controls">
+            <div class="message-control">
+              <label for="jwk-message">Enter a message to sign:</label>
+              <input type="text" id="jwk-message" name="message" size="25"
+                     value="The bunny hops at teatime">
+            </div>
+            <div class="signature">Signature:<span class="signature-value"></span></div>
+            <input class="import-key-button" type="button" value="Import Key">
+            <input class="sign-button hidden" type="button" value="Sign" disabled>
+          </section>
+        </section>
+
+      </section>
+    </main>
+
+  </body>
+  <script src="raw.js"></script>
+  <script src="pkcs8.js"></script>
+  <script src="spki.js"></script>
+  <script src="jwk.js"></script>
+</html>
