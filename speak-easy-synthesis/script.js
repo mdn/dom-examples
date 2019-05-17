@@ -57,6 +57,7 @@ function speak(){
     for(i = 0; i < voices.length ; i++) {
       if(voices[i].name === selectedOption) {
         utterThis.voice = voices[i];
+        break;
       }
     }
     utterThis.pitch = pitch.value;
