@@ -48,7 +48,6 @@
   Write the decrypted message into the "Decrypted" box.
   */
   async function decryptMessage(key) {
-    let encoded = getMessageEncoding();
     let decrypted = await window.crypto.subtle.decrypt(
       {
         name: "AES-CBC",
