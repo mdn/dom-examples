@@ -45,7 +45,7 @@
   }
 
   /*
-  Fetch the encoded message and decrypt it.
+  Fetch the ciphertext and decrypt it.
   Write the decrypted message into the "Decrypted" box.
   */
   async function decryptMessage(key) {
