@@ -26,13 +26,13 @@
   function getKey(keyMaterial, salt) {
     return window.crypto.subtle.deriveKey(
       {
-        "name": "PBKDF2",
+        name: "PBKDF2",
         salt: salt, 
-        "iterations": 100000,
-        "hash": "SHA-256"
+        iterations: 100000,
+        hash: "SHA-256"
       },
       keyMaterial,
-      { "name": "AES-GCM", "length": 256},
+      { name: "AES-GCM", length: 256},
       true,
       [ "wrapKey", "unwrapKey" ]
     );
