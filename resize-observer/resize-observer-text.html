@@ -40,19 +40,19 @@
       <p>And remember, don't do anything that affects anything, unless it turns out you were supposed to, in which case, for the love of God, don't not do it! Ow, my spirit! I don't want to be rescued. You guys aren't Santa! You're not even robots. I've got to find a way to escape the horrible ravages of youth. Suddenly, I'm going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now 'I' have to pay 'them'!</p>
     </div>
     <script>
-    if(ResizeObserver) {
-      const h1Elem = document.querySelector('h1');
-      const pElem = document.querySelector('p');
+      if(ResizeObserver) {
+        const h1Elem = document.querySelector('h1');
+        const pElem = document.querySelector('p');
 
-      const resizeObserver = new ResizeObserver(entries => {
-        for (let entry of entries) {
-          h1Elem.style.fontSize = Math.max(2, entry.contentRect.width/200) + 'rem';
-          pElem.style.fontSize = Math.max(1.2, entry.contentRect.width/600) + 'rem';
-        }
-      });
+        const resizeObserver = new ResizeObserver(entries => {
+          for (let entry of entries) {
+            h1Elem.style.fontSize = Math.max(2, entry.contentRect.width/200) + 'rem';
+            pElem.style.fontSize = Math.max(1.2, entry.contentRect.width/600) + 'rem';
+          }
+        });
 
-      resizeObserver.observe(document.querySelector('div'));
-    }
+        resizeObserver.observe(document.querySelector('div'));
+      }
     </script>
   </body>
 </html>
