@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Resize observer text test</title>
+    <style>
+      html {
+        height: 100%;
+        font-family: 'helvetica neue', arial, sans-serif;
+      }
+
+      body {
+        height: inherit;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      div {
+        background-color: #eee;
+        border: 1px solid #ccc;
+        padding: 20px;
+        width: 50%;
+        min-width: 320px;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>So what happened?</h1>
+      <p>And remember, don't do anything that affects anything, unless it turns out you were supposed to, in which case, for the love of God, don't not do it! Ow, my spirit! I don't want to be rescued. You guys aren't Santa! You're not even robots. I've got to find a way to escape the horrible ravages of youth. Suddenly, I'm going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now 'I' have to pay 'them'!</p>
+    </div>
+    <script>
+    if(ResizeObserver) {
+      const h1Elem = document.querySelector('h1');
+      const pElem = document.querySelector('p');
+
+      const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+          h1Elem.style.fontSize = Math.max(2, entry.contentRect.width/200) + 'rem';
+          pElem.style.fontSize = Math.max(1.2, entry.contentRect.width/600) + 'rem';
+        }
+      });
+
+      resizeObserver.observe(document.querySelector('div'));
+    }
+    </script>
+  </body>
+</html>

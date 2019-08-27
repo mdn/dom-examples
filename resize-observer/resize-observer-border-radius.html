@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Resize observer border-radius test</title>
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        height: inherit;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      div {
+        background-color: green;
+        width: 50%;
+        height: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+    </div>
+    <script>
+const resizeObserver = new ResizeObserver(entries => {
+  for (let entry of entries) {
+    entry.target.style.borderRadius = Math.min(100, (entry.contentRect.width/10) +
+                                                    (entry.contentRect.height/10)) + 'px';
+  }
+});
+
+resizeObserver.observe(document.querySelector('div'));
+
+    </script>
+  </body>
+</html>
