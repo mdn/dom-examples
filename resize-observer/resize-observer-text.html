@@ -17,7 +17,7 @@
         align-items: center;
       }
 
-      div {
+      body > div {
         background-color: #eee;
         border: 1px solid #ccc;
         padding: 20px;
@@ -32,26 +32,58 @@
       p {
         line-height: 1.5;
       }
+
+      form {
+        width: 100%;
+      }
+
+      form > div {
+        display: flex;
+      }
+
+      form label {
+        flex: 2;
+      }
+
+      form input {
+        flex: 3;
+      }
     </style>
   </head>
   <body>
     <div>
       <h1>So what happened?</h1>
       <p>And remember, don't do anything that affects anything, unless it turns out you were supposed to, in which case, for the love of God, don't not do it! Ow, my spirit! I don't want to be rescued. You guys aren't Santa! You're not even robots. I've got to find a way to escape the horrible ravages of youth. Suddenly, I'm going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now 'I' have to pay 'them'!</p>
+      <form>
+        <div><label>Adjust width:</label><input type="range" value="600" min="300" max="1300"></div>
+      </form>
     </div>
     <script>
       if(ResizeObserver) {
         const h1Elem = document.querySelector('h1');
         const pElem = document.querySelector('p');
+        const divElem = document.querySelector('body > div');
+        const slider = document.querySelector('input');
+
+        divElem.style.width = '600px';
+
+        slider.addEventListener('input', () => {
+          divElem.style.width = slider.value + 'px';
+        })
 
         const resizeObserver = new ResizeObserver(entries => {
           for (let entry of entries) {
-            h1Elem.style.fontSize = Math.max(2, entry.contentBoxSize.inlineSize/200) + 'rem';
-            pElem.style.fontSize = Math.max(1.2, entry.contentBoxSize.inlineSize/600) + 'rem';
+            if(entry.contentBoxSize) {
+              h1Elem.style.fontSize = Math.max(1.5, entry.contentBoxSize.inlineSize/200) + 'rem';
+              pElem.style.fontSize = Math.max(1, entry.contentBoxSize.inlineSize/600) + 'rem';
+            } else {
+              h1Elem.style.fontSize = Math.max(1.5, entry.contentRect.width/200) + 'rem';
+              pElem.style.fontSize = Math.max(1, entry.contentRect.width/600) + 'rem';
+            }
           }
         });
 
-        resizeObserver.observe(document.querySelector('div'));
+        resizeObserver.observe(divElem);
       }
     </script>
   </body>
