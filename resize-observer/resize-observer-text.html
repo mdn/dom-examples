@@ -48,6 +48,10 @@
       form input {
         flex: 3;
       }
+
+      input[type="checkbox"] {
+        height: 2rem;
+      }
     </style>
   </head>
   <body>
@@ -55,6 +59,7 @@
       <h1>So what happened?</h1>
       <p>And remember, don't do anything that affects anything, unless it turns out you were supposed to, in which case, for the love of God, don't not do it! Ow, my spirit! I don't want to be rescued. You guys aren't Santa! You're not even robots. I've got to find a way to escape the horrible ravages of youth. Suddenly, I'm going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now 'I' have to pay 'them'!</p>
       <form>
+        <div><label>Observer enabled:</label><input type="checkbox" checked></div>
         <div><label>Adjust width:</label><input type="range" value="600" min="300" max="1300"></div>
       </form>
     </div>
@@ -63,7 +68,8 @@
         const h1Elem = document.querySelector('h1');
         const pElem = document.querySelector('p');
         const divElem = document.querySelector('body > div');
-        const slider = document.querySelector('input');
+        const slider = document.querySelector('input[type="range"]');
+        const checkbox = document.querySelector('input[type="checkbox"]');
 
         divElem.style.width = '600px';
 
@@ -84,6 +90,14 @@
         });
 
         resizeObserver.observe(divElem);
+
+        checkbox.addEventListener('change', () => {
+          if(checkbox.checked) {
+            resizeObserver.observe(divElem);
+          } else {
+            resizeObserver.unobserve(divElem);
+          }
+        });
       }
     </script>
   </body>
