@@ -28,8 +28,8 @@
     <script>
       const resizeObserver = new ResizeObserver(entries => {
         for (let entry of entries) {
-          entry.target.style.borderRadius = Math.min(100, (entry.contentRect.width/10) +
-                                                          (entry.contentRect.height/10)) + 'px';
+          entry.target.style.borderRadius = Math.min(100, (entry.contentBoxSize.inlineSize/10) +
+                                                          (entry.contentBoxSize.blockSize/10)) + 'px';
         }
       });
 

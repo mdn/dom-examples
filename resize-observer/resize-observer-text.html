@@ -46,8 +46,8 @@
 
         const resizeObserver = new ResizeObserver(entries => {
           for (let entry of entries) {
-            h1Elem.style.fontSize = Math.max(2, entry.contentRect.width/200) + 'rem';
-            pElem.style.fontSize = Math.max(1.2, entry.contentRect.width/600) + 'rem';
+            h1Elem.style.fontSize = Math.max(2, entry.contentBoxSize.inlineSize/200) + 'rem';
+            pElem.style.fontSize = Math.max(1.2, entry.contentBoxSize.inlineSize/600) + 'rem';
           }
         });
 
