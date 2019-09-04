@@ -64,7 +64,7 @@
       </form>
     </div>
     <script>
-      if(ResizeObserver) {
+      if(window.ResizeObserver) {
         const h1Elem = document.querySelector('h1');
         const pElem = document.querySelector('p');
         const divElem = document.querySelector('body > div');
@@ -87,6 +87,7 @@
               pElem.style.fontSize = Math.max(1, entry.contentRect.width/600) + 'rem';
             }
           }
+          console.log('Size changed');
         });
 
         resizeObserver.observe(divElem);
@@ -98,6 +99,8 @@
             resizeObserver.unobserve(divElem);
           }
         });
+      } else {
+        console.log('Resize observer not supported!');
       }
     </script>
   </body>
