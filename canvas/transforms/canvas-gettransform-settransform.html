@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2D canvas getTransform() and setTransform example</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas></canvas>
+    <canvas></canvas>
+
+    <script>
+      const canvases = document.querySelectorAll('canvas');
+      const ctx1 = canvases[0].getContext('2d');
+      const ctx2 = canvases[1].getContext('2d');
+
+      ctx1.setTransform(1, .2, .8, 1, 0, 0);
+      ctx1.fillRect(25, 25, 50, 50);
+
+      let storedTransform = ctx1.getTransform();
+      console.log(storedTransform);
+
+      ctx2.setTransform(storedTransform);
+      ctx2.beginPath();
+      ctx2.arc(50, 50, 50, 0, 2 * Math.PI);
+      ctx2.fill();
+    </script>
+  </body>
+</html>
