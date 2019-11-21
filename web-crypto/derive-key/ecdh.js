@@ -1,6 +1,7 @@
 (() => {
 
   let iv;
+  let ciphertext;
 
   /*
   Fetch the contents of the "message" textbox, and encode it
