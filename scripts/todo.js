@@ -233,6 +233,7 @@ window.onload = function() {
 
   // this function checks whether the deadline for each task is up or not, and responds appropriately
   function checkDeadlines() {
+    // First of all check whether notifications are enabled or denied
     if(Notification.permission === 'denied' || Notification.permission === 'default') {
       notificationBtn.style.display = 'block';
     } else {
@@ -326,26 +327,48 @@ window.onload = function() {
   // askNotificationPermission function to ask for permission when the "Enable notifications" button is clicked
 
   function askNotificationPermission() {
+    // function to actually ask the permissions
+    function askPermission(permission) {
+      // Whatever the user answers, we make sure Chrome stores the information
+      if(!('permission' in Notification)) {
+        Notification.permission = permission;
+      }
+
+      // set the button to shown or hidden, depending on what the user answers
+      if(Notification.permission === 'denied' || Notification.permission === 'default') {
+        notificationBtn.style.display = 'block';
+      } else {
+        notificationBtn.style.display = 'none';
+      }
+    }
+
     // Let's check if the browser supports notifications
     if (!"Notification" in window) {
       console.log("This browser does not support notifications.");
     } else {
-      Notification.requestPermission()
-      .then((permission) => {
-        // Whatever the user answers, we make sure Chrome stores the information
-        if(!('permission' in Notification)) {
-          Notification.permission = permission;
-        }
-
-        // set the button to shown or hidden, depending on what the user answers
-        if(Notification.permission === 'denied' || Notification.permission === 'default') {
-          notificationBtn.style.display = 'block';
-        } else {
-          notificationBtn.style.display = 'none';
-        }
-
-      })
+      if(checkNotificationPromise()) {
+        Notification.requestPermission()
+        .then((permission) => {
+          askPermission(permission);
+        })
+      } else {
+        Notification.requestPermission(function(permission) {
+          console.log(permission);
+        });
+      }
     }
+  }
+
+  // Function to check whether browser supports the promise version of requestPermission()
+  // Safari only supports the old callback-based version
+  function checkNotificationPromise() {
+    try {
+      Notification.requestPermission().then();
+    } catch(e) {
+      return false;
+    }
+
+    return true;
   }
 
   // wire up notification permission functionality to "Enable notifications" button
