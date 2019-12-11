@@ -328,7 +328,7 @@ window.onload = function() {
 
   function askNotificationPermission() {
     // function to actually ask the permissions
-    function askPermission(permission) {
+    function handlePermission(permission) {
       // Whatever the user answers, we make sure Chrome stores the information
       if(!('permission' in Notification)) {
         Notification.permission = permission;
@@ -349,11 +349,11 @@ window.onload = function() {
       if(checkNotificationPromise()) {
         Notification.requestPermission()
         .then((permission) => {
-          askPermission(permission);
+          handlePermission(permission);
         })
       } else {
         Notification.requestPermission(function(permission) {
-          console.log(permission);
+          handlePermission(permission);
         });
       }
     }
