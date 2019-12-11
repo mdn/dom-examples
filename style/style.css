@@ -52,7 +52,7 @@ h2 {
   border-bottom: 2px solid #FF6400;
 }
 
-#install, input[type="submit"] {
+#enable, input[type="submit"] {
   line-height: 1.8;
   font-size: 1.3rem;
   border-radius: 5px;
@@ -64,7 +64,7 @@ h2 {
               inset 0px -5px 3px rgba(0,0,0,0.2);
 }
 
-#install {
+#enable {
   position: absolute;
   bottom: 0.3rem;
   right: 0.3rem;
@@ -199,15 +199,15 @@ button, input[type="submit"], select {
     border-left: none;
     border-right: none;
   }
-  
+
   form div {
     clear: both;
   }
-  
+
   form .full-width {
     margin: 1rem auto;
   }
-  
+
   form .half-width {
     width: 100%;
     float: none;
@@ -217,19 +217,19 @@ button, input[type="submit"], select {
     width: 100%;
     float: none;
   }
-  
+
   form div label {
     width: 36%;
     padding-left: 1rem;
   }
-  
+
   form input, form select, form label {
     line-height: 2.5rem;
     font-size: 2rem;
   }
 
   form .full-width input {
-    width: 50%; 
+    width: 50%;
   }
 
   form .half-width input {
@@ -239,8 +239,8 @@ button, input[type="submit"], select {
   form .third-width select {
     width: 50%;
   }
-  
-  #install {
+
+  #enable {
     right: 1rem;
   }
 
