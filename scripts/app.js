@@ -1,10 +1,10 @@
 // set up basic variables for app
 
-var record = document.querySelector('.record');
-var stop = document.querySelector('.stop');
-var soundClips = document.querySelector('.sound-clips');
-var canvas = document.querySelector('.visualizer');
-var mainSection = document.querySelector('.main-controls');
+const record = document.querySelector('.record');
+const stop = document.querySelector('.stop');
+const soundClips = document.querySelector('.sound-clips');
+const canvas = document.querySelector('.visualizer');
+const mainSection = document.querySelector('.main-controls');
 
 // disable stop button while not recording
 
@@ -12,19 +12,19 @@ stop.disabled = true;
 
 // visualiser setup - create web audio api context and canvas
 
-var audioCtx = new (window.AudioContext || webkitAudioContext)();
-var canvasCtx = canvas.getContext("2d");
+let audioCtx;
+const canvasCtx = canvas.getContext("2d");
 
 //main block for doing the audio recording
 
 if (navigator.mediaDevices.getUserMedia) {
   console.log('getUserMedia supported.');
 
-  var constraints = { audio: true };
-  var chunks = [];
+  const constraints = { audio: true };
+  let chunks = [];
 
-  var onSuccess = function(stream) {
-    var mediaRecorder = new MediaRecorder(stream);
+  let onSuccess = function(stream) {
+    const mediaRecorder = new MediaRecorder(stream);
 
     visualize(stream);
 
@@ -53,13 +53,13 @@ if (navigator.mediaDevices.getUserMedia) {
     mediaRecorder.onstop = function(e) {
       console.log("data available after MediaRecorder.stop() called.");
 
-      var clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
+      const clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
       console.log(clipName);
-      var clipContainer = document.createElement('article');
-      var clipLabel = document.createElement('p');
-      var audio = document.createElement('audio');
-      var deleteButton = document.createElement('button');
-     
+      const clipContainer = document.createElement('article');
+      const clipLabel = document.createElement('p');
+      const audio = document.createElement('audio');
+      const deleteButton = document.createElement('button');
+
       clipContainer.classList.add('clip');
       audio.setAttribute('controls', '');
       deleteButton.textContent = 'Delete';
@@ -77,9 +77,9 @@ if (navigator.mediaDevices.getUserMedia) {
       soundClips.appendChild(clipContainer);
 
       audio.controls = true;
-      var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      const blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
       chunks = [];
-      var audioURL = window.URL.createObjectURL(blob);
+      const audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
       console.log("recorder stopped");
 
@@ -89,8 +89,8 @@ if (navigator.mediaDevices.getUserMedia) {
       }
 
       clipLabel.onclick = function() {
-        var existingName = clipLabel.textContent;
-        var newClipName = prompt('Enter a new name for your sound clip?');
+        const existingName = clipLabel.textContent;
+        const newClipName = prompt('Enter a new name for your sound clip?');
         if(newClipName === null) {
           clipLabel.textContent = existingName;
         } else {
@@ -104,7 +104,7 @@ if (navigator.mediaDevices.getUserMedia) {
     }
   }
 
-  var onError = function(err) {
+  let onError = function(err) {
     console.log('The following error occured: ' + err);
   }
 
@@ -115,12 +115,16 @@ if (navigator.mediaDevices.getUserMedia) {
 }
 
 function visualize(stream) {
-  var source = audioCtx.createMediaStreamSource(stream);
+  if(!audioCtx) {
+    audioCtx = new AudioContext();
+  }
 
-  var analyser = audioCtx.createAnalyser();
+  const source = audioCtx.createMediaStreamSource(stream);
+
+  const analyser = audioCtx.createAnalyser();
   analyser.fftSize = 2048;
-  var bufferLength = analyser.frequencyBinCount;
-  var dataArray = new Uint8Array(bufferLength);
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
 
   source.connect(analyser);
   //analyser.connect(audioCtx.destination);
@@ -143,14 +147,14 @@ function visualize(stream) {
 
     canvasCtx.beginPath();
 
-    var sliceWidth = WIDTH * 1.0 / bufferLength;
-    var x = 0;
+    let sliceWidth = WIDTH * 1.0 / bufferLength;
+    let x = 0;
 
 
-    for(var i = 0; i < bufferLength; i++) {
- 
-      var v = dataArray[i] / 128.0;
-      var y = v * HEIGHT/2;
+    for(let i = 0; i < bufferLength; i++) {
+
+      let v = dataArray[i] / 128.0;
+      let y = v * HEIGHT/2;
 
       if(i === 0) {
         canvasCtx.moveTo(x, y);
