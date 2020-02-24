@@ -14,16 +14,18 @@
     main();
 
     //
-    // start here
+    // Start here
     //
     function main() {
-      const canvas = document.querySelector("#glcanvas");
+      const canvas = document.querySelector('#glcanvas');
       // Initialize the GL context
-      const gl = canvas.getContext("webgl");
+      const gl = canvas.getContext('webgl');
 
+      // If we don't have a GL context, give up now
       // Only continue if WebGL is available and working
+
       if (!gl) {
-        alert("Unable to initialize WebGL. Your browser or machine may not support it.");
+        alert('Unable to initialize WebGL. Your browser or machine may not support it.');
         return;
       }
 
