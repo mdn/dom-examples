@@ -115,6 +115,8 @@ label {
   right: 3px;
   z-index: 5;
   cursor: pointer;
+  background-color: black;
+  border-radius: 10px;
 }
 
 input[type=checkbox] {

@@ -54,7 +54,7 @@ if (navigator.mediaDevices.getUserMedia) {
       console.log("data available after MediaRecorder.stop() called.");
 
       const clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
-      console.log(clipName);
+
       const clipContainer = document.createElement('article');
       const clipLabel = document.createElement('p');
       const audio = document.createElement('audio');
@@ -84,7 +84,7 @@ if (navigator.mediaDevices.getUserMedia) {
       console.log("recorder stopped");
 
       deleteButton.onclick = function(e) {
-        evtTgt = e.target;
+        let evtTgt = e.target;
         evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
       }
 
