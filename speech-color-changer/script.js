@@ -23,7 +23,7 @@ colors.forEach(function(v, i, a){
   console.log(v, i);
   colorHTML += '<span style="background-color:' + v + ';"> ' + v + ' </span>';
 });
-hints.innerHTML = 'Tap/click then say a color to change the background color of the app. Try '+ colorHTML + '.';
+hints.innerHTML = 'Tap/click then say a color to change the background color of the app. Try ' + colorHTML + '.';
 
 document.body.onclick = function() {
   recognition.start();
@@ -38,7 +38,7 @@ recognition.onresult = function(event) {
   // Each SpeechRecognitionResult object contains SpeechRecognitionAlternative objects that contain individual results.
   // These also have getters so they can be accessed like arrays.
   // The second [0] returns the SpeechRecognitionAlternative at position 0.
-  // We then return the transcript property of the SpeechRecognitionAlternative object 
+  // We then return the transcript property of the SpeechRecognitionAlternative object
   var color = event.results[0][0].transcript;
   diagnostic.textContent = 'Result received: ' + color + '.';
   bg.style.backgroundColor = color;

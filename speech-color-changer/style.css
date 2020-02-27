@@ -9,6 +9,8 @@ html {
 body {
   height: inherit;
   overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 h1, p {
