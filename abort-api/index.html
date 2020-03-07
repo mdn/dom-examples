@@ -70,7 +70,8 @@
       abortBtn.style.display = 'inline';
       reports.textContent = 'Video awaiting download...';
       fetch(url, {signal}).then(function(response) {
-        runAnimation();
+        if(response.status ==200) {
+          runAnimation();
         setTimeout(() => console.log('Body used: ', response.bodyUsed), 1)
         return response.blob().finally(() => {
           clearInterval(progressAnim);
@@ -90,7 +91,12 @@
 
           reports.textContent = 'Video ready to play';
         });
+        } else {
+          throw (new Error('Failed to fetch'));
+        }
       }).catch(function(e) {
+        abortBtn.style.display = 'none';
+        downloadBtn.style.display = 'inline';
         reports.textContent = 'Download error: ' + e.message;
       })
     }
@@ -108,3 +114,4 @@
 
   </script>
 </html>
+
