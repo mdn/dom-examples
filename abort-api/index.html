@@ -70,7 +70,7 @@
       abortBtn.style.display = 'inline';
       reports.textContent = 'Video awaiting download...';
       fetch(url, {signal}).then(function(response) {
-        if(response.status ==200) {
+        if(response.status == 200) {
           runAnimation();
         setTimeout(() => console.log('Body used: ', response.bodyUsed), 1)
         return response.blob().finally(() => {
