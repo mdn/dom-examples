@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <title>Web Animations API implicit keyframes</title>
+  <style>
+    html {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      height: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    div {
+      width: 150px;
+      height: 100px;
+      background-color: red;
+      border: 10px solid black;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+
+  <script>
+    const divElem = document.querySelector('div');
+
+    let rotate360 = [
+      { transform: 'rotate(360deg)' }
+    ];
+
+    let slowInfinite = {
+      duration: 5000,
+      iterations: Infinity
+    }
+
+    divElem.animate( rotate360, slowInfinite );
+
+  </script>
+</body>
+
+</html>
