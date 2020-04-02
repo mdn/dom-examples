@@ -1,4 +1,4 @@
-#auxclick demo
+#Web animations API demos
 
 Some simple demos to show Web Animations API features.
 
