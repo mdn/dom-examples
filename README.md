@@ -41,6 +41,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "touchevents" directory is for examples and demos of the [Touch Events](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events) standard.
 
+* The "web-animations-api" directory contains [Web Animation API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) demos. See the [web animations README](web-animations-api/README.md) for more information.
+
 * The "web-storage" directory contains a simple demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](http://mdn.github.io/dom-examples/web-storage/).
 
 * The "web-share" directory contains a simple demo to show usage of the [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share). For more detail on how it works, read. [View the demo live](http://mdn.github.io/dom-examples/web-share/).
