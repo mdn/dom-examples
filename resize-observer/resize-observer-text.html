@@ -87,7 +87,7 @@
               pElem.style.fontSize = Math.max(1, entry.contentRect.width/600) + 'rem';
             }
           }
-          console.log('Size changed');
+          console.log(entry, 'entry');
         });
 
         resizeObserver.observe(divElem);
