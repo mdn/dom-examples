@@ -132,8 +132,8 @@ function visualize(stream) {
   draw()
 
   function draw() {
-    WIDTH = canvas.width
-    HEIGHT = canvas.height;
+    const WIDTH = canvas.width
+    const HEIGHT = canvas.height;
 
     requestAnimationFrame(draw);
 
