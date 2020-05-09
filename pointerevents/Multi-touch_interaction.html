@@ -170,7 +170,51 @@ function init() {
  <!-- UI for logging/bebugging -->
  <button id="log" onclick="enableLog(event);">Start/Stop event logging</button>
  <button id="clearlog" onclick="clearLog(event);">Clear the log</button>
+ <p>
+  <button onclick="simulate()">simulate</button>
+  <input id="simulateNum" type="number" value="2" /> pointer(s) swipe.
+ </p>
  <p></p>
  <output></output>
+
+ <!-- simulate multi-touch -->
+ <script>
+  function wait(ms) {
+   return new Promise((res) => {
+    setTimeout(function () {
+     res();
+    }, ms);
+   });
+  }
+
+  async function simulate() {
+   var target1 = document.getElementById("target1");
+   var simulateNum = parseInt(document.getElementById("simulateNum").value);
+   var event = null;
+   for (let i = 0; i < simulateNum; i++) {
+    await wait(500);
+    event = new PointerEvent("pointerdown", {
+     pointerId: i,
+     pointerType: "touch",
+    });
+    target1.dispatchEvent(event);
+   }
+   for (let i = 0; i < simulateNum; i++) {
+    event = new PointerEvent("pointermove", {
+     pointerId: i,
+     pointerType: "touch",
+    });
+    target1.dispatchEvent(event);
+   }
+   for (let i = 0; i < simulateNum; i++) {
+    await wait(500);
+    event = new PointerEvent("pointerup", {
+     pointerId: i,
+     pointerType: "touch",
+    });
+    target1.dispatchEvent(event);
+   }
+  }
+ </script>
 </body>
 </html>
