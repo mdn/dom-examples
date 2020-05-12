@@ -1,117 +1,109 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Abort APi example</title>
-    <style>
-      .wrapper {
-        width: 70%;
-        max-width: 800px;
-        margin: 0 auto;
-      }
 
-      video {
-        max-width: 100%;
-      }
+<head>
+  <meta charset="utf-8">
+  <title>Abort APi example</title>
+  <style>
+    .wrapper {
+      width: 70%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-      .videoWrapper, .abort {
-        display: none;
-      }
+    video {
+      max-width: 100%;
+    }
 
-      progress {
-        display: block;
-        width: 100%;
-      }
+    .wrapper > div {
+      margin-bottom: 10px;
+    }
 
-      div div {
-        margin-bottom: 10px;
-      }
-    </style>
-  </head>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
 
-  <body>
-    <div class="wrapper">
-      <h1>Simple offline video player</h1>
-      <div class="controls">
-        <button class="download">Download video</button>
-        <button class="abort">Cancel download</button>
-        <p class="reports"></p>
-      </div>
-      <div class="videoWrapper">
-        <p>Sintel © copyright Blender Foundation | <a href="http://www.sintel.org/">www.sintel.org</a>.</p>
-      </div>
+<body>
+  <div class="wrapper">
+    <h1>Simple offline video player</h1>
+    <div class="controls">
+      <button class="download">Download video</button>
+      <button class="abort hidden">Cancel download</button>
+      <p class="reports"></p>
     </div>
-  </body>
-  <script>
-    var url = 'sintel.mp4';
+    <div class="videoWrapper hidden">
+      <p>Sintel © copyright Blender Foundation | <a href="http://www.sintel.org/">www.sintel.org</a>.</p>
+    </div>
+  </div>
+</body>
+<script>
+  const url = 'sintel.mp4';
 
-    var controller, signal;
+  const videoWrapper = document.querySelector('.videoWrapper');
+  const downloadBtn = document.querySelector('.download');
+  const abortBtn = document.querySelector('.abort');
+  const reports = document.querySelector('.reports');
 
-    var videoWrapper = document.querySelector('.videoWrapper');
-    var downloadBtn = document.querySelector('.download');
-    var abortBtn = document.querySelector('.abort');
-    var reports = document.querySelector('.reports');
+  let controller;
+  let progressAnim;
+  let animCount = 0;
 
-    var progressAnim;
-    var animCount = 0;
+  downloadBtn.addEventListener('click', fetchVideo);
 
-    downloadBtn.addEventListener('click', fetchVideo);
+  abortBtn.addEventListener('click', () => {
+    controller.abort();
+    console.log('Download aborted');
+    downloadBtn.classList.remove('hidden');
+  });
 
-    abortBtn.addEventListener('click', function() {
-      controller.abort();
-      console.log('Download aborted');
-      downloadBtn.style.display = 'inline';
+  function fetchVideo() {
+    controller = new AbortController();
+    const signal = controller.signal;
+    downloadBtn.classList.add('hidden');
+    abortBtn.classList.remove('hidden');
+    reports.textContent = 'Video awaiting download...';
+    fetch(url, { signal }).then((response) => {
+      if (response.status === 200) {
+        runAnimation();
+        setTimeout(() => console.log('Body used: ', response.bodyUsed), 1);
+        return response.blob();
+      } else {
+        throw new Error('Failed to fetch');
+      }
+    }).then((myBlob) => {
+      const video = document.createElement('video');
+      video.setAttribute('controls', '');
+      video.src = URL.createObjectURL(myBlob);
+      videoWrapper.appendChild(video);
+
+      videoWrapper.classList.remove('hidden');
+      abortBtn.classList.add('hidden');
+      downloadBtn.classList.add('hidden');
+
+      reports.textContent = 'Video ready to play';
+    }).catch((e) => {
+      abortBtn.classList.add('hidden');
+      downloadBtn.classList.remove('hidden');
+      reports.textContent = 'Download error: ' + e.message;
+    }).finally(() => {
+      clearInterval(progressAnim);
+      animCount = 0;
     });
+  }
 
-    function fetchVideo() {
-      controller = new AbortController;
-      signal = controller.signal;
-      downloadBtn.style.display = 'none';
-      abortBtn.style.display = 'inline';
-      reports.textContent = 'Video awaiting download...';
-      fetch(url, {signal}).then(function(response) {
-        if(response.status == 200) {
-          runAnimation();
-        setTimeout(() => console.log('Body used: ', response.bodyUsed), 1)
-        return response.blob().finally(() => {
-          clearInterval(progressAnim);
-          progressAnim = undefined;
-          controller = undefined;
-          signal = undefined;
-          animCount = 0;
-        }).then(function(myBlob) {
-          var video = document.createElement('video');
-          video.setAttribute('controls', '');
-          video.src = URL.createObjectURL(myBlob);
-          videoWrapper.appendChild(video);
+  function runAnimation() {
+    progressAnim = setInterval(() => {
+      switch (animCount++ & 3) {
+        case 0: reports.textContent = 'Download occuring; waiting for video player to be constructed'; break;
+        case 1: reports.textContent = 'Download occuring; waiting for video player to be constructed.'; break;
+        case 2: reports.textContent = 'Download occuring; waiting for video player to be constructed..'; break;
+        case 3: reports.textContent = 'Download occuring; waiting for video player to be constructed...'; break;
+      }
+    }, 300);
+  }
 
-          videoWrapper.style.display = 'block';
-          abortBtn.style.display = 'none';
-          downloadBtn.style.display = 'none';
+</script>
 
-          reports.textContent = 'Video ready to play';
-        });
-        } else {
-          throw (new Error('Failed to fetch'));
-        }
-      }).catch(function(e) {
-        abortBtn.style.display = 'none';
-        downloadBtn.style.display = 'inline';
-        reports.textContent = 'Download error: ' + e.message;
-      })
-    }
-
-    function runAnimation() {
-      progressAnim = setInterval(function() {
-        switch (animCount++ & 3) {
-          case 0: reports.textContent = 'Download occuring; waiting for video player to be constructed'; break;
-          case 1: reports.textContent = 'Download occuring; waiting for video player to be constructed.'; break;
-          case 2: reports.textContent = 'Download occuring; waiting for video player to be constructed..'; break;
-          case 3: reports.textContent = 'Download occuring; waiting for video player to be constructed...'; break;
-        }
-      }, 300);
-    }
-
-  </script>
 </html>
-
