@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="A media session API demo for MDN">
+  <title>Media Session Demo</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+	
+	<!-- my styles -->
+	<link rel="stylesheet" href="moz.css">
+
+	<style>
+		#status {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+		}
+		#status h3 {grid-area: 1 / 1 / 2 / 3;}
+		#status dl {grid-area: 2 / 2 / 3 / 3;}
+		#status img {
+			max-width: 300px;
+			grid-area: 2 / 1 / 3 / 2;
+		}
+	</style>
+
+	<script src="script.js" defer></script>
+
+</head>
+<body>
+	<header>
+		<h1>Media Session Demo</h1>
+	</header>
+
+	<article>
+		<header>
+			<h2>Here's a playlist.</h2>
+		</header>
+
+		<p>When you press play, if media session is supported, controls should be available through the UA.</p>
+
+		<section id="playlist">
+
+			<audio controls src="tracks/secret.mp3"></audio>
+
+		</section>
+
+		<section id="status">
+			<h3>No track is playing</h3>
+			<dl>
+				<dt>Track:</dt>
+				<dd>N/A</dd>
+				<dt>Artist:</dt>
+				<dd>N/A</dd>
+				<dt>Album:</dt>
+				<dd>N/A</dd>
+			</dl>
+			<img src="" alt="" />
+		</section>
+
+	</article>
+</body>
+</html>
