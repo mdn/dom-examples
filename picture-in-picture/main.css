@@ -1,0 +1,13 @@
+#contents {
+	width: 600px;
+	font: 14px "Open Sans", sans-serif;
+}
+
+#credits {
+	padding: 0 0 10px 0;
+	font: italic 10px "Open Sans", sans-serif;
+}
+
+:picture-in-picture {
+	box-shadow: 0 0 0 5px red;
+}
