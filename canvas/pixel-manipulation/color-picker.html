@@ -3,10 +3,33 @@
   <head>
     <meta charset="utf-8">
     <title>Color Picker | Canvas pixel manipulation</title>
+
+		<style>
+			.color-cell {
+				color: white;
+			}
+		</style>
   </head>
   <body>
-    <canvas id="canvas" width="300" height="227" style="float:left"></canvas>
-    <div id="color" style="width:200px;height:50px;float:left"></div>
-		<script src="color-picker.js"></script>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Source</th>
+				<th width="150">Hovered color</th>
+				<th width="150">Selected color</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<canvas id="canvas" width="300" height="227"></canvas>
+				</td>
+				<td align="center" class="color-cell" id="hovered-color"></td>
+				<td align="center" class="color-cell" id="selected-color"></td>
+			</tr>
+		</tbody>
+	<table>
+	<script src="color-picker.js"></script>
   </body>
 </html>
