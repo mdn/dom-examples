@@ -5,14 +5,34 @@
     <title>Zoom and anti-aliasing | Canvas pixel manipulation</title>
   </head>
   <body>
-    <canvas id="canvas" width="300" height="227"></canvas>
-    <canvas id="zoom" width="300" height="227"></canvas>
-    <div>
-      <label for="smoothbtn">
-        <input type="checkbox" name="smoothbtn" checked="checked" id="smoothbtn">
-        Enable image smoothing
-      </label>
-    </div>
+    <table>
+			<thead>
+				<tr>
+					<th>Source</th>
+					<th>imageSmoothingEnabled=true</th>
+					<th>imageSmoothingEnabled=false</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<canvas id="canvas" width="300" height="227"></canvas>
+					</td>
+					<td align="center">
+						<canvas id="smoothed-zoom" width="200" height="200"></canvas>
+					</td>
+					<td align="center">
+						<canvas id="pixelated-zoom" width="200" height="200"></canvas>
+					</td>
+				</tr>
+			</tbody>
+		<table>
+
+
+
+
+
+
 		<script src="image-smoothing.js"></script>
   </body>
 </html>
