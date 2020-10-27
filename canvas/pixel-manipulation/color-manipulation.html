@@ -6,11 +6,16 @@
   </head>
   <body>
     <canvas id="canvas" width="300" height="227"></canvas>
-    <div>
-			<input id="originalbtn" value="Original" type="button">
-      <input id="grayscalebtn" value="Grayscale" type="button">
-      <input id="invertbtn" value="Invert" type="button">
-    </div>
+    <form>
+			<input type="radio" id="original" name="color" value="original" checked>
+  		<label for="original">Original</label>
+
+			<input type="radio" id="grayscale" name="color" value="grayscale">
+  		<label for="grayscale">Grayscale</label>
+
+			<input type="radio" id="inverted" name="color" value="inverted">
+  		<label for="inverted">Inverted</label>
+    </form>
 		<script src="color-manipulation.js"></script>
   </body>
 </html>

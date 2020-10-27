@@ -38,9 +38,16 @@ var grayscale = function() {
 	ctx.putImageData(imageData, 0, 0);
 };
 
-var originalbtn = document.getElementById('originalbtn');
-originalbtn.addEventListener('click', original);
-var invertbtn = document.getElementById('invertbtn');
-invertbtn.addEventListener('click', invert);
-var grayscalebtn = document.getElementById('grayscalebtn');
-grayscalebtn.addEventListener('click', grayscale);
+const inputs = document.querySelectorAll('[name=color]');
+for (const input of inputs) {
+	input.addEventListener("change", function(evt) {
+		switch (evt.target.value) {
+			case "inverted":
+				return invert();
+			case "grayscale":
+				return grayscale();
+			default:
+				return original();
+		}
+	});
+}
