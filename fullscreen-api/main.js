@@ -6,7 +6,7 @@ function startup() {
 
   // On pressing ENTER call toggleFullScreen method
   document.addEventListener("keypress", function(e) {
-    if (e.keyCode === 13) {
+    if (e.key === 'Enter') {
       toggleFullScreen(video);
     }
   }, false);
