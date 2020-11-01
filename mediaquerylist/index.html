@@ -54,7 +54,7 @@
   }
 
   screenTest(mql);
-  mql.addListener(screenTest);
+  mql.addEventListener('change', screenTest, false);
 
   mql.onchange = function() {
     console.log(mql);
