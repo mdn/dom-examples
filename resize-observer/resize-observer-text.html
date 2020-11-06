@@ -80,8 +80,11 @@
         const resizeObserver = new ResizeObserver(entries => {
           for (let entry of entries) {
             if(entry.contentBoxSize) {
-              h1Elem.style.fontSize = Math.max(1.5, entry.contentBoxSize.inlineSize/200) + 'rem';
-              pElem.style.fontSize = Math.max(1, entry.contentBoxSize.inlineSize/600) + 'rem';
+              const size = entry.contentBoxSize instanceof Array ? 
+                  entry.contentBoxSize[0].inlineSize : 
+                  entry.contentBoxSize.inlineSize;
+              h1Elem.style.fontSize = Math.max(1.5, size/200) + 'rem';
+              pElem.style.fontSize = Math.max(1, size/600) + 'rem';
             } else {
               h1Elem.style.fontSize = Math.max(1.5, entry.contentRect.width/200) + 'rem';
               pElem.style.fontSize = Math.max(1, entry.contentRect.width/600) + 'rem';
