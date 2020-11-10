@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>MediaQueryList example</title>
+		<style>
+			html {
+				font-family: sans-serif;
+				margin: 10px;
+			}
+
+			body {
+				text-align: center;
+			}
+
+			div {
+				display: inline;
+				font-size: 1.2rem;
+			}
+
+			input {
+				width: 250px;
+				height: 20px;
+			}
+			label {
+				display: block;
+				margin: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>change event example</h1>
+
+		<label>
+			Enter a colour hex value:-
+			<input class="color" value="#" maxlength="7" />
+		</label>
+		<label>
+			Enter about anything:-
+			<input class="para-input" />
+		</label>
+
+		<br />
+
+		<div class="fcolor"></div>
+	</body>
+	<script>
+		const color = document.querySelector(".color");
+		const para = document.querySelector(".fcolor");
+		const paraInput = document.querySelector(".para-input");
+
+		color.addEventListener("change", (event) => {
+			para.style.color = `${event.target.value}`;
+		});
+
+		paraInput.addEventListener("change", (event) => {
+			para.textContent = `${event.target.value}`;
+		});
+	</script>
+</html>
