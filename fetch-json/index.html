@@ -29,12 +29,12 @@
       }
       return response.json();
     })
-    .then(function(json) {
-      for(var i = 0; i < json.products.length; i++) {
+    .then(function(data) {
+      for(var i = 0; i < data.products.length; i++) {
         var listItem = document.createElement('li');
-        listItem.innerHTML = '<strong>' + json.products[i].Name + '</strong>';
-        listItem.innerHTML +=' can be found in ' + json.products[i].Location + '.';
-        listItem.innerHTML +=' Cost: <strong>£' + json.products[i].Price + '</strong>';
+        listItem.innerHTML = '<strong>' + data.products[i].Name + '</strong>';
+        listItem.innerHTML +=' can be found in ' + data.products[i].Location + '.';
+        listItem.innerHTML +=' Cost: <strong>£' + data.products[i].Price + '</strong>';
         myList.appendChild(listItem);
       }
     })
