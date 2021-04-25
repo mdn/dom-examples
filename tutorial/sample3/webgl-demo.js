@@ -47,7 +47,7 @@ function main() {
 
   // Collect all the info needed to use the shader program.
   // Look up which attributes our shader program is using
-  // for aVertexPosition, aVevrtexColor and also
+  // for aVertexPosition, aVertexColor and also
   // look up uniform locations.
   const programInfo = {
     program: shaderProgram,
