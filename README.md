@@ -33,7 +33,7 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "reporting-api" directory contains a couple of simple demos to show usage of the Reprting API. You can find more explanation of how the API works in the main MDN [Reporting API](https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API) docs. [Run the deprecation report demo live](https://mdn.github.io/dom-examples/reporting-api/deprecation_report.html).
 
-* The "resize-event" directory contains a simple demo to show how you can use the [onresize](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onresize) event handler. Resize the browser window either by height or width to see the size of your current window. [Run the demo live](https://mdn.github.io/dom-examples/resize-event).
+* The "resize-event" directory contains a simple demo to show how you can use the [resize event](https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event). Resize the browser window either by height or width to see the size of your current window. [Run the demo live](https://mdn.github.io/dom-examples/resize-event).
 
 * The "screenleft-screentop" directory contains a demo to show how you could use the [Window.screenLeft](https://developer.mozilla.org/en-US/docs/Web/API/Window/screenLeft) and [Window.screenTop](https://developer.mozilla.org/en-US/docs/Web/API/Window/screenTop) properties to draw a circle on a canvas that always stays in the same physical place on the screen when you move your browser window. [Run the demo live](https://mdn.github.io/dom-examples/screenleft-screentop/).
 
