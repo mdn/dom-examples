@@ -57,7 +57,7 @@
     ciphertextValue.classList.add('fade-in');
     ciphertextValue.addEventListener('animationend', () => {
       ciphertextValue.classList.remove('fade-in');
-    });
+    }, { once: true });
     ciphertextValue.textContent = `${buffer}...[${ciphertext.byteLength} bytes total]`;
   }
 
@@ -68,7 +68,7 @@
       encryptButton.classList.add('fade-in');
       encryptButton.addEventListener('animationend', () => {
         encryptButton.classList.remove('fade-in');
-      });
+      }, { once: true });
       encryptButton.removeAttribute("disabled");
       encryptButton.classList.remove("hidden");
     }
