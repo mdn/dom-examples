@@ -8,14 +8,14 @@ Specifically, each of these examples pairs with an article in the MDN
 [WebGL tutorial](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial).
 
 # The examples
-* https://mdn.github.io/webgl-examples/tutorial/sample1/
-* https://mdn.github.io/webgl-examples/tutorial/sample2/
-* https://mdn.github.io/webgl-examples/tutorial/sample3/
-* https://mdn.github.io/webgl-examples/tutorial/sample4/
-* https://mdn.github.io/webgl-examples/tutorial/sample5/
-* https://mdn.github.io/webgl-examples/tutorial/sample6/
-* https://mdn.github.io/webgl-examples/tutorial/sample7/
-* https://mdn.github.io/webgl-examples/tutorial/sample8/
+* [https://mdn.github.io/webgl-examples/tutorial/sample1/](https://mdn.github.io/webgl-examples/tutorial/sample1/)
+* [https://mdn.github.io/webgl-examples/tutorial/sample2/](https://mdn.github.io/webgl-examples/tutorial/sample2/)
+* [https://mdn.github.io/webgl-examples/tutorial/sample3/](https://mdn.github.io/webgl-examples/tutorial/sample3/)
+* [https://mdn.github.io/webgl-examples/tutorial/sample4/](https://mdn.github.io/webgl-examples/tutorial/sample4/)
+* [https://mdn.github.io/webgl-examples/tutorial/sample5/](https://mdn.github.io/webgl-examples/tutorial/sample5/)
+* [https://mdn.github.io/webgl-examples/tutorial/sample6/](https://mdn.github.io/webgl-examples/tutorial/sample6/)
+* [https://mdn.github.io/webgl-examples/tutorial/sample7/](https://mdn.github.io/webgl-examples/tutorial/sample7/)
+* [https://mdn.github.io/webgl-examples/tutorial/sample8/](https://mdn.github.io/webgl-examples/tutorial/sample8/)
 
 # Installing and testing
 If you choose to fork or clone these examples to experiment with them,
