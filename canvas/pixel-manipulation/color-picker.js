@@ -12,8 +12,9 @@ var selectedColor = document.getElementById('selected-color');
 
 
 function pick(event, destination) {
-  var x = event.layerX;
-  var y = event.layerY;
+  var rect = event.target.getBoundingClientRect();
+  var x = event.layerX - rect.left;
+  var y = event.layerY - rect.top;
   var pixel = ctx.getImageData(x, y, 1, 1);
   var data = pixel.data;
 
