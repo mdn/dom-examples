@@ -15,6 +15,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "fullscreen-api" directory is for examples and demos of the [Fullscreen API](https://wiki.developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API). Run the [example live](https://mdn.github.io/dom-examples/fullscreen-api/).
 
+* The "indexeddb-api" directory contains a demo for the [IndexedDB API](https://mdn.github.io/dom-examples/indexeddb-api/index.html).
+
 * The "insert-adjacent" directory contains simple demos for [insertAdjacentElement](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentElement.html) and [insertAdjacentText](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentText.html).
 
 * The "matchmedia" directory contains a simple demo to test matchMedia functionality. See [Window.matchMedia](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) for more details. [Run the demo live](https://mdn.github.io/dom-examples/matchmedia/).
