@@ -1,5 +1,5 @@
 // create a reference to the notifications list in the bottom of the app; we will write database messages into this list by
-//appending list items on to the inner HTML of this variable - this is all the lines that say note.innerHTML += '<li>foo</li>';
+//appending list items as children of this element
 const note = document.getElementById('notifications');
 
 // create an instance of a db object for us to store the IDB data in
@@ -35,7 +35,7 @@ if(Notification.permission === 'denied' || Notification.permission === 'default'
 }
 
 window.onload = function() {
-  note.innerHTML += '<li>App initialised.</li>';
+  note.appendChild(createListItem('App initialised.'));
   // In the following line, you should include the prefixes of implementations you want to test.
   window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
   // DON'T use "var indexedDB = ..." if you're not in a function.
@@ -52,11 +52,11 @@ window.onload = function() {
 
   // these two event handlers act on the database being opened successfully, or not
   DBOpenRequest.onerror = function(event) {
-    note.innerHTML += '<li>Error loading database.</li>';
+    note.appendChild(createListItem('Error loading database.'));
   };
 
   DBOpenRequest.onsuccess = function(event) {
-    note.innerHTML += '<li>Database initialised.</li>';
+    note.appendChild(createListItem('Database initialised.'));
 
     // store the result of opening the database in the db variable. This is used a lot below
     db = DBOpenRequest.result;
@@ -73,7 +73,7 @@ window.onload = function() {
     let db = event.target.result;
 
     db.onerror = function(event) {
-      note.innerHTML += '<li>Error loading database.</li>';
+      note.appendChild(createListItem('Error loading database.'));
     };
 
     // Create an objectStore for this database
@@ -90,13 +90,15 @@ window.onload = function() {
 
     objectStore.createIndex("notified", "notified", { unique: false });
 
-    note.innerHTML += '<li>Object store created.</li>';
+    note.appendChild(createListItem('Object store created.'));
   };
 
   function displayData() {
     // first clear the content of the task list so that you don't get a huge long list of duplicate stuff each time
     //the display is updated.
-    taskList.innerHTML = "";
+    while (taskList.firstChild) {
+      taskList.removeChild(taskList.lastChild);
+    }
 
     // Open our object store and then get a cursor list of all the different data items in the IDB to iterate through
     let objectStore = db.transaction('toDoList').objectStore('toDoList');
@@ -104,8 +106,6 @@ window.onload = function() {
       let cursor = event.target.result;
         // if there is still another cursor to go, keep runing this code
         if(cursor) {
-          // create a list item to put each data item inside when displaying it
-          const listItem = document.createElement('li');
 
           // check which suffix the deadline day of the month needs
           if(cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
@@ -118,8 +118,9 @@ window.onload = function() {
             daySuffix = "th";
           }
 
-          // build the to-do list entry and put it into the list item via innerHTML.
-          listItem.innerHTML = cursor.value.taskTitle + ' — ' + cursor.value.hours + ':' + cursor.value.minutes + ', ' + cursor.value.month + ' ' + cursor.value.day + daySuffix + ' ' + cursor.value.year + '.';
+          // build the to-do list entry and put it into the list item.
+          const toDoText = `${cursor.value.taskTitle} — ${cursor.value.hours}:${cursor.value.minutes}, ${cursor.value.month} ${cursor.value.day}${daySuffix}  ${cursor.value.year}.`;
+          const listItem = createListItem(toDoText);
 
           if(cursor.value.notified == "yes") {
             listItem.style.textDecoration = "line-through";
@@ -133,7 +134,7 @@ window.onload = function() {
           // function when clicked
           const deleteButton = document.createElement('button');
           listItem.appendChild(deleteButton);
-          deleteButton.innerHTML = 'X';
+          deleteButton.textContent = 'X';
           // here we are setting a data attribute on our delete button to say what task we want deleted if it is clicked!
           deleteButton.setAttribute('data-task', cursor.value.taskTitle);
           deleteButton.onclick = function(event) {
@@ -145,7 +146,7 @@ window.onload = function() {
 
         // if there are no more cursor items to iterate through, say so, and exit the function
         } else {
-          note.innerHTML += '<li>Entries all displayed.</li>';
+          note.appendChild(createListItem('Entries all displayed.'));
         }
       }
     }
@@ -160,7 +161,7 @@ window.onload = function() {
     // Stop the form submitting if any values are left empty. This is just for browsers that don't support the HTML5 form
     // required attributes
     if(title.value == '' || hours.value == null || minutes.value == null || day.value == '' || month.value == '' || year.value == null) {
-      note.innerHTML += '<li>Data not submitted — form incomplete.</li>';
+      note.appendChild(createListItem('Data not submitted — form incomplete.'));
       return;
     } else {
 
@@ -174,14 +175,14 @@ window.onload = function() {
 
       // report on the success of the transaction completing, when everything is done
       transaction.oncomplete = function() {
-        note.innerHTML += '<li>Transaction completed: database modification finished.</li>';
+        note.appendChild(createListItem('Transaction completed: database modification finished.'));
 
         // update the display of data to show the newly added item, by running displayData() again.
         displayData();
       };
 
       transaction.onerror = function() {
-        note.innerHTML += '<li>Transaction not opened due to error: ' + transaction.error + '</li>';
+        note.appendChild(createListItem(`Transaction not opened due to error: ${transaction.error}`));
       };
 
       // call an object store that's already been added to the database
@@ -199,7 +200,7 @@ window.onload = function() {
           // report the success of our request
           // (to detect whether it has been succesfully
           // added to the database, you'd look at transaction.oncomplete)
-          note.innerHTML += '<li>Request successful.</li>';
+          note.appendChild(createListItem('Request successful.'));
 
           // clear the form, ready for adding the next entry
           title.value = '';
@@ -227,7 +228,7 @@ window.onload = function() {
     transaction.oncomplete = function() {
       // delete the parent of the button, which is the list item, so it no longer is displayed
       event.target.parentNode.parentNode.removeChild(event.target.parentNode);
-      note.innerHTML += '<li>Task \"' + dataTask + '\" deleted.</li>';
+      note.appendChild(createListItem(`Task "${dataTask}" deleted.`));
     };
   };
 
@@ -375,7 +376,11 @@ window.onload = function() {
 
   notificationBtn.addEventListener('click', askNotificationPermission);
 
-
+  function createListItem(contents) {
+    const listItem = document.createElement('li');
+    listItem.textContent = contents;
+    return listItem;
+  }
 
   // function for creating the notification
   function createNotification(title) {
