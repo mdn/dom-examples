@@ -71,8 +71,12 @@ function pointermove_handler(ev) {
  // If two pointers are down, check for pinch gestures
  if (evCache.size == 2) {
    const [...events] = evCache.values();
-   // Calculate the distance between the two pointers
-   var curDiff = Math.abs(events[0].clientX - events[1].clientX);
+   // Calculate the Euclidean distance between the two pointers
+   const x1 = events[0].clientX;
+   const x2 = events[1].clientX;
+   const y1 = events[0].clientY;
+   const y2 = events[1].clientY;
+   const curDiff = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 
    if (prevDiff > 0) {
      if (curDiff > prevDiff) {
