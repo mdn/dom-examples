@@ -18,7 +18,18 @@ const registerServiceWorker = async () => {
 
 const imgSection = document.querySelector("section");
 
-const createGalleryFigure = (galleryImage) => {
+const getImageBlob = async (url) => {
+  const imageResponse = await fetch(url);
+  if (!imageResponse.ok) {
+    throw new Error(
+      "Image didn't load successfully; error code:" + imageResponse.statusText
+    );
+  }
+  return imageResponse.blob();
+};
+
+const createGalleryFigure = async (galleryImage) => {
+  const imageBlob = await getImageBlob(galleryImage.url);
   const myImage = document.createElement("img");
   const myCaption = document.createElement("caption");
   const myFigure = document.createElement("figure");
@@ -27,11 +38,10 @@ const createGalleryFigure = (galleryImage) => {
     galleryImage.name +
     "</strong>: Taken by " +
     galleryImage.credit;
-  myImage.src = galleryImage.url;
+  myImage.src = window.URL.createObjectURL(imageBlob);
   myImage.setAttribute("alt", galleryImage.alt);
-  myImage.onerror = () => console.log(`image failed to load: ${myImage.src}`);
   myFigure.append(myImage, myCaption);
-  return myFigure;
+  imgSection.append(myFigure);
 };
 
 window.onload = async () => {
@@ -43,5 +53,5 @@ window.onload = async () => {
       return;
     }
   }
-  imgSection.append(...Gallery.images.map(createGalleryFigure));
+  await Promise.allSettled(Gallery.images.map(createGalleryFigure));
 };

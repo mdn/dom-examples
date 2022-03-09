@@ -23,7 +23,7 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
     }
     // when the even fallback response is not available,
     // there is nothing we can do, but we must always
-    // return a response
+    // return a Response object
     return new Response("Network error happened", {
       status: 408,
       headers: { "Content-Type": "text/plain" },
