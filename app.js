@@ -29,7 +29,7 @@ const createGalleryFigure = (galleryImage) => {
     galleryImage.credit;
   myImage.src = galleryImage.url;
   myImage.setAttribute("alt", galleryImage.alt);
-  myImage.onerror = (error) => console.log("image failed to load", error);
+  myImage.onerror = () => console.log(`image failed to load: ${myImage.src}`);
   myFigure.append(myImage, myCaption);
   return myFigure;
 };

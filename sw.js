@@ -20,7 +20,13 @@ const cacheFirst = async (request) => {
     const fallBackResponse = await caches.match(
       "/sw-test/gallery/myLittleVader.jpg"
     );
-    return fallBackResponse;
+    if (fallBackResponse) {
+      return fallBackResponse;
+    }
+    return new Response("Network error happened", {
+      status: 408,
+      headers: { "Content-Type": "text/plain" },
+    });
   }
   // response may be used only once
   // we need to save clone to put one copy in cache
