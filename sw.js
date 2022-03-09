@@ -25,7 +25,7 @@ const cacheFirst = async (request) => {
   // response may be used only once
   // we need to save clone to put one copy in cache
   // and serve second one
-  await putInCache(responseFromNetwork.clone());
+  await putInCache(request, responseFromNetwork.clone());
   return responseFromNetwork;
 };
 
@@ -38,14 +38,14 @@ const cacheFirstWithFallback = async (request) => {
     return await cacheFirst(request);
   } catch (error) {
     console.log(`failed to load ${request.url}`, error);
-    try {
-      return await fallback(request);
-    } catch (error) {
-      return new Response("Network error happened", {
-        status: 408,
-        headers: { "Content-Type": "text/plain" },
-      });
+    const response = await fallback(request);
+    if (response) {
+      return response;
     }
+    return new Response("Network error happened", {
+      status: 408,
+      headers: { "Content-Type": "text/plain" },
+    });
   }
 };
 
