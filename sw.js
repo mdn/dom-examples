@@ -8,45 +8,25 @@ const putInCache = async (request, response) => {
   await cache.put(request, response);
 };
 
-const networkOnly = async (request) => {
-  return fetch(request);
-};
-
 const cacheFirst = async (request) => {
   const responseFromCache = await caches.match(request);
   if (responseFromCache) {
     return responseFromCache;
   }
-  const responseFromNetwork = await fetch(request);
-  console.log(responseFromNetwork);
-  if (!responseFromNetwork.ok) {
-    return responseFromNetwork;
+  let responseFromNetwork;
+  try {
+    responseFromNetwork = await fetch(request);
+  } catch (error) {
+    const fallBackResponse = await caches.match(
+      "/sw-test/gallery/myLittleVader.jpg"
+    );
+    return fallBackResponse;
   }
   // response may be used only once
   // we need to save clone to put one copy in cache
   // and serve second one
-  await putInCache(request, responseFromNetwork.clone());
+  putInCache(request, responseFromNetwork.clone());
   return responseFromNetwork;
-};
-
-const fallback = (request) => {
-  return caches.match("./sw-test/gallery/myLittleVader.jpg");
-};
-
-const cacheFirstWithFallback = async (request) => {
-  try {
-    return await cacheFirst(request);
-  } catch (error) {
-    console.log(`failed to load ${request.url}`, error);
-    const response = await fallback(request);
-    if (response) {
-      return response;
-    }
-    return new Response("Network error happened", {
-      status: 408,
-      headers: { "Content-Type": "text/plain" },
-    });
-  }
 };
 
 self.addEventListener("install", (event) => {
@@ -66,5 +46,5 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  event.respondWith(cacheFirstWithFallback(event.request));
+  event.respondWith(cacheFirst(event.request));
 });
