@@ -39,7 +39,6 @@ window.onload = async () => {
     try {
       await registerServiceWorker();
     } catch (error) {
-      // registration failed
       console.log("Registration failed with " + error);
       return;
     }
