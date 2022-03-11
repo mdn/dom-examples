@@ -15,9 +15,13 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
     return responseFromCache;
   }
   // Next try to get the resource from the network
-  let responseFromNetwork;
   try {
-    responseFromNetwork = await fetch(request);
+    const responseFromNetwork = await fetch(request);
+    // response may be used only once
+    // we need to save clone to put one copy in cache
+    // and serve second one
+    putInCache(request, responseFromNetwork.clone());
+    return responseFromNetwork;
   } catch (error) {
     const fallbackResponse = await caches.match(fallbackUrl);
     if (fallbackResponse) {
@@ -31,11 +35,6 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
       headers: { 'Content-Type': 'text/plain' },
     });
   }
-  // response may be used only once
-  // we need to save clone to put one copy in cache
-  // and serve second one
-  putInCache(request, responseFromNetwork.clone());
-  return responseFromNetwork;
 };
 
 self.addEventListener('install', (event) => {
