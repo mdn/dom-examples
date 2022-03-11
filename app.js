@@ -28,7 +28,9 @@ const getImageBlob = async (url) => {
   const imageResponse = await fetch(url);
   if (!imageResponse.ok) {
     throw new Error(
-      `Image didn't load successfully; error code: ${imageResponse.statusText}`
+      `Image didn't load successfully; error code: ${
+        imageResponse.statusText || imageResponse.status
+      }`
     );
   }
   return imageResponse.blob();
