@@ -1,10 +1,10 @@
 const addResourcesToCache = async (resources) => {
-  const cache = await caches.open("v1");
+  const cache = await caches.open('v1');
   await cache.addAll(resources);
 };
 
 const putInCache = async (request, response) => {
-  const cache = await caches.open("v1");
+  const cache = await caches.open('v1');
   await cache.put(request, response);
 };
 
@@ -24,9 +24,9 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
     // when the even fallback response is not available,
     // there is nothing we can do, but we must always
     // return a Response object
-    return new Response("Network error happened", {
+    return new Response('Network error happened', {
       status: 408,
-      headers: { "Content-Type": "text/plain" },
+      headers: { 'Content-Type': 'text/plain' },
     });
   }
   // response may be used only once
@@ -36,27 +36,27 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
   return responseFromNetwork;
 };
 
-self.addEventListener("install", (event) => {
+self.addEventListener('install', (event) => {
   event.waitUntil(
     addResourcesToCache([
-      "/sw-test/",
-      "/sw-test/index.html",
-      "/sw-test/style.css",
-      "/sw-test/app.js",
-      "/sw-test/image-list.js",
-      "/sw-test/star-wars-logo.jpg",
-      "/sw-test/gallery/bountyHunters.jpg",
-      "/sw-test/gallery/myLittleVader.jpg",
-      "/sw-test/gallery/snowTroopers.jpg",
+      '/sw-test/',
+      '/sw-test/index.html',
+      '/sw-test/style.css',
+      '/sw-test/app.js',
+      '/sw-test/image-list.js',
+      '/sw-test/star-wars-logo.jpg',
+      '/sw-test/gallery/bountyHunters.jpg',
+      '/sw-test/gallery/myLittleVader.jpg',
+      '/sw-test/gallery/snowTroopers.jpg',
     ])
   );
 });
 
-self.addEventListener("fetch", (event) => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
     cacheFirst({
       request: event.request,
-      fallbackUrl: "/sw-test/gallery/myLittleVader.jpg",
+      fallbackUrl: '/sw-test/gallery/myLittleVader.jpg',
     })
   );
 });
