@@ -1,4 +1,4 @@
-const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 // create a reference to the notifications list in the bottom of the app; we will write database messages into this list by
 //appending list items as children of this element
@@ -9,7 +9,7 @@ let db;
 
 // create a blank instance of the object that is used to transfer data into the IDB. This is mainly for reference
 let newItem = [
-      { taskTitle: "", hours: 0, minutes: 0, day: 0, month: "", year: 0, notified: "no" }
+      { taskTitle: '', hours: 0, minutes: 0, day: 0, month: '', year: 0, notified: 'no' }
     ];
 
 // all the variables we need for the app
@@ -40,17 +40,17 @@ window.onload = function() {
   note.appendChild(createListItem('App initialised.'));
   // In the following line, you should include the prefixes of implementations you want to test.
   window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-  // DON'T use "var indexedDB = ..." if you're not in a function.
+  // DON'T use 'var indexedDB = ...' if you're not in a function.
   // Moreover, you may need references to some window.IDB* objects:
   window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
   window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
   // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
 
   // Let us open our database
-  const DBOpenRequest = window.indexedDB.open("toDoList", 4);
+  const DBOpenRequest = window.indexedDB.open('toDoList', 4);
 
   // Gecko-only IndexedDB temp storage option:
-  // var request = window.indexedDB.open("toDoList", {version: 4, storage: "temporary"});
+  // var request = window.indexedDB.open('toDoList', {version: 4, storage: 'temporary'});
 
   // these two event handlers act on the database being opened successfully, or not
   DBOpenRequest.onerror = function(event) {
@@ -80,17 +80,17 @@ window.onload = function() {
 
     // Create an objectStore for this database
 
-    let objectStore = db.createObjectStore("toDoList", { keyPath: "taskTitle" });
+    let objectStore = db.createObjectStore('toDoList', { keyPath: 'taskTitle' });
 
     // define what data items the objectStore will contain
 
-    objectStore.createIndex("hours", "hours", { unique: false });
-    objectStore.createIndex("minutes", "minutes", { unique: false });
-    objectStore.createIndex("day", "day", { unique: false });
-    objectStore.createIndex("month", "month", { unique: false });
-    objectStore.createIndex("year", "year", { unique: false });
+    objectStore.createIndex('hours', 'hours', { unique: false });
+    objectStore.createIndex('minutes', 'minutes', { unique: false });
+    objectStore.createIndex('day', 'day', { unique: false });
+    objectStore.createIndex('month', 'month', { unique: false });
+    objectStore.createIndex('year', 'year', { unique: false });
 
-    objectStore.createIndex("notified", "notified", { unique: false });
+    objectStore.createIndex('notified', 'notified', { unique: false });
 
     note.appendChild(createListItem('Object store created.'));
   };
@@ -111,22 +111,22 @@ window.onload = function() {
 
           // check which suffix the deadline day of the month needs
           if(cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
-            daySuffix = "st";
+            daySuffix = 'st';
           } else if(cursor.value.day == 2 || cursor.value.day == 22) {
-            daySuffix = "nd";
+            daySuffix = 'nd';
           } else if(cursor.value.day == 3 || cursor.value.day == 23) {
-            daySuffix = "rd";
+            daySuffix = 'rd';
           } else {
-            daySuffix = "th";
+            daySuffix = 'th';
           }
 
           // build the to-do list entry and put it into the list item.
           const toDoText = `${cursor.value.taskTitle} — ${cursor.value.hours}:${cursor.value.minutes}, ${cursor.value.month} ${cursor.value.day}${daySuffix}  ${cursor.value.year}.`;
           const listItem = createListItem(toDoText);
 
-          if(cursor.value.notified == "yes") {
-            listItem.style.textDecoration = "line-through";
-            listItem.style.color = "rgba(255,0,0,0.5)";
+          if(cursor.value.notified == 'yes') {
+            listItem.style.textDecoration = 'line-through';
+            listItem.style.color = 'rgba(255,0,0,0.5)';
           }
 
           // put the item item inside the task list
@@ -169,11 +169,11 @@ window.onload = function() {
 
       // grab the values entered into the form fields and store them in an object ready for being inserted into the IDB
       let newItem = [
-        { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, notified: "no" }
+        { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, notified: 'no' }
       ];
 
       // open a read/write db transaction, ready for adding the data
-      let transaction = db.transaction(["toDoList"], "readwrite");
+      let transaction = db.transaction(['toDoList'], 'readwrite');
 
       // report on the success of the transaction completing, when everything is done
       transaction.oncomplete = function() {
@@ -188,7 +188,7 @@ window.onload = function() {
       };
 
       // call an object store that's already been added to the database
-      let objectStore = transaction.objectStore("toDoList");
+      let objectStore = transaction.objectStore('toDoList');
       console.log(objectStore.indexNames);
       console.log(objectStore.keyPath);
       console.log(objectStore.name);
@@ -223,8 +223,8 @@ window.onload = function() {
     let dataTask = event.target.getAttribute('data-task');
 
     // open a database transaction and delete the task, finding it by the name we retrieved above
-    let transaction = db.transaction(["toDoList"], "readwrite");
-    let request = transaction.objectStore("toDoList").delete(dataTask);
+    let transaction = db.transaction(['toDoList'], 'readwrite');
+    let request = transaction.objectStore('toDoList').delete(dataTask);
 
     // report that the data item has been deleted
     transaction.oncomplete = function() {
@@ -256,7 +256,7 @@ window.onload = function() {
     const yearCheck = now.getFullYear();
 
     // again, open a transaction then a cursor to iterate through all the data items in the IDB
-    let objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
+    let objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
     objectStore.openCursor().onsuccess = function(event) {
       let cursor = event.target.result;
         if(cursor) {
@@ -271,7 +271,7 @@ window.onload = function() {
           // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
           // The secondsCheck = 0 check is so that you don't get duplicate notifications for the same task. The notification
           // will only appear when the seconds is 0, meaning that you won't get more than one notification for each task
-          if(+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && cursor.value.notified == "no") {
+          if(+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && cursor.value.notified == 'no') {
 
             // If the numbers all do match, run the createNotification() function to create a system notification
             // but only if the permission is set
@@ -290,7 +290,7 @@ window.onload = function() {
   }
 
 
-  // askNotificationPermission function to ask for permission when the "Enable notifications" button is clicked
+  // askNotificationPermission function to ask for permission when the 'Enable notifications' button is clicked
 
   function askNotificationPermission() {
     // function to actually ask the permissions
@@ -309,8 +309,8 @@ window.onload = function() {
     }
 
     // Let's check if the browser supports notifications
-    if (!"Notification" in window) {
-      console.log("This browser does not support notifications.");
+    if (!'Notification' in window) {
+      console.log('This browser does not support notifications.');
     } else {
       if(checkNotificationPromise()) {
         Notification.requestPermission()
@@ -337,7 +337,7 @@ window.onload = function() {
     return true;
   }
 
-  // wire up notification permission functionality to "Enable notifications" button
+  // wire up notification permission functionality to 'Enable notifications' button
 
   notificationBtn.addEventListener('click', askNotificationPermission);
 
@@ -355,11 +355,11 @@ window.onload = function() {
     let text = 'HEY! Your task "' + title + '" is now overdue.';
     let notification = new Notification('To do list', { body: text, icon: img });
 
-    // we need to update the value of notified to "yes" in this particular data object, so the
+    // we need to update the value of notified to 'yes' in this particular data object, so the
     // notification won't be set off on it again
 
     // first open up a transaction as usual
-    let objectStore = db.transaction(['toDoList'], "readwrite").objectStore('toDoList');
+    let objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
 
     // get the to-do list object that has this title as it's title
     let objectStoreTitleRequest = objectStore.get(title);
@@ -368,8 +368,8 @@ window.onload = function() {
       // grab the data object returned as the result
       let data = objectStoreTitleRequest.result;
 
-      // update the notified value in the object to "yes"
-      data.notified = "yes";
+      // update the notified value in the object to 'yes'
+      data.notified = 'yes';
 
       // create another request that inserts the item back into the database
       let updateTitleRequest = objectStore.put(data);
