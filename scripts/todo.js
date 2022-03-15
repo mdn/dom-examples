@@ -1,3 +1,5 @@
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 // create a reference to the notifications list in the bottom of the app; we will write database messages into this list by
 //appending list items as children of this element
 const note = document.getElementById('notifications');
@@ -261,46 +263,9 @@ window.onload = function() {
 
         // convert the month names we have installed in the IDB into a month number that JavaScript will understand.
         // The JavaScript date object creates month values as a number between 0 and 11.
-        switch(cursor.value.month) {
-          case "January":
-            var monthNumber = 0;
-            break;
-          case "February":
-            var monthNumber = 1;
-            break;
-          case "March":
-            var monthNumber = 2;
-            break;
-          case "April":
-            var monthNumber = 3;
-            break;
-          case "May":
-            var monthNumber = 4;
-            break;
-          case "June":
-            var monthNumber = 5;
-            break;
-          case "July":
-            var monthNumber = 6;
-            break;
-          case "August":
-            var monthNumber = 7;
-            break;
-          case "September":
-            var monthNumber = 8;
-            break;
-          case "October":
-            var monthNumber = 9;
-            break;
-          case "November":
-            var monthNumber = 10;
-            break;
-          case "December":
-            var monthNumber = 11;
-            break;
-          default:
-          alert('Incorrect month entered in database.');
-        }
+        var monthNumber = MONTHS.indexOf(cursor.value.month);
+        if (monthNumber === -1) alert('Incorrect month entered in database.');
+        
           // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
           // The + operator in this case converts numbers with leading zeros into their non leading zero equivalents, so e.g.
           // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
