@@ -164,53 +164,51 @@ window.onload = function() {
     if(title.value == '' || hours.value == null || minutes.value == null || day.value == '' || month.value == '' || year.value == null) {
       note.appendChild(createListItem('Data not submitted — form incomplete.'));
       return;
-    } else {
+    }
+    // grab the values entered into the form fields and store them in an object ready for being inserted into the IDB
+    const newItem = [
+      { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, notified: 'no' }
+    ];
 
-      // grab the values entered into the form fields and store them in an object ready for being inserted into the IDB
-      const newItem = [
-        { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, notified: 'no' }
-      ];
+    // open a read/write db transaction, ready for adding the data
+    const transaction = db.transaction(['toDoList'], 'readwrite');
 
-      // open a read/write db transaction, ready for adding the data
-      const transaction = db.transaction(['toDoList'], 'readwrite');
+    // report on the success of the transaction completing, when everything is done
+    transaction.oncomplete = function() {
+      note.appendChild(createListItem('Transaction completed: database modification finished.'));
 
-      // report on the success of the transaction completing, when everything is done
-      transaction.oncomplete = function() {
-        note.appendChild(createListItem('Transaction completed: database modification finished.'));
+      // update the display of data to show the newly added item, by running displayData() again.
+      displayData();
+    };
 
-        // update the display of data to show the newly added item, by running displayData() again.
-        displayData();
-      };
+    transaction.onerror = function() {
+      note.appendChild(createListItem(`Transaction not opened due to error: ${transaction.error}`));
+    };
 
-      transaction.onerror = function() {
-        note.appendChild(createListItem(`Transaction not opened due to error: ${transaction.error}`));
-      };
+    // call an object store that's already been added to the database
+    const objectStore = transaction.objectStore('toDoList');
+    console.log(objectStore.indexNames);
+    console.log(objectStore.keyPath);
+    console.log(objectStore.name);
+    console.log(objectStore.transaction);
+    console.log(objectStore.autoIncrement);
 
-      // call an object store that's already been added to the database
-      const objectStore = transaction.objectStore('toDoList');
-      console.log(objectStore.indexNames);
-      console.log(objectStore.keyPath);
-      console.log(objectStore.name);
-      console.log(objectStore.transaction);
-      console.log(objectStore.autoIncrement);
+    // Make a request to add our newItem object to the object store
+    const objectStoreRequest = objectStore.add(newItem[0]);
+    objectStoreRequest.onsuccess = function(event) {
 
-      // Make a request to add our newItem object to the object store
-      const objectStoreRequest = objectStore.add(newItem[0]);
-      objectStoreRequest.onsuccess = function(event) {
+      // report the success of our request
+      // (to detect whether it has been succesfully
+      // added to the database, you'd look at transaction.oncomplete)
+      note.appendChild(createListItem('Request successful.'));
 
-        // report the success of our request
-        // (to detect whether it has been succesfully
-        // added to the database, you'd look at transaction.oncomplete)
-        note.appendChild(createListItem('Request successful.'));
-
-        // clear the form, ready for adding the next entry
-        title.value = '';
-        hours.value = null;
-        minutes.value = null;
-        day.value = 01;
-        month.value = 'January';
-        year.value = 2020;
-      };
+      // clear the form, ready for adding the next entry
+      title.value = '';
+      hours.value = null;
+      minutes.value = null;
+      day.value = 01;
+      month.value = 'January';
+      year.value = 2020;
     };
   };
 
