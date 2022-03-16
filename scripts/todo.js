@@ -8,7 +8,7 @@ const note = document.getElementById('notifications');
 let db;
 
 // create a blank instance of the object that is used to transfer data into the IDB. This is mainly for reference
-let newItem = [
+const newItem = [
       { taskTitle: '', hours: 0, minutes: 0, day: 0, month: '', year: 0, notified: 'no' }
     ];
 
@@ -72,7 +72,7 @@ window.onload = function() {
   // window.indexedDB.open line above
   //it is only implemented in recent browsers
   DBOpenRequest.onupgradeneeded = function(event) {
-    let db = event.target.result;
+    const db = event.target.result;
 
     db.onerror = function(event) {
       note.appendChild(createListItem('Error loading database.'));
@@ -80,7 +80,7 @@ window.onload = function() {
 
     // Create an objectStore for this database
 
-    let objectStore = db.createObjectStore('toDoList', { keyPath: 'taskTitle' });
+    const objectStore = db.createObjectStore('toDoList', { keyPath: 'taskTitle' });
 
     // define what data items the objectStore will contain
 
@@ -103,9 +103,9 @@ window.onload = function() {
     }
 
     // Open our object store and then get a cursor list of all the different data items in the IDB to iterate through
-    let objectStore = db.transaction('toDoList').objectStore('toDoList');
+    const objectStore = db.transaction('toDoList').objectStore('toDoList');
     objectStore.openCursor().onsuccess = function(event) {
-      let cursor = event.target.result;
+      const cursor = event.target.result;
         // if there is still another cursor to go, keep runing this code
         if(cursor) {
 
@@ -168,12 +168,12 @@ window.onload = function() {
     } else {
 
       // grab the values entered into the form fields and store them in an object ready for being inserted into the IDB
-      let newItem = [
+      const newItem = [
         { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, notified: 'no' }
       ];
 
       // open a read/write db transaction, ready for adding the data
-      let transaction = db.transaction(['toDoList'], 'readwrite');
+      const transaction = db.transaction(['toDoList'], 'readwrite');
 
       // report on the success of the transaction completing, when everything is done
       transaction.oncomplete = function() {
@@ -188,7 +188,7 @@ window.onload = function() {
       };
 
       // call an object store that's already been added to the database
-      let objectStore = transaction.objectStore('toDoList');
+      const objectStore = transaction.objectStore('toDoList');
       console.log(objectStore.indexNames);
       console.log(objectStore.keyPath);
       console.log(objectStore.name);
@@ -196,7 +196,7 @@ window.onload = function() {
       console.log(objectStore.autoIncrement);
 
       // Make a request to add our newItem object to the object store
-      let objectStoreRequest = objectStore.add(newItem[0]);
+      const objectStoreRequest = objectStore.add(newItem[0]);
         objectStoreRequest.onsuccess = function(event) {
 
           // report the success of our request
@@ -220,11 +220,11 @@ window.onload = function() {
 
   function deleteItem(event) {
     // retrieve the name of the task we want to delete
-    let dataTask = event.target.getAttribute('data-task');
+    const dataTask = event.target.getAttribute('data-task');
 
     // open a database transaction and delete the task, finding it by the name we retrieved above
-    let transaction = db.transaction(['toDoList'], 'readwrite');
-    let request = transaction.objectStore('toDoList').delete(dataTask);
+    const transaction = db.transaction(['toDoList'], 'readwrite');
+    transaction.objectStore('toDoList').delete(dataTask);
 
     // report that the data item has been deleted
     transaction.oncomplete = function() {
@@ -256,14 +256,14 @@ window.onload = function() {
     const yearCheck = now.getFullYear();
 
     // again, open a transaction then a cursor to iterate through all the data items in the IDB
-    let objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
+    const objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
     objectStore.openCursor().onsuccess = function(event) {
-      let cursor = event.target.result;
+      const cursor = event.target.result;
         if(cursor) {
 
         // convert the month names we have installed in the IDB into a month number that JavaScript will understand.
         // The JavaScript date object creates month values as a number between 0 and 11.
-        var monthNumber = MONTHS.indexOf(cursor.value.month);
+        const monthNumber = MONTHS.indexOf(cursor.value.month);
         if (monthNumber === -1) alert('Incorrect month entered in database.');
         
           // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
@@ -351,28 +351,28 @@ window.onload = function() {
   function createNotification(title) {
 
     // Create and show the notification
-    let img = '/to-do-notifications/img/icon-128.png';
-    let text = 'HEY! Your task "' + title + '" is now overdue.';
-    let notification = new Notification('To do list', { body: text, icon: img });
+    const img = '/to-do-notifications/img/icon-128.png';
+    const text = 'HEY! Your task "' + title + '" is now overdue.';
+    const notification = new Notification('To do list', { body: text, icon: img });
 
     // we need to update the value of notified to 'yes' in this particular data object, so the
     // notification won't be set off on it again
 
     // first open up a transaction as usual
-    let objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
+    const objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
 
     // get the to-do list object that has this title as it's title
-    let objectStoreTitleRequest = objectStore.get(title);
+    const objectStoreTitleRequest = objectStore.get(title);
 
     objectStoreTitleRequest.onsuccess = function() {
       // grab the data object returned as the result
-      let data = objectStoreTitleRequest.result;
+      const data = objectStoreTitleRequest.result;
 
       // update the notified value in the object to 'yes'
       data.notified = 'yes';
 
       // create another request that inserts the item back into the database
-      let updateTitleRequest = objectStore.put(data);
+      const updateTitleRequest = objectStore.put(data);
 
       // when this new request succeeds, run the displayData() function again to update the display
       updateTitleRequest.onsuccess = function() {
