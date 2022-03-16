@@ -113,6 +113,7 @@ window.onload = function() {
       }
       // if there is still another cursor to go, keep runing this code
       // check which suffix the deadline day of the month needs
+      let daySuffix;
       if(cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
         daySuffix = 'st';
       } else if(cursor.value.day == 2 || cursor.value.day == 22) {
