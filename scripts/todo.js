@@ -107,51 +107,51 @@ window.onload = function() {
     objectStore.openCursor().onsuccess = function(event) {
       const cursor = event.target.result;
         // if there is still another cursor to go, keep runing this code
-        if(cursor) {
+      if(cursor) {
 
-          // check which suffix the deadline day of the month needs
-          if(cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
-            daySuffix = 'st';
-          } else if(cursor.value.day == 2 || cursor.value.day == 22) {
-            daySuffix = 'nd';
-          } else if(cursor.value.day == 3 || cursor.value.day == 23) {
-            daySuffix = 'rd';
-          } else {
-            daySuffix = 'th';
-          }
-
-          // build the to-do list entry and put it into the list item.
-          const toDoText = `${cursor.value.taskTitle} — ${cursor.value.hours}:${cursor.value.minutes}, ${cursor.value.month} ${cursor.value.day}${daySuffix}  ${cursor.value.year}.`;
-          const listItem = createListItem(toDoText);
-
-          if(cursor.value.notified == 'yes') {
-            listItem.style.textDecoration = 'line-through';
-            listItem.style.color = 'rgba(255,0,0,0.5)';
-          }
-
-          // put the item item inside the task list
-          taskList.appendChild(listItem);
-
-          // create a delete button inside each list item, giving it an event handler so that it runs the deleteButton()
-          // function when clicked
-          const deleteButton = document.createElement('button');
-          listItem.appendChild(deleteButton);
-          deleteButton.textContent = 'X';
-          // here we are setting a data attribute on our delete button to say what task we want deleted if it is clicked!
-          deleteButton.setAttribute('data-task', cursor.value.taskTitle);
-          deleteButton.onclick = function(event) {
-            deleteItem(event);
-          }
-
-          // continue on to the next item in the cursor
-          cursor.continue();
-
-        // if there are no more cursor items to iterate through, say so, and exit the function
+        // check which suffix the deadline day of the month needs
+        if(cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
+          daySuffix = 'st';
+        } else if(cursor.value.day == 2 || cursor.value.day == 22) {
+          daySuffix = 'nd';
+        } else if(cursor.value.day == 3 || cursor.value.day == 23) {
+          daySuffix = 'rd';
         } else {
-          note.appendChild(createListItem('Entries all displayed.'));
+          daySuffix = 'th';
         }
+
+        // build the to-do list entry and put it into the list item.
+        const toDoText = `${cursor.value.taskTitle} — ${cursor.value.hours}:${cursor.value.minutes}, ${cursor.value.month} ${cursor.value.day}${daySuffix}  ${cursor.value.year}.`;
+        const listItem = createListItem(toDoText);
+
+        if(cursor.value.notified == 'yes') {
+          listItem.style.textDecoration = 'line-through';
+          listItem.style.color = 'rgba(255,0,0,0.5)';
+        }
+
+        // put the item item inside the task list
+        taskList.appendChild(listItem);
+
+        // create a delete button inside each list item, giving it an event handler so that it runs the deleteButton()
+        // function when clicked
+        const deleteButton = document.createElement('button');
+        listItem.appendChild(deleteButton);
+        deleteButton.textContent = 'X';
+        // here we are setting a data attribute on our delete button to say what task we want deleted if it is clicked!
+        deleteButton.setAttribute('data-task', cursor.value.taskTitle);
+        deleteButton.onclick = function(event) {
+          deleteItem(event);
+        }
+
+        // continue on to the next item in the cursor
+        cursor.continue();
+
+      // if there are no more cursor items to iterate through, say so, and exit the function
+      } else {
+        note.appendChild(createListItem('Entries all displayed.'));
       }
     }
+  }
 
   // give the form submit button an event listener so that when the form is submitted the addData() function is run
   taskForm.addEventListener('submit',addData,false);
@@ -197,26 +197,23 @@ window.onload = function() {
 
       // Make a request to add our newItem object to the object store
       const objectStoreRequest = objectStore.add(newItem[0]);
-        objectStoreRequest.onsuccess = function(event) {
+      objectStoreRequest.onsuccess = function(event) {
 
-          // report the success of our request
-          // (to detect whether it has been succesfully
-          // added to the database, you'd look at transaction.oncomplete)
-          note.appendChild(createListItem('Request successful.'));
+        // report the success of our request
+        // (to detect whether it has been succesfully
+        // added to the database, you'd look at transaction.oncomplete)
+        note.appendChild(createListItem('Request successful.'));
 
-          // clear the form, ready for adding the next entry
-          title.value = '';
-          hours.value = null;
-          minutes.value = null;
-          day.value = 01;
-          month.value = 'January';
-          year.value = 2020;
-
-        };
-
+        // clear the form, ready for adding the next entry
+        title.value = '';
+        hours.value = null;
+        minutes.value = null;
+        day.value = 01;
+        month.value = 'January';
+        year.value = 2020;
       };
-
     };
+  };
 
   function deleteItem(event) {
     // retrieve the name of the task we want to delete
@@ -259,34 +256,32 @@ window.onload = function() {
     const objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
     objectStore.openCursor().onsuccess = function(event) {
       const cursor = event.target.result;
-        if(cursor) {
+      if(cursor) {
 
-        // convert the month names we have installed in the IDB into a month number that JavaScript will understand.
-        // The JavaScript date object creates month values as a number between 0 and 11.
-        const monthNumber = MONTHS.indexOf(cursor.value.month);
-        if (monthNumber === -1) alert('Incorrect month entered in database.');
-        
-          // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
-          // The + operator in this case converts numbers with leading zeros into their non leading zero equivalents, so e.g.
-          // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
-          // The secondsCheck = 0 check is so that you don't get duplicate notifications for the same task. The notification
-          // will only appear when the seconds is 0, meaning that you won't get more than one notification for each task
-          if(+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && cursor.value.notified == 'no') {
+      // convert the month names we have installed in the IDB into a month number that JavaScript will understand.
+      // The JavaScript date object creates month values as a number between 0 and 11.
+      const monthNumber = MONTHS.indexOf(cursor.value.month);
+      if (monthNumber === -1) alert('Incorrect month entered in database.');
+      
+        // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
+        // The + operator in this case converts numbers with leading zeros into their non leading zero equivalents, so e.g.
+        // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
+        // The secondsCheck = 0 check is so that you don't get duplicate notifications for the same task. The notification
+        // will only appear when the seconds is 0, meaning that you won't get more than one notification for each task
+        if(+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && cursor.value.notified == 'no') {
 
-            // If the numbers all do match, run the createNotification() function to create a system notification
-            // but only if the permission is set
+          // If the numbers all do match, run the createNotification() function to create a system notification
+          // but only if the permission is set
 
-            if(Notification.permission === 'granted') {
-              createNotification(cursor.value.taskTitle);
-            }
+          if(Notification.permission === 'granted') {
+            createNotification(cursor.value.taskTitle);
           }
-
-          // move on and perform the same deadline check on the next cursor item
-          cursor.continue();
         }
 
+        // move on and perform the same deadline check on the next cursor item
+        cursor.continue();
+      }
     }
-
   }
 
 
