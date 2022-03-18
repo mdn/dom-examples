@@ -8,12 +8,21 @@ const putInCache = async (request, response) => {
   await cache.put(request, response);
 };
 
-const cacheFirst = async ({ request, fallbackUrl }) => {
+const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
   // First try to get the resource from the cache
   const responseFromCache = await caches.match(request);
   if (responseFromCache) {
     return responseFromCache;
   }
+
+  // Next try to use the preloaded response, if it's there
+  const preloadResponse = await preloadResponsePromise;
+  if (preloadResponse) {
+    console.info('using preload response', preloadResponse);
+    putInCache(request, preloadResponse.clone());
+    return preloadResponse;
+  }
+
   // Next try to get the resource from the network
   try {
     const responseFromNetwork = await fetch(request);
@@ -37,6 +46,17 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
   }
 };
 
+const enableNavigationPreload = async () => {
+  if (self.registration.navigationPreload) {
+    // Enable navigation preloads!
+    await self.registration.navigationPreload.enable();
+  }
+};
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(enableNavigationPreload());
+});
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     addResourcesToCache([
@@ -57,6 +77,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     cacheFirst({
       request: event.request,
+      preloadResponsePromise: event.preloadResponse,
       fallbackUrl: '/sw-test/gallery/myLittleVader.jpg',
     })
   );
