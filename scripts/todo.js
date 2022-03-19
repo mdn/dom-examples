@@ -9,8 +9,8 @@ let db;
 
 // create a blank instance of the object that is used to transfer data into the IDB. This is mainly for reference
 const newItem = [
-      { taskTitle: '', hours: 0, minutes: 0, day: 0, month: '', year: 0, notified: 'no' }
-    ];
+  { taskTitle: '', hours: 0, minutes: 0, day: 0, month: '', year: 0, notified: 'no' },
+];
 
 // all the variables we need for the app
 const taskList = document.getElementById('task-list');
@@ -30,7 +30,7 @@ const notificationBtn = document.getElementById('enable');
 
 // Do an initial check to see what the notification permission state is
 
-if(Notification.permission === 'denied' || Notification.permission === 'default') {
+if (Notification.permission === 'denied' || Notification.permission === 'default') {
   notificationBtn.style.display = 'block';
 } else {
   notificationBtn.style.display = 'none';
@@ -107,18 +107,18 @@ window.onload = function() {
     objectStore.openCursor().onsuccess = function(event) {
       const cursor = event.target.result;
       // if there are no (more) cursor items to iterate through, say so, and exit the function
-      if(!cursor) { 
+      if (!cursor) { 
         note.appendChild(createListItem('Entries all displayed.'));
         return;
       }
       // if there is still another cursor to go, keep runing this code
       // check which suffix the deadline day of the month needs
       let daySuffix;
-      if(cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
+      if (cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
         daySuffix = 'st';
-      } else if(cursor.value.day == 2 || cursor.value.day == 22) {
+      } else if (cursor.value.day == 2 || cursor.value.day == 22) {
         daySuffix = 'nd';
-      } else if(cursor.value.day == 3 || cursor.value.day == 23) {
+      } else if (cursor.value.day == 3 || cursor.value.day == 23) {
         daySuffix = 'rd';
       } else {
         daySuffix = 'th';
@@ -128,7 +128,7 @@ window.onload = function() {
       const toDoText = `${cursor.value.taskTitle} — ${cursor.value.hours}:${cursor.value.minutes}, ${cursor.value.month} ${cursor.value.day}${daySuffix}  ${cursor.value.year}.`;
       const listItem = createListItem(toDoText);
 
-      if(cursor.value.notified == 'yes') {
+      if (cursor.value.notified == 'yes') {
         listItem.style.textDecoration = 'line-through';
         listItem.style.color = 'rgba(255,0,0,0.5)';
       }
@@ -145,15 +145,15 @@ window.onload = function() {
       deleteButton.setAttribute('data-task', cursor.value.taskTitle);
       deleteButton.onclick = function(event) {
         deleteItem(event);
-      }
+      };
 
       // continue on to the next item in the cursor
       cursor.continue();
-    }
-  }
+    };
+  };
 
   // give the form submit button an event listener so that when the form is submitted the addData() function is run
-  taskForm.addEventListener('submit',addData,false);
+  taskForm.addEventListener('submit', addData, false);
 
   function addData(e) {
     // prevent default - we don't want the form to submit in the conventional way
@@ -161,13 +161,13 @@ window.onload = function() {
 
     // Stop the form submitting if any values are left empty. This is just for browsers that don't support the HTML5 form
     // required attributes
-    if(title.value == '' || hours.value == null || minutes.value == null || day.value == '' || month.value == '' || year.value == null) {
+    if (title.value == '' || hours.value == null || minutes.value == null || day.value == '' || month.value == '' || year.value == null) {
       note.appendChild(createListItem('Data not submitted — form incomplete.'));
       return;
     }
     // grab the values entered into the form fields and store them in an object ready for being inserted into the IDB
     const newItem = [
-      { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, notified: 'no' }
+      { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, notified: 'no' },
     ];
 
     // open a read/write db transaction, ready for adding the data
@@ -231,7 +231,7 @@ window.onload = function() {
   // this function checks whether the deadline for each task is up or not, and responds appropriately
   function checkDeadlines() {
     // First of all check whether notifications are enabled or denied
-    if(Notification.permission === 'denied' || Notification.permission === 'default') {
+    if (Notification.permission === 'denied' || Notification.permission === 'default') {
       notificationBtn.style.display = 'block';
     } else {
       notificationBtn.style.display = 'none';
@@ -253,7 +253,7 @@ window.onload = function() {
     const objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
     objectStore.openCursor().onsuccess = function(event) {
       const cursor = event.target.result;
-      if(!cursor) return;
+      if (!cursor) return;
 
       // convert the month names we have installed in the IDB into a month number that JavaScript will understand.
       // The JavaScript date object creates month values as a number between 0 and 11.
@@ -265,20 +265,20 @@ window.onload = function() {
       // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
       // The secondsCheck = 0 check is so that you don't get duplicate notifications for the same task. The notification
       // will only appear when the seconds is 0, meaning that you won't get more than one notification for each task
-      if(+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && cursor.value.notified == 'no') {
+      if (+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && cursor.value.notified == 'no') {
 
         // If the numbers all do match, run the createNotification() function to create a system notification
         // but only if the permission is set
 
-        if(Notification.permission === 'granted') {
+        if (Notification.permission === 'granted') {
           createNotification(cursor.value.taskTitle);
         }
       }
 
       // move on and perform the same deadline check on the next cursor item
       cursor.continue();
-    }
-  }
+    };
+  };
 
 
   // askNotificationPermission function to ask for permission when the 'Enable notifications' button is clicked
@@ -287,34 +287,34 @@ window.onload = function() {
     // function to actually ask the permissions
     function handlePermission(permission) {
       // Whatever the user answers, we make sure Chrome stores the information
-      if(!('permission' in Notification)) {
+      if (!('permission' in Notification)) {
         Notification.permission = permission;
       }
 
       // set the button to shown or hidden, depending on what the user answers
-      if(Notification.permission === 'denied' || Notification.permission === 'default') {
+      if (Notification.permission === 'denied' || Notification.permission === 'default') {
         notificationBtn.style.display = 'block';
       } else {
         notificationBtn.style.display = 'none';
       }
-    }
+    };
 
     // Let's check if the browser supports notifications
     if (!'Notification' in window) {
       console.log('This browser does not support notifications.');
     } else {
-      if(checkNotificationPromise()) {
+      if (checkNotificationPromise()) {
         Notification.requestPermission()
         .then((permission) => {
           handlePermission(permission);
-        })
+        });
       } else {
         Notification.requestPermission(function(permission) {
           handlePermission(permission);
         });
       }
     }
-  }
+  };
 
   // Function to check whether browser supports the promise version of requestPermission()
   // Safari only supports the old callback-based version
@@ -326,7 +326,7 @@ window.onload = function() {
     }
 
     return true;
-  }
+  };
 
   // wire up notification permission functionality to 'Enable notifications' button
 
@@ -336,7 +336,7 @@ window.onload = function() {
     const listItem = document.createElement('li');
     listItem.textContent = contents;
     return listItem;
-  }
+  };
 
   // function for creating the notification
   function createNotification(title) {
@@ -368,9 +368,9 @@ window.onload = function() {
       // when this new request succeeds, run the displayData() function again to update the display
       updateTitleRequest.onsuccess = function() {
         displayData();
-      }
-    }
-  }
+      };
+    };
+  };
 
   // using a setInterval to run the checkDeadlines() function every second
   setInterval(checkDeadlines, 1000);
