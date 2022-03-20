@@ -113,19 +113,11 @@ window.onload = function() {
       }
       // if there is still another cursor to go, keep runing this code
       // check which suffix the deadline day of the month needs
-      let daySuffix;
-      if (cursor.value.day == 1 || cursor.value.day == 21 || cursor.value.day == 31) {
-        daySuffix = 'st';
-      } else if (cursor.value.day == 2 || cursor.value.day == 22) {
-        daySuffix = 'nd';
-      } else if (cursor.value.day == 3 || cursor.value.day == 23) {
-        daySuffix = 'rd';
-      } else {
-        daySuffix = 'th';
-      }
+      const { taskTitle, hours, minutes, month, day, year } = cursor.value;
+      const ordDay = ordinal(day);
 
       // build the to-do list entry and put it into the list item.
-      const toDoText = `${cursor.value.taskTitle} — ${cursor.value.hours}:${cursor.value.minutes}, ${cursor.value.month} ${cursor.value.day}${daySuffix}  ${cursor.value.year}.`;
+      const toDoText = `${taskTitle} — ${hours}:${minutes}, ${month} ${ordDay} ${year}.`;
       const listItem = createListItem(toDoText);
 
       if (cursor.value.notified == 'yes') {
@@ -375,3 +367,12 @@ window.onload = function() {
   // using a setInterval to run the checkDeadlines() function every second
   setInterval(checkDeadlines, 1000);
 }
+
+const ordinal = (day) => {
+  const n = day.toString();
+  const last = n.slice(-1);
+  if (last === '1') return `${n}st`;
+  if (last === '2') return `${n}nd`;
+  if (last === '3') return `${n}rd`;
+  return `${n}th`;
+};
