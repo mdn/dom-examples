@@ -120,7 +120,7 @@ window.onload = function() {
       const toDoText = `${taskTitle} — ${hours}:${minutes}, ${month} ${ordDay} ${year}.`;
       const listItem = createListItem(toDoText);
 
-      if (cursor.value.notified == 'yes') {
+      if (cursor.value.notified === 'yes') {
         listItem.style.textDecoration = 'line-through';
         listItem.style.color = 'rgba(255,0,0,0.5)';
       }
@@ -153,7 +153,7 @@ window.onload = function() {
 
     // Stop the form submitting if any values are left empty. This is just for browsers that don't support the HTML5 form
     // required attributes
-    if (title.value == '' || hours.value == null || minutes.value == null || day.value == '' || month.value == '' || year.value == null) {
+    if (title.value === '' || hours.value === null || minutes.value === null || day.value === '' || month.value === '' || year.value === null) {
       note.appendChild(createListItem('Data not submitted — form incomplete.'));
       return;
     }
@@ -257,7 +257,7 @@ window.onload = function() {
       // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
       // The secondsCheck = 0 check is so that you don't get duplicate notifications for the same task. The notification
       // will only appear when the seconds is 0, meaning that you won't get more than one notification for each task
-      if (+(cursor.value.hours) == hourCheck && +(cursor.value.minutes) == minuteCheck && +(cursor.value.day) == dayCheck && monthNumber == monthCheck && cursor.value.year == yearCheck && cursor.value.notified == 'no') {
+      if (+(cursor.value.hours) === hourCheck && +(cursor.value.minutes) === minuteCheck && +(cursor.value.day) === dayCheck && monthNumber === monthCheck && cursor.value.year === yearCheck && cursor.value.notified === 'no') {
 
         // If the numbers all do match, run the createNotification() function to create a system notification
         // but only if the permission is set
