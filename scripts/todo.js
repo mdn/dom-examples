@@ -251,7 +251,7 @@ window.onload = function() {
       // convert the month names we have installed in the IDB into a month number that JavaScript will understand.
       // The JavaScript date object creates month values as a number between 0 and 11.
       const monthNumber = MONTHS.indexOf(month);
-      if (monthNumber === -1) alert('Incorrect month entered in database.');
+      if (monthNumber === -1) throw new Error('Incorrect month entered in database.');
       
       // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
       // The + operator in this case converts numbers with leading zeros into their non leading zero equivalents, so e.g.
