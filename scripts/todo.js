@@ -113,14 +113,14 @@ window.onload = function() {
       }
       // if there is still another cursor to go, keep runing this code
       // check which suffix the deadline day of the month needs
-      const { taskTitle, hours, minutes, month, day, year } = cursor.value;
+      const { hours, minutes, day, month, year, notified, taskTitle } = cursor.value;
       const ordDay = ordinal(day);
 
       // build the to-do list entry and put it into the list item.
       const toDoText = `${taskTitle} — ${hours}:${minutes}, ${month} ${ordDay} ${year}.`;
       const listItem = createListItem(toDoText);
 
-      if (cursor.value.notified === 'yes') {
+      if (notified === 'yes') {
         listItem.style.textDecoration = 'line-through';
         listItem.style.color = 'rgba(255,0,0,0.5)';
       }
@@ -134,7 +134,7 @@ window.onload = function() {
       listItem.appendChild(deleteButton);
       deleteButton.textContent = 'X';
       // here we are setting a data attribute on our delete button to say what task we want deleted if it is clicked!
-      deleteButton.setAttribute('data-task', cursor.value.taskTitle);
+      deleteButton.setAttribute('data-task', taskTitle);
       deleteButton.onclick = function(event) {
         deleteItem(event);
       };
@@ -246,10 +246,11 @@ window.onload = function() {
     objectStore.openCursor().onsuccess = function(event) {
       const cursor = event.target.result;
       if (!cursor) return;
+      const { hours, minutes, day, month, year, notified, taskTitle } = cursor.value;
 
       // convert the month names we have installed in the IDB into a month number that JavaScript will understand.
       // The JavaScript date object creates month values as a number between 0 and 11.
-      const monthNumber = MONTHS.indexOf(cursor.value.month);
+      const monthNumber = MONTHS.indexOf(month);
       if (monthNumber === -1) alert('Incorrect month entered in database.');
       
       // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
@@ -257,13 +258,17 @@ window.onload = function() {
       // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
       // The secondsCheck = 0 check is so that you don't get duplicate notifications for the same task. The notification
       // will only appear when the seconds is 0, meaning that you won't get more than one notification for each task
-      if (+(cursor.value.hours) === hourCheck && +(cursor.value.minutes) === minuteCheck && +(cursor.value.day) === dayCheck && monthNumber === monthCheck && cursor.value.year === yearCheck && cursor.value.notified === 'no') {
-
+      let mached = parseInt(hours) === hourCheck;
+      mached &&= parseInt(minutes) === minuteCheck;
+      mached &&= parseInt(day) === dayCheck;
+      mached &&= parseInt(monthNumber) === monthCheck;
+      mached &&= parseInt(year) === yearCheck;
+      if (mached && notified === 'no') {
         // If the numbers all do match, run the createNotification() function to create a system notification
         // but only if the permission is set
 
         if (Notification.permission === 'granted') {
-          createNotification(cursor.value.taskTitle);
+          createNotification(taskTitle);
         }
       }
 
