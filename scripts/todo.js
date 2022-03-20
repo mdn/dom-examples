@@ -279,7 +279,7 @@ window.onload = function() {
     // function to actually ask the permissions
     function handlePermission(permission) {
       // Whatever the user answers, we make sure Chrome stores the information
-      if (!('permission' in Notification)) {
+      if (!Reflect.has(Notification, 'permission')) {
         Notification.permission = permission;
       }
 
@@ -292,7 +292,7 @@ window.onload = function() {
     };
 
     // Let's check if the browser supports notifications
-    if (!'Notification' in window) {
+    if (!Reflect.has(window, 'Notification')) {
       console.log('This browser does not support notifications.');
     } else {
       if (checkNotificationPromise()) {
