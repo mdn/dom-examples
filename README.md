@@ -51,4 +51,6 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "web-storage" directory contains a simple demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](https://mdn.github.io/dom-examples/web-storage/).
 
-* The "web-share" directory contains a simple demo to show usage of the [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share). For more detail on how it works, read. [View the demo live](https://mdn.github.io/dom-examples/web-share/).
+* The "web-share" directory contains a simple demo to show usage of the [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share). [View the demo live](https://mdn.github.io/dom-examples/web-share/).
+
+* The "web-workers" directory contains a simple web worker to demonstrate how [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) work. [View the demo live](https://mdn.github.io/dom-examples/web-workers/simple-web-worker/).
