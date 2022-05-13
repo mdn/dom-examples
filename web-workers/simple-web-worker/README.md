@@ -1,6 +1,6 @@
 # simple-web-worker
 
-A simple web worker test. [View this demo live](https://mdn.github.io/simple-web-worker/).
+A simple web worker test. [View this demo live](https://mdn.github.io/dom-examples/web-workers/simple-web-worker/).
 
 To run this code locally you'll need to serve it.
 
