@@ -1,5 +1,5 @@
-var form = document.querySelector('form');
+var form = document.querySelector("form");
 
-form.onsubmit = function(e) {
+form.onsubmit = function (e) {
   e.preventDefault();
 };

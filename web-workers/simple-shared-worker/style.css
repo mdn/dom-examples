@@ -1,5 +1,5 @@
 html {
-  background-color: #7D2663;
+  background-color: #7d2663;
   font-family: sans-serif;
 }
 
@@ -26,15 +26,17 @@ p {
   transition: 1s all;
 }
 
-.controls:hover, .controls:focus {
+.controls:hover,
+.controls:focus {
   opacity: 1;
 }
 
-.controls label, .controls p, .controls input {
+.controls label,
+.controls p,
+.controls input {
   font-size: 3vw;
 }
 
 .controls div {
   padding-bottom: 1rem;
 }
-
