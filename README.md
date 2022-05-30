@@ -1,9 +1,3 @@
 # simple-web-worker
 
-A simple web worker test. [View this demo live](https://mdn.github.io/simple-web-worker/).
-
-To run this code locally you'll need to serve it.
-
-For example if you have [node](https://nodejs.org/) installed, navigate to the folder containing the code and run:
-
-`npx lite-server`
+> NOTE: This example repository has been archived. The example code and live example can now be found at [dom-examples/web-workers/simple-web-worker](https://github.com/mdn/dom-examples/tree/master/web-workers/simple-web-worker)
