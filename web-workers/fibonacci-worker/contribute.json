@@ -2,7 +2,7 @@
   "name": "Fibonacci worker",
   "description": "A web worker that calculates fibonacci numbers.",
   "repository": {
-    "url": "https://github.com/mdn/fibonacci-worker",
+    "url": "https://github.com/mdn/dom-examples/web-workers/fibonacci-worker",
     "license": "CC0"
   },
   "participate": {
