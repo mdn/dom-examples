@@ -20,4 +20,4 @@ This current works only on Chrome/Chrome Mobile. To get this code running succes
 
 Type words in the input then submit the form to hear it spoken. You can also select the different voices available on the system, and alter the rate and pitch.
 
-This currently works in Chrome and Firefox.
+This currently works in Chrome, Firefox and Safari.
