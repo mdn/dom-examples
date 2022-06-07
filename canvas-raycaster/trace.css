@@ -1,0 +1,20 @@
+.window {
+  z-index: 10;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 30%;
+  color: #00FF00;
+  background-color: #001100;
+  opacity: .80;
+  border: 2px solid #000000;
+  font-family: "Lucida Console", "Monaco", "Courier New", Courier, mono;
+  font-size: small;
+}
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+li {
+  list-style-type: none;
+}
