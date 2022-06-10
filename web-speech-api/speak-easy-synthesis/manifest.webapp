@@ -1,0 +1,14 @@
+{
+  "name": "SpeechSyn",
+  "description": "Web Speech API speech synthesis demo",
+  "launch_path": "/index.html",
+  "icons": {
+    "512": "/img/ws512.png",
+    "128": "/img/ws128.png"
+  },
+  "developer": {
+    "name": "Chris Mills",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API"
+  },
+  "default_locale": "en"
+}
