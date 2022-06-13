@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   font-family: 'Arvo', serif;
-  font-size: 10px;
+  font-size: 100%/1.5 serif;
 }
 
 h1 {
