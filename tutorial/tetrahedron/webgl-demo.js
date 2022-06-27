@@ -1,4 +1,4 @@
-var cubeRotation = 0.0;
+var tetrahedronRotation = 0.0;
 
 main();
 
@@ -49,7 +49,7 @@ function main() {
 
   // Collect all the info needed to use the shader program.
   // Look up which attributes our shader program is using
-  // for aVertexPosition, aVertexColor and also
+  // for aVertexPosition, aVevrtexColor and also
   // look up uniform locations.
   const programInfo = {
     program: shaderProgram,
@@ -60,7 +60,7 @@ function main() {
     uniformLocations: {
       projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
       modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
-    }
+    },
   };
 
   // Here's where we call the routine that builds all the
@@ -79,6 +79,7 @@ function main() {
 
     requestAnimationFrame(render);
   }
+  
   requestAnimationFrame(render);
 }
 
@@ -86,11 +87,11 @@ function main() {
 // initBuffers
 //
 // Initialize the buffers we'll need. For this demo, we just
-// have one object -- a simple three-dimensional cube.
+// have one object -- a simple three-dimensional tetrahedron.
 //
 function initBuffers(gl) {
 
-  // Create a buffer for the cube's vertex positions.
+  // Create a buffer for the tetrahedron's vertex positions.
 
   const positionBuffer = gl.createBuffer();
 
@@ -99,44 +100,37 @@ function initBuffers(gl) {
 
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-  // Now create an array of positions for the cube.
-
+  // Now create an array of positions for the tetrahedron.
+  // A equilateral triangle is needed ( well 4 of them )
+  // Point `O` is where the height is projected
+  // The tetrahedron is rotated around point `M`
+  // Height from vertex `A` to the edge `BC` is `H`
+  // The edge of the tetrahedron is 2 units long
+  // |AH| = 1.7320508075688772935274463415059
+  // The median and a height AH divides itself by
+  // the other medians into 1x and 2x ( one part and two parts )
+  // |AH|/3 = 0.57735026918962576450914878050197
+  // Find the tetrahedron height by argument sine (<OAD) 
+  // <OAD = 54.735610317245345684622999669982
+  // |DO|  = 1.6329931618554520654648560498039
+  // |DO|/3 = 0.5443310539518173551549520166013
+  // 2 * (|DO|/3) = 1.0886621079036347103099040332026
   const positions = [
-    // Front face
-    -1.0, -1.0,  1.0,
-     1.0, -1.0,  1.0,
-     1.0,  1.0,  1.0,
-    -1.0,  1.0,  1.0,
-
-    // Back face
-    -1.0, -1.0, -1.0,
-    -1.0,  1.0, -1.0,
-     1.0,  1.0, -1.0,
-     1.0, -1.0, -1.0,
-
-    // Top face
-    -1.0,  1.0, -1.0,
-    -1.0,  1.0,  1.0,
-     1.0,  1.0,  1.0,
-     1.0,  1.0, -1.0,
-
-    // Bottom face
-    -1.0, -1.0, -1.0,
-     1.0, -1.0, -1.0,
-     1.0, -1.0,  1.0,
-    -1.0, -1.0,  1.0,
-
-    // Right face
-     1.0, -1.0, -1.0,
-     1.0,  1.0, -1.0,
-     1.0,  1.0,  1.0,
-     1.0, -1.0,  1.0,
-
-    // Left face
-    -1.0, -1.0, -1.0,
-    -1.0, -1.0,  1.0,
-    -1.0,  1.0,  1.0,
-    -1.0,  1.0, -1.0,
+    -1.0, -0.5773, -0.54433, // A
+     1.0, -0.5773, -0.54433, // B
+     0.0,  1.1547, -0.54433, // C
+     
+    -1.0, -0.5773, -0.54433, // A
+     1.0, -0.5773, -0.54433, // B
+     0.0,  0.0000,  1.08866, // D
+     
+     1.0, -0.5773, -0.54433, // B
+     0.0,  1.1547, -0.54433, // C
+     0.0,  0.0000,  1.08866, // D
+     
+    -1.0, -0.5773, -0.54433, // A
+     0.0,  1.1547, -0.54433, // C
+     0.0,  0.0000,  1.08866, // D
   ];
 
   // Now pass the list of positions into WebGL to build the
@@ -153,8 +147,6 @@ function initBuffers(gl) {
     [1.0,  0.0,  0.0,  1.0],    // Back face: red
     [0.0,  1.0,  0.0,  1.0],    // Top face: green
     [0.0,  0.0,  1.0,  1.0],    // Bottom face: blue
-    [1.0,  1.0,  0.0,  1.0],    // Right face: yellow
-    [1.0,  0.0,  1.0,  1.0],    // Left face: purple
   ];
 
   // Convert the array of colors into a table for all the vertices.
@@ -165,7 +157,7 @@ function initBuffers(gl) {
     const c = faceColors[j];
 
     // Repeat each color four times for the four vertices of the face
-    colors = colors.concat(c, c, c, c);
+    colors = colors.concat(c,c,c);
   }
 
   const colorBuffer = gl.createBuffer();
@@ -183,13 +175,14 @@ function initBuffers(gl) {
   // position.
 
   const indices = [
-    0,  1,  2,      0,  2,  3,    // front
-    4,  5,  6,      4,  6,  7,    // back
-    8,  9,  10,     8,  10, 11,   // top
-    12, 13, 14,     12, 14, 15,   // bottom
-    16, 17, 18,     16, 18, 19,   // right
-    20, 21, 22,     20, 22, 23,   // left
+    0,  1,  2,      0,  1,  2,  // ABC
+    3,  4,  5,      3,  4,  5,  // ABD
+    6,  7,  8,      6,  7,  8,  // BCD
+    9, 10, 11,      9, 10, 11,  // ACD
+    0,  0,  0,      0,  0,  0,  // Dummy1
+    0,  0,  0,      0,  0,  0,  // Dummy2
   ];
+
 
   // Now send the element array to GL
 
@@ -249,17 +242,13 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
                  [-0.0, 0.0, -6.0]);  // amount to translate
   mat4.rotate(modelViewMatrix,  // destination matrix
               modelViewMatrix,  // matrix to rotate
-              cubeRotation,     // amount to rotate in radians
+              tetrahedronRotation,     // amount to rotate in radians
               [0, 0, 1]);       // axis to rotate around (Z)
   mat4.rotate(modelViewMatrix,  // destination matrix
               modelViewMatrix,  // matrix to rotate
-              cubeRotation * .7,// amount to rotate in radians
-              [0, 1, 0]);       // axis to rotate around (Y)
-  mat4.rotate(modelViewMatrix,  // destination matrix
-              modelViewMatrix,  // matrix to rotate
-              cubeRotation * .3,// amount to rotate in radians
-              [1, 0, 0]);       // axis to rotate around (X)
-  
+              tetrahedronRotation * .7,// amount to rotate in radians
+              [0, 1, 0]);       // axis to rotate around (X)
+
   // Tell WebGL how to pull out the positions from the position
   // buffer into the vertexPosition attribute
   {
@@ -327,7 +316,7 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
 
   // Update the rotation for the next draw
 
-  cubeRotation += deltaTime;
+  tetrahedronRotation += deltaTime;
 }
 
 //
@@ -379,4 +368,3 @@ function loadShader(gl, type, source) {
 
   return shader;
 }
-
