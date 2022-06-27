@@ -54,3 +54,5 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 * The "web-share" directory contains a simple demo to show usage of the [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share). [View the demo live](https://mdn.github.io/dom-examples/web-share/).
 
 * The "web-workers" directory contains a simple web worker to demonstrate how [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) work. [View the demo live](https://mdn.github.io/dom-examples/web-workers/simple-web-worker/).
+
+* The ["webgl-examples"](webgl-examples/README.md) directory contains a number of WebGL examples that demonstrate the [WebGL API](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API), which is used for 2D and 3D graphics on the web.
