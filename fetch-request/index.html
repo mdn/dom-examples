@@ -19,8 +19,8 @@
 
   </body>
   <script>
-    var myImage = document.querySelector('img');
-    var myRequest = new Request('flowers.jpg');
+    const myImage = document.querySelector('img');
+    const myRequest = new Request('flowers.jpg');
 
     fetch(myRequest)
     .then(function(response) {
@@ -30,11 +30,11 @@
       return response.blob();
     })
     .then(function(myBlob) {
-      var objectURL = URL.createObjectURL(myBlob);
+      const objectURL = URL.createObjectURL(myBlob);
       myImage.src = objectURL;
     })
     .catch(function(error) {
-      var p = document.createElement('p');
+      const p = document.createElement('p');
       p.appendChild(
         document.createTextNode('Error: ' + error.message)
       );
