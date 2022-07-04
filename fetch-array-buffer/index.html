@@ -20,8 +20,6 @@
     <pre></pre>
   </body>
   <script>
-    let source;
-
     const pre = document.querySelector("pre");
     const myScript = document.querySelector("script");
     const play = document.querySelector(".play");
@@ -32,7 +30,7 @@
     // decodeAudioData to decode it and stick it in a buffer.
     // Then we put the buffer into the source
     function getData() {
-      source = window.AudioContext.createBufferSource();
+      const source = new AudioBufferSourceNode();
 
       return fetch("viper.ogg")
         .then((response) => {
@@ -42,9 +40,10 @@
           return response.arrayBuffer();
         })
         .then((buffer) => {
-          audioCtx.decodeAudioData(buffer, (decodedData) => {
+          audioCtx.decodeAudioData(buffer).then((decodedData) => {
             source.buffer = decodedData;
             source.connect(audioCtx.destination);
+            return source;
           });
         });
     }
@@ -52,7 +51,7 @@
     // wire up buttons to stop and play audio
     play.onclick = () => {
       getData()
-        .then(() => {
+        .then((source) => {
           errorDisplay.innerHTML = "";
           source.start(0);
           play.disabled = true;
