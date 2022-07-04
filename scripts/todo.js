@@ -12,7 +12,7 @@ const newItem = [
   { taskTitle: '', hours: 0, minutes: 0, day: 0, month: '', year: 0, notified: 'no' },
 ];
 
-// all the variables we need for the app
+// all the UI elements we need for the app
 const taskList = document.getElementById('task-list');
 
 const taskForm = document.getElementById('task-form');
@@ -36,28 +36,21 @@ if (Notification.permission === 'denied' || Notification.permission === 'default
   notificationBtn.style.display = 'none';
 }
 
-window.onload = function() {
+window.onload = () => {
   note.appendChild(createListItem('App initialised.'));
-  // In the following line, you should include the prefixes of implementations you want to test.
-  window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-  // DON'T use 'var indexedDB = ...' if you're not in a function.
-  // Moreover, you may need references to some window.IDB* objects:
-  window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
-  window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
-  // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
 
   // Let us open our database
   const DBOpenRequest = window.indexedDB.open('toDoList', 4);
 
   // Gecko-only IndexedDB temp storage option:
-  // var request = window.indexedDB.open('toDoList', {version: 4, storage: 'temporary'});
+  // const DBOpenRequest = window.indexedDB.open('toDoList', {version: 4, storage: 'temporary'});
 
   // these two event handlers act on the database being opened successfully, or not
-  DBOpenRequest.onerror = function(event) {
+  DBOpenRequest.onerror = (event) => {
     note.appendChild(createListItem('Error loading database.'));
   };
 
-  DBOpenRequest.onsuccess = function(event) {
+  DBOpenRequest.onsuccess = (event) => {
     note.appendChild(createListItem('Database initialised.'));
 
     // store the result of opening the database in the db variable. This is used a lot below
@@ -71,10 +64,10 @@ window.onload = function() {
   // Either one has not been created before, or a new version number has been submitted via the
   // window.indexedDB.open line above
   //it is only implemented in recent browsers
-  DBOpenRequest.onupgradeneeded = function(event) {
-    const db = event.target.result;
+  DBOpenRequest.onupgradeneeded = (event) => {
+    db = event.target.result;
 
-    db.onerror = function(event) {
+    db.onerror = (event) => {
       note.appendChild(createListItem('Error loading database.'));
     };
 
@@ -104,7 +97,7 @@ window.onload = function() {
 
     // Open our object store and then get a cursor list of all the different data items in the IDB to iterate through
     const objectStore = db.transaction('toDoList').objectStore('toDoList');
-    objectStore.openCursor().onsuccess = function(event) {
+    objectStore.openCursor().onsuccess = (event) => {
       const cursor = event.target.result;
       // if there are no (more) cursor items to iterate through, say so, and exit the function
       if (!cursor) { 
@@ -135,7 +128,7 @@ window.onload = function() {
       deleteButton.textContent = 'X';
       // here we are setting a data attribute on our delete button to say what task we want deleted if it is clicked!
       deleteButton.setAttribute('data-task', taskTitle);
-      deleteButton.onclick = function(event) {
+      deleteButton.onclick = (event) => {
         deleteItem(event);
       };
 
@@ -166,14 +159,14 @@ window.onload = function() {
     const transaction = db.transaction(['toDoList'], 'readwrite');
 
     // report on the success of the transaction completing, when everything is done
-    transaction.oncomplete = function() {
+    transaction.oncomplete = () => {
       note.appendChild(createListItem('Transaction completed: database modification finished.'));
 
       // update the display of data to show the newly added item, by running displayData() again.
       displayData();
     };
 
-    transaction.onerror = function() {
+    transaction.onerror = () => {
       note.appendChild(createListItem(`Transaction not opened due to error: ${transaction.error}`));
     };
 
@@ -187,7 +180,7 @@ window.onload = function() {
 
     // Make a request to add our newItem object to the object store
     const objectStoreRequest = objectStore.add(newItem[0]);
-    objectStoreRequest.onsuccess = function(event) {
+    objectStoreRequest.onsuccess = (event) => {
 
       // report the success of our request
       // (to detect whether it has been succesfully
@@ -213,7 +206,7 @@ window.onload = function() {
     transaction.objectStore('toDoList').delete(dataTask);
 
     // report that the data item has been deleted
-    transaction.oncomplete = function() {
+    transaction.oncomplete = () => {
       // delete the parent of the button, which is the list item, so it no longer is displayed
       event.target.parentNode.parentNode.removeChild(event.target.parentNode);
       note.appendChild(createListItem(`Task "${dataTask}" deleted.`));
@@ -243,7 +236,7 @@ window.onload = function() {
 
     // again, open a transaction then a cursor to iterate through all the data items in the IDB
     const objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
-    objectStore.openCursor().onsuccess = function(event) {
+    objectStore.openCursor().onsuccess = (event) => {
       const cursor = event.target.result;
       if (!cursor) return;
       const { hours, minutes, day, month, year, notified, taskTitle } = cursor.value;
@@ -301,14 +294,9 @@ window.onload = function() {
       console.log('This browser does not support notifications.');
     } else {
       if (checkNotificationPromise()) {
-        Notification.requestPermission()
-        .then((permission) => {
-          handlePermission(permission);
-        });
+        Notification.requestPermission().then(handlePermission);
       } else {
-        Notification.requestPermission(function(permission) {
-          handlePermission(permission);
-        });
+        Notification.requestPermission(handlePermission);
       }
     }
   };
@@ -352,7 +340,7 @@ window.onload = function() {
     // get the to-do list object that has this title as it's title
     const objectStoreTitleRequest = objectStore.get(title);
 
-    objectStoreTitleRequest.onsuccess = function() {
+    objectStoreTitleRequest.onsuccess = () => {
       // grab the data object returned as the result
       const data = objectStoreTitleRequest.result;
 
@@ -363,7 +351,7 @@ window.onload = function() {
       const updateTitleRequest = objectStore.put(data);
 
       // when this new request succeeds, run the displayData() function again to update the display
-      updateTitleRequest.onsuccess = function() {
+      updateTitleRequest.onsuccess = () => {
         displayData();
       };
     };
