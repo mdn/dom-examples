@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
 
     <title>Fetch response clone example</title>
 
@@ -11,7 +11,7 @@
       img {
         width: 300px;
         border: 2px solid black;
-        box-shadow: 4px 4px 4px rgba(0,0,0,0.9);
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.9);
         margin: 0 10px;
       }
     </style>
@@ -19,16 +19,14 @@
 
   <body>
     <h1>Fetch response clone example</h1>
-    <img src="" class="img1">
-    <img src="" class="img2">
-
+    <img src="" class="img1" />
+    <img src="" class="img2" />
   </body>
   <script>
-    const image1 = document.querySelector('.img1');
-    const image2 = document.querySelector('.img2');
+    const image1 = document.querySelector(".img1");
+    const image2 = document.querySelector(".img2");
 
-    fetch('flowers.jpg')
-    .then((response1) => {
+    fetch("flowers.jpg").then((response1) => {
       if (!response1.ok) {
         showError(image1, `HTTP error, status = ${response1.status}`);
       } else {
@@ -39,21 +37,20 @@
     });
 
     function useResponse(response, image) {
-      response.blob()
-      .then((myBlob) => {
-        const objectURL = URL.createObjectURL(myBlob);
-        image.src = objectURL;
-      })
-      .catch((error) => {
+      response
+        .blob()
+        .then((myBlob) => {
+          const objectURL = URL.createObjectURL(myBlob);
+          image.src = objectURL;
+        })
+        .catch((error) => {
           showError(image, error.message);
-      });
+        });
     }
 
     function showError(image, errorMessage) {
-      const p = document.createElement('p');
-      p.appendChild(
-        document.createTextNode(`Error: ${errorMessage}`)
-      );
+      const p = document.createElement("p");
+      p.appendChild(document.createTextNode(`Error: ${errorMessage}`));
       document.body.insertBefore(p, image);
     }
   </script>

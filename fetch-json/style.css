@@ -3,7 +3,7 @@ html {
 }
 
 ul {
-  list-style-type: none;	
+  list-style-type: none;
   display: flex;
   flex-flow: column;
   align-items: flex-start;
@@ -15,7 +15,7 @@ li {
   font-size: 150%;
   border-top: 3px solid pink;
   border-bottom: 3px solid pink;
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.7);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
 }
 
 strong {

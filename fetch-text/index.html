@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
 
     <title>Fetch text example</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
@@ -17,42 +17,39 @@
       <li><a data-page="page2">Page 2</a></li>
       <li><a data-page="page3">Page 3</a></li>
     </ul>
-    <article>
-    </article>
-
+    <article></article>
   </body>
   <script>
-    const myArticle = document.querySelector('article');
-    const myLinks = document.querySelectorAll('ul a');
-    for(const link of myLinks) {
+    const myArticle = document.querySelector("article");
+    const myLinks = document.querySelectorAll("ul a");
+    for (const link of myLinks) {
       link.onclick = (e) => {
         e.preventDefault();
-        const linkData = e.target.getAttribute('data-page');
+        const linkData = e.target.getAttribute("data-page");
         getData(linkData);
-      }
-    };
+      };
+    }
 
     function getData(pageId) {
       console.log(pageId);
       const myRequest = new Request(`${pageId}.txt`);
 
       fetch(myRequest)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error, status = ${response.status}`);
-        }
-        return response.text();
-      })
-      .then((text) => {
-        myArticle.innerText = text;
-      })
-      .catch((error) => {
-        myArticle.innerText = '';
-        myArticle.appendChild(
-          document.createTextNode(`Error: ${error.message}`)
-        );
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error, status = ${response.status}`);
+          }
+          return response.text();
+        })
+        .then((text) => {
+          myArticle.innerText = text;
+        })
+        .catch((error) => {
+          myArticle.innerText = "";
+          myArticle.appendChild(
+            document.createTextNode(`Error: ${error.message}`)
+          );
+        });
     }
-
   </script>
 </html>

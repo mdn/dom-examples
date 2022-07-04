@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
 
     <title>Fetch arrayBuffer example</title>
 
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="" />
   </head>
 
   <body>
@@ -22,11 +22,11 @@
   <script>
     let source;
 
-    const pre = document.querySelector('pre');
-    const myScript = document.querySelector('script');
-    const play = document.querySelector('.play');
-    const stop = document.querySelector('.stop');
-    const errorDisplay = document.querySelector('.error');
+    const pre = document.querySelector("pre");
+    const myScript = document.querySelector("script");
+    const play = document.querySelector(".play");
+    const stop = document.querySelector(".stop");
+    const errorDisplay = document.querySelector(".error");
 
     // use fetch to load an audio track, and
     // decodeAudioData to decode it and stick it in a buffer.
@@ -34,34 +34,34 @@
     function getData() {
       source = window.AudioContext.createBufferSource();
 
-      return fetch('viper.ogg')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error, status = ${response.status}`);
-        }
-        return response.arrayBuffer();
-      })
-      .then((buffer) => {
-        audioCtx.decodeAudioData(buffer, (decodedData) => {
-          source.buffer = decodedData;
-          source.connect(audioCtx.destination);
+      return fetch("viper.ogg")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error, status = ${response.status}`);
+          }
+          return response.arrayBuffer();
+        })
+        .then((buffer) => {
+          audioCtx.decodeAudioData(buffer, (decodedData) => {
+            source.buffer = decodedData;
+            source.connect(audioCtx.destination);
+          });
         });
-      });
-    };
+    }
 
     // wire up buttons to stop and play audio
     play.onclick = () => {
       getData()
-      .then(() => {
-        errorDisplay.innerHTML = '';
-        source.start(0);
-        play.disabled = true;
-      })
-      .catch((error) => {
-        errorDisplay.appendChild(
-          document.createTextNode(`Error: ${error.message}`)
-        );
-      });
+        .then(() => {
+          errorDisplay.innerHTML = "";
+          source.start(0);
+          play.disabled = true;
+        })
+        .catch((error) => {
+          errorDisplay.appendChild(
+            document.createTextNode(`Error: ${error.message}`)
+          );
+        });
     };
 
     stop.onclick = () => {

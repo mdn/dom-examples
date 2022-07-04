@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
 
     <title>Fetch json example</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <h1>Fetch json example</h1>
-    <ul>
-    </ul>
-
+    <ul></ul>
   </body>
   <script>
-    const myList = document.querySelector('ul');
+    const myList = document.querySelector("ul");
 
-    fetch('products.json')
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error, status = ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(function(data) {
-      for(const product of data.products) {
-        const listItem = document.createElement('li');
-        listItem.innerHTML  = `<strong> ${product.Name} </strong>`;
-        listItem.innerHTML += ` can be found in ${product.Location}.`;
-        listItem.innerHTML += ` Cost: <strong>£${data.product.Price}</strong>`;
-        myList.appendChild(listItem);
-      }
-    })
-    .catch((error) => {
-      const p = document.createElement('p');
-      p.appendChild(
-        document.createTextNode(`Error: ${error.message}`)
-      );
-      document.body.insertBefore(p, myList);
-    });
+    fetch("products.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error, status = ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(function (data) {
+        for (const product of data.products) {
+          const listItem = document.createElement("li");
+          listItem.innerHTML = `<strong> ${product.Name} </strong>`;
+          listItem.innerHTML += ` can be found in ${product.Location}.`;
+          listItem.innerHTML += ` Cost: <strong>£${data.product.Price}</strong>`;
+          myList.appendChild(listItem);
+        }
+      })
+      .catch((error) => {
+        const p = document.createElement("p");
+        p.appendChild(document.createTextNode(`Error: ${error.message}`));
+        document.body.insertBefore(p, myList);
+      });
   </script>
 </html>
