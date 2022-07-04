@@ -8,9 +8,6 @@
     <title>Fetch basic response example</title>
 
     <link rel="stylesheet" href="">
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
   </head>
 
   <body>
@@ -19,12 +16,12 @@
 
   </body>
   <script>
-    var myImage = document.querySelector('img');
+    const myImage = document.querySelector('img');
 
-    var myRequest = new Request('flowers.jpg');
+    const myRequest = new Request('flowers.jpg');
 
     fetch(myRequest)
-    .then(function(response) {
+    .then((response) => {
       console.log(response.type);
       console.log(response.url);
       console.log(response.useFinalURL);
@@ -33,25 +30,24 @@
       console.log(response.statusText);
       console.log(response.headers);
       if (!response.ok) {
-        throw new Error("HTTP error, status = " + response.status);
+        throw new Error(`HTTP error, status = ${response.status}`);
       }
       return response.blob();
     })
-    .then(function(myBlob) {
-      var objectURL = URL.createObjectURL(myBlob);
+    .then((myBlob) =>{
+      const objectURL = URL.createObjectURL(myBlob);
       myImage.src = objectURL;
     })
-    .catch(function(error) {
-      var p = document.createElement('p');
+    .catch((error) => {
+      const p = document.createElement('p');
       p.appendChild(
-        document.createTextNode('Error: ' + error.message)
+        document.createTextNode(`Error: ${error.message}`)
       );
       document.body.insertBefore(p, myImage);
     });
 
-    var myBlob = new Blob();
-    var init = { "status" : 200 , "statusText" : "SuperSmashingGreat!" }
-    var myResponse = new Response(myBlob, init);
-
+    const myBlob = new Blob();
+    const options = { "status" : 200 , "statusText" : "SuperSmashingGreat!" }
+    const myResponse = new Response(myBlob, options);
   </script>
 </html>

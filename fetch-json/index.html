@@ -8,9 +8,6 @@
     <title>Fetch json example</title>
 
     <link rel="stylesheet" href="style.css">
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
   </head>
 
   <body>
@@ -20,31 +17,30 @@
 
   </body>
   <script>
-    var myList = document.querySelector('ul');
+    const myList = document.querySelector('ul');
 
     fetch('products.json')
-    .then(function(response) {
+    .then((response) => {
       if (!response.ok) {
-        throw new Error("HTTP error, status = " + response.status);
+        throw new Error(`HTTP error, status = ${response.status}`);
       }
       return response.json();
     })
     .then(function(data) {
-      for(var i = 0; i < data.products.length; i++) {
-        var listItem = document.createElement('li');
-        listItem.innerHTML = '<strong>' + data.products[i].Name + '</strong>';
-        listItem.innerHTML +=' can be found in ' + data.products[i].Location + '.';
-        listItem.innerHTML +=' Cost: <strong>£' + data.products[i].Price + '</strong>';
+      for(const product of data.products) {
+        const listItem = document.createElement('li');
+        listItem.innerHTML  = `<strong> ${product.Name} </strong>`;
+        listItem.innerHTML += ` can be found in ${product.Location}.`;
+        listItem.innerHTML += ` Cost: <strong>£${data.product.Price}</strong>`;
         myList.appendChild(listItem);
       }
     })
-    .catch(function(error) {
-      var p = document.createElement('p');
+    .catch((error) => {
+      const p = document.createElement('p');
       p.appendChild(
-        document.createTextNode('Error: ' + error.message)
+        document.createTextNode(`Error: ${error.message}`)
       );
       document.body.insertBefore(p, myList);
     });
-
   </script>
 </html>

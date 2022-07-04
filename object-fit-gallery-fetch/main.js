@@ -1,61 +1,37 @@
-var thumbs = document.querySelectorAll('.thumb');
-var mainImg = document.querySelector('.main');
+const thumbs = document.querySelectorAll('.thumb');
+const mainImg = document.querySelector('.main');
 
-for(var i = 1; i <= thumbs.length ; i++) {
-  var requestObj = 'images/pic' + i + '.jpg';
-  retrieveImage(requestObj, i - 1);
-}
+thumbs.forEach((thumb, index) => {
+  const requestObj = `images/pic${index}.jpg`;
 
-function retrieveImage(requestObj, imageNo) {
   fetch(requestObj)
-  .then(response => {
+  .then((response) => {
     if (!response.ok) {
-      throw new Error("HTTP error, status = " + response.status);
+      throw new Error(`HTTP error, status = ${response.status}`);
     }
     return response.blob();
   })
-  .then(blob => displayImage(imageNo, blob))
-  .catch(error => {
-    thumbs[imageNo].title = 'Image load failed: ' + error.message;
+  .then((blob) => displayImage(thumb, blob))
+  .catch((error) => {
+    thumb.title = `Image load failed: ${error.message}`;
   });
-}
+});
 
-function displayImage(imageNo, blob) {
-  var objectURL = URL.createObjectURL(blob);
-  thumbs[imageNo].setAttribute('src', objectURL);
-  thumbs[imageNo].onclick = function() {
+function displayImage(currentThumb, blob) {
+  const objectURL = URL.createObjectURL(blob);
+  currentThumb.setAttribute('src', objectURL);
+  currentThumb.onclick = () => {
     mainImg.setAttribute('src', objectURL);
     mainImg.className = 'blowup';
-    for(var i = 0; i < thumbs.length; i++) {
-      thumbs[i].className = 'thumb darken';
+    for(const thumb of thumbs) {
+      thumbs.className = 'thumb darken';
     }
   }
 }
 
-// The XHR version follows: much more complex
-
-// function retrieveImage(requestObj,imageNo) {
-//   var request = new XMLHttpRequest();
-//   request.open('GET', requestObj, true);
-//   request.responseType = 'blob';
-//   request.send();
-
-//   request.onload = function() {
-//     var objectURL = URL.createObjectURL(request.response);
-//     thumbs[imageNo].setAttribute('src',objectURL);
-//     thumbs[imageNo].onclick = function() {
-//       mainImg.setAttribute('src',objectURL);
-//       mainImg.className = 'blowup';
-//         for(i = 0; i < thumbs.length; i++) {
-//           thumbs[i].className = 'thumb darken';
-//         }
-//     }
-//   }
-// }
-
-mainImg.onclick = function() {
+mainImg.onclick = () => {
   mainImg.className = 'main';
-  for(var i = 0; i < thumbs.length; i++) {
-    thumbs[i].className = 'thumb';
+  for(const thumb of thumbs) {
+    thumb.className = 'thumb';
   }
 }

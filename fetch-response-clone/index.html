@@ -15,10 +15,6 @@
         margin: 0 10px;
       }
     </style>
-
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
   </head>
 
   <body>
@@ -28,15 +24,15 @@
 
   </body>
   <script>
-    var image1 = document.querySelector('.img1');
-    var image2 = document.querySelector('.img2');
+    const image1 = document.querySelector('.img1');
+    const image2 = document.querySelector('.img2');
 
     fetch('flowers.jpg')
-    .then(function(response1) {
+    .then((response1) => {
       if (!response1.ok) {
-        showError(image1, "HTTP error, status = " + response1.status);
+        showError(image1, `HTTP error, status = ${response1.status}`);
       } else {
-        var response2 = response1.clone();
+        const response2 = response1.clone();
         useResponse(response1, image1);
         useResponse(response2, image2);
       }
@@ -44,22 +40,21 @@
 
     function useResponse(response, image) {
       response.blob()
-      .then(function(myBlob) {
-        var objectURL = URL.createObjectURL(myBlob);
+      .then((myBlob) => {
+        const objectURL = URL.createObjectURL(myBlob);
         image.src = objectURL;
       })
-      .catch(function(error) {
+      .catch((error) => {
           showError(image, error.message);
       });
     }
 
     function showError(image, errorMessage) {
-      var p = document.createElement('p');
+      const p = document.createElement('p');
       p.appendChild(
-        document.createTextNode('Error: ' + errorMessage)
+        document.createTextNode(`Error: ${errorMessage}`)
       );
       document.body.insertBefore(p, image);
     }
-
   </script>
 </html>
