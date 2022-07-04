@@ -30,7 +30,7 @@
     // decodeAudioData to decode it and stick it in a buffer.
     // Then we put the buffer into the source
     function getData() {
-      const source = new AudioBufferSourceNode();
+      const audioCtx = new AudioContext();
 
       return fetch("viper.ogg")
         .then((response) => {
@@ -39,13 +39,12 @@
           }
           return response.arrayBuffer();
         })
-        .then((buffer) => {
-          const audioCtx = new AudioContext()
-          audioCtx.decodeAudioData(buffer).then((decodedData) => {
-            source.buffer = decodedData;
-            source.connect(audioCtx.destination);
-            return source;
-          });
+        .then((buffer) => audioCtx.decodeAudioData(buffer))
+        .then((decodedData) => {
+          const source = new AudioBufferSourceNode();
+          source.buffer = decodedData;
+          source.connect(audioCtx.destination);
+          return source;
         });
     }
 
