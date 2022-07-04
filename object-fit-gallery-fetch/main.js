@@ -24,7 +24,7 @@ function displayImage(currentThumb, blob) {
     mainImg.setAttribute("src", objectURL);
     mainImg.className = "blowup";
     for (const thumb of thumbs) {
-      thumbs.className = "thumb darken";
+      thumb.className = "thumb darken";
     }
   };
 }

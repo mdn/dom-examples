@@ -45,10 +45,7 @@
           myArticle.innerText = text;
         })
         .catch((error) => {
-          myArticle.innerText = "";
-          myArticle.appendChild(
-            document.createTextNode(`Error: ${error.message}`)
-          );
+          myArticle.innerText = `Error: ${error.message}`;
         });
     }
   </script>
