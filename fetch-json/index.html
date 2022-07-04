@@ -24,7 +24,7 @@
         }
         return response.json();
       })
-      .then(function (data) {
+      .then((data) => {
         for (const product of data.products) {
           const listItem = document.createElement("li");
           
