@@ -34,7 +34,11 @@
           const priceElement = document.createElement("strong");
           priceElement.textContent = `£${product.Price}`;
 
-          listItem.append(nameElement, ` can be found in ${product.Location}. Cost: `, priceElement);
+          listItem.append(
+            nameElement,
+            ` can be found in ${product.Location}. Cost: `,
+            priceElement,
+          );
           myList.appendChild(listItem);
         }
       })
