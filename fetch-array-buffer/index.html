@@ -40,6 +40,7 @@
           return response.arrayBuffer();
         })
         .then((buffer) => {
+          const audioCtx = new AudioContext()
           audioCtx.decodeAudioData(buffer).then((decodedData) => {
             source.buffer = decodedData;
             source.connect(audioCtx.destination);
