@@ -30,13 +30,11 @@
           
           const nameElement = document.createElement("strong");
           nameElement.textContent = product.Name;
-
-          const textNode = document.createTextNode(` can be found in ${product.Location}. Cost: `);
           
           const priceElement = document.createElement("strong");
           priceElement.textContent = `£${product.Price}`;
 
-          listItem.append(nameElement, textNode, priceElement);
+          listItem.append(nameElement, ` can be found in ${product.Location}. Cost: `, priceElement);
           myList.appendChild(listItem);
         }
       })
