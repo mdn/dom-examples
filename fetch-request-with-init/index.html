@@ -1,56 +1,48 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
 
     <title>Fetch Request example with init</title>
 
-    <link rel="stylesheet" href="">
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="" />
   </head>
 
   <body>
     <h1>Fetch Request with init example</h1>
-    <img src="">
-
+    <img src="" />
   </body>
   <script>
-    var myImage = document.querySelector('img');
+    const myImage = document.querySelector("img");
 
-    var myHeaders = new Headers();
+    const myHeaders = new Headers();
 
-    var myInit = {
-      method: 'GET',
+    const myOptions = {
+      method: "GET",
       headers: myHeaders,
-      mode: 'cors',
-      cache: 'default'
+      mode: "cors",
+      cache: "default",
     };
 
-    var myRequest = new Request('flowers.jpg', myInit);
-    var myResponse;
+    const myRequest = new Request("flowers.jpg", myOptions);
 
     fetch(myRequest)
-    .then(function(response) {
-      if (!response.ok) {
-        throw new Error("HTTP error, status = " + response.status);
-      }
-      return response.blob();
-    })
-    .then(function(blob) {
-      var objectURL = URL.createObjectURL(blob);
-      myImage.src = objectURL;
-    })
-    .catch(function(error) {
-      var p = document.createElement('p');
-      p.appendChild(
-        document.createTextNode('Error: ' + error.message)
-      );
-      document.body.insertBefore(p, myImage);
-    });
-
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error, status = ${response.status}`);
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const objectURL = URL.createObjectURL(blob);
+        myImage.src = objectURL;
+      })
+      .catch((error) => {
+        const p = document.createElement("p");
+        p.appendChild(document.createTextNode(`Error: ${error.message}`));
+        document.body.insertBefore(p, myImage);
+      });
   </script>
 </html>

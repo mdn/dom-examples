@@ -2,7 +2,8 @@ html {
   font-family: sans-serif;
 }
 
-h1,h2 {
+h1,
+h2 {
   text-align: center;
 }
 
@@ -11,10 +12,15 @@ article {
   min-height: 480px;
   margin: 0 auto;
   padding: 10px;
-  background-image: repeating-linear-gradient(to bottom, transparent 1px, transparent 20px, rgb(0,0,150) 21px),
-                    linear-gradient(to bottom right, white, #ccc);
+  background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 1px,
+      transparent 20px,
+      rgb(0, 0, 150) 21px
+    ),
+    linear-gradient(to bottom right, white, #ccc);
   border-radius: 20px;
-  box-shadow: 5px 5px 10px rgba(0,0,0,0.7);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
   line-height: 1.5;
 }
 
@@ -39,6 +45,7 @@ ul li a {
   cursor: pointer;
 }
 
-ul li a:hover, ul li a:focus {
+ul li a:hover,
+ul li a:focus {
   text-decoration: none;
 }

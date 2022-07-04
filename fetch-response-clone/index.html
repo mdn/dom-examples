@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
 
     <title>Fetch response clone example</title>
 
@@ -11,55 +11,43 @@
       img {
         width: 300px;
         border: 2px solid black;
-        box-shadow: 4px 4px 4px rgba(0,0,0,0.9);
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.9);
         margin: 0 10px;
       }
     </style>
-
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
   </head>
 
   <body>
     <h1>Fetch response clone example</h1>
-    <img src="" class="img1">
-    <img src="" class="img2">
-
+    <img src="" class="img1" />
+    <img src="" class="img2" />
   </body>
   <script>
-    var image1 = document.querySelector('.img1');
-    var image2 = document.querySelector('.img2');
+    const image1 = document.querySelector(".img1");
+    const image2 = document.querySelector(".img2");
 
-    fetch('flowers.jpg')
-    .then(function(response1) {
+    fetch("flowers.jpg").then((response1) => {
       if (!response1.ok) {
-        showError(image1, "HTTP error, status = " + response1.status);
+        showError(image1, `HTTP error, status = ${response1.status}`);
       } else {
-        var response2 = response1.clone();
+        const response2 = response1.clone();
         useResponse(response1, image1);
         useResponse(response2, image2);
       }
     });
 
     function useResponse(response, image) {
-      response.blob()
-      .then(function(myBlob) {
-        var objectURL = URL.createObjectURL(myBlob);
-        image.src = objectURL;
-      })
-      .catch(function(error) {
-          showError(image, error.message);
-      });
+      response
+        .blob()
+        .then((myBlob) => {
+          const objectURL = URL.createObjectURL(myBlob);
+          image.src = objectURL;
+        })
+        .catch((error) => {
+          const p = document.createElement("p");
+          p.appendChild(document.createTextNode(`Error: ${errorMessage}`));
+          document.body.insertBefore(p, image);
+        });
     }
-
-    function showError(image, errorMessage) {
-      var p = document.createElement('p');
-      p.appendChild(
-        document.createTextNode('Error: ' + errorMessage)
-      );
-      document.body.insertBefore(p, image);
-    }
-
   </script>
 </html>
