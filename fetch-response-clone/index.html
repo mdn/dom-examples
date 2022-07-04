@@ -44,14 +44,10 @@
           image.src = objectURL;
         })
         .catch((error) => {
-          showError(image, error.message);
+          const p = document.createElement("p");
+          p.appendChild(document.createTextNode(`Error: ${errorMessage}`));
+          document.body.insertBefore(p, image);
         });
-    }
-
-    function showError(image, errorMessage) {
-      const p = document.createElement("p");
-      p.appendChild(document.createTextNode(`Error: ${errorMessage}`));
-      document.body.insertBefore(p, image);
     }
   </script>
 </html>
