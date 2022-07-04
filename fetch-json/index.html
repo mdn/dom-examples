@@ -27,7 +27,16 @@
       .then(function (data) {
         for (const product of data.products) {
           const listItem = document.createElement("li");
-          listItem.innerHTML = `<strong> ${product.Name} </strong> can be found in ${product.Location}. Cost: <strong>£${product.Price}</strong>`;
+          
+          const nameElement = document.createElement("strong");
+          nameElement.textContent = product.Name;
+
+          const textNode = document.createTextNode(` can be found in ${product.Location}. Cost: `);
+          
+          const priceElement = document.createElement("strong");
+          priceElement.textContent = `£${product.Price}`;
+
+          listItem.append(nameElement, textNode, priceElement);
           myList.appendChild(listItem);
         }
       })
