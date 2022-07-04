@@ -2,7 +2,7 @@ const thumbs = document.querySelectorAll(".thumb");
 const mainImg = document.querySelector(".main");
 
 thumbs.forEach((thumb, index) => {
-  const requestObj = `images/pic${index}.jpg`;
+  const requestObj = `images/pic${index + 1}.jpg`;
 
   fetch(requestObj)
     .then((response) => {
