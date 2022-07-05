@@ -14,4 +14,3 @@ See below for links to the live versions of each example:
 - [Fetch text example](https://mdn.github.io/fetch-examples/fetch-text/)
 - [Fetch example with Request object and Init object](https://mdn.github.io/fetch-examples/fetch-with-init-then-request/)
 - [object-fit gallery with fetched images](https://mdn.github.io/fetch-examples/object-fit-gallery-fetch/)
-- [Fetch example showing experimental usage of fetch signal/controller/observer](https://mdn.github.io/fetch-examples/fetch-signal-controller-observer/)
