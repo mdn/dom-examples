@@ -40,21 +40,21 @@
 
   <script>
 
-  var button = document.querySelector('button');
-  var html = document.querySelector('html');
+  const button = document.querySelector('button');
+  const html = document.querySelector('html');
 
   function random(number) {
     return Math.floor(Math.random() * number);
   }
 
   button.onclick = function() {
-    var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+    let rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
     button.style.backgroundColor = rndCol;
   };
 
   button.onauxclick = function(e) {
     e.preventDefault();
-    var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+    let rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
     button.style.color = rndCol;
   }
 
