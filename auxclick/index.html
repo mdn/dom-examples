@@ -48,7 +48,7 @@
   }
 
   button.onclick = function() {
-    let rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+    const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
     button.style.backgroundColor = rndCol;
   };
 
