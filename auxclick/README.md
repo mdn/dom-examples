@@ -1,4 +1,4 @@
-#auxclick demo
+# auxclick demo
 
 The <code>onauxclick</code> property is an event handler called when an <code>auxclick</code> event is sent, indicating that a non-primary button has been pressed on an input device (e.g. a middle mouse button).
 
