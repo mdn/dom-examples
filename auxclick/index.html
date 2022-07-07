@@ -47,7 +47,7 @@
     return Math.floor(Math.random() * number);
   }
 
-  button.onclick = function() {
+  button.onclick = () => {
     const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
     button.style.backgroundColor = rndCol;
   };
