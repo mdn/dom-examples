@@ -6,4 +6,4 @@ This property is implemented as part of a plan to improve compatibility between 
 
 Previous to this, <code>click</code> generally fired for clicks on all input device buttons, and browser behaviour was somewhat inconsistent.
 
-[See the demo live](https://mdn.github.io/dom-examples/auxclick/). <code>auxclick</code> is currently supported in Firefox 53+, with Chrome soon to follow. 
+[See the demo live](https://mdn.github.io/dom-examples/auxclick/).
