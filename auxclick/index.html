@@ -52,7 +52,7 @@
     button.style.backgroundColor = rndCol;
   };
 
-  button.onauxclick = function(e) {
+  button.onauxclick = (e) => {
     e.preventDefault();
     let rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
     button.style.color = rndCol;
