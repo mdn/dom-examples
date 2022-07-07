@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -40,21 +40,21 @@
 
   <script>
 
-  var button = document.querySelector('button');
-  var html = document.querySelector('html');
+  const button = document.querySelector('button');
+  const html = document.querySelector('html');
 
   function random(number) {
     return Math.floor(Math.random() * number);
   }
 
-  button.onclick = function() {
-    var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+  button.onclick = () => {
+    const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
     button.style.backgroundColor = rndCol;
   };
 
-  button.onauxclick = function(e) {
+  button.onauxclick = (e) => {
     e.preventDefault();
-    var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+    const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
     button.style.color = rndCol;
   }
 
