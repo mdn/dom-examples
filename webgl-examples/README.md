@@ -1,6 +1,6 @@
 # MDN WebGL examples
 
-This repository is home to examples for the MDN Web Docs content about
+This folder is home to examples for the MDN Web Docs content about
 the [WebGL API](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API),
 which is used for 2D and 3D graphics on the web.
 
