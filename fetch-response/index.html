@@ -21,13 +21,13 @@
 
     fetch(myRequest)
       .then((response) => {
-        console.log(response.type);
-        console.log(response.url);
-        console.log(response.useFinalURL);
-        console.log(response.status);
-        console.log(response.ok);
-        console.log(response.statusText);
-        console.log(response.headers);
+        console.log('response.type =', response.type);
+        console.log('response.url =', response.url);
+        console.log('response.userFinalURL =', response.useFinalURL);
+        console.log('response.status =', response.status);
+        console.log('response.ok =', response.ok);
+        console.log('response.statusText =', response.statusText);
+        console.log('response.headers =', response.headers);
         if (!response.ok) {
           throw new Error(`HTTP error, status = ${response.status}`);
         }
