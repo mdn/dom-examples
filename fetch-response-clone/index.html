@@ -45,7 +45,7 @@
         })
         .catch((error) => {
           const p = document.createElement("p");
-          p.appendChild(document.createTextNode(`Error: ${errorMessage}`));
+          p.appendChild(document.createTextNode(`Error: ${error}`));
           document.body.insertBefore(p, image);
         });
     }
