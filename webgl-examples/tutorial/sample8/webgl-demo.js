@@ -125,7 +125,7 @@ function setupVideo(url) {
   var playing = false;
   var timeupdate = false;
 
-  video.autoplay = true;
+  video.playsInline = true;
   video.muted = true;
   video.loop = true;
 
