@@ -77,6 +77,15 @@ function main() {
 
   const texture = loadTexture(gl, "cubetexture.png");
 
+  // Browsers copy pixels from the loaded image in top-to-bottom order —
+  // from the top-left corner; but WebGL wants the pixels in bottom-to-top
+  // order — starting from the bottom-left corner. So in order to prevent
+  // the resulting image texture from having the wrong orientation when
+  // rendered, we need to make the following call, to cause the pixels to
+  // be flipped into the bottom-to-top order that WebGL expects.
+  // See jameshfisher.com/2020/10/22/why-is-my-webgl-texture-upside-down
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+
   var then = 0;
 
   // Draw the scene repeatedly
