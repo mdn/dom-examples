@@ -4,9 +4,9 @@ const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
       const registration = await navigator.serviceWorker.register(
-        '/sw-test/sw.js',
+        '/sw.js',
         {
-          scope: '/sw-test/',
+          scope: '/',
         }
       );
       if (registration.installing) {

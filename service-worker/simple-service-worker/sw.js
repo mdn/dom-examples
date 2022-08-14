@@ -60,15 +60,15 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('install', (event) => {
   event.waitUntil(
     addResourcesToCache([
-      '/sw-test/',
-      '/sw-test/index.html',
-      '/sw-test/style.css',
-      '/sw-test/app.js',
-      '/sw-test/image-list.js',
-      '/sw-test/star-wars-logo.jpg',
-      '/sw-test/gallery/bountyHunters.jpg',
-      '/sw-test/gallery/myLittleVader.jpg',
-      '/sw-test/gallery/snowTroopers.jpg',
+      '/',
+      '/index.html',
+      '/style.css',
+      '/app.js',
+      '/image-list.js',
+      '/star-wars-logo.jpg',
+      '/gallery/bountyHunters.jpg',
+      '/gallery/myLittleVader.jpg',
+      '/gallery/snowTroopers.jpg',
     ])
   );
 });
@@ -78,7 +78,7 @@ self.addEventListener('fetch', (event) => {
     cacheFirst({
       request: event.request,
       preloadResponsePromise: event.preloadResponse,
-      fallbackUrl: '/sw-test/gallery/myLittleVader.jpg',
+      fallbackUrl: '/gallery/myLittleVader.jpg',
     })
   );
 });
