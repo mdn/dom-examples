@@ -55,10 +55,10 @@ function main() {
 
   // Here's where we call the routine that builds all the
   // objects we'll be drawing.
-  const buffers = initBuffers(gl);
+  initBuffers(gl);
 
   // Draw the scene
-  drawScene(gl, programInfo, buffers);
+  drawScene(gl, programInfo);
 }
 
 //
@@ -94,16 +94,12 @@ function initBuffers(gl) {
   gl.bufferData(gl.ARRAY_BUFFER,
                 new Float32Array(positions),
                 gl.STATIC_DRAW);
-
-  return {
-    position: positionBuffer,
-  };
 }
 
 //
 // Draw the scene.
 //
-function drawScene(gl, programInfo, buffers) {
+function drawScene(gl, programInfo) {
   gl.clearColor(0.0, 0.0, 0.0, 1.0);  // Clear to black, fully opaque
   gl.clearDepth(1.0);                 // Clear everything
   gl.enable(gl.DEPTH_TEST);           // Enable depth testing
@@ -153,7 +149,6 @@ function drawScene(gl, programInfo, buffers) {
     const normalize = false;
     const stride = 0;
     const offset = 0;
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffers.position);
     gl.vertexAttribPointer(
         programInfo.attribLocations.vertexPosition,
         numComponents,
