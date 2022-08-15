@@ -1,0 +1,41 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  font-family: sans-serif;
+}
+
+h1 {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 197px;
+  background: url(star-wars-logo.jpg) no-repeat center;
+}
+
+section {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+figure {
+  width: 100%;
+  margin: 0;
+}
+
+img {
+  width: 100%;
+  box-shadow: 2px 2px 1px black;
+}
+
+caption {
+  display: block;
+  margin: 0 auto 1rem;
+  width: 70%;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  padding: 5px;
+  background: #ccc;
+  box-shadow: 1px 1px 1px black;
+}
