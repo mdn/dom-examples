@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Fetch arrayBuffer example</title>
+
+    <link rel="stylesheet" href="" />
+  </head>
+
+  <body>
+    <h1>Fetch arrayBuffer example</h1>
+
+    <button class="play">Play</button>
+    <button class="stop">Stop</button>
+    <span class="error"></span>
+
+    <pre></pre>
+  </body>
+  <script>
+    const pre = document.querySelector("pre");
+    const myScript = document.querySelector("script");
+    const play = document.querySelector(".play");
+    const stop = document.querySelector(".stop");
+    const errorDisplay = document.querySelector(".error");
+
+    // use fetch to load an audio track, and
+    // decodeAudioData to decode it and stick it in a buffer.
+    // Then we put the buffer into the source
+    function getData() {
+      const audioCtx = new AudioContext();
+
+      return fetch("viper.ogg")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error, status = ${response.status}`);
+          }
+          return response.arrayBuffer();
+        })
+        .then((buffer) => audioCtx.decodeAudioData(buffer))
+        .then((decodedData) => {
+          const source = new AudioBufferSourceNode(audioCtx);
+          source.buffer = decodedData;
+          source.connect(audioCtx.destination);
+          return source;
+        });
+    }
+
+    // wire up buttons to stop and play audio
+    play.onclick = () => {
+      getData()
+        .then((source) => {
+          errorDisplay.innerHTML = "";
+          source.start(0);
+          play.disabled = true;
+        })
+        .catch((error) => {
+          errorDisplay.appendChild(document.createTextNode(`Error: ${error.message}`));
+        });
+    };
+
+    stop.onclick = () => {
+      source.stop(0);
+      play.disabled = false;
+    };
+
+    // dump script to pre element
+    pre.innerHTML = myScript.innerHTML;
+  </script>
+</html>
