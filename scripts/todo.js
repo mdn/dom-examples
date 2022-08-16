@@ -243,7 +243,7 @@ window.onload = () => {
       matched &&= parseInt(day) === dayCheck;
       matched &&= parseInt(monthNumber) === monthCheck;
       matched &&= parseInt(year) === yearCheck;
-      if (mached && notified === 'no') {
+      if (matched && notified === 'no') {
         // If the numbers all do match, run the createNotification() function to create a system notification
         // but only if the permission is set
         if (Notification.permission === 'granted') {
