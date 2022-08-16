@@ -256,7 +256,6 @@ window.onload = () => {
     };
   };
 
-
   // Ask for permission when the 'Enable notifications' button is clicked
   function askNotificationPermission() {
     // Function to actually ask the permissions
