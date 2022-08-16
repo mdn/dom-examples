@@ -202,7 +202,7 @@ window.onload = () => {
     };
   };
 
-  // Checks whether the deadline for each task is up or not, and responds appropriately
+  // Check whether the deadline for each task is up or not, and responds appropriately
   function checkDeadlines() {
     // First of all check whether notifications are enabled or denied
     if (Notification.permission === 'denied' || Notification.permission === 'default') {
