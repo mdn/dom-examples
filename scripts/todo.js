@@ -237,7 +237,7 @@ window.onload = () => {
 
       // Check if the current hours, minutes, day, month and year values match the stored values for each task.
       // The parseInt() function transforms the value from a string to a number for comparison
-      // (taking care of leading zeros, and removing spaces and underscore from the string).
+      // (taking care of leading zeros, and removing spaces and underscores from the string).
       let matched = parseInt(hours) === hourCheck;
       matched &&= parseInt(minutes) === minuteCheck;
       matched &&= parseInt(day) === dayCheck;
