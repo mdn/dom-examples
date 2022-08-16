@@ -1,29 +1,25 @@
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-// create an instance of a db object for us to store the IDB data in
-let db;
-
 window.onload = () => {
-  // create a reference to the notifications list in the bottom of the app; we will write database messages into this list by
-  //appending list items as children of this element
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  // Hold an instance of a db object for us to store the IndexedDB data in
+  let db;
+
+  // Create a reference to the notifications list in the bottom of the app; we will write database messages into this list by
+  // appending list items as children of this element
   const note = document.getElementById('notifications');
 
-  // all the UI elements we need for the app
+  // All other UI elements we need for the app
   const taskList = document.getElementById('task-list');
-
   const taskForm = document.getElementById('task-form');
   const title = document.getElementById('title');
-
   const hours = document.getElementById('deadline-hours');
   const minutes = document.getElementById('deadline-minutes');
   const day = document.getElementById('deadline-day');
   const month = document.getElementById('deadline-month');
   const year = document.getElementById('deadline-year');
-
   const notificationBtn = document.getElementById('enable');
 
   // Do an initial check to see what the notification permission state is
-
   if (Notification.permission === 'denied' || Notification.permission === 'default') {
     notificationBtn.style.display = 'block';
   } else {
@@ -35,10 +31,7 @@ window.onload = () => {
   // Let us open our database
   const DBOpenRequest = window.indexedDB.open('toDoList', 4);
 
-  // Gecko-only IndexedDB temp storage option:
-  // const DBOpenRequest = window.indexedDB.open('toDoList', {version: 4, storage: 'temporary'});
-
-  // these two event handlers act on the database being opened successfully, or not
+  // Register two event handlers to act on the database being opened successfully, or not
   DBOpenRequest.onerror = (event) => {
     note.appendChild(createListItem('Error loading database.'));
   };
@@ -46,10 +39,10 @@ window.onload = () => {
   DBOpenRequest.onsuccess = (event) => {
     note.appendChild(createListItem('Database initialised.'));
 
-    // store the result of opening the database in the db variable. This is used a lot below
+    // Store the result of opening the database in the db variable. This is used a lot below
     db = DBOpenRequest.result;
 
-    // Run the displayData() function to populate the task list with all the to-do list data already in the IDB
+    // Run the displayData() function to populate the task list with all the to-do list data already in the IndexedDB
     displayData();
   };
 
@@ -65,11 +58,9 @@ window.onload = () => {
     };
 
     // Create an objectStore for this database
-
     const objectStore = db.createObjectStore('toDoList', { keyPath: 'taskTitle' });
 
-    // define what data items the objectStore will contain
-
+    // Define what data items the objectStore will contain
     objectStore.createIndex('hours', 'hours', { unique: false });
     objectStore.createIndex('minutes', 'minutes', { unique: false });
     objectStore.createIndex('day', 'day', { unique: false });
@@ -82,8 +73,8 @@ window.onload = () => {
   };
 
   function displayData() {
-    // first clear the content of the task list so that you don't get a huge long list of duplicate stuff each time
-    //the display is updated.
+    // First clear the content of the task list so that you don't get a huge long list of duplicate stuff each time
+    // the display is updated.
     while (taskList.firstChild) {
       taskList.removeChild(taskList.lastChild);
     }
@@ -92,35 +83,38 @@ window.onload = () => {
     const objectStore = db.transaction('toDoList').objectStore('toDoList');
     objectStore.openCursor().onsuccess = (event) => {
       const cursor = event.target.result;
-      // if there are no (more) cursor items to iterate through, say so, and exit the function
+      // Check if there are no (more) cursor items to iterate through
       if (!cursor) {
+        // No more items to iterate through, we quit.
         note.appendChild(createListItem('Entries all displayed.'));
         return;
       }
-      // if there is still another cursor to go, keep runing this code
-      // check which suffix the deadline day of the month needs
+      
+      // Check which suffix the deadline day of the month needs
       const { hours, minutes, day, month, year, notified, taskTitle } = cursor.value;
       const ordDay = ordinal(day);
 
-      // build the to-do list entry and put it into the list item.
+      // Build the to-do list entry and put it into the list item.
       const toDoText = `${taskTitle} — ${hours}:${minutes}, ${month} ${ordDay} ${year}.`;
       const listItem = createListItem(toDoText);
 
       if (notified === 'yes') {
         listItem.style.textDecoration = 'line-through';
-        listItem.style.color = 'rgba(255,0,0,0.5)';
+        listItem.style.color = 'rgba(255, 0, 0, 0.5)';
       }
 
-      // put the item item inside the task list
+      // Put the item item inside the task list
       taskList.appendChild(listItem);
 
-      // create a delete button inside each list item, giving it an event handler so that it runs the deleteButton()
-      // function when clicked
+      // Create a delete button inside each list item,
       const deleteButton = document.createElement('button');
       listItem.appendChild(deleteButton);
       deleteButton.textContent = 'X';
-      // here we are setting a data attribute on our delete button to say what task we want deleted if it is clicked!
+      
+      // Set a data attribute on our delete button to associate the task it relates to.
       deleteButton.setAttribute('data-task', taskTitle);
+      
+      // Associate action (deletion) when clicked
       deleteButton.onclick = (event) => {
         deleteItem(event);
       };
@@ -130,40 +124,42 @@ window.onload = () => {
     };
   };
 
-  // give the form submit button an event listener so that when the form is submitted the addData() function is run
+  // Add listener for clicking the submit button
   taskForm.addEventListener('submit', addData, false);
 
   function addData(e) {
-    // prevent default - we don't want the form to submit in the conventional way
+    // Prevent default, as we don't want the form to submit in the conventional way
     e.preventDefault();
 
-    // Stop the form submitting if any values are left empty. This is just for browsers that don't support the HTML5 form
-    // required attributes
+    // Stop the form submitting if any values are left empty.
+    // This should never happen as there is the required attribute
     if (title.value === '' || hours.value === null || minutes.value === null || day.value === '' || month.value === '' || year.value === null) {
       note.appendChild(createListItem('Data not submitted — form incomplete.'));
       return;
     }
-    // grab the values entered into the form fields and store them in an object ready for being inserted into the IDB
+    
+    // Grab the values entered into the form fields and store them in an object ready for being inserted into the IndexedDB
     const newItem = [
       { taskTitle: title.value, hours: hours.value, minutes: minutes.value, day: day.value, month: month.value, year: year.value, notified: 'no' },
     ];
 
-    // open a read/write db transaction, ready for adding the data
+    // Open a read/write DB transaction, ready for adding the data
     const transaction = db.transaction(['toDoList'], 'readwrite');
 
-    // report on the success of the transaction completing, when everything is done
+    // Report on the success of the transaction completing, when everything is done
     transaction.oncomplete = () => {
       note.appendChild(createListItem('Transaction completed: database modification finished.'));
 
-      // update the display of data to show the newly added item, by running displayData() again.
+      // Update the display of data to show the newly added item, by running displayData() again.
       displayData();
     };
 
+    // Handler for any unexpected error
     transaction.onerror = () => {
       note.appendChild(createListItem(`Transaction not opened due to error: ${transaction.error}`));
     };
 
-    // call an object store that's already been added to the database
+    // Call an object store that's already been added to the database
     const objectStore = transaction.objectStore('toDoList');
     console.log(objectStore.indexNames);
     console.log(objectStore.keyPath);
@@ -175,12 +171,12 @@ window.onload = () => {
     const objectStoreRequest = objectStore.add(newItem[0]);
     objectStoreRequest.onsuccess = (event) => {
 
-      // report the success of our request
+      // Report the success of our request
       // (to detect whether it has been succesfully
       // added to the database, you'd look at transaction.oncomplete)
       note.appendChild(createListItem('Request successful.'));
 
-      // clear the form, ready for adding the next entry
+      // Clear the form, ready for adding the next entry
       title.value = '';
       hours.value = null;
       minutes.value = null;
@@ -191,22 +187,22 @@ window.onload = () => {
   };
 
   function deleteItem(event) {
-    // retrieve the name of the task we want to delete
+    // Retrieve the name of the task we want to delete
     const dataTask = event.target.getAttribute('data-task');
 
-    // open a database transaction and delete the task, finding it by the name we retrieved above
+    // Open a database transaction and delete the task, finding it by the name we retrieved above
     const transaction = db.transaction(['toDoList'], 'readwrite');
     transaction.objectStore('toDoList').delete(dataTask);
 
-    // report that the data item has been deleted
+    // Report that the data item has been deleted
     transaction.oncomplete = () => {
-      // delete the parent of the button, which is the list item, so it no longer is displayed
+      // Delete the parent of the button, which is the list item, so it is no longer displayed
       event.target.parentNode.parentNode.removeChild(event.target.parentNode);
       note.appendChild(createListItem(`Task "${dataTask}" deleted.`));
     };
   };
 
-  // this function checks whether the deadline for each task is up or not, and responds appropriately
+  // Checks whether the deadline for each task is up or not, and responds appropriately
   function checkDeadlines() {
     // First of all check whether notifications are enabled or denied
     if (Notification.permission === 'denied' || Notification.permission === 'default') {
@@ -215,20 +211,20 @@ window.onload = () => {
       notificationBtn.style.display = 'none';
     }
 
-    // grab the time and date right now
+    // Grab the current time and date
     const now = new Date();
 
-    // from the now variable, store the current minutes, hours, day of the month (getDate is needed for this, as getDay
-    // returns the day of the week, 1-7), month, year (getFullYear needed; getYear is deprecated, and returns a weird value
-    // that is not much use to anyone!) and seconds
+    // From the now variable, store the current minutes, hours, day of the month, month, year and seconds
     const minuteCheck = now.getMinutes();
     const hourCheck = now.getHours();
-    const dayCheck = now.getDate();
+    const dayCheck = now.getDate(); // Do not use getDay() that returns the day of the week, 1 to 7
     const monthCheck = now.getMonth();
-    const yearCheck = now.getFullYear();
+    const yearCheck = now.getFullYear(); // Do not use getYear() that is deprecated.
 
-    // again, open a transaction then a cursor to iterate through all the data items in the IDB
+    // Open a new transaction
     const objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
+    
+    // Open a cursor to iterate through all the data items in the IndexedDB
     objectStore.openCursor().onsuccess = (event) => {
       const cursor = event.target.result;
       if (!cursor) return;
@@ -239,42 +235,38 @@ window.onload = () => {
       const monthNumber = MONTHS.indexOf(month);
       if (monthNumber === -1) throw new Error('Incorrect month entered in database.');
 
-      // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
-      // The + operator in this case converts numbers with leading zeros into their non leading zero equivalents, so e.g.
-      // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
-      // The secondsCheck = 0 check is so that you don't get duplicate notifications for the same task. The notification
-      // will only appear when the seconds is 0, meaning that you won't get more than one notification for each task
-      let mached = parseInt(hours) === hourCheck;
-      mached &&= parseInt(minutes) === minuteCheck;
-      mached &&= parseInt(day) === dayCheck;
-      mached &&= parseInt(monthNumber) === monthCheck;
-      mached &&= parseInt(year) === yearCheck;
+      // Check if the current hours, minutes, day, month and year values match the stored values for each task.
+      // The parseInt() function transforms the value from a string to a number for comparison
+      // (taking care of leading zeros, and removing spaces and underscore from the string).
+      let matched = parseInt(hours) === hourCheck;
+      matched &&= parseInt(minutes) === minuteCheck;
+      matched &&= parseInt(day) === dayCheck;
+      matched &&= parseInt(monthNumber) === monthCheck;
+      matched &&= parseInt(year) === yearCheck;
       if (mached && notified === 'no') {
         // If the numbers all do match, run the createNotification() function to create a system notification
         // but only if the permission is set
-
         if (Notification.permission === 'granted') {
           createNotification(taskTitle);
         }
       }
 
-      // move on and perform the same deadline check on the next cursor item
+      // Move on to the next cursor item
       cursor.continue();
     };
   };
 
 
-  // askNotificationPermission function to ask for permission when the 'Enable notifications' button is clicked
-
+  // Ask for permission when the 'Enable notifications' button is clicked
   function askNotificationPermission() {
-    // function to actually ask the permissions
+    // Function to actually ask the permissions
     function handlePermission(permission) {
       // Whatever the user answers, we make sure Chrome stores the information
       if (!Reflect.has(Notification, 'permission')) {
         Notification.permission = permission;
       }
 
-      // set the button to shown or hidden, depending on what the user answers
+      // Set the button to shown or hidden, depending on what the user answers
       if (Notification.permission === 'denied' || Notification.permission === 'default') {
         notificationBtn.style.display = 'block';
       } else {
@@ -282,7 +274,7 @@ window.onload = () => {
       }
     };
 
-    // Let's check if the browser supports notifications
+    // Check if the browser supports notifications
     if (!Reflect.has(window, 'Notification')) {
       console.log('This browser does not support notifications.');
     } else {
@@ -294,7 +286,7 @@ window.onload = () => {
     }
   };
 
-  // Function to check whether browser supports the promise version of requestPermission()
+  // Check whether browser supports the promise version of requestPermission()
   // Safari only supports the old callback-based version
   function checkNotificationPromise() {
     try {
@@ -306,8 +298,7 @@ window.onload = () => {
     return true;
   };
 
-  // wire up notification permission functionality to 'Enable notifications' button
-
+  // Wire up notification permission functionality to 'Enable notifications' button
   notificationBtn.addEventListener('click', askNotificationPermission);
 
   function createListItem(contents) {
@@ -316,49 +307,49 @@ window.onload = () => {
     return listItem;
   };
 
-  // function for creating the notification
+  // Create a notification with the given title
   function createNotification(title) {
-
     // Create and show the notification
     const img = '/to-do-notifications/img/icon-128.png';
     const text = `HEY! Your task "${title}" is now overdue.`;
     const notification = new Notification('To do list', { body: text, icon: img });
 
-    // we need to update the value of notified to 'yes' in this particular data object, so the
+    // We need to update the value of notified to 'yes' in this particular data object, so the
     // notification won't be set off on it again
 
-    // first open up a transaction as usual
+    // First open up a transaction
     const objectStore = db.transaction(['toDoList'], 'readwrite').objectStore('toDoList');
 
-    // get the to-do list object that has this title as it's title
+    // Get the to-do list object that has this title as its title
     const objectStoreTitleRequest = objectStore.get(title);
 
     objectStoreTitleRequest.onsuccess = () => {
-      // grab the data object returned as the result
+      // Grab the data object returned as the result
       const data = objectStoreTitleRequest.result;
 
-      // update the notified value in the object to 'yes'
+      // Update the notified value in the object to 'yes'
       data.notified = 'yes';
 
-      // create another request that inserts the item back into the database
+      // Create another request that inserts the item back into the database
       const updateTitleRequest = objectStore.put(data);
 
-      // when this new request succeeds, run the displayData() function again to update the display
+      // When this new request succeeds, run the displayData() function again to update the display
       updateTitleRequest.onsuccess = () => {
         displayData();
       };
     };
   };
 
-  // using a setInterval to run the checkDeadlines() function every second
+  // Using a setInterval to run the checkDeadlines() function every second
   setInterval(checkDeadlines, 1000);
 }
 
-const ordinal = (day) => {
+// Helper function returning the day of the month followed by an ordinal (st, nd, or rd)
+function ordinal(day) {
   const n = day.toString();
   const last = n.slice(-1);
-  if (last === '1') return `${n}st`;
-  if (last === '2') return `${n}nd`;
-  if (last === '3') return `${n}rd`;
+  if (last === '1' && n !== '11') return `${n}st`;
+  if (last === '2' && n !== '12') return `${n}nd`;
+  if (last === '3' && n !== '13') return `${n}rd`;
   return `${n}th`;
 };
