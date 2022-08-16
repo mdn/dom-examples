@@ -1,42 +1,35 @@
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-// create a reference to the notifications list in the bottom of the app; we will write database messages into this list by
-//appending list items as children of this element
-const note = document.getElementById('notifications');
-
 // create an instance of a db object for us to store the IDB data in
 let db;
 
-// create a blank instance of the object that is used to transfer data into the IDB. This is mainly for reference
-const newItem = [
-  { taskTitle: '', hours: 0, minutes: 0, day: 0, month: '', year: 0, notified: 'no' },
-];
-
-// all the UI elements we need for the app
-const taskList = document.getElementById('task-list');
-
-const taskForm = document.getElementById('task-form');
-const title = document.getElementById('title');
-
-const hours = document.getElementById('deadline-hours');
-const minutes = document.getElementById('deadline-minutes');
-const day = document.getElementById('deadline-day');
-const month = document.getElementById('deadline-month');
-const year = document.getElementById('deadline-year');
-
-const submit = document.getElementById('submit');
-
-const notificationBtn = document.getElementById('enable');
-
-// Do an initial check to see what the notification permission state is
-
-if (Notification.permission === 'denied' || Notification.permission === 'default') {
-  notificationBtn.style.display = 'block';
-} else {
-  notificationBtn.style.display = 'none';
-}
-
 window.onload = () => {
+  // create a reference to the notifications list in the bottom of the app; we will write database messages into this list by
+  //appending list items as children of this element
+  const note = document.getElementById('notifications');
+
+  // all the UI elements we need for the app
+  const taskList = document.getElementById('task-list');
+
+  const taskForm = document.getElementById('task-form');
+  const title = document.getElementById('title');
+
+  const hours = document.getElementById('deadline-hours');
+  const minutes = document.getElementById('deadline-minutes');
+  const day = document.getElementById('deadline-day');
+  const month = document.getElementById('deadline-month');
+  const year = document.getElementById('deadline-year');
+
+  const notificationBtn = document.getElementById('enable');
+
+  // Do an initial check to see what the notification permission state is
+
+  if (Notification.permission === 'denied' || Notification.permission === 'default') {
+    notificationBtn.style.display = 'block';
+  } else {
+    notificationBtn.style.display = 'none';
+  }
+
   note.appendChild(createListItem('App initialised.'));
 
   // Let us open our database
@@ -100,7 +93,7 @@ window.onload = () => {
     objectStore.openCursor().onsuccess = (event) => {
       const cursor = event.target.result;
       // if there are no (more) cursor items to iterate through, say so, and exit the function
-      if (!cursor) { 
+      if (!cursor) {
         note.appendChild(createListItem('Entries all displayed.'));
         return;
       }
@@ -245,7 +238,7 @@ window.onload = () => {
       // The JavaScript date object creates month values as a number between 0 and 11.
       const monthNumber = MONTHS.indexOf(month);
       if (monthNumber === -1) throw new Error('Incorrect month entered in database.');
-      
+
       // check if the current hours, minutes, day, month and year values match the stored values for each task in the IDB.
       // The + operator in this case converts numbers with leading zeros into their non leading zero equivalents, so e.g.
       // 09 -> 9. This is needed because JS date number values never have leading zeros, but our data might.
