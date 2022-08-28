@@ -1,6 +1,7 @@
-/* || basic set up + sizing for containers */
+/* Basic set up + sizing for containers */
 
-html, body {
+html,
+body {
   margin: 0;
 }
 
@@ -8,60 +9,58 @@ html {
   width: 100%;
   height: 100%;
   font-size: 10px;
-  font-family: 'Donegal One', serif;
-  background: #000;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background: #111;
 }
 
 body {
   width: 50rem;
   position: relative;
-  background: #FFEE00;
+  background: #d88;
   margin: 0 auto;
-  border-left: 2px solid #FF6400;
-  border-right: 2px solid #FF6400;
+  border-left: 2px solid #d33;
+  border-right: 2px solid #d33;
 }
 
-h1, h2 {
+h1,
+h2 {
   text-align: center;
-  background: #FF6400;
-  font-family: 'Lily Script One', cursive;
+  background: #d88;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
   font-size: 6rem;
   margin: 0;
-  background: -webkit-linear-gradient(top, #FF9640, #FF6400);
-  background: -moz-linear-gradient(top, #FF9640, #FF6400);
-  background: -ms-linear-gradient(top, #FF9640, #FF6400);
-  background: linear-gradient(top, #FF9640, #FF6400);
-  text-shadow: 1px 1px 1px #FF6400, 2px 2px 1px black;
+  background: #d66;
 }
 
 h2 {
   font-size: 2.4rem;
 }
 
-/* || bottom toolbar styling  */
+/* Bottom toolbar styling  */
 
 #toolbar {
   position: relative;
   height: 6rem;
   width: 100%;
-  background: #FF6400;
-  border-top: 2px solid #FF6400;
-  border-bottom: 2px solid #FF6400;
+  background: #d66;
+  border-top: 2px solid #d33;
+  border-bottom: 2px solid #d33;
 }
 
-#enable, input[type="submit"] {
+#enable,
+input[type="submit"] {
   line-height: 1.8;
   font-size: 1.3rem;
   border-radius: 5px;
   border: 1px solid black;
   color: black;
   text-shadow: 1px 1px 1px black;
-  border: 1px solid rgba(0,0,0,0.1);
-  box-shadow: inset 0px 5px 3px rgba(255,255,255,0.2),
-              inset 0px -5px 3px rgba(0,0,0,0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0px 5px 3px rgba(255, 255, 255, 0.2),
+    inset 0px -5px 3px rgba(0, 0, 0, 0.2);
 }
 
 #enable {
@@ -74,7 +73,7 @@ h2 {
   margin: 0;
   position: relative;
   padding: 0.3rem;
-  background: #FFEE00;
+  background: #ddd;
   position: absolute;
   top: 0rem;
   left: 0rem;
@@ -88,14 +87,14 @@ h2 {
   margin-left: 1.5rem;
 }
 
-/* || new item form styling */
+/* New item form styling */
 
 .form-box {
-  background: #FF6400;
+  background: #d66;
   width: 85%;
   padding: 1rem;
   margin: 2rem auto;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 form div {
@@ -116,7 +115,6 @@ form .third-width {
   width: 33%;
   float: left;
 }
-
 
 form div label {
   width: 10rem;
@@ -165,7 +163,7 @@ form div input[type="submit"] {
 .task-box li {
   list-style-type: none;
   padding: 1rem;
-  border-bottom: 2px solid #FF6400;
+  border-bottom: 2px solid #d33;
 }
 
 .task-box li:last-child {
@@ -178,16 +176,17 @@ form div input[type="submit"] {
 
 .task-box button {
   margin-left: 2rem;
- font-size: 1.6rem;
- border: 1px solid #eee;
- border-radius: 5px;
- box-shadow: inset 0 -2px 5px rgba(0,0,0,0.5);
-             1px 1px 1px black;
+  font-size: 1.6rem;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.5) 1px 1px 1px black;
 }
 
 /* setting cursor for interactive controls */
 
-button, input[type="submit"], select {
+button,
+input[type="submit"],
+select {
   cursor: pointer;
 }
 
@@ -223,7 +222,9 @@ button, input[type="submit"], select {
     padding-left: 1rem;
   }
 
-  form input, form select, form label {
+  form input,
+  form select,
+  form label {
     line-height: 2.5rem;
     font-size: 2rem;
   }
@@ -243,5 +244,4 @@ button, input[type="submit"], select {
   #enable {
     right: 1rem;
   }
-
 }
