@@ -1,0 +1,74 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: whitesmoke;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#support-div {
+  font-size: 2em;
+  text-align: center;
+  min-height: 1em;
+  line-height: 1.5em;
+}
+
+.supported {
+  background: lightgreen;
+}
+
+.not-supported {
+  background: crimson;
+}
+
+canvas {
+  border: 1px solid black;
+  background: #fff;
+}
+
+.canvas-title {
+  display: block;
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+main,
+footer {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  background: #acacac;
+  padding: 10px;
+  margin: 10px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  font-size: 1em;
+}
+
+button:hover {
+  background: lightblue;
+}
+
+.visualisation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.visualisation>div {
+  margin: 5px;
+}
