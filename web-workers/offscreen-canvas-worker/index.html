@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OffscreenCanvas API</title>
     <link rel="stylesheet" href="style.css" />
@@ -14,16 +13,15 @@
     <main>
       <h2>Simulate a heavy process:</h2>
 
-      <button onclick="fibonacci(40)">Canvas A</button>
-      <button onclick="slowdownWorker()">Canvas B</button>
+      <button id="main-button" onclick="slowMainThread()">Canvas A</button>
+      <button id="worker-button" onclick="slowdownWorker()">Canvas B</button>
 
-      <div>
-        <button>Test button</button><button>Test button</button
-        ><button>Test button</button><button>Test button</button
-        ><button>Test button</button><button>Test button</button>
+      <div class="ui-example">
+        <button>Hover example</button><button>Hover example</button
+        ><button>Hover example</button><button>Hover example</button>
       </div>
 
-      <h2>Visualization:</h2>
+      <h2>Counters:</h2>
       <div class="visualisation">
         <div>
           <span class="canvas-title">Canvas A</span>
@@ -48,41 +46,33 @@
           ? "Your browser supports the OffscreenCanvas API "
           : "Your browser does not support OffscreenCanvas";
 
-      var requestAnimationFrame =
-        window.requestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.msRequestAnimationFrame;
+      const requestAnimationFrame = window.requestAnimationFrame;
 
       // Init Canvas A (running on the current page)
-      var canvasA = document.getElementById("canvas main");
-      var ctxA = canvasA.getContext("2d");
+      const canvasA = document.getElementById("canvas main");
+      const indicator = document.getElementById("indicator");
+      const ctxA = canvasA.getContext("2d");
 
-      var canvasWidth = ctxA.width;
-      var canvasHeight = ctxA.height;
+      const canvasWidth = ctxA.width;
+      const canvasHeight = ctxA.height;
+
+      // Setup the counter for Canvas A
+      let counter = 0;
+      setInterval(function () {
+        redrawCanvasA();
+        counter++;
+      }, 100);
 
       // Redraw Canvas A text
       function redrawCanvasA() {
-        ctxA.clearRect(0, 0, canvasWidth, canvasHeight);
-
-        // color in the background
-        ctxA.fillStyle = "#EEEEEE";
-        ctxA.fillRect(0, 0, canvasWidth, canvasHeight);
-
-        // draw the circle
-        ctxA.beginPath();
-
-        var radius = 25 + 20 * Math.abs(Math.cos(angle));
-        ctxA.arc(70, 70, radius, 0, Math.PI * 2, false);
-        ctxA.closePath();
-
-        // color in the circle
-        ctxA.fillStyle = "#006699";
-        ctxA.fill();
-
-        angle += Math.PI / 64;
-
-        requestAnimationFrame(drawCircle);
+        ctxA.clearRect(0, 0, canvasA.width, canvasA.height);
+        ctxA.font = "16px Verdana";
+        ctxA.textAlign = "center";
+        ctxA.fillText(
+          "Counter: " + counter,
+          canvasA.width / 2,
+          canvasA.height / 2
+        );
       }
 
       // Using the OffscreenCanvas API and starting the worker
@@ -96,6 +86,10 @@
       function fibonacci(num) {
         if (num <= 1) return 1;
         return fibonacci(num - 1) + fibonacci(num - 2);
+      }
+
+      function slowMainThread() {
+        fibonacci(42);
       }
 
       // Initiate the slowing down of Canvas B
