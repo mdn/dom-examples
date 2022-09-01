@@ -52,10 +52,6 @@ canvas:hover {
 
 #canvas-description  {
   max-width: 50%;
-  text-align: center;
-}
-
-#canvas-description>p {
   text-align: left;
 }
 

@@ -10,6 +10,13 @@
   <body>
     <header>
       <h1>OffscreenCanvas and worker threads</h1>
+      <p>
+        <b>Note:</b> your browser must support
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas"
+          ><code>OffscreenCanvas</code></a
+        >.
+      </p>
       <p>This example has two canvases with incrementing counters.</p>
 
       <p>
@@ -55,15 +62,15 @@
       </div>
       <div id="canvas-description">
         <p>
-          <b>When the main thread is blocked</b>, all UI elements are frozen.
-          The hover effect on buttons is affected like this one:
+          <b>When the main thread is blocked</b>, all UI elements are frozen.<br />
+          The hover effect on buttons is also blocked:
         </p>
         <button>Example button</button>
         <p>
           <b>When the worker thread is blocked</b>, the main thread is free to
           do work such as the element hover effects and animations. Blocking the
           worker thread will still prevent Canvas B's counter from being
-          updated, but the UI stays responsive while this happens.
+          updated, but the rest of the UI stays responsive while this is true.
         </p>
       </div>
 
