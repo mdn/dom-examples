@@ -4,7 +4,8 @@ body {
   margin: 2rem;
 }
 
-main, footer {
+main,
+footer {
   display: flex;
   align-content: left;
   justify-content: left;
@@ -22,7 +23,8 @@ header {
   max-width: 50%;
 }
 
-button, canvas {
+button,
+canvas {
   border-radius: 10px;
 }
 
@@ -50,7 +52,7 @@ canvas:hover {
   color: black;
 }
 
-#canvas-description  {
+#canvas-description {
   max-width: 50%;
   text-align: left;
 }
@@ -71,7 +73,7 @@ canvas:hover {
   margin-bottom: 1rem;
 }
 
-.canvases  {
+.canvases {
   text-align: center;
   display: flex;
   flex-wrap: wrap;
