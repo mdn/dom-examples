@@ -42,7 +42,7 @@
       <div class="canvases">
         <div>
           <span class="canvas-title">Canvas A</span>
-          <canvas id="canvas main" width="200" height="200"></canvas>
+          <canvas id="main" width="200" height="200"></canvas>
           <div>
             <button id="main-button" onclick="slowMainThread()">
               Block main thread
@@ -51,7 +51,7 @@
         </div>
         <div>
           <span class="canvas-title">Canvas B</span>
-          <canvas id="canvas worker" width="200" height="200"></canvas>
+          <canvas id="worker" width="200" height="200"></canvas>
 
           <div>
             <button id="worker-button" onclick="slowdownWorker()">
@@ -83,10 +83,8 @@
     </main>
 
     <script>
-      const requestAnimationFrame = window.requestAnimationFrame;
-
-      const canvasA = document.getElementById("canvas main");
-      const canvasB = document.getElementById("canvas worker");
+      const canvasA = document.getElementById("main");
+      const canvasB = document.getElementById("worker");
 
       const ctxA = canvasA.getContext("2d");
       const canvasWidth = ctxA.width;
@@ -94,7 +92,7 @@
 
       // Create a counter for Canvas A
       let counter = 0;
-      setInterval(function () {
+      setInterval(() => {
         redrawCanvasA();
         counter++;
       }, 100);
@@ -109,7 +107,9 @@
 
       // This function creates heavy (blocking) work on a thread
       function fibonacci(num) {
-        if (num <= 1) return 1;
+        if (num <= 1) {
+          return 1;
+        }
         return fibonacci(num - 1) + fibonacci(num - 2);
       }
 

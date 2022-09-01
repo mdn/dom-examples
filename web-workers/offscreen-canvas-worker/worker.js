@@ -2,11 +2,11 @@ let canvasB = null;
 let ctxWorker = null;
 
 // Waiting to receive the OffScreenCanvas
-self.onmessage = function (e) {
-  if (e.data === "slowDown") {
+self.onmessage = (event) => {
+  if (event.data === "slowDown") {
     fibonacci(42);
   } else {
-    canvasB = e.data.canvas;
+    canvasB = event.data.canvas;
     ctxWorker = canvasB.getContext("2d");
     startCounting();
   }
@@ -14,14 +14,16 @@ self.onmessage = function (e) {
 
 // Fibonacci function to add some delay to the thread
 function fibonacci(num) {
-  if (num <= 1) return 1;
+  if (num <= 1) {
+    return 1;
+  }
   return fibonacci(num - 1) + fibonacci(num - 2);
 }
 
 // Start the counter for Canvas B
 let counter = 0;
 function startCounting() {
-  setInterval(function () {
+  setInterval(() => {
     redrawCanvasB();
     counter++;
   }, 100);
