@@ -4,13 +4,10 @@ let ctxWorker = null;
 // Waiting to receive the OffScreenCanvas
 self.onmessage = function (e) {
   if (e.data === "slowDown") {
-    // canvasB.style.border = "2px solid red";
     fibonacci(42);
   } else {
     canvasB = e.data.canvas;
-
     ctxWorker = canvasB.getContext("2d");
-    // canvasB.style.border = "1px solid black";
     startCounting();
   }
 };
