@@ -1,14 +1,16 @@
-var canvasB = null;
-var ctxWorker = null;
+let canvasB = null;
+let ctxWorker = null;
 
 // Waiting to receive the OffScreenCanvas
 self.onmessage = function (e) {
-  if (typeof e.data == "string") {
+  if (e.data === "slowDown") {
+    // canvasB.style.border = "2px solid red";
     fibonacci(42);
   } else {
     canvasB = e.data.canvas;
-    ctxWorker = canvasB.getContext("2d");
 
+    ctxWorker = canvasB.getContext("2d");
+    // canvasB.style.border = "1px solid black";
     startCounting();
   }
 };
@@ -20,7 +22,7 @@ function fibonacci(num) {
 }
 
 // Start the counter for Canvas B
-var counter = 0;
+let counter = 0;
 function startCounting() {
   setInterval(function () {
     redrawCanvasB();
@@ -31,11 +33,7 @@ function startCounting() {
 // Redraw Canvas B text
 function redrawCanvasB() {
   ctxWorker.clearRect(0, 0, canvasB.width, canvasB.height);
-  ctxWorker.font = "16px Verdana";
+  ctxWorker.font = "24px Verdana";
   ctxWorker.textAlign = "center";
-  ctxWorker.fillText(
-    "Counter: " + counter,
-    canvasB.width / 2,
-    canvasB.height / 2
-  );
+  ctxWorker.fillText(counter, canvasB.width / 2, canvasB.height / 2);
 }
