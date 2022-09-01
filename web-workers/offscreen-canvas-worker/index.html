@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>OffscreenCanvas API</title>
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -12,15 +14,20 @@
 
       <p>
         Canvas A is being drawn to on the main thread. Canvas B uses an
-        OffscreenCanvas so that we can draw to it in a worker thread. The
-        purpose of this example is to show how a worker thread can keep the rest
-        of our UI responsive.
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas"
+          ><code>OffscreenCanvas</code></a
+        >
+        so that we can draw to it in a worker thread. The purpose of this
+        example is to show how a worker thread can keep the rest of our UI
+        responsive.
       </p>
 
       <p>
         The button below each canvas creates <b>blocking work</b> on either the
         main thread (Canvas A) or a worker thread (Canvas B). When a thread is
-        blocked, the canvas' counter in that thread is blocked.
+        blocked, incrementing the related counter from that thread is also
+        blocked.
       </p>
     </header>
 
@@ -31,7 +38,7 @@
           <canvas id="canvas main" width="200" height="200"></canvas>
           <div>
             <button id="main-button" onclick="slowMainThread()">
-              Main thread
+              Block main thread
             </button>
           </div>
         </div>
@@ -41,7 +48,7 @@
 
           <div>
             <button id="worker-button" onclick="slowdownWorker()">
-              Worker thread
+              Block worker thread
             </button>
           </div>
         </div>
@@ -49,7 +56,7 @@
       <div id="canvas-description">
         <p>
           <b>When the main thread is blocked</b>, all UI elements are frozen.
-          The hover effect on all buttons is affected:
+          The hover effect on buttons is affected like this one:
         </p>
         <button>Example button</button>
         <p>
@@ -59,6 +66,13 @@
           updated, but the UI stays responsive while this happens.
         </p>
       </div>
+
+      <footer>
+        <p>
+          This demo is based on an example by
+          <a href="https://glitch.com/@PicchiKevin">Kevin Picchi</a>.
+        </p>
+      </footer>
     </main>
 
     <script>

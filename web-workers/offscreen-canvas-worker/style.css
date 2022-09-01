@@ -4,7 +4,7 @@ body {
   margin: 2rem;
 }
 
-main {
+main, footer {
   display: flex;
   align-content: left;
   justify-content: left;
