@@ -1,20 +1,17 @@
-html, body {
+html,
+body {
   margin: 0;
-  font-family: 'Arvo', serif;
+  font-family: "Arvo", serif;
   font-size: 100%/1.5 serif;
 }
 
 h1 {
   text-align: center;
-  font-family: 'Bevan', cursive;
+  font-family: "Bevan", cursive;
   font-size: 4rem;
   letter-spacing: 0.2rem;
-  text-shadow: 1px 1px 1px #eee4fe,
-               2px 2px 1px #eee4fe,
-               3px 3px 1px #7b62ae,
-               4px 4px 1px #7b62ae,
-               5px 5px 1px #261758,
-               6px 6px 1px #261758;
+  text-shadow: 1px 1px 1px #eee4fe, 2px 2px 1px #eee4fe, 3px 3px 1px #7b62ae,
+    4px 4px 1px #7b62ae, 5px 5px 1px #261758, 6px 6px 1px #261758;
 }
 
 table {
@@ -23,10 +20,11 @@ table {
   letter-spacing: 0.1rem;
   margin: 0 auto;
   border-collapse: collapse;
-  box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 }
 
-table,thead {
+table,
+thead {
   background: white;
 }
 
@@ -42,13 +40,14 @@ th {
   font-size: 1.7rem;
   padding: 1.2rem;
   text-align: left;
-  background: linear-gradient(to bottom,#261758,#666778);
+  background: linear-gradient(to bottom, #261758, #666778);
   color: white;
   text-shadow: 1px 1px 1px black;
   cursor: pointer;
 }
 
-th:hover, th:focus {
+th:hover,
+th:focus {
   color: #ddd;
   border: 0;
 }
