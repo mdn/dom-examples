@@ -1,8 +1,8 @@
-onconnect = function (e) {
-  var port = e.ports[0];
+onconnect = function (event) {
+  const port = event.ports[0];
 
-  port.onmessage = function (e) {
-    var workerResult = "Result: " + e.data[0] * e.data[1];
+  port.onmessage = function () {
+    const workerResult = `Result: ${e.data[0] * e.data[1]}`;
     port.postMessage(workerResult);
   };
 };
