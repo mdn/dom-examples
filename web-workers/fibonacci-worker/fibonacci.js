@@ -1,12 +1,14 @@
-self.onmessage = function(e) {
-  let userNum = Number(e.data);
+self.onmessage = function (event) {
+  const userNum = Number(event.data);
   fibonacci(userNum);
-}
+};
 
+function fibonacci(num) {
+  let a = 1;
+  let b = 0;
+  let temp;
 
-function fibonacci(num){
-let a = 1, b = 0, temp;
-  while (num >= 0){
+  while (num >= 0) {
     temp = a;
     a = a + b;
     b = temp;
