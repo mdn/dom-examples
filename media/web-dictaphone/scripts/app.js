@@ -84,8 +84,7 @@ if (navigator.mediaDevices.getUserMedia) {
       console.log("recorder stopped");
 
       deleteButton.onclick = function(e) {
-        let evtTgt = e.target;
-        evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+        e.target.closest(".clip").remove();
       }
 
       clipLabel.onclick = function() {
