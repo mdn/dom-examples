@@ -1,40 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width">
+    <title>Shared Workers basic example</title>
 
-  <title>Shared Workers basic example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  <link rel="stylesheet" href="style.css">
-</head>
+  <body>
+    <h1>Shared<br />Workers<br />basic<br />example</h1>
 
-<body>
-  <h1>Shared<br>Workers<br>basic<br>example</h1>
+    <div class="controls" tabindex="0">
+      <form>
+        <div>
+          <label for="number1">Multiply number 1: </label>
+          <input type="text" id="number1" value="0" />
+        </div>
+        <div>
+          <label for="number2">Multiply number 2: </label>
+          <input type="text" id="number2" value="0" />
+        </div>
+      </form>
 
-  <div class="controls" tabindex="0">
+      <p class="result1">Result: 0</p>
 
-    <form>
-      <div>
-        <label for="number1">Multiply number 1: </label>
-        <input type="text" id="number1" value="0">
-      </div>
-      <div>
-        <label for="number2">Multiply number 2: </label>
-        <input type="text" id="number2" value="0">
-      </div>
-    </form>
+      <p><a href="index2.html" target="_blank">Go to second worker page</a></p>
+    </div>
 
-    <p class="result1">Result: 0</p>
-
-    <p><a href="index2.html" target="_blank">Go to second worker page</a></p>
-
-  </div>
-
-  <script src="multiply.js"></script>
-  <script src="nosubmit.js"></script>
-</body>
-
+    <script src="multiply.js"></script>
+    <script src="nosubmit.js"></script>
+  </body>
 </html>

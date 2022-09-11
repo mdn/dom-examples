@@ -1,10 +1,10 @@
-var first = document.querySelector("#number1");
-var second = document.querySelector("#number2");
+const first = document.querySelector("#number1");
+const second = document.querySelector("#number2");
 
-var result1 = document.querySelector(".result1");
+const result1 = document.querySelector(".result1");
 
 if (!!window.SharedWorker) {
-  var myWorker = new SharedWorker("worker.js");
+  const myWorker = new SharedWorker("worker.js");
 
   first.onchange = function () {
     myWorker.port.postMessage([first.value, second.value]);
