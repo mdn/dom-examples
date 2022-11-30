@@ -11,9 +11,9 @@
     <p class="output">My body</p>
     <iframe src="page2.html" width="480" height="320"></iframe>
     <script>
-      var channel = new MessageChannel();
-      var output = document.querySelector(".output");
-      var iframe = document.querySelector("iframe");
+     const channel = new MessageChannel();
+     const output = document.querySelector('.output');
+     const iframe = document.querySelector('iframe');
 
       // Wait for the iframe to load
       iframe.addEventListener("load", onLoad);
