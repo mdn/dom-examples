@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
     <title>My page title</title>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Lobster+Two' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="style.css">
+    <link
+      href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Lobster+Two"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <ul></ul>
+    <script>
+      const list = document.querySelector("ul");
+      let port2;
+
+      // Listen for the intial port transfer message
+      window.addEventListener("message", initPort);
+
+      // Setup the transfered port
+      function initPort(e) {
+        port2 = e.ports[0];
+        port2.onmessage = onMessage;
+      }
+
+      // Handle messages received on port2
+      function onMessage(e) {
+        const listItem = document.createElement("li");
+        listItem.textContent = e.data;
+        list.appendChild(listItem);
+        port2.postMessage('Message received by IFrame: "' + e.data + '"');
+      }
+    </script>
   </body>
-  <script>
-    var list = document.querySelector('ul');
-    var port2;
-    
-    // Listen for the intial port transfer message
-    window.addEventListener('message', initPort);
-
-    // Setup the transfered port
-    function initPort(e) {
-      port2 = e.ports[0];
-      port2.onmessage = onMessage;
-    }
-
-    // Handle messages received on port2
-    function onMessage(e) {
-      var listItem = document.createElement('li');
-      listItem.textContent = e.data;
-      list.appendChild(listItem);
-      port2.postMessage('Message received by IFrame: "' + e.data + '"');
-    }
-  </script>
 </html>
