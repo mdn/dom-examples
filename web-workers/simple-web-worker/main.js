@@ -21,5 +21,5 @@ if (window.Worker) {
     console.log('Message received from worker');
   }
 } else {
-  console.log('Your browser doesn\'t support web workers.');
+  console.log('Your browser doesn't support web workers.');
 }
