@@ -1,41 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>WebGL Demo</title>
+    <script src="webgl-demo.js" type="module" defer></script>
+  </head>
 
-<head>
-  <title>WebGL Demo</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="./webgl.css" type="text/css">
-</head>
-
-<body>
-  <canvas id="glcanvas" width="640" height="480"></canvas>
-</body>
-
-<script>
-  //
-  // Start here
-  //
-  function main() {
-    const canvas = document.querySelector('#glcanvas');
-    // Initialize the GL context
-    const gl = canvas.getContext('webgl');
-
-    // If we don't have a GL context, give up now
-    // Only continue if WebGL is available and working
-
-    if (!gl) {
-      alert('Unable to initialize WebGL. Your browser or machine may not support it.');
-      return;
-    }
-
-    // Set clear color to black, fully opaque
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
-    // Clear the color buffer with specified clear color
-    gl.clear(gl.COLOR_BUFFER_BIT);
-  }
-
-
-  window.onload = main;
-</script>
-
+  <body>
+    <canvas id="glcanvas" width="640" height="480"></canvas>
+  </body>
 </html>
