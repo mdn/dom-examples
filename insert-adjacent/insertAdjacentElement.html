@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>insertAdjacentElement() demo</title>
@@ -28,74 +28,72 @@
 </body>
 
 <script>
+const beforeBtn = document.querySelector('.before');
+const afterBtn = document.querySelector('.after');
+const resetBtn = document.querySelector('.reset');
 
-  var beforeBtn = document.querySelector('.before');
-  var afterBtn = document.querySelector('.after');
-  var resetBtn = document.querySelector('.reset');
+const container = document.querySelector('section');
 
-  var container = document.querySelector('section');
+let activeElem;
 
-  var activeElem;
-
-  resetBtn.addEventListener('click', function() {
-    while (container.firstChild) {
-        container.removeChild(container.firstChild);
-    }
-
-    for(i = 0; i <=3; i++) {
-      var tempDiv = document.createElement('div');
-      container.appendChild(tempDiv);
-      setListener(tempDiv);
-    }
-  });
-
-  beforeBtn.addEventListener('click', function() {
-    var tempDiv = document.createElement('div');
-    tempDiv.style.backgroundColor = randomColor();
-    if (activeElem) {
-      activeElem.insertAdjacentElement('beforebegin',tempDiv);
-    }
-    setListener(tempDiv);
-  });
-
-  afterBtn.addEventListener('click', function() {
-    var tempDiv = document.createElement('div');
-    tempDiv.style.backgroundColor = randomColor();
-    if (activeElem) {
-      activeElem.insertAdjacentElement('afterend',tempDiv);
-    }
-    setListener(tempDiv);
-  });
-
-  function setListener(elem) {
-    elem.addEventListener('click', function() {
-      var allElems = document.querySelectorAll('section div');
-        for(i = 0; i < allElems.length; i++) {
-            allElems[i].style.border = '3px solid black';
-        } 
-      elem.style.border = '3px solid aqua';
-      activeElem = elem;
-    })
-  };
-
-  function randomColor() {
-    function random() {
-      var result = Math.floor(Math.random() * 255);
-      return result;
-    }
-
-    return 'rgb(' + random() + ',' + random() + ',' + random() + ')';
+resetBtn.addEventListener('click', () => {
+  while (container.firstChild) {
+      container.removeChild(container.firstChild);
   }
 
-  function init() {
-    var initElems = document.querySelectorAll('section div');
-    for(i = 0; i < initElems.length; i++) {
-      setListener(initElems[i]);
-    }
-  };
+  for (let i = 0; i <=3; i++) {
+    let tempDiv = document.createElement('div');
+    container.appendChild(tempDiv);
+    setListener(tempDiv);
+  }
+});
 
-  init();
+beforeBtn.addEventListener('click', function() {
+  let tempDiv = document.createElement('div');
+  tempDiv.style.backgroundColor = randomColor();
+  if (activeElem) {
+    activeElem.insertAdjacentElement('beforebegin',tempDiv);
+  }
+  setListener(tempDiv);
+});
 
+afterBtn.addEventListener('click', function() {
+  let tempDiv = document.createElement('div');
+  tempDiv.style.backgroundColor = randomColor();
+  if (activeElem) {
+    activeElem.insertAdjacentElement('afterend',tempDiv);
+  }
+  setListener(tempDiv);
+});
+
+function setListener(elem) {
+  elem.addEventListener('click', function() {
+    const allElems = document.querySelectorAll('section div');
+      for (let i = 0; i < allElems.length; i++) {
+          allElems[i].style.border = '3px solid black';
+      } 
+    elem.style.border = '3px solid aqua';
+    activeElem = elem;
+  })
+};
+
+function randomColor() {
+  function random() {
+    const result = Math.floor(Math.random() * 255);
+    return result;
+  }
+
+  return 'rgb(' + random() + ',' + random() + ',' + random() + ')';
+}
+
+function init() {
+  const initElems = document.querySelectorAll('section div');
+  for (let i = 0; i < initElems.length; i++) {
+    setListener(initElems[i]);
+  }
+};
+
+init();
 </script>
 
 </html>
