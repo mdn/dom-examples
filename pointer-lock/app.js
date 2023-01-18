@@ -3,17 +3,17 @@
 const RADIUS = 20;
 
 function degToRad(degrees) {
-  var result = Math.PI / 180 * degrees;
+  const result = (Math.PI / 180) * degrees;
   return result;
 }
 
 // setup of the canvas
 
-var canvas = document.querySelector('canvas');
-var ctx = canvas.getContext('2d');
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
 
-var x = 50;
-var y = 50;
+let x = 50;
+let y = 50;
 
 function canvasDraw() {
   ctx.fillStyle = "black";
@@ -25,38 +25,31 @@ function canvasDraw() {
 }
 canvasDraw();
 
-// pointer lock object forking for cross browser
-
-canvas.requestPointerLock = canvas.requestPointerLock ||
-                            canvas.mozRequestPointerLock;
-
-document.exitPointerLock = document.exitPointerLock ||
-                           document.mozExitPointerLock;
-
-canvas.onclick = function() {
-  canvas.requestPointerLock();
-};
+canvas.addEventListener("click", async () => {
+  if(!document.pointerLockElement) {
+    await canvas.requestPointerLock({
+      unadjustedMovement: true,
+    });
+  }
+});
 
 // pointer lock event listeners
 
-// Hook pointer lock state change events for different browsers
-document.addEventListener('pointerlockchange', lockChangeAlert, false);
-document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
+document.addEventListener("pointerlockchange", lockChangeAlert, false);
 
 function lockChangeAlert() {
-  if (document.pointerLockElement === canvas ||
-      document.mozPointerLockElement === canvas) {
-    console.log('The pointer lock status is now locked');
+  if (document.pointerLockElement === canvas) {
+    console.log("The pointer lock status is now locked");
     document.addEventListener("mousemove", updatePosition, false);
   } else {
-    console.log('The pointer lock status is now unlocked');  
+    console.log("The pointer lock status is now unlocked");
     document.removeEventListener("mousemove", updatePosition, false);
   }
 }
 
-var tracker = document.getElementById('tracker');
+const tracker = document.getElementById("tracker");
 
-var animation;
+let animation;
 function updatePosition(e) {
   x += e.movementX;
   y += e.movementY;
@@ -65,17 +58,17 @@ function updatePosition(e) {
   }
   if (y > canvas.height + RADIUS) {
     y = -RADIUS;
-  }  
+  }
   if (x < -RADIUS) {
     x = canvas.width + RADIUS;
   }
   if (y < -RADIUS) {
     y = canvas.height + RADIUS;
   }
-  tracker.textContent = "X position: " + x + ", Y position: " + y;
+  tracker.textContent = `X position: ${x}, Y position: ${y}`;
 
   if (!animation) {
-    animation = requestAnimationFrame(function() {
+    animation = requestAnimationFrame(function () {
       animation = null;
       canvasDraw();
     });
