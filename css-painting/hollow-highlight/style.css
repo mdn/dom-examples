@@ -1,0 +1,14 @@
+li {
+  --boxColor: hsl(155 90% 60% / 0.5);
+  background-image: paint(hollowHighlights, stroke, 5px);
+}
+
+li:nth-of-type(3n) {
+  --boxColor: hsl(255 90% 60% / 0.5);
+  background-image: paint(hollowHighlights, filled, 3px);
+}
+
+li:nth-of-type(3n + 1) {
+  --boxColor: hsl(355 90% 60% / 0.5);
+  background-image: paint(hollowHighlights, stroke, 1px);
+}
