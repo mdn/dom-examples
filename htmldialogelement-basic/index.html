@@ -1,33 +1,34 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>HTMLDialogElement example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
   <!-- Simple pop-up dialog box, containing a form -->
   <dialog id="favDialog">
     <form method="dialog">
-      <section>
-        <p><label for="favAnimal">Favorite animal:</label>
+      <p>
+        <label for="favAnimal">Favorite animal:</label>
         <select id="favAnimal" name="favAnimal">
           <option></option>
           <option>Brine shrimp</option>
           <option>Red panda</option>
           <option>Spider monkey</option>
-        </select></p>
-      </section>
-      <menu>
+        </select>
+      </p>
+      <div>
         <button id="cancel" type="reset">Cancel</button>
         <button type="submit">Confirm</button>
-      </menu>
+      </div>
     </form>
   </dialog>
 
-  <menu>
+  <div>
     <button id="updateDetails">Update details</button>
-  </menu>
+  </div>
 
   <script>
     (function() {

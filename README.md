@@ -3,6 +3,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "abort-api" directory contains an example of how to use the "Abort API" (aka [AbortSignal](https://dom.spec.whatwg.org/#interface-AbortSignal) and [AbortController](https://dom.spec.whatwg.org/#interface-abortcontroller)). [Run the example live](https://mdn.github.io/dom-examples/abort-api/).
 
+* The "audiocontext-setsinkid" directory contains an example of how to use the [`AudioContext.setSinkId()`](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/setSinkId) method and related features. [Run the example live](https://mdn.github.io/dom-examples/audiocontext-setsinkid/).
+
 * The "auxclick" directory contains a simple example demonstrating the new <code>auxclick</code> event type. See [GlobalEventHandlers.auxclick](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onauxclick) for more details, or [run the example live](https://mdn.github.io/dom-examples/auxclick/).
 
 * The "canvas" directory contains an example "chroma-keying" demonstrating how to use the Canvas API to manipulate videos: see [Manipulating video using canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Manipulating_video_using_canvas) or [run the example live](https://mdn.github.io/dom-examples/canvas/chroma-keying/).
