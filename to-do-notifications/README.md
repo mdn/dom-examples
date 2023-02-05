@@ -7,4 +7,4 @@ The IndexedDB and Notification API functionality all works on Firefox desktop, F
 
 The Vibration API stuff works on Firefox OS and Firefox for Android.
 
-You can [try it out live](https://mdn.github.io/to-do-notifications/).
+You can [try it out live](https://mdn.github.io/dom-examples/to-do-notifications/).
