@@ -14,13 +14,13 @@ const vertices = new Float32Array([
 
 const shaders = `
 struct VertexOut {
-    @builtin(position) position : vec4<f32>,
-    @location(0) color : vec4<f32>
+    @builtin(position) position : vec4f,
+    @location(0) color : vec4f
 }
 
 @vertex
-fn vertex_main(@location(0) position: vec4<f32>,
-                 @location(1) color: vec4<f32>) -> VertexOut
+fn vertex_main(@location(0) position: vec4f,
+                 @location(1) color: vec4f) -> VertexOut
 {
   var output : VertexOut;
   output.position = position;
@@ -29,7 +29,7 @@ fn vertex_main(@location(0) position: vec4<f32>,
 }
 
 @fragment
-fn fragment_main(fragData: VertexOut) -> @location(0) vec4<f32>
+fn fragment_main(fragData: VertexOut) -> @location(0) vec4f
 {
   return fragData.color;
 }
@@ -65,10 +65,9 @@ async function init() {
     const canvas = document.querySelector('#gpuCanvas');
     const context = canvas.getContext('webgpu');
 
-    // Configure swap chain, link the GPU to the canvas
     context.configure({
         device: device,
-        format: 'bgra8unorm',
+        format: navigator.gpu.getPreferredCanvasFormat(),
         alphaMode: 'premultiplied'
     });
 
@@ -76,14 +75,11 @@ async function init() {
     const vertexBuffer = device.createBuffer({
         size: vertices.byteLength, // make it big enough to store vertices in
         usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST,
-        mappedAtCreation: true // mapped at creation
-        });
+    });
 
-    // Store mapped range of vertex buffer in a typed array, then copy the triangle vertex data into it
-    new Float32Array(vertexBuffer.getMappedRange()).set(vertices);
-
-    // Unmap the vertex buffer; we are done changing it, and the new contents are automatically copied to the GPU
-    vertexBuffer.unmap();
+    // Store vertices in a typed array, then copy the vertex data over to the GPUBuffer using writeBuffer() utility function
+    const array = new Float32Array(vertices);
+    device.queue.writeBuffer(vertexBuffer, 0, array, 0, array.length);
 
     // 5: Create a GPUVertexBufferLayout and GPURenderPipelineDescriptor to provide a definition of our render pipline
     const vertexBuffers = [{
@@ -110,7 +106,7 @@ async function init() {
             module: shaderModule,
             entryPoint: 'fragment_main',
             targets: [{
-            format: 'bgra8unorm'
+              format: navigator.gpu.getPreferredCanvasFormat()
             }]
         },
         primitive: {

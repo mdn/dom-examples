@@ -1,17 +1,17 @@
 // Compute shader
 
 const shader = `
-@group(0) @binding(1)
+@group(0) @binding(0)
 var<storage, read_write> output: array<f32>;
 
 @compute @workgroup_size(64)
 fn main(
 
   @builtin(global_invocation_id)
-  global_id : vec3<u32>,
+  global_id : vec3u,
 
   @builtin(local_invocation_id)
-  local_id : vec3<u32>,
+  local_id : vec3u,
 
 ) {
   output[global_id.x] =
@@ -63,10 +63,10 @@ async function init() {
     const bindGroupLayout =
     device.createBindGroupLayout({
         entries: [{
-            binding: 1,
+            binding: 0,
             visibility: GPUShaderStage.COMPUTE,
             buffer: {
-                type: "storage",
+                type: "storage"
             }
         }]
     });
@@ -74,11 +74,11 @@ async function init() {
     const bindGroup = device.createBindGroup({
         layout: bindGroupLayout,
         entries: [{
-            binding: 1,
+            binding: 0,
             resource: {
-            buffer: output,
-            },
-        }],
+              buffer: output,
+            }
+        }]
     });
 
     const computePipeline = device.createComputePipeline({
