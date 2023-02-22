@@ -47,9 +47,6 @@ async function init() {
   if (!adapter) {
     throw Error('Couldn\'t request WebGPU adapter.');
   }
-    
-  // const adapterInfo = await adapter.requestAdapterInfo([]);
-  // console.log(adapterInfo);
 
   const device = await adapter.requestDevice();
 
@@ -65,7 +62,8 @@ async function init() {
   context.configure({
     device: device,
     format: navigator.gpu.getPreferredCanvasFormat(),
-    alphaMode: 'premultiplied'
+    alphaMode: 'premultiplied',
+    usage: GPUTextureUsage.COPY_SRC | GPUTextureUsage.RENDER_ATTACHMENT
   });
 
   // 4: Create vertex buffer to contain vertex data
