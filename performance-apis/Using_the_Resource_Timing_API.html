@@ -33,6 +33,7 @@ function display_buffer_count() {
   const list = performance.getEntriesByType("resource");
   if (list) {
     log(`= Resource Buffer Count = ${list.length}`);
+  }
 }
 
 function clear_resource_timings() {
