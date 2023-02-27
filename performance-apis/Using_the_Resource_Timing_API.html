@@ -8,13 +8,13 @@
 <meta name="viewport" content="width=device-width">
 <script>
 // log to either console of <output> element
-var useConsoleLog = false;
+let useConsoleLog = false;
 
 function log(s) {
   if (useConsoleLog) {
     console.log(s);
   } else {
-    var o = document.getElementsByTagName("output")[0];
+    const o = document.getElementsByTagName("output")[0];
     o.innerHTML += s + " <br>";
   }
 }
@@ -28,9 +28,11 @@ function display_buffer_count() {
     log("= Buffer Count: peformance NOT supported");
     return;
   }
+  
   // Log the number of resource performance items
-  var list = performance.getEntriesByType("resource");
-  if (list) log ("= Resource Buffer Count = " + list.length);
+  const list = performance.getEntriesByType("resource");
+  if (list) {
+    log(`= Resource Buffer Count = ${list.length}`);
 }
 
 function clear_resource_timings() {
@@ -38,9 +40,10 @@ function clear_resource_timings() {
     log("= performance.clearResourceTimings(): peformance NOT supported");
     return;
   }
+  
   // Check if Performance.clearResourceTiming() is supported
   log ("= Print performance.clearResourceTimings()");
-  var supported = typeof performance.clearResourceTimings == "function";
+  const supported = typeof performance.clearResourceTimings == "function";
   if (supported) {
     log("... Performance.clearResourceTimings() = supported");
     performance.clearResourceTimings();
@@ -48,12 +51,13 @@ function clear_resource_timings() {
     log("... Performance.clearResourceTiming() = NOT supported");
     return;
   }
-  // getEntries should now return zero
-  var p = performance.getEntriesByType("resource");
+  
+  // getEntries() should now be empty
+  const p = performance.getEntriesByType("resource");
   if (p.length == 0)
     log("... Performance data buffer cleared");
   else
-    log("... Performance data buffer NOT cleared (still have `" + p.length + "` items");
+    log(`... Performance data buffer NOT cleared (still have '${p.length}' items`);
 }
 
 function set_resource_timing_buffer_size(n) {
@@ -61,9 +65,10 @@ function set_resource_timing_buffer_size(n) {
     log("= performance.setResourceTimingBufferSize(): peformance NOT supported");
     return;
   }
+  
   // Check if Performance.setResourceTimingBufferSize() is supported
   log ("= performance.setResourceTimingBufferSize()");
-  var supported = typeof performance.setResourceTimingBufferSize == "function";
+  const supported = typeof performance.setResourceTimingBufferSize == "function";
   if (supported) {
     log("... Performance.setResourceTimingBufferSize() = supported");
     performance.setResourceTimingBufferSize(n);
@@ -80,7 +85,7 @@ function display_size_data(){
     return;
   }
 
-  var list = performance.getEntriesByType("resource");
+  const list = performance.getEntriesByType("resource");
   if (list === undefined) {
     log("= Display Size Data: peformance.getEntriesByType() is  NOT supported");
     return;
@@ -88,22 +93,22 @@ function display_size_data(){
 
   // For each "resource", display its *Size propery values
   log("= Display Size Data");
-  for (var i=0; i < list.length; i++) {
-    log("== Resource[" + i + "] - " + list[i].name);
+  for (let i=0; i < list.length; i++) {
+    log(`== Resource[${i}] - ${list[i].name}`);
     if ("decodedBodySize" in list[i])
-      log("... decodedBodySize[" + i + " = " + list[i].decodedBodySize);
+      log(`... decodedBodySize[${i}] = ${list[i].decodedBodySize}`);
     else
-      log("... decodedBodySize[" + i + " = NOT supported");
+      log(`... decodedBodySize[${i}] = NOT supported");
 
     if ("encodedBodySize" in list[i])
-      log("... encodedBodySize[" + i + " = " + list[i].encodedBodySize);
+      log(`... encodedBodySize[${i}] = ${list[i].encodedBodySize}`);
     else
-      log("... encodedBodySize[" + i + " = NOT supported");
+      log(`... encodedBodySize[${i}] = NOT supported");
 
     if ("transferSize" in list[i])
-      log("... transferSize[" + i + " = " + list[i].transferSize);
+      log(`... transferSize[${i}] = " ${list[i].transferSize}`);
     else
-      log("... transferSize[" + i + " = NOT supported");
+      log(`... transferSize[${i}] = NOT supported");
   }
 }
 
@@ -115,54 +120,54 @@ function calculate_load_times() {
   }
 
   // Get a list of "resource" performance entries
-  var resources = performance.getEntriesByType("resource");
+  const resources = performance.getEntriesByType("resource");
   if (resources === undefined || resources.length <= 0) {
     log("= Calculate Load Times: there are NO 'resource' performance records");
     return;
   }
 
   log("= Calculate Load Times");
-  for (var i=0; i < resources.length; i++) {
-    log("== Resource[" + i + "] - " + resources[i].name);
+  for (let i=0; i < resources.length; i++) {
+    log(`== Resource[${i}] - ${resources[i].name}`);
     // Redirect time
     var t = resources[i].redirectEnd - resources[i].redirectStart;
-    log("... Redirect time = " + t);
+    log(`... Redirect time = ${t}`);
 
     // DNS time
     t = resources[i].domainLookupEnd - resources[i].domainLookupStart;
-    log("... DNS lookup time = " + t);
+    log(`... DNS lookup time = ${t}`);
 
     // TCP handshake time
     t = resources[i].connectEnd - resources[i].connectStart;
-    log("... TCP time = " + t);
+    log(`... TCP time = ${t}`);
 
     // Secure connection time
     t = (resources[i].secureConnectionStart > 0) ? (resources[i].connectEnd - resources[i].secureConnectionStart) : "0";
-    log("... Secure connection time = " + t);
+    log(`... Secure connection time = ${t}`);
 
     // Response time
     t = resources[i].responseEnd - resources[i].responseStart;
-    log("... Response time = " + t);
+    log(`... Response time = ${t}`;
 
     // Fetch until response end
     t = (resources[i].fetchStart > 0) ? (resources[i].responseEnd - resources[i].fetchStart) : "0";
-    log("... Fetch until response end time = " + t);
+    log(`... Fetch until response end time = ${t}`);
 
     // Request start until reponse end
     t = (resources[i].requestStart > 0) ? (resources[i].responseEnd - resources[i].requestStart) : "0";
-    log("... Request start until response end time = " + t);
+    log(`... Request start until response end time = ${t}`);
 
     // Start until reponse end
     t = (resources[i].startTime > 0) ? (resources[i].responseEnd - resources[i].startTime) : "0";
-    log("... Start until response end time = " + t);
+    log(`... Start until response end time = ${t}`);
   }
 }
 
 function init() {
-  // load some image to trigger "resource" fetch events
-  var image1 = new Image();
+  // Load some image to trigger "resource" fetch events
+  const image1 = new Image();
   image1.src = "https://developer.mozilla.org/static/img/opengraph-logo.png";
-  var image2 = new Image();
+  const image2 = new Image();
   image2.src = "http://mozorg.cdn.mozilla.net/media/img/firefox/firefox-256.e2c1fc556816.jpg"
 
   // Set a callback if the resource buffer becomes filled
