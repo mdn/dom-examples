@@ -91,19 +91,19 @@ function display_size_data(){
   for (var i=0; i < list.length; i++) {
     log("== Resource[" + i + "] - " + list[i].name);
     if ("decodedBodySize" in list[i])
-      log("... decodedBodySize[" + i + " = " + list[i].decodedBodySize);
+      log("... decodedBodySize[" + i + "] = " + list[i].decodedBodySize);
     else
-      log("... decodedBodySize[" + i + " = NOT supported");
+      log("... decodedBodySize[" + i + "] = NOT supported");
 
     if ("encodedBodySize" in list[i])
-      log("... encodedBodySize[" + i + " = " + list[i].encodedBodySize);
+      log("... encodedBodySize[" + i + "] = " + list[i].encodedBodySize);
     else
-      log("... encodedBodySize[" + i + " = NOT supported");
+      log("... encodedBodySize[" + i + "] = NOT supported");
 
     if ("transferSize" in list[i])
-      log("... transferSize[" + i + " = " + list[i].transferSize);
+      log("... transferSize[" + i + "] = " + list[i].transferSize);
     else
-      log("... transferSize[" + i + " = NOT supported");
+      log("... transferSize[" + i + "] = NOT supported");
   }
 }
 
