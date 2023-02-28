@@ -99,17 +99,17 @@ function display_size_data(){
     if ("decodedBodySize" in list[i])
       log(`... decodedBodySize[${i}] = ${list[i].decodedBodySize}`);
     else
-      log(`... decodedBodySize[${i}] = NOT supported");
+      log(`... decodedBodySize[${i}] = NOT supported`);
 
     if ("encodedBodySize" in list[i])
       log(`... encodedBodySize[${i}] = ${list[i].encodedBodySize}`);
     else
-      log(`... encodedBodySize[${i}] = NOT supported");
+      log(`... encodedBodySize[${i}] = NOT supported`);
 
     if ("transferSize" in list[i])
       log(`... transferSize[${i}] = " ${list[i].transferSize}`);
     else
-      log(`... transferSize[${i}] = NOT supported");
+      log(`... transferSize[${i}] = NOT supported`);
   }
 }
 
@@ -148,7 +148,7 @@ function calculate_load_times() {
 
     // Response time
     t = resources[i].responseEnd - resources[i].responseStart;
-    log(`... Response time = ${t}`;
+    log(`... Response time = ${t}`);
 
     // Fetch until response end
     t = (resources[i].fetchStart > 0) ? (resources[i].responseEnd - resources[i].fetchStart) : "0";
@@ -169,7 +169,7 @@ function init() {
   const image1 = new Image();
   image1.src = "https://developer.mozilla.org/static/img/opengraph-logo.png";
   const image2 = new Image();
-  image2.src = "http://mozorg.cdn.mozilla.net/media/img/firefox/firefox-256.e2c1fc556816.jpg"
+  image2.src = "http://mozorg.cdn.mozilla.net/media/img/firefox/firefox-256.e2c1fc556816.jpg";
 
   // Set a callback if the resource buffer becomes filled
   performance.onresourcetimingbufferfull = buffer_full;
