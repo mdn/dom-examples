@@ -1,0 +1,153 @@
+/* resets */
+
+figure {
+  margin: 0
+}
+
+/* layout */
+
+body {
+  width: 70%;
+  max-width: 700px;
+
+  margin: 0 auto;
+}
+
+main {
+  display: flex;
+}
+
+img {
+  border: 1px solid #999;
+}
+
+.thumbs img {
+  display: block;
+  margin: 10px;
+  border-radius: 7px;
+  opacity: 0.7;
+}
+
+a {
+  outline: 0;
+}
+
+.thumbs a:hover img, .thumbs a:focus img {
+  opacity: 1;
+}
+
+.thumbs img:first-child {
+  margin-top: 0px;
+}
+
+.gallery-view img {
+  max-width: 100%;
+  margin-right: 10px;
+  border-radius: 7px;
+}
+
+footer, figcaption {
+  position: absolute;
+  padding: 5px 10px;
+  background-color: rgba(255,255,255,0.5);
+}
+
+footer {
+  bottom: 3px;
+  left: 3px;
+}
+
+figure {
+  position: relative;
+}
+
+figcaption {
+  top: 0px;
+  right: -2px;
+  border: 1px solid #999;
+  border-radius: 0 7px 0 7px;
+}
+
+/* text */
+
+h1, figcaption, a {
+  font-family: 'Roboto Slab', serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* media queries */
+
+@media (max-width: 980px) {
+  body {
+    width: 90%;
+  }
+}
+
+@media (max-width: 700px) {
+  body {
+    width: 98%;
+  }
+
+  main {
+    flex-direction: column;
+  }
+
+  .thumbs {
+    display: flex;
+    align-items: space-between;
+    justify-content: space-between;
+  }
+
+  .thumbs img {
+    margin: 0 0 10px 0;
+  }
+}
+
+/* View Transitions CSS */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+}
+
+figcaption {
+  view-transition-name: figure-caption;
+}
+
+/* Simple final style */
+
+::view-transition-old(figure-caption),
+::view-transition-new(figure-caption) {
+  height: 100%;
+}
+
+/* Alternative custom animation style */
+
+/* @keyframes grow-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes shrink-x {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+::view-transition-old(figure-caption),
+::view-transition-new(figure-caption) {
+  height: auto;
+  right: 0;
+  left: auto;
+  transform-origin: right center;
+}
+
+::view-transition-old(figure-caption) {
+  animation: 0.25s linear both shrink-x;
+}
+
+::view-transition-new(figure-caption) {
+  animation: 0.25s 0.25s linear both grow-x;
+} */
