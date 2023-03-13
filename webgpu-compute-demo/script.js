@@ -44,8 +44,7 @@ async function init() {
     code: shader
   });
 
-  // 3: Create an output buffer to read GPU calculations to, a staging buffer to be mapped for JavaScript access,
-  // and a GPUBindGroup based on the GPUBindGroupLayout
+  // 3: Create an output buffer to read GPU calculations to, and a staging buffer to be mapped for JavaScript access
 
   const output = device.createBuffer({
     size: BUFFER_SIZE,
@@ -54,7 +53,7 @@ async function init() {
 
   const stagingBuffer = device.createBuffer({
     size: BUFFER_SIZE,
-    usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST,
+    usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST
   });
 
   // 4: Create a GPUBindGroupLayout to define the bind group structure, create a GPUBindGroup from it,
@@ -88,7 +87,7 @@ async function init() {
     compute: {
       module: shaderModule,
       entryPoint: 'main'
-    },
+    }
   });
 
   // 5: Create GPUCommandEncoder to issue commands to the GPU

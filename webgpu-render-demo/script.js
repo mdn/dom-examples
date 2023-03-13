@@ -48,7 +48,7 @@ async function init() {
     throw Error('Couldn\'t request WebGPU adapter.');
   }
 
-  const device = await adapter.requestDevice();
+  let device = await adapter.requestDevice();
 
   // 2: Create a shader module from the shaders template literal
   const shaderModule = device.createShaderModule({
@@ -62,8 +62,7 @@ async function init() {
   context.configure({
     device: device,
     format: navigator.gpu.getPreferredCanvasFormat(),
-    alphaMode: 'premultiplied',
-    usage: GPUTextureUsage.COPY_SRC | GPUTextureUsage.RENDER_ATTACHMENT
+    alphaMode: 'premultiplied'
   });
 
   // 4: Create vertex buffer to contain vertex data
@@ -109,7 +108,7 @@ async function init() {
     layout: 'auto'
   };
 
-  // 6: Create the actual render pipline
+  // 6: Create the actual render pipeline
 
   const renderPipeline = device.createRenderPipeline(pipelineDescriptor);
     
