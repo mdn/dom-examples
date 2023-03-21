@@ -31,8 +31,6 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "payment-request" directory contains examples of the [Payment Request API](https://developer.mozilla.org/en-US/docs/Web/API/Payment_Request_API).
 
-* The "performance-apis" directory is for examples and demos of the [Web Performance APIs](https://www.w3.org/wiki/Web_Performance/Publications).
-
 * The "pointerevents" directory is for examples and demos of the [Pointer Events](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) standard.
 
 * The "pointer-lock" directory contains a simple demo to show usage of the Pointer Lock API. You can find more explanation of how the demo works at the main MDN [Pointer Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API) page. [Run the demo live](https://mdn.github.io/dom-examples/pointer-lock/).
