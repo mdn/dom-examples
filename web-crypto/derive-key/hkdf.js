@@ -108,14 +108,17 @@
     - our ECDH private key
     - their ECDH public key
     */
-  function deriveSharedSecret(privateKey, publicKey) {
-    return window.crypto.subtle.deriveKey(
-      {
-        name: "ECDH",
-        public: publicKey,
-      },
+  async function deriveSharedSecret(privateKey, publicKey) {
+    const secret = await window.crypto.subtle.deriveBits(
+      { name: "ECDH", public: publicKey },
       privateKey,
-      "HKDF",
+      384
+    );
+
+    return window.crypto.subtle.importKey(
+      "raw",
+      secret,
+      { name: "HKDF" },
       false,
       ["deriveKey"]
     );
@@ -131,7 +134,7 @@
         namedCurve: "P-384",
       },
       false,
-      ["deriveKey"]
+      ["deriveBits"]
     );
 
     let bobsKeyPair = await window.crypto.subtle.generateKey(
@@ -140,7 +143,7 @@
         namedCurve: "P-384",
       },
       false,
-      ["deriveKey"]
+      ["deriveBits"]
     );
 
     // Alice then generates a secret key using her private key and Bob's public key.
