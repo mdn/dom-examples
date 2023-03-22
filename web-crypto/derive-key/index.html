@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Web Crypto API example</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
@@ -11,30 +11,94 @@
       <h1>Web Crypto: deriveKey</h1>
 
       <section class="description">
-        <p>This page shows how to use the <code>deriveKey()</code> function of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>. It contains two separate examples, one for PBKDF2 and one for ECDH.</p>
+        <p>
+          This page shows how to use the <code>deriveKey()</code> function of
+          the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API"
+            >Web Crypto API</a
+          >. It contains two separate examples, one for PBKDF2 and one for ECDH.
+        </p>
 
-        <p>It's important to note that although both are defined in the API as key derivation functions, PBKDF2 and ECDH have very different use cases and characteristics.</p>
+        <p>
+          It's important to note that although both are defined in the API as
+          key derivation functions, PBKDF2 and ECDH have very different use
+          cases and characteristics.
+        </p>
 
-        <hr/>
+        <hr />
         <h2>PBKDF2 example</h2>
-        <p>The PBKDF2 algorithm is used here to derive a secret key from a password.</p>
+        <p>
+          The PBKDF2 algorithm is used here to derive a secret key from a
+          password.
+        </p>
 
-        <p>When you click "Encrypt" the example prompts you for a password and then derives an AES key from the password using PBKDF2. It then uses that key to encrypt the message, and writes a representation of the ciphertext into the "Ciphertext" output.</p>
+        <p>
+          When you click "Encrypt" the example prompts you for a password and
+          then derives an AES key from the password using PBKDF2. It then uses
+          that key to encrypt the message, and writes a representation of the
+          ciphertext into the "Ciphertext" output.
+        </p>
 
-        <p>When you click "Decrypt" the example prompts you for the password and derives an AES key from the password using PBKDF2. It then uses that key to decrypt the ciphertext, and writes a representation of the decrypted message into the "Decrypted" output.</p>
+        <p>
+          When you click "Decrypt" the example prompts you for the password and
+          derives an AES key from the password using PBKDF2. It then uses that
+          key to decrypt the ciphertext, and writes a representation of the
+          decrypted message into the "Decrypted" output.
+        </p>
 
-        <p>If the "Decrypt" password doesn't match the original, decryption will fail and an error is shown.</p>
+        <p>
+          If the "Decrypt" password doesn't match the original, decryption will
+          fail and an error is shown.
+        </p>
 
-        <hr/>
+        <hr />
         <h2>ECDH example</h2>
-        <p>The ECDH algorithm is more commonly called a "key agreement" algorithm. It enables two parties (conventionally called "Alice" and "Bob"), each of whom has a public/private key pair, to establish a shared secret key.</p>
+        <p>
+          The ECDH algorithm is more commonly called a "key agreement"
+          algorithm. It enables two parties (conventionally called "Alice" and
+          "Bob"), each of whom has a public/private key pair, to establish a
+          shared secret key.
+        </p>
 
-        <p>With this example we've created two key pairs, one for Alice and one for Bob. Alice derives an AES key using her private key and Bob's public key. Bob independently derives the same key using his private key and Alice's public key.</p>
+        <p>
+          With this example we've created two key pairs, one for Alice and one
+          for Bob. Alice derives an AES key using her private key and Bob's
+          public key. Bob independently derives the same key using his private
+          key and Alice's public key.
+        </p>
 
-        <p>When you click "Encrypt" the example uses Alice's copy of the key to encrypt a message for Bob.</p>
+        <p>
+          When you click "Encrypt" the example uses Alice's copy of the key to
+          encrypt a message for Bob.
+        </p>
 
-        <p>When you click "Decrypt" the example uses Bob's copy of the key to decrypt the message.</p>
+        <p>
+          When you click "Decrypt" the example uses Bob's copy of the key to
+          decrypt the message.
+        </p>
+        <hr />
+        <h2>HKDF example</h2>
+        <p>
+          The HKDF algorithm is used to derive a key from some relatively
+          high-entropy input, such as a secret agreed using ECDH. So for
+          example, it could be used to derive multiple encryption keys from a
+          single ECDH secret.
+        </p>
 
+        <p>When the page loads, we use ECDH to derive a shared secret.</p>
+
+        <p>
+          When you click "Encrypt" the example uses HKDF to derive an AES
+          encryption key from the shared secret, and uses it to encrypt the
+          message.
+        </p>
+
+        <p>
+          When you click "Decrypt" the example uses HKDF to derive the same AES
+          encryption key from the shared secret, and uses it to decrypt the
+          message.
+        </p>
       </section>
 
       <section class="examples">
@@ -43,15 +107,23 @@
           <section class="derive-key-controls">
             <div class="message-control">
               <label for="pbkdf2-message">Enter a message to encrypt:</label>
-              <input type="text" id="pbkdf2-message" name="message" size="25"
-                     value="The bunny hops at teatime">
+              <input
+                type="text"
+                id="pbkdf2-message"
+                name="message"
+                size="25"
+                value="The bunny hops at teatime"
+              />
             </div>
-            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
-            <div class="decrypted">Decrypted:<span class="decrypted-value"></span></div>
+            <div class="ciphertext">
+              Ciphertext:<span class="ciphertext-value"></span>
+            </div>
+            <div class="decrypted">
+              Decrypted:<span class="decrypted-value"></span>
+            </div>
 
-            <input class="encrypt-button" type="button" value="Encrypt">
-            <input class="decrypt-button" type="button" value="Decrypt">
-
+            <input class="encrypt-button" type="button" value="Encrypt" />
+            <input class="decrypt-button" type="button" value="Decrypt" />
           </section>
         </section>
 
@@ -60,22 +132,54 @@
           <section class="derive-key-controls">
             <div class="message-control">
               <label for="ecdh-message">Enter a message to encrypt:</label>
-              <input type="text" id="ecdh-message" name="message" size="25"
-                     value="The bunny hops at teatime">
+              <input
+                type="text"
+                id="ecdh-message"
+                name="message"
+                size="25"
+                value="The bunny hops at teatime"
+              />
             </div>
-            <div class="ciphertext">Ciphertext:<span class="ciphertext-value"></span></div>
-            <div class="decrypted">Decrypted:<span class="decrypted-value"></span></div>
+            <div class="ciphertext">
+              Ciphertext:<span class="ciphertext-value"></span>
+            </div>
+            <div class="decrypted">
+              Decrypted:<span class="decrypted-value"></span>
+            </div>
 
-            <input class="encrypt-button" type="button" value="Encrypt">
-            <input class="decrypt-button" type="button" value="Decrypt">
-
+            <input class="encrypt-button" type="button" value="Encrypt" />
+            <input class="decrypt-button" type="button" value="Decrypt" />
           </section>
         </section>
 
+        <section class="derive-key hkdf">
+          <h2>HKDF</h2>
+          <section class="derive-key-controls">
+            <div class="message-control">
+              <label for="hkdf-message">Enter a message to encrypt:</label>
+              <input
+                type="text"
+                id="hkdf-message"
+                name="message"
+                size="25"
+                value="The bunny hops at teatime"
+              />
+            </div>
+            <div class="ciphertext">
+              Ciphertext:<span class="ciphertext-value"></span>
+            </div>
+            <div class="decrypted">
+              Decrypted:<span class="decrypted-value"></span>
+            </div>
+
+            <input class="encrypt-button" type="button" value="Encrypt" />
+            <input class="decrypt-button" type="button" value="Decrypt" />
+          </section>
+        </section>
       </section>
     </main>
-
   </body>
   <script src="ecdh.js"></script>
   <script src="pbkdf2.js"></script>
+  <script src="hkdf.js"></script>
 </html>

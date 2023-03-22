@@ -1,28 +1,52 @@
 (() => {
-  let iv;
+  let salt;
   let ciphertext;
+  let iv;
+  let alicesSecretKey;
+  let bobsSecretKey;
 
   /*
-  Fetch the contents of the "message" textbox, and encode it
-  in a form we can use for the encrypt operation.
-  */
+    Fetch the contents of the "message" textbox, and encode it
+    in a form we can use for the encrypt operation.
+    */
   function getMessageEncoding() {
-    let message = document.querySelector("#ecdh-message").value;
+    let message = document.querySelector("#hkdf-message").value;
     let enc = new TextEncoder();
     return enc.encode(message);
   }
 
   /*
-  Encrypt the message using the secret key.
-  Update the "ciphertextValue" box with a representation of part of
-  the ciphertext.
+  Given some key material and some random salt,
+  derive an AES-GCM key using HKDF.
   */
-  async function encrypt(secretKey) {
-    const ciphertextValue = document.querySelector(".ecdh .ciphertext-value");
+  function getKey(keyMaterial, salt) {
+    return window.crypto.subtle.deriveKey(
+      {
+        name: "HKDF",
+        salt: salt,
+        info: new Uint8Array("Encryption example"),
+        hash: "SHA-256",
+      },
+      keyMaterial,
+      { name: "AES-GCM", length: 256 },
+      true,
+      ["encrypt", "decrypt"]
+    );
+  }
+
+  /*
+    Encrypt the message using the secret key.
+    Update the "ciphertextValue" box with a representation of part of
+    the ciphertext.
+    */
+  async function encrypt(secret) {
+    const ciphertextValue = document.querySelector(".hkdf .ciphertext-value");
     ciphertextValue.textContent = "";
-    const decryptedValue = document.querySelector(".ecdh .decrypted-value");
+    const decryptedValue = document.querySelector(".hkdf .decrypted-value");
     decryptedValue.textContent = "";
 
+    salt = window.crypto.getRandomValues(new Uint8Array(16));
+    let key = await getKey(secret, salt);
     iv = window.crypto.getRandomValues(new Uint8Array(12));
     let encoded = getMessageEncoding();
 
@@ -31,7 +55,7 @@
         name: "AES-GCM",
         iv: iv,
       },
-      secretKey,
+      key,
       encoded
     );
 
@@ -44,16 +68,18 @@
   }
 
   /*
-  Decrypt the message using the secret key.
-  If the ciphertext was decrypted successfully,
-  update the "decryptedValue" box with the decrypted value.
-  If there was an error decrypting,
-  update the "decryptedValue" box with an error message.
-  */
-  async function decrypt(secretKey) {
-    const decryptedValue = document.querySelector(".ecdh .decrypted-value");
+    Decrypt the message using the secret key.
+    If the ciphertext was decrypted successfully,
+    update the "decryptedValue" box with the decrypted value.
+    If there was an error decrypting,
+    update the "decryptedValue" box with an error message.
+    */
+  async function decrypt(secret) {
+    const decryptedValue = document.querySelector(".hkdf .decrypted-value");
     decryptedValue.textContent = "";
     decryptedValue.classList.remove("error");
+
+    let key = await getKey(secret, salt);
 
     try {
       let decrypted = await window.crypto.subtle.decrypt(
@@ -61,7 +87,7 @@
           name: "AES-GCM",
           iv: iv,
         },
-        secretKey,
+        key,
         ciphertext
       );
 
@@ -78,23 +104,20 @@
   }
 
   /*
-  Derive an AES key, given:
-  - our ECDH private key
-  - their ECDH public key
-  */
-  function deriveSecretKey(privateKey, publicKey) {
+    Derive a shared secret, given:
+    - our ECDH private key
+    - their ECDH public key
+    */
+  function deriveSharedSecret(privateKey, publicKey) {
     return window.crypto.subtle.deriveKey(
       {
         name: "ECDH",
         public: publicKey,
       },
       privateKey,
-      {
-        name: "AES-GCM",
-        length: 256,
-      },
+      "HKDF",
       false,
-      ["encrypt", "decrypt"]
+      ["deriveKey"]
     );
   }
 
@@ -121,25 +144,25 @@
     );
 
     // Alice then generates a secret key using her private key and Bob's public key.
-    let alicesSecretKey = await deriveSecretKey(
+    alicesSecretKey = await deriveSharedSecret(
       alicesKeyPair.privateKey,
       bobsKeyPair.publicKey
     );
 
     // Bob generates the same secret key using his private key and Alice's public key.
-    let bobsSecretKey = await deriveSecretKey(
+    bobsSecretKey = await deriveSharedSecret(
       bobsKeyPair.privateKey,
       alicesKeyPair.publicKey
     );
 
     // Alice can then use her copy of the secret key to encrypt a message to Bob.
-    let encryptButton = document.querySelector(".ecdh .encrypt-button");
+    let encryptButton = document.querySelector(".hkdf .encrypt-button");
     encryptButton.addEventListener("click", () => {
       encrypt(alicesSecretKey);
     });
 
     // Bob can use his copy to decrypt the message.
-    let decryptButton = document.querySelector(".ecdh .decrypt-button");
+    let decryptButton = document.querySelector(".hkdf .decrypt-button");
     decryptButton.addEventListener("click", () => {
       decrypt(bobsSecretKey);
     });
