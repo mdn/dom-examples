@@ -1,81 +1,85 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <title>Nested popovers example</title>
-      <style>
-        body,
-        html {
-          font-family: sans-serif;
-        }
+  <head>
+    <meta charset="utf-8" />
+    <title>Nested popovers example</title>
+    <style>
+      body,
+      html {
+        font-family: sans-serif;
+      }
 
-        body [popover] {
-          border: 1px solid black;
-          width: 10vw;
-          inset: unset;
-        }
+      body [popover] {
+        border: 1px solid black;
+        width: 10vw;
+        inset: unset;
+      }
 
-        #mainpopover {
-          left: 7px;
-          top: 38px;
-        }
+      #mainpopover {
+        left: 7px;
+        top: 38px;
+      }
 
-        #subpopover {
-          left: 10vw;
-          top: 86px;
-        }
+      #subpopover {
+        left: 10vw;
+        top: 86px;
+      }
 
-        .listcontainer, .subcontainer {
-          display: flex;
-          flex-direction: column;
-        }
+      .listcontainer,
+      .subcontainer {
+        display: flex;
+        flex-direction: column;
+      }
 
-        a {
-          flex: 1;
-          text-decoration: none;
-          outline: none;
-          text-align: center;
-          line-height: 3;
-          color: black;
-        }
+      a {
+        flex: 1;
+        text-decoration: none;
+        outline: none;
+        text-align: center;
+        line-height: 3;
+        color: black;
+      }
 
-        a:link,
-        a:visited {
-          background: palegoldenrod;
-          color: black;
-        }
+      a:link,
+      a:visited {
+        background: palegoldenrod;
+        color: black;
+      }
 
-        a:hover, a:focus {
-          background: orange;
-        }
+      a:hover,
+      a:focus {
+        background: orange;
+      }
 
-        a:active {
-          background: darkred;
-          color: white;
-        }
-      </style>
-      <script src="index.js" defer></script>
-    </head>
-    <body>
-      <button popovertarget="mainpopover" popovertargetaction="toggle">Menu</button>
-      <div id="mainpopover" popover>
-        <nav class="listcontainer">
-          <a href="#">Home</a>
-          <div class="subcontainer" tabindex="0">
-            <a href="#">Pizza <strong>></strong></a>
-            <div id="subpopover" popover>
-              <div class="listcontainer">
-                <a href="#">Margherita</a>
-                <a href="#">Pepperoni</a>
-                <a href="#">Ham & Shroom</a>
-                <a href="#">Vegan</a>
-              </div>
+      a:active {
+        background: darkred;
+        color: white;
+      }
+    </style>
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <button popovertarget="mainpopover" popovertargetaction="toggle">
+      Menu
+    </button>
+    <div id="mainpopover" popover>
+      <nav class="listcontainer">
+        <a href="#">Home</a>
+        <div class="subcontainer" tabindex="0">
+          <a href="#">Pizza <strong>></strong></a>
+          <div id="subpopover" popover>
+            <div class="listcontainer">
+              <a href="#">Margherita</a>
+              <a href="#">Pepperoni</a>
+              <a href="#">Ham & Shroom</a>
+              <a href="#">Vegan</a>
             </div>
           </div>
-          <a href="#">Music</a>
-          <a href="#">Wombats</a>
-          <a href="#">Finland</a>
-        </nav>
-      </div>
-    </body>
+        </div>
+        <a href="#">Music</a>
+        <a href="#">Wombats</a>
+        <a href="#">Finland</a>
+      </nav>
+    </div>
+  </body>
 </html>

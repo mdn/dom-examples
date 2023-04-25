@@ -1,26 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <title>Popover positioning example</title>
-      <style>
-        :popover-open {
-          width: 300px;
-          height: 200px;
-          position: absolute;
-          inset: unset;
-          top: 5px;
-          right: 5px;
-          margin: 0;
-        }
-      </style>
-    </head>
-    <body>
-      <button popovertarget="mypopover" popovertargetaction="show">Show popover</button>
-      <button popovertarget="mypopover" popovertargetaction="hide">Hide popover</button>
-      <div id="mypopover" popover>
-        <h2>Popover heading</h2>
-        <p>Popover content</p>
-      </div>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Popover positioning example</title>
+    <style>
+      :popover-open {
+        width: 300px;
+        height: 200px;
+        position: absolute;
+        inset: unset;
+        top: 5px;
+        right: 5px;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <button popovertarget="mypopover" popovertargetaction="show">
+      Show popover
+    </button>
+    <button popovertarget="mypopover" popovertargetaction="hide">
+      Hide popover
+    </button>
+    <div id="mypopover" popover>
+      <h2>Popover heading</h2>
+      <p>Popover content</p>
+    </div>
+  </body>
 </html>
