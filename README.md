@@ -35,6 +35,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "pointer-lock" directory contains a simple demo to show usage of the Pointer Lock API. You can find more explanation of how the demo works at the main MDN [Pointer Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API) page. [Run the demo live](https://mdn.github.io/dom-examples/pointer-lock/).
 
+* The "popover-api" directory is for examples and demos of the [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) standard. Go to the[Popover API demo index](https://mdn.github.io/dom-examples/popover-api/) to see what's available.
+
 * The "reporting-api" directory contains a couple of simple demos to show usage of the Reprting API. You can find more explanation of how the API works in the main MDN [Reporting API](https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API) docs. [Run the deprecation report demo live](https://mdn.github.io/dom-examples/reporting-api/deprecation_report.html).
 
 * The "resize-event" directory contains a simple demo to show how you can use the [resize event](https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event). Resize the browser window either by height or width to see the size of your current window. [Run the demo live](https://mdn.github.io/dom-examples/resize-event).
