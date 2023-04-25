@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Multiple manual popovers example</title>
+    <style>
+      :popover-open {
+        position: absolute;
+        inset: unset;
+        top: 40px;
+      }
+
+      #mypopup-1 {
+        left: 8px;
+      }
+
+      #mypopup-2 {
+        left: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <button popovertarget="mypopup-1" popovertargetaction="show">
+      Show popover #1
+    </button>
+    <button popovertarget="mypopup-1" popovertargetaction="hide">
+      Hide popover #1
+    </button>
+    <button popovertarget="mypopup-2" popovertargetaction="show">
+      Show popover #2
+    </button>
+    <button popovertarget="mypopup-2" popovertargetaction="hide">
+      Hide popover #2
+    </button>
+
+    <div id="mypopup-1" popover="manual">Popover content #1</div>
+    <div id="mypopup-2" popover="manual">Popover content #2</div>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Blur background example</title>
+    <style>
+      body {
+        margin: 0;
+        background: url("tile.png");
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      button {
+        margin: 5px 0 0 5px;
+      }
+
+      :popover-open {
+        width: 300px;
+        height: 200px;
+        padding: 0 10px;
+        border-radius: 10px;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+
+      ::backdrop {
+        backdrop-filter: blur(3px);
+      }
+    </style>
+  </head>
+  <body>
+    <button popovertarget="mypopover" popovertargetaction="show">
+      Show popover
+    </button>
+    <div id="mypopover" popover>
+      <h2>Popover heading</h2>
+      <p>
+        This here is some very important content that we want to draw your
+        attention to before you light dismiss it. Read it all, do not delay!
+      </p>
+    </div>
+  </body>
+</html>
