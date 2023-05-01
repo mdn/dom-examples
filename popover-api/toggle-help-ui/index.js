@@ -5,6 +5,8 @@ function supportsPopover() {
 const popover = document.getElementById("mypopover");
 const toggleBtn = document.getElementById("toggleBtn");
 
+const keyboardHelpPara = document.getElementById("keyboard-help-para");
+
 const popoverSupported = supportsPopover();
 
 if (popoverSupported) {
@@ -19,4 +21,5 @@ if (popoverSupported) {
   });
 } else {
   toggleBtn.style.display = "none";
+  keyboardHelpPara.style.display = "none";
 }
