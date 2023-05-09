@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Toggle help UI example</title>
     <style>
       :popover-open {
         position: absolute;
         inset: unset;
-        top: 5px;
+        bottom: 5px;
         right: 5px;
+      }
+
+      @media all and (max-width: 600px) {
+        :popover-open {
+          left: 5px;
+        }
       }
     </style>
     <script src="index.js" defer></script>

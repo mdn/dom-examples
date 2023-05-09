@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Multiple manual popovers example</title>
     <style>
       :popover-open {
         position: absolute;
         inset: unset;
-        top: 40px;
+        top: 80px;
       }
 
       #mypopup-1 {
@@ -26,6 +27,7 @@
     <button popovertarget="mypopup-1" popovertargetaction="hide">
       Hide popover #1
     </button>
+    <hr>
     <button popovertarget="mypopup-2" popovertargetaction="show">
       Show popover #2
     </button>
