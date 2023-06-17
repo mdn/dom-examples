@@ -15,7 +15,7 @@ fn main(
   local_id : vec3u,
 ) {
   // Avoid accessing the buffer out of bounds
-  if (global_id.x >= ${BUFFER_SIZE}) {
+  if (global_id.x >= ${BUFFER_SIZE}u) {
     return;
   }
 
