@@ -2,11 +2,6 @@
 
 const RADIUS = 20;
 
-function degToRad(degrees) {
-  const result = (Math.PI / 180) * degrees;
-  return result;
-}
-
 // setup of the canvas
 
 const canvas = document.querySelector("canvas");
@@ -16,13 +11,47 @@ let x = 50;
 let y = 50;
 
 function canvasDraw() {
+  // Find center x and y for any partial balls
+  function find2ndCenter(pos, max) {
+    if (pos < RADIUS) {
+      pos += max;
+    }
+    else if (pos + RADIUS > max) {
+      pos -= max;
+    }
+    else {
+      pos = 0;
+    }
+    return pos;
+  }
+
+  function drawBall(x, y) {
+    ctx.beginPath();
+    ctx.arc(x, y, RADIUS, 0, 2 * Math.PI, true);
+    ctx.fill();
+  }
+
+  const x2 = find2ndCenter(x, canvas.width);
+  const y2 = find2ndCenter(y, canvas.height);
+
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "#f00";
-  ctx.beginPath();
-  ctx.arc(x, y, RADIUS, 0, degToRad(360), true);
-  ctx.fill();
-}
+
+  /* Draw the main ball (which may or may not be a full ball) and any
+   * partial balls that result from moving close to one of the edges */
+  drawBall(x, y); // main ball
+  if (x2) {
+    drawBall(x2, y); // partial ball
+  }
+  if (y2) {
+    drawBall(x, y2); // partial ball
+  }
+  if (x2 && y2) {
+    drawBall(x2, y2); // partial ball
+  }
+} // end of function canvasDraw
+
 canvasDraw();
 
 canvas.addEventListener("click", async () => {
@@ -51,20 +80,18 @@ const tracker = document.getElementById("tracker");
 
 let animation;
 function updatePosition(e) {
-  x += e.movementX;
-  y += e.movementY;
-  if (x > canvas.width + RADIUS) {
-    x = -RADIUS;
+  function updateCoord(pos, delta, max) {
+    pos += delta;
+    pos %= max;
+    if (pos < 0) {
+      pos += max;
+    }
+    return pos;
   }
-  if (y > canvas.height + RADIUS) {
-    y = -RADIUS;
-  }
-  if (x < -RADIUS) {
-    x = canvas.width + RADIUS;
-  }
-  if (y < -RADIUS) {
-    y = canvas.height + RADIUS;
-  }
+
+  x = updateCoord(x, e.movementX, canvas.width);
+  y = updateCoord(y, e.movementY, canvas.height);
+  
   tracker.textContent = `X position: ${x}, Y position: ${y}`;
 
   if (!animation) {
@@ -74,3 +101,4 @@ function updatePosition(e) {
     });
   }
 }
+
