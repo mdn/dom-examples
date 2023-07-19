@@ -1,6 +1,8 @@
 <?php
 date_default_timezone_set("America/New_York");
+header("X-Accel-Buffering: no");
 header("Content-Type: text/event-stream");
+header("Cache-Control: no-cache");
 
 $counter = rand(1, 10); // a random counter
 while (1) {
