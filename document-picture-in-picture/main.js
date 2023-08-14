@@ -6,7 +6,7 @@ let pipActive = false;
 let pipWindow;
 
 const inPIPMessage = document.createElement("p");
-inPIPMessage.textContent = "Video player is currently in the separate Picture-in-Picture window";
+inPIPMessage.textContent = "Video player is currently in the separate Picture-in-Picture window.";
 
 if ("documentPictureInPicture" in window) {
 
@@ -24,7 +24,7 @@ async function togglePictureInPicture() {
 		pipActive = true;
 
 		// Open a Picture-in-Picture window.
-		pipWindow = await documentPictureInPicture.requestWindow({
+		pipWindow = await window.documentPictureInPicture.requestWindow({
 			width: videoPlayer.clientWidth,
 			height: videoPlayer.clientHeight,
 		});
