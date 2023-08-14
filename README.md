@@ -17,6 +17,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 * The "drag-and-drop" directory is for examples and demos of the [HTML Drag and Drop](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) standard.
 
+* The "document-picture-in-picture" directory contains an example showing usage of the [Document Picture-in-Picture API](http://developer.mozilla.org/en-US/docs/Web/API/Document_Picture-in-Picture_API/). [See the example live](https://mdn.github.io/dom-examples/document-picture-in-picture/).
+
 * The "fullscreen-api" directory is for examples and demos of the [Fullscreen API](https://wiki.developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API). Run the [example live](https://mdn.github.io/dom-examples/fullscreen-api/).
 
 * The "indexeddb-api" directory contains a demo for the [IndexedDB API](https://mdn.github.io/dom-examples/indexeddb-api/index.html).
