@@ -152,7 +152,6 @@ async function openWindows() {
       screen2.availWidth,
       screen2.availHeight,
       sites[0].url);
-
   }
 
   // Check whether one of our popup windows has been closed
