@@ -74,8 +74,6 @@ function openWindow(left, top, width, height, url) {
     windowFeatures,
   );
 
-
-
   // Store a reference to the window in the windowRefs array
   windowRefs.push(windowRef);
 
@@ -91,6 +89,8 @@ function closeAllWindows() {
 
 async function openWindows() {
   const screenDetails = await window.getScreenDetails();
+
+  // Return the number of screens
   const noOfScreens = screenDetails.screens.length;
 
   if (noOfScreens === 1) {
@@ -144,7 +144,7 @@ async function openWindows() {
       screen1.availTop,
       windowWidth,
       windowHeight,
-      sites[2].url);
+      sites[3].url);
 
     // Open the code editor the full size of the secondary screen
     openWindow(screen2.availLeft,
@@ -175,7 +175,7 @@ async function openWindows() {
     closeAllWindows();
   });
 
-  screenDetails.addEventListener("screenschange", (event) => {
+  screenDetails.addEventListener("screenschange", () => {
     // If the new number of screens is different to the old number of screens, report the difference
     if (screenDetails.screens.length !== noOfScreens) {
       console.log(
