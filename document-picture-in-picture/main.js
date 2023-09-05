@@ -2,8 +2,8 @@
 const videoPlayer = document.getElementById("player");
 const playerContainer = document.getElementById("container");
 
-const inPIPMessage = document.querySelector(".in-pip-message");
-inPIPMessage.style.display = "none";
+const inPipMessage = document.querySelector(".in-pip-message");
+inPipMessage.style.display = "none";
 
 if ("documentPictureInPicture" in window) {
 
@@ -27,7 +27,7 @@ async function togglePictureInPicture() {
 
 		// Add pagehide listener to handle the case of the pip window being closed using the browser X button
 		pipWindow.addEventListener("pagehide", (event) => {
-			inPIPMessage.style.display = "none";
+			inPipMessage.style.display = "none";
 			playerContainer.append(videoPlayer);
 		});
 
@@ -55,9 +55,9 @@ async function togglePictureInPicture() {
 		pipWindow.document.body.append(videoPlayer);
 
 		// Display a message to say it has been moved
-		inPIPMessage.style.display = "block";
+		inPipMessage.style.display = "block";
 	} else {
-		inPIPMessage.style.display = "none";
+		inPipMessage.style.display = "none";
 		playerContainer.append(videoPlayer);
 		window.documentPictureInPicture.window.close();
 	}
