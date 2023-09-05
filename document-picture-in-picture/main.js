@@ -1,18 +1,15 @@
 
 const videoPlayer = document.getElementById("player");
 const playerContainer = document.getElementById("container");
-let togglePipButton;
-let pipActive = false;
-let pipWindow;
 
-const inPIPMessage = document.createElement("p");
-inPIPMessage.textContent = "Video player is currently in the separate Picture-in-Picture window.";
+const inPIPMessage = document.querySelector(".in-pip-message");
+inPIPMessage.style.display = "none";
 
 if ("documentPictureInPicture" in window) {
 
 	document.querySelector(".no-picture-in-picture").remove();
 
-	togglePipButton = document.createElement("button");
+	const togglePipButton = document.createElement("button");
 	togglePipButton.textContent = "Toggle Picture-in-Picture";
 	togglePipButton.addEventListener("click", togglePictureInPicture, false);
 
@@ -20,19 +17,17 @@ if ("documentPictureInPicture" in window) {
 }
 
 async function togglePictureInPicture() {
-	if (!pipActive) {
-		pipActive = true;
+	if (!window.documentPictureInPicture.window) {
 
 		// Open a Picture-in-Picture window.
-		pipWindow = await window.documentPictureInPicture.requestWindow({
+		const pipWindow = await window.documentPictureInPicture.requestWindow({
 			width: videoPlayer.clientWidth,
 			height: videoPlayer.clientHeight,
 		});
 
 		// Add pagehide listener to handle the case of the pip window being closed using the browser X button
 		pipWindow.addEventListener("pagehide", (event) => {
-			pipActive = false;
-			inPIPMessage.remove();
+			inPIPMessage.style.display = "none";
 			playerContainer.append(videoPlayer);
 		});
 
@@ -60,10 +55,9 @@ async function togglePictureInPicture() {
 		pipWindow.document.body.append(videoPlayer);
 
 		// Display a message to say it has been moved
-		playerContainer.append(inPIPMessage);
+		inPIPMessage.style.display = "block";
 	} else {
-		pipActive = false;
-		inPIPMessage.remove();
+		inPIPMessage.style.display = "none";
 		playerContainer.append(videoPlayer);
 		window.documentPictureInPicture.window.close();
 	}
