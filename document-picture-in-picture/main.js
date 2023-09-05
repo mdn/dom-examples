@@ -17,6 +17,7 @@ if ("documentPictureInPicture" in window) {
 }
 
 async function togglePictureInPicture() {
+	// Returns null if no pip window is currently open
 	if (!window.documentPictureInPicture.window) {
 
 		// Open a Picture-in-Picture window.
