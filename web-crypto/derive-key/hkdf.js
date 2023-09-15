@@ -1,7 +1,10 @@
 (() => {
-  let salt;
-  let ciphertext;
-  let iv;
+  // Represents the secret message that could be sent
+  const message = {
+    salt: null,
+    iv: null,
+    ciphertext: null,
+  };
   let alicesSecretKey;
   let bobsSecretKey;
 
@@ -45,26 +48,26 @@
     const decryptedValue = document.querySelector(".hkdf .decrypted-value");
     decryptedValue.textContent = "";
 
-    salt = window.crypto.getRandomValues(new Uint8Array(16));
-    let key = await getKey(secret, salt);
-    iv = window.crypto.getRandomValues(new Uint8Array(12));
+    message.salt = window.crypto.getRandomValues(new Uint8Array(16));
+    let key = await getKey(secret, message.salt);
+    message.iv = window.crypto.getRandomValues(new Uint8Array(12));
     let encoded = getMessageEncoding();
 
-    ciphertext = await window.crypto.subtle.encrypt(
+    message.ciphertext = await window.crypto.subtle.encrypt(
       {
         name: "AES-GCM",
-        iv: iv,
+        iv: message.iv,
       },
       key,
       encoded
     );
 
-    let buffer = new Uint8Array(ciphertext, 0, 5);
+    let buffer = new Uint8Array(message.ciphertext, 0, 5);
     ciphertextValue.classList.add("fade-in");
     ciphertextValue.addEventListener("animationend", () => {
       ciphertextValue.classList.remove("fade-in");
     });
-    ciphertextValue.textContent = `${buffer}...[${ciphertext.byteLength} bytes total]`;
+    ciphertextValue.textContent = `${buffer}...[${message.ciphertext.byteLength} bytes total]`;
   }
 
   /*
@@ -79,16 +82,16 @@
     decryptedValue.textContent = "";
     decryptedValue.classList.remove("error");
 
-    let key = await getKey(secret, salt);
+    let key = await getKey(secret, message.salt);
 
     try {
       let decrypted = await window.crypto.subtle.decrypt(
         {
           name: "AES-GCM",
-          iv: iv,
+          iv: message.iv,
         },
         key,
-        ciphertext
+        message.ciphertext
       );
 
       let dec = new TextDecoder();
