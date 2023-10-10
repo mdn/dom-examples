@@ -2,8 +2,7 @@
 const videoPlayer = document.getElementById("player");
 const playerContainer = document.getElementById("container");
 
-const inPipMessage = document.querySelector(".in-pip-message");
-inPipMessage.style.display = "none";
+const inPipMessage = document.getElementById("in-pip-message");
 
 if ("documentPictureInPicture" in window) {
 
