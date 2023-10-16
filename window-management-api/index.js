@@ -70,7 +70,7 @@ function openWindow(left, top, width, height, url) {
   const windowFeatures = `left=${left},top=${top},width=${width},height=${height}`;
   const windowRef = window.open(
     url,
-    Math.random().toString(), // a target is needed for it to open as a separate window rather than a tab
+    '_blank', // needed for it to open in a new window
     windowFeatures,
   );
 
@@ -135,12 +135,12 @@ async function openWindows() {
       windowWidth,
       windowHeight,
       sites[1].url);
-    openWindow(windowWidth + screen1.availLeft + WINDOW_CHROME_X,
+    openWindow(screen1.availLeft + windowWidth + WINDOW_CHROME_X,
       screen1.availTop,
       windowWidth,
       windowHeight,
       sites[2].url);
-    openWindow((windowWidth * 2) + screen1.availLeft + (WINDOW_CHROME_X * 2),
+    openWindow(screen1.availLeft + ((windowWidth + WINDOW_CHROME_X) * 2),
       screen1.availTop,
       windowWidth,
       windowHeight,
@@ -160,12 +160,10 @@ async function openWindows() {
   closeMonitor = setInterval(checkWindowClose, 250);
 
   function checkWindowClose() {
-    windowRefs.forEach(windowRef => {
-      if (windowRef.closed) {
-        closeAllWindows();
-        return;
-      }
-    });
+    if (windowRefs.some(windowRef => windowRef.closed)) {
+      closeAllWindows();
+      clearInterval(closeMonitor);
+    }
   }
 
   // Also close our popup windows if the main app window is closed
