@@ -70,7 +70,7 @@ function openWindow(left, top, width, height, url) {
   const windowFeatures = `left=${left},top=${top},width=${width},height=${height}`;
   const windowRef = window.open(
     url,
-    '_blank', // needed for it to open in a new window
+    "_blank", // needed for it to open in a new window
     windowFeatures,
   );
 
