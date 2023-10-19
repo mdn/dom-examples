@@ -1,0 +1,21 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
+}
+
+body {
+  width: 70%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+p,
+li {
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+}
+
+hr {
+  color: gray;
+  border-width: 3px;
+}
