@@ -42,7 +42,11 @@ const createGalleryFigure = async (galleryImage) => {
     const myImage = document.createElement('img');
     const myCaption = document.createElement('caption');
     const myFigure = document.createElement('figure');
-    myCaption.innerHTML = `${galleryImage.name}: Taken by ${galleryImage.credit}`;
+    const myName = document.createElement('span');
+    myName.textContent = `${galleryImage.name}: `;
+    const myCredit = document.createElement('span');
+    myCredit.innerHTML = `Taken by ${galleryImage.credit}`;
+    myCaption.append(myName, myCredit);
     myImage.src = window.URL.createObjectURL(imageBlob);
     myImage.setAttribute('alt', galleryImage.alt);
     myFigure.append(myImage, myCaption);
