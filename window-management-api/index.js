@@ -161,7 +161,7 @@ async function openWindows() {
   // Check whether one of our popup windows has been closed
   // If so, close them all
 
-  closeMonitor = setInterval(checkWindowClose, 250);
+  const closeMonitor = setInterval(checkWindowClose, 250);
 
   function checkWindowClose() {
     if (windowRefs.some(windowRef => windowRef.closed)) {
