@@ -97,8 +97,10 @@ async function openWindows() {
     // Only one screen
     const screen1 = screenDetails.screens[0];
     // Windows will be half the width and half the height of the screen
-    let windowWidth = Math.floor((screen1.availWidth - 2 * WINDOW_CHROME_X) / 2);
-    let windowHeight = Math.floor((screen1.availHeight - 2 * WINDOW_CHROME_Y) / 2);
+    // The available width of screen1, minus 2 times the horizontal browser chrome width, divided by 2 
+    const windowWidth = Math.floor((screen1.availWidth - 2 * WINDOW_CHROME_X) / 2);
+    // The available height of screen1, minus 2 times the horizontal browser chrome height, divided by 2 
+    const windowHeight = Math.floor((screen1.availHeight - 2 * WINDOW_CHROME_Y) / 2);
 
     openWindow(screen1.availLeft,
       screen1.availTop,
@@ -126,8 +128,10 @@ async function openWindows() {
     const screen1 = screenDetails.screens[0];
     const screen2 = screenDetails.screens[1];
     // Windows will be a third the width and the full height of the screen
-    let windowWidth = Math.floor((screen1.availWidth - 3 * WINDOW_CHROME_X) / 3);
-    let windowHeight = Math.floor(screen1.availHeight - WINDOW_CHROME_Y);
+    // The available width of screen1, minus 3 times the horizontal browser chrome width, divided by 3 
+    const windowWidth = Math.floor((screen1.availWidth - 3 * WINDOW_CHROME_X) / 3);
+    // The available height of screen1, minus the vertical browser chrome width
+    const windowHeight = Math.floor(screen1.availHeight - WINDOW_CHROME_Y);
 
     // Open the reference windows in thirds across the entire height of the primary screen
     openWindow(screen1.availLeft,
