@@ -20,6 +20,9 @@ const sites = [
 
 const outputElem = document.querySelector("section");
 
+// Create constant to hold popover when it is created
+let popoverElem = undefined;
+
 // Array to hold references to the currently open windows
 let windowRefs = [];
 
@@ -32,6 +35,7 @@ const WINDOW_CHROME_X = 1;
 if ("getScreenDetails" in window) {
   // The Window Management API is supported
   createButton();
+  createPopover();
 } else {
   // The Window Management API is not supported
   createLinks(sites);
@@ -64,6 +68,31 @@ function createButton() {
   btn.addEventListener("click", openWindows);
 }
 
+// Function to create popover warning users to update their settings to allow multiple popup windows
+
+function createPopover() {
+  popoverElem = document.createElement('div');
+  popoverElem.id = "block-warning";
+  popoverElem.popover = "manual";
+  popoverElem.innerHTML = `
+    <h2>Please disable popup blocking</h2>
+    <p>Your browser is blocking the app's popup windows. Please enable popups and then try again.
+    You can do this by clicking the icon to the right of your web address bar, selecting the "Always allow..."
+    option, then clicking "Done".</p>
+    
+    <img src="popups-blocked.png" alt="Browser dialog window with title Popups blocked, showing options to allow popups or keep blocking them, with Done and Manage buttons at the bottom">
+
+    <p><button id="popover-dismiss">OK, got it</button></p>
+  `;
+
+  document.body.append(popoverElem);
+
+  const dismissBtn = document.getElementById("popover-dismiss");
+  dismissBtn.addEventListener('click', () => {
+    popoverElem.hidePopover();
+  });
+}
+
 // Functions for creating the windows
 
 function openWindow(left, top, width, height, url) {
@@ -74,9 +103,15 @@ function openWindow(left, top, width, height, url) {
     windowFeatures,
   );
 
-  // Store a reference to the window in the windowRefs array
-  windowRefs.push(windowRef);
-
+  if (windowRef === null) {
+    // If the browser is blocking popups, clear out any windows that were able to open
+    // and display instructions to help the user fix this problem
+    closeAllWindows();
+    popoverElem.showPopover()
+  } else {
+    // Store a reference to the window in the windowRefs array
+    windowRefs.push(windowRef);
+  }
 }
 
 function closeAllWindows() {
