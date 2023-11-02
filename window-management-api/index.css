@@ -1,6 +1,5 @@
 html {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.1rem;
 }
 
 body {
@@ -13,9 +12,45 @@ p,
 li {
   letter-spacing: 0.5px;
   line-height: 1.5;
+  font-size: 1.1rem;
 }
 
 hr {
   color: gray;
   border-width: 3px;
+}
+
+/* popover styling */
+
+#block-warning {
+  width: 50%;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 0 20px;
+}
+
+#block-warning h2 {
+  font-size: 1.5rem;
+}
+
+#block-warning p {
+  font-size: 0.9rem;
+}
+
+#block-warning p:last-child {
+  text-align: right;
+}
+
+#block-warning img {
+  display: block;
+  border: 1px solid black;
+  margin: 10px auto 20px;
+}
+
+#block-warning button {
+  padding: 5px 10px;
+}
+
+#block-warning::backdrop {
+  background-color: rgb(0, 0, 0, 0.25);
 }
