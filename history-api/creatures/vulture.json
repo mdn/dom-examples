@@ -1,0 +1,8 @@
+{
+  "description": "Turkey vultures have a keen sense of smell.",
+  "image": {
+    "src": "images/vulture.jpg",
+    "alt": "A turkey vulture"
+  },
+  "name": "Vulture"
+}
