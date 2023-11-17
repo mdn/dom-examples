@@ -1,3 +1,4 @@
+// Update the page content based on the history entry
 function displayContent(state) {
   const description = document.querySelector("#description");
   description.textContent = state.description;
@@ -7,7 +8,7 @@ function displayContent(state) {
   photo.setAttribute("alt", state.image.alt);
 }
 
-// handle click on link
+// Handle click on link
 document.addEventListener("click", async (event) => {
   const creature = event.target.getAttribute("data-creature");
   if (creature) {
@@ -23,16 +24,14 @@ document.addEventListener("click", async (event) => {
   }
 });
 
-// handle forward/back buttons
+// Handle forward/back buttons
 window.addEventListener("popstate", (event) => {
-  // guard against popstate event on chrome init
   if (event.state) {
-    // get the state and change the page content
     displayContent(event.state);
   }
 });
 
-// create state on page init and replace the current history with it
+// Create state on page load and replace the current history with it
 const image = document.querySelector("#photo");
 const initialState = {
   description: document.querySelector("#description").textContent,
