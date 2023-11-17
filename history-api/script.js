@@ -1,5 +1,7 @@
 // Update the page with the new content
 function displayContent(content) {
+  document.title = `Creatures: ${content.name}`;
+  
   const description = document.querySelector("#description");
   description.textContent = content.description;
 
@@ -8,7 +10,9 @@ function displayContent(content) {
   photo.setAttribute("alt", content.image.alt);
 }
 
-// Handle click on link
+// When a link is clicked: update the page for that creature.
+// From a user perspective, this will look like the loading of a new page.
+
 document.addEventListener("click", async (event) => {
   const creature = event.target.getAttribute("data-creature");
   if (creature) {
@@ -17,6 +21,8 @@ document.addEventListener("click", async (event) => {
       const response = await fetch(`creatures/${creature}.json`);
       const json = await response.json();
       displayContent(json);
+      // Add a new entry to the history.
+      // This simulates loading a new page.
       history.pushState(json, "", creature);
     } catch (err) {
       console.error(err);
@@ -26,7 +32,10 @@ document.addEventListener("click", async (event) => {
 
 // Handle forward/back buttons
 window.addEventListener("popstate", (event) => {
+  // If a state has been provided, we have a "simulated" page
+  // and we update the current page.
   if (event.state) {
+   // Simulate the loading of the previous page
     displayContent(event.state);
   }
 });
