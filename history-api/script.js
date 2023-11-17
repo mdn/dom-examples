@@ -9,11 +9,11 @@ function displayContent(state) {
 
 // handle click on link
 document.addEventListener("click", async (event) => {
-  const cat = event.target.getAttribute("data-cat");
-  if (cat) {
+  const creature = event.target.getAttribute("data-creature");
+  if (creature) {
     event.preventDefault();
     try {
-      const response = await fetch(`${cat}.json`);
+      const response = await fetch(`creatures/${creature}.json`);
       const json = await response.json();
       displayContent(json);
       history.pushState(json, "", "");
