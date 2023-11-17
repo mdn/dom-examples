@@ -17,7 +17,7 @@ document.addEventListener("click", async (event) => {
       const response = await fetch(`creatures/${creature}.json`);
       const json = await response.json();
       displayContent(json);
-      history.pushState(json, "", "");
+      history.pushState(json, "", creature);
     } catch (err) {
       console.error(err);
     }
