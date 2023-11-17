@@ -1,5 +1,8 @@
 {
   "description": "Painted turtles have anti-freeze in their blood.",
-  "photo": "images/turtle.jpg",
+  "image": {
+    "src": "images/turtle.jpg",
+    "alt": "A painted turtle"
+  },
   "name": "Turtle"
 }
