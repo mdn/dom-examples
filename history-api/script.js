@@ -28,13 +28,12 @@ window.addEventListener("popstate", (event) => {
   // guard against popstate event on chrome init
   if (event.state) {
     // get the state and change the page content
-    displayContent(event.state, true);
+    displayContent(event.state);
   }
 });
 
-const image = document.querySelector("#photo");
-
 // create state on page init and replace the current history with it
+const image = document.querySelector("#photo");
 const initialState = {
   description: document.querySelector("#description").textContent,
   image: {
