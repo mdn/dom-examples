@@ -1,7 +1,7 @@
 // Update the page with the new content
 function displayContent(content) {
   document.title = `Creatures: ${content.name}`;
-  
+
   const description = document.querySelector("#description");
   description.textContent = content.description;
 
@@ -35,7 +35,7 @@ window.addEventListener("popstate", (event) => {
   // If a state has been provided, we have a "simulated" page
   // and we update the current page.
   if (event.state) {
-   // Simulate the loading of the previous page
+    // Simulate the loading of the previous page
     displayContent(event.state);
   }
 });
@@ -48,5 +48,6 @@ const initialState = {
     src: image.getAttribute("src"),
     alt: image.getAttribute("alt"),
   },
+  name: "Home",
 };
 history.replaceState(initialState, "", document.location.href);
