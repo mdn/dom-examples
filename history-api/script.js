@@ -1,11 +1,11 @@
-// Update the page content based on the history entry
-function displayContent(state) {
+// Update the page with the new content
+function displayContent(content) {
   const description = document.querySelector("#description");
-  description.textContent = state.description;
+  description.textContent = content.description;
 
   const photo = document.querySelector("#photo");
-  photo.setAttribute("src", state.image.src);
-  photo.setAttribute("alt", state.image.alt);
+  photo.setAttribute("src", content.image.src);
+  photo.setAttribute("alt", content.image.alt);
 }
 
 // Handle click on link
