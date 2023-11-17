@@ -22,7 +22,7 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "fullscreen-api" directory is for examples and demos of the [Fullscreen API](https://wiki.developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API). Run the [example live](https://mdn.github.io/dom-examples/fullscreen-api/).
 
-- The "history-api" directory contains an example that demonstrates the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). [View the demo live](https://mdn.github.io/history-api/).
+- The "history-api" directory contains an example that demonstrates the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). [View the demo live](https://mdn.github.io/dom-examples/history-api/).
 
 - The "indexeddb-api" directory contains a demo for the [IndexedDB API](https://mdn.github.io/dom-examples/indexeddb-api/index.html).
 
