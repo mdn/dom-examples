@@ -1,24 +1,20 @@
-// set up basic variables for app
-
+// Set up basic variables for app
 const record = document.querySelector('.record');
 const stop = document.querySelector('.stop');
 const soundClips = document.querySelector('.sound-clips');
 const canvas = document.querySelector('.visualizer');
 const mainSection = document.querySelector('.main-controls');
 
-// disable stop button while not recording
-
+// Disable stop button while not recording
 stop.disabled = true;
 
-// visualiser setup - create web audio api context and canvas
-
+// Visualiser setup - create web audio api context and canvas
 let audioCtx;
 const canvasCtx = canvas.getContext("2d");
 
-//main block for doing the audio recording
-
+// Main block for doing the audio recording
 if (navigator.mediaDevices.getUserMedia) {
-  console.log('getUserMedia supported.');
+  console.log('The mediaDevices.getUserMedia() media is supported.');
 
   const constraints = { audio: true };
   let chunks = [];
@@ -31,7 +27,7 @@ if (navigator.mediaDevices.getUserMedia) {
     record.onclick = function() {
       mediaRecorder.start();
       console.log(mediaRecorder.state);
-      console.log("recorder started");
+      console.log("Recorder started.");
       record.style.background = "red";
 
       stop.disabled = false;
@@ -41,17 +37,16 @@ if (navigator.mediaDevices.getUserMedia) {
     stop.onclick = function() {
       mediaRecorder.stop();
       console.log(mediaRecorder.state);
-      console.log("recorder stopped");
+      console.log("Recorder stopped.");
       record.style.background = "";
       record.style.color = "";
-      // mediaRecorder.requestData();
 
       stop.disabled = true;
       record.disabled = false;
     }
 
     mediaRecorder.onstop = function(e) {
-      console.log("data available after MediaRecorder.stop() called.");
+      console.log("Last data to read (after MediaRecorder.stop() called).");
 
       const clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
 
@@ -110,7 +105,7 @@ if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
 
 } else {
-   console.log('getUserMedia not supported on your browser!');
+   console.log('MediaDevices.getUserMedia() not supported on your browser!');
 }
 
 function visualize(stream) {
@@ -126,7 +121,6 @@ function visualize(stream) {
   const dataArray = new Uint8Array(bufferLength);
 
   source.connect(analyser);
-  //analyser.connect(audioCtx.destination);
 
   draw()
 
