@@ -14,7 +14,7 @@ const canvasCtx = canvas.getContext("2d");
 
 // Main block for doing the audio recording
 if (navigator.mediaDevices.getUserMedia) {
-  console.log('The mediaDevices.getUserMedia() media is supported.');
+  console.log('The mediaDevices.getUserMedia() method is supported.');
 
   const constraints = { audio: true };
   let chunks = [];
