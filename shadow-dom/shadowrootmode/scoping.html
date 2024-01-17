@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSS scoping in declarative shadow DOM</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <p hidden>⛔ Your browser doesn't support <code>shadowrootmode</code> attribute yet.</p>
+    <article>
+      <style>
+        p {
+          padding: 8px;
+          background-color: wheat;
+        }
+      </style>
+      <p>I'm in the DOM.</p>
+    </article>
+    <article>
+      <template shadowrootmode="open">
+        <style>
+          p {
+            padding: 8px;
+            background-color: plum;
+          }
+        </style>
+        <p>I'm in the Shadow DOM.</p>
+      </template>
+    </article>
+
+    <script>
+      const isShadowRootModeSupported = HTMLTemplateElement.prototype.hasOwnProperty('shadowRootMode');
+
+      document.querySelector('p[hidden]').toggleAttribute('hidden', isShadowRootModeSupported);
+    </script>
+    <!--
+      Used in:
+      - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
+    -->
+  </body>
+</html>
