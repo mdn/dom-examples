@@ -44,7 +44,7 @@
       };
 
       worker.onerror = function (error) {
-        console.log(`Worker error: ${error.message} \n`);
+        console.log("Worker error: "+error.message+"\n");
         throw error;
       };
 
