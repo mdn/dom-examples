@@ -17,6 +17,7 @@
           <li>"RSA-PSS"</li>
           <li>"ECDSA"</li>
           <li>"HMAC"</li>
+          <li>"ED25519" (See <a href="https://blogs.igalia.com/jfernandez/2023/06/20/secure-curves-in-the-web-cryptography-api/">Secure Curves in the Web Cryptography API</a>)</li>
         </ul>
         <hr/>
         <p>Each example has four components:</p>
@@ -91,6 +92,20 @@
             <input class="verify-button" type="button" value="Verify">
           </section>
         </section>
+
+        <section class="sign-verify ed25519">
+          <h2 class="sign-verify-heading">ED25519</h2>
+          <section class="sign-verify-controls">
+            <div class="message-control">
+              <label for="ed25519-message">Enter a message to sign:</label>
+              <input type="text" id="ed25519-message" name="message" size="25"
+                     value="The lion roars near dawn">
+            </div>
+            <div class="signature">Signature:<span class="signature-value"></span></div>
+            <input class="sign-button" type="button" value="Sign">
+            <input class="verify-button" type="button" value="Verify">
+          </section>
+        </section>
       </section>
     </main>
 
@@ -99,4 +114,5 @@
   <script src="rsa-pss.js"></script>
   <script src="ecdsa.js"></script>
   <script src="hmac.js"></script>
+  <script src="ed25519.js"></script>
 </html>
