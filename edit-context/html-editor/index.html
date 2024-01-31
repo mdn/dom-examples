@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Context API: HTML editor demo</title>
+
+  <style>
+    html,
+    body {
+      font-size: .9rem;
+      font-family: consolas, monospace;
+      margin: 0;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    body {
+      padding: 1rem;
+      display: grid;
+      grid-template-rows: 1fr min-content;
+      gap: 1rem;
+      place-items: center;
+    }
+
+    #html-editor {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border-radius: .5rem;
+      padding: 1rem;
+      overflow: auto;
+      white-space: pre;
+      tab-size: 2;
+      caret-color: red;
+      background: #000;
+      line-height: 1.6;
+      transition: line-height .2s;
+      color: red;
+    }
+
+    #html-editor.debug {
+      line-height: 2.4;
+    }
+
+    #html-editor::selection {
+      color: white;
+      background: red;
+    }
+
+    #html-editor.is-composing {
+      box-shadow: 0 0 0 .25rem red;
+    }
+
+    [data-token-pos] {
+      margin: 0;
+      transition: margin .2s;
+    }
+
+    .debug [data-token-pos] {
+      position: relative;
+      margin: 0 .2rem;
+    }
+
+    .debug [data-token-pos]::before {
+      position: absolute;
+      content: attr(data-token-pos);
+      color: #ddd;
+      font-size: .5rem;
+      top: -1rem;
+      left: 0;
+      line-height: 1;
+      padding: .1rem .1rem 1rem .1rem;
+      background-image:
+        linear-gradient(to bottom, #999 0 1px, transparent 1px .7rem, #999 .7rem calc(.7rem + 1px), transparent 0),
+        linear-gradient(to right, #999 0 1px, transparent 1px calc(100% - 1px), #999 0),
+        linear-gradient(to bottom, #333 0 .7rem, transparent 0),
+        linear-gradient(to right, #999 0 1px, transparent 0);
+      background-size: 100% 100%, 100% .7rem, 100% 100%, 100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    .token-openTagStart,
+    .token-openTagEnd,
+    .token-closeTagStart,
+    .token-closeTagEnd,
+    .token-selfClose {
+      background: rgb(7 53 92);
+      margin: 0 2px;
+      color: white;
+      border-radius: .25rem;
+    }
+
+    .token-equal {
+      color: white;
+    }
+
+    .token-tagName {
+      font-weight: bold;
+      color: rgb(117, 186, 242);
+    }
+
+    .token-attributeName {
+      color: rgb(207, 81, 198);
+    }
+
+    .token-attributeValue {
+      font-style: italic;
+      color: rgb(127 230 127);
+      border: 1px dashed #8c8c8c;
+      border-width: 1px 0 1px 0;
+    }
+
+    .token-quoteStart,
+    .token-quoteEnd {
+      font-weight: bold;
+      color: rgb(127 230 127);
+      border: 1px solid #8c8c8c;
+      border-width: 1px 0 1px 1px;
+      border-radius: .25rem 0 0 .25rem;
+    }
+
+    .token-quoteEnd {
+      border-width: 1px 1px 1px 0;
+      border-radius: 0 .25rem .25rem 0;
+    }
+
+    .token-text {
+      color: #6a6a6a;
+      padding: 0 .25rem;
+    }
+
+
+    ::highlight(ime-solid-thin) {
+      text-decoration: underline 1px;
+    }
+
+    ::highlight(ime-solid-thick) {
+      text-decoration: underline 2px;
+    }
+
+    ::highlight(ime-double-thin) {
+      text-decoration: underline double 1px;
+    }
+
+    ::highlight(ime-double-thick) {
+      text-decoration: underline double 2px;
+    }
+
+    ::highlight(ime-dotted-thin) {
+      text-decoration: underline dotted 1px;
+    }
+
+    ::highlight(ime-dotted-thick) {
+      text-decoration: underline dotted 2px;
+    }
+
+    ::highlight(ime-dashed-thin) {
+      text-decoration: underline dashed 1px;
+    }
+
+    ::highlight(ime-dashed-thick) {
+      text-decoration: underline dashed 2px;
+    }
+
+    ::highlight(ime-wavy-thin) {
+      text-decoration: underline wavy 1px;
+    }
+
+    ::highlight(ime-wavy-thick) {
+      text-decoration: underline wavy 2px;
+    }
+
+    ::highlight(ime-squiggle-thin) {
+      text-decoration: underline wavy 1px;
+    }
+
+    ::highlight(ime-squiggle-thick) {
+      text-decoration: underline wavy 2px;
+    }
+
+    .controls label {
+      display: flex;
+      align-items: center;
+    }
+
+    .debug .debug-overlay {
+      position: absolute;
+      background: rgba(255, 0, 0, .2);
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- The editor element -->
+  <div id="html-editor" spellcheck="false"></div>
+
+  <!-- Some debug controls -->
+  <div class="controls">
+    <label><input type="checkbox" id="debug">Debug</label>
+  </div>
+
+  <script type="module">
+    import { tokenizeHTML } from "./tokenizer.js";
+
+    const IS_EDIT_CONTEXT_SUPPORTED = 'EditContext' in window;
+    const IS_CUSTOM_HIGHLIGHT_SUPPORTED = 'Highlight' in window;
+
+    // The editor element.
+    const editorEl = document.getElementById("html-editor");
+
+    // The current tokens from the html text.
+    let currentTokens = [];
+
+    let isDebug = false;
+    const debugCheckbox = document.querySelector(".controls #debug");
+    debugCheckbox.addEventListener("change", e => {
+      editorEl.classList.toggle("debug", e.target.checked);
+      isDebug = e.target.checked;
+      render();
+    });
+
+    // Instances of CSS custom Highlight objects, used to render
+    // the IME composition text formats.
+    const imeHighlights = {
+      "solid-thin": null,
+      "solid-thick": null,
+      "double-thin": null,
+      "double-thick": null,
+      "dotted-thin": null,
+      "dotted-thick": null,
+      "dashed-thin": null,
+      "dashed-thick": null,
+      "wavy-thin": null,
+      "wavy-thick": null,
+      "squiggle-thin": null,
+      "squiggle-thick": null
+    };
+    if (IS_CUSTOM_HIGHLIGHT_SUPPORTED) {
+      for (const [key, value] of Object.entries(imeHighlights)) {
+        imeHighlights[key] = new Highlight();
+        CSS.highlights.set(`ime-${key}`, imeHighlights[key]);
+      }
+    } else {
+      console.warn("Custom highlights are not supported in this browser. IME formats will not be rendered.");
+    }
+
+    (function () {
+      if (!IS_EDIT_CONTEXT_SUPPORTED) {
+        editorEl.textContent = "Sorry, your browser doesn't support the EditContext API. This demo will not work.";
+        return;
+      }
+
+      // Instantiate the EditContext object.
+      const editContext = new EditContext({
+        text: "<html>\n  <body id=foo>\n    <h1 id='header'>Cool Title</h1>\n    <p class=\"wow\">hello<br/>How are you? test</p>\n  </body>\n</html>"
+      });
+
+      // Attach the EditContext object to the editor element.
+      // This makes the element focusable and able to receive text input.
+      editorEl.editContext = editContext;
+
+      // Update the control bounds (i.e. where the editor is on the screen)
+      // now, and when the window is resized.
+      // This helps the OS position the IME composition window correctly.
+      function updateControlBounds() {
+        const editorBounds = editorEl.getBoundingClientRect();
+        editContext.updateControlBounds(editorBounds);
+      }
+      updateControlBounds();
+      window.addEventListener("resize", updateControlBounds);
+
+      // Update the selection and selection bounds in the EditContext object.
+      // This helps the OS position the IME composition window correctly.
+      function updateSelection(start, end) {
+        editContext.updateSelection(start, end);
+        // Get the bounds of the selection.
+        editContext.updateSelectionBounds(document.getSelection().getRangeAt(0).getBoundingClientRect());
+      }
+
+      // The render function is used to update the view of the editor.
+      // The EditContext object is our "model", and the editorEl is our "view".
+      // The render function's job is to update the view when the model changes.
+      function render(text = editContext.text, selectionStart = editContext.selectionStart, selectionEnd = editContext.selectionEnd) {
+        // Empty the editor. We're re-rendering everything.
+        editorEl.innerHTML = "";
+
+        // Tokenize the text.
+        currentTokens = tokenizeHTML(text);
+
+        // Render each token.
+        for (const token of currentTokens) {
+          const span = document.createElement("span");
+          span.classList.add(`token-${token.type}`);
+          span.textContent = token.value;
+          span.dataset.tokenPos = token.pos;
+          editorEl.appendChild(span);
+
+          // Store the node in the token so we can find it later.
+          token.node = span;
+        }
+
+        // Move the selection to the correct location.
+        // It was lost when we updated the DOM.
+        // The EditContext API gives us the selection as text offsets.
+        // Convert it into a DOM selection.
+        const { anchorNode, anchorOffset, extentNode, extentOffset } = convertFromOffsetsToSelection(selectionStart, selectionEnd);
+        document.getSelection().setBaseAndExtent(anchorNode, anchorOffset, extentNode, extentOffset);
+
+        // Render the character bounds in debug mode.
+        if (isDebug) {
+          const bounds = editContext.characterBounds();
+          for (const bound of bounds) {
+            const overlay = document.createElement("div");
+            overlay.classList.add("debug-overlay");
+            overlay.style.top = `${bound.top}px`;
+            overlay.style.left = `${bound.left}px`;
+            overlay.style.width = `${bound.width}px`;
+            overlay.style.height = `${bound.height}px`;
+            editorEl.appendChild(overlay);
+          }
+        }
+      }
+
+      // Listen to the EditContext's textupdate event.
+      // This tells us when text input happens. We use it to re-render the view.
+      editContext.addEventListener("textupdate", e => {
+        render(editContext.text, e.selectionStart, e.selectionEnd);
+      });
+
+      // Visually show when we're composing text, like when using an IME,
+      // or voice dictation.
+      editContext.addEventListener("compositionstart", e => {
+        editorEl.classList.add("is-composing");
+      });
+      editContext.addEventListener("compositionend", e => {
+        editorEl.classList.remove("is-composing");
+      });
+
+      // Update the character bounds when the EditContext needs it.
+      editContext.addEventListener("characterboundsupdate", e => {
+        const tokenNodes = convertFromOffsetsToListOfRenderedTokenNodes(e.rangeStart, e.rangeEnd);
+
+        const charBounds = tokenNodes.map(({ node, nodeOffset, charOffset }) => {
+          const range = document.createRange();
+          range.setStart(node.firstChild, charOffset - nodeOffset);
+          range.setEnd(node.firstChild, charOffset - nodeOffset + 1);
+          return range.getBoundingClientRect();
+        });
+
+        editContext.updateCharacterBounds(e.rangeStart, charBounds);
+      });
+
+      // Draw IME composition text formats if needed.
+      editContext.addEventListener("textformatupdate", e => {
+        const formats = e.getTextFormats();
+
+        for (const format of formats) {
+          const { rangeStart, rangeEnd, underlineStyle, underlineThickness } = format;
+
+          // Find the nodes in the view that are in the range.
+          const { anchorNode, anchorOffset, extentNode, extentOffset } = convertFromOffsetsToSelection(rangeStart, rangeEnd);
+          const highlight = imeHighlights[`${format.underlineStyle.toLowerCase()}-${format.underlineThickness.toLowerCase()}`];
+          if (highlight) {
+            const range = document.createRange();
+            range.setStart(anchorNode, anchorOffset);
+            range.setEnd(extentNode, extentOffset);
+            highlight.add(range);
+          }
+        }
+      });
+
+      // Handle key presses that are not already handled by the EditContext.
+      editorEl.addEventListener("keydown", e => {
+        if (e.key === "Tab") {
+          e.preventDefault();
+          editContext.updateText(
+            editContext.selectionStart,
+            editContext.selectionEnd,
+            "\t"
+          );
+          updateSelection(editContext.selectionStart + 1, editContext.selectionStart + 1);
+          render();
+        } else if (e.key === "Enter") {
+          editContext.updateText(
+            editContext.selectionStart,
+            editContext.selectionEnd,
+            "\n"
+          );
+          updateSelection(editContext.selectionStart + 1, editContext.selectionStart + 1);
+          render();
+        }
+      });
+
+      // Listen to selectionchange events to let the EditContext know where it is.
+      document.addEventListener("selectionchange", () => {
+        const selection = document.getSelection();
+        const offsets = convertFromSelectionToOffsets(selection);
+        if (offsets) {
+          updateSelection(offsets.start, offsets.end);
+        }
+      });
+
+      // Find the tokens in currentTokens that are in the given range and return
+      // the corresponding nodes.
+      function convertFromOffsetsToListOfRenderedTokenNodes(start, end) {
+        const tokenNodes = [];
+
+        for (let offset = start; offset < end; offset++) {
+          const token = currentTokens.find(token => token.pos <= offset && token.pos + token.value.length > offset);
+          if (token) {
+            tokenNodes.push({ node: token.node, nodeOffset: token.pos, charOffset: offset });
+          }
+        }
+
+        return tokenNodes;
+      }
+
+      // The EditContext object only knows about a plain text string and about
+      // character offsets. However, our editor view renders the text by using
+      // DOM nodes. So we sometimes need to convert between the two.
+      // The two utility functions below convert between selection objects and
+      // text offsets.
+      function convertFromSelectionToOffsets(selection) {
+        const treeWalker = document.createTreeWalker(editorEl, NodeFilter.SHOW_TEXT);
+
+        let anchorNodeFound = false;
+        let extentNodeFound = false;
+        let anchorOffset = 0;
+        let extentOffset = 0;
+
+        while (treeWalker.nextNode()) {
+          const node = treeWalker.currentNode;
+          if (node === selection.anchorNode) {
+            anchorNodeFound = true;
+            anchorOffset += selection.anchorOffset;
+          }
+
+          if (node === selection.extentNode) {
+            extentNodeFound = true;
+            extentOffset += selection.extentOffset;
+          }
+
+          if (!anchorNodeFound) {
+            anchorOffset += node.textContent.length;
+          }
+          if (!extentNodeFound) {
+            extentOffset += node.textContent.length;
+          }
+        }
+
+        if (!anchorNodeFound || !extentNodeFound) {
+          return null;
+        }
+
+        if (anchorOffset > extentOffset) {
+          [anchorOffset, extentOffset] = [extentOffset, anchorOffset];
+        }
+
+        return { start: anchorOffset, end: extentOffset };
+      }
+
+      function convertFromOffsetsToSelection(start, end) {
+        const treeWalker = document.createTreeWalker(editorEl, NodeFilter.SHOW_TEXT);
+
+        let offset = 0;
+        let anchorNode = null;
+        let anchorOffset = 0;
+        let extentNode = null;
+        let extentOffset = 0;
+
+        while (treeWalker.nextNode()) {
+          const node = treeWalker.currentNode;
+
+          if (!anchorNode && offset + node.textContent.length >= start) {
+            anchorNode = node;
+            anchorOffset = start - offset;
+          }
+
+          if (offset + node.textContent.length >= end) {
+            extentNode = node;
+            extentOffset = end - offset;
+            break;
+          }
+
+          offset += node.textContent.length;
+        }
+
+        return { anchorNode, anchorOffset, extentNode, extentOffset };
+      }
+
+      // Render the initial view.
+      render();
+    })();
+  </script>
+</body>
+
+</html>
