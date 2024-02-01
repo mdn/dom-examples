@@ -140,14 +140,6 @@
       text-decoration: underline 2px;
     }
 
-    ::highlight(ime-double-thin) {
-      text-decoration: underline double 1px;
-    }
-
-    ::highlight(ime-double-thick) {
-      text-decoration: underline double 2px;
-    }
-
     ::highlight(ime-dotted-thin) {
       text-decoration: underline dotted 1px;
     }
@@ -228,8 +220,6 @@
     const imeHighlights = {
       "solid-thin": null,
       "solid-thick": null,
-      "double-thin": null,
-      "double-thick": null,
       "dotted-thin": null,
       "dotted-thick": null,
       "dashed-thin": null,
@@ -375,22 +365,17 @@
 
       // Handle key presses that are not already handled by the EditContext.
       editorEl.addEventListener("keydown", e => {
+        const start = Math.min(editContext.selectionStart, editContext.selectionEnd);
+        const end = Math.max(editContext.selectionStart, editContext.selectionEnd);
+
         if (e.key === "Tab") {
           e.preventDefault();
-          editContext.updateText(
-            editContext.selectionStart,
-            editContext.selectionEnd,
-            "\t"
-          );
-          updateSelection(editContext.selectionStart + 1, editContext.selectionStart + 1);
+          editContext.updateText(start, end, "\t");
+          updateSelection(start + 1, start + 1);
           render();
         } else if (e.key === "Enter") {
-          editContext.updateText(
-            editContext.selectionStart,
-            editContext.selectionEnd,
-            "\n"
-          );
-          updateSelection(editContext.selectionStart + 1, editContext.selectionStart + 1);
+          editContext.updateText(start, end, "\n");
+          updateSelection(start + 1, start + 1);
           render();
         }
       });
@@ -456,14 +441,14 @@
           return null;
         }
 
-        if (anchorOffset > extentOffset) {
-          [anchorOffset, extentOffset] = [extentOffset, anchorOffset];
-        }
-
         return { start: anchorOffset, end: extentOffset };
       }
 
       function convertFromOffsetsToSelection(start, end) {
+        const isBackwards = start > end;
+        const orderedStart = isBackwards ? end : start;
+        const orderedEnd = isBackwards ? start : end;
+
         const treeWalker = document.createTreeWalker(editorEl, NodeFilter.SHOW_TEXT);
 
         let offset = 0;
@@ -475,25 +460,31 @@
         while (treeWalker.nextNode()) {
           const node = treeWalker.currentNode;
 
-          if (!anchorNode && offset + node.textContent.length >= start) {
+          if (!anchorNode && offset + node.textContent.length >= orderedStart) {
             anchorNode = node;
-            anchorOffset = start - offset;
+            anchorOffset = orderedStart - offset;
           }
 
-          if (offset + node.textContent.length >= end) {
+          if (offset + node.textContent.length >= orderedEnd) {
             extentNode = node;
-            extentOffset = end - offset;
+            extentOffset = orderedEnd - offset;
             break;
           }
 
           offset += node.textContent.length;
         }
 
-        return { anchorNode, anchorOffset, extentNode, extentOffset };
+        return {
+          anchorNode: isBackwards ? extentNode : anchorNode,
+          anchorOffset: isBackwards ? extentOffset : anchorOffset,
+          extentNode: isBackwards ? anchorNode : extentNode,
+          extentOffset: isBackwards ? anchorOffset : extentOffset
+        };
       }
 
       // Render the initial view.
       render();
+      setInterval(render, 1000);
     })();
   </script>
 </body>
