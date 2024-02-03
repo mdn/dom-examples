@@ -1,11 +1,11 @@
 const addResourcesToCache = async (resources) => {
   const cache = await caches.open('v1');
-  await cache.addAll(resources);
+  cache.addAll(resources).catch(err => console.error(err, err.stack));
 };
 
 const putInCache = async (request, response) => {
   const cache = await caches.open('v1');
-  await cache.put(request, response);
+  cache.put(request, response).catch(err => console.error(err, err.stack));
 };
 
 const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
