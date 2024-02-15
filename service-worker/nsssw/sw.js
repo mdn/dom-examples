@@ -1,6 +1,6 @@
 let cache;
 async function cacheOpen () {
-    return cache ?? caches.open("v1")
+    return cache ?? caches.open("volcanos")
                           .then(cash => cache = cash)
                           .catch(responseError);
 }
