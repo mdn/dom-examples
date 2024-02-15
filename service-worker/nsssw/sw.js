@@ -10,7 +10,7 @@ self.addEventListener("install", evt => {
              .catch(responseError)
     ));
 });
-self.addEventListener("fetch", async evt => {
+self.addEventListener("fetch", evt => {
     const request = evt.request;
     evt.respondWith(cacheOpen().then(() =>
         cache.match(request).then(match =>
