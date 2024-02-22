@@ -16,6 +16,11 @@ const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
   }
 
   // Next try to use the preloaded response, if it's there
+  // NOTE: Chrome throws errors regarding preloadResponse, see:
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=1420515
+  // https://github.com/mdn/dom-examples/issues/145
+  // To avoid those errors, remove or comment out this block of preloadResponse
+  // code along with enableNavigationPreload() and the "activate" listener.
   const preloadResponse = await preloadResponsePromise;
   if (preloadResponse) {
     console.info('using preload response', preloadResponse);
