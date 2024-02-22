@@ -10,8 +10,13 @@ h1 {
   font-family: "Bevan", cursive;
   font-size: 4rem;
   letter-spacing: 0.2rem;
-  text-shadow: 1px 1px 1px #eee4fe, 2px 2px 1px #eee4fe, 3px 3px 1px #7b62ae,
-    4px 4px 1px #7b62ae, 5px 5px 1px #261758, 6px 6px 1px #261758;
+  text-shadow:
+    1px 1px 1px #eee4fe,
+    2px 2px 1px #eee4fe,
+    3px 3px 1px #7b62ae,
+    4px 4px 1px #7b62ae,
+    5px 5px 1px #261758,
+    6px 6px 1px #261758;
 }
 
 table {

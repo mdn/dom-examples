@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   margin: 0;
 }
 
@@ -12,14 +13,15 @@ body {
   overflow: hidden;
 }
 
-h1, p {
+h1,
+p {
   font-family: sans-serif;
   text-align: center;
 }
 
 div p {
   padding: 20px;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 div {
