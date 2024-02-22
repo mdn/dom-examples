@@ -54,6 +54,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "server-sent-events" directory contains a very basic SSE demo that uses PHP to create the server. You can find more information in our [Using server-sent events](https://developer.mozilla.org/docs/Web/API/Server-sent_events/Using_server-sent_events) article. To run the demo you'll need to serve the files from a server that supports PHP; [MAMP](https://www.mamp.info/en/) is a good PHP test server environment.
 
+- The "service-worker/simple-service-worker" directory contains a simple demo showing how to use the [`Service Worker API`](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) to manage your page's cache. [Run the demo live](https://mdn.github.io/dom-examples/service-worker/simple-service-worker/).
+
 - The "sourcebuffer" directory contains a basic demo to show usage of the [`SourceBuffer`](https://developer.mozilla.org/docs/Web/API/SourceBuffer) interface. [Run the demo live](https://mdn.github.io/dom-examples/sourcebuffer/).
 
 - The "streams" directory contains demos of the Streams API for using low-level I/O processing.
