@@ -445,10 +445,6 @@
       }
 
       function convertFromOffsetsToSelection(start, end) {
-        const isBackwards = start > end;
-        const orderedStart = isBackwards ? end : start;
-        const orderedEnd = isBackwards ? start : end;
-
         const treeWalker = document.createTreeWalker(editorEl, NodeFilter.SHOW_TEXT);
 
         let offset = 0;
@@ -460,26 +456,24 @@
         while (treeWalker.nextNode()) {
           const node = treeWalker.currentNode;
 
-          if (!anchorNode && offset + node.textContent.length >= orderedStart) {
+          if (!anchorNode && offset + node.textContent.length >= start) {
             anchorNode = node;
-            anchorOffset = orderedStart - offset;
+            anchorOffset = start - offset;
           }
 
-          if (offset + node.textContent.length >= orderedEnd) {
+          if (!extentNode && offset + node.textContent.length >= end) {
             extentNode = node;
-            extentOffset = orderedEnd - offset;
+            extentOffset = end - offset;
+          }
+
+          if (anchorNode && extentNode) {
             break;
           }
 
           offset += node.textContent.length;
         }
 
-        return {
-          anchorNode: isBackwards ? extentNode : anchorNode,
-          anchorOffset: isBackwards ? extentOffset : anchorOffset,
-          extentNode: isBackwards ? anchorNode : extentNode,
-          extentOffset: isBackwards ? anchorOffset : extentOffset
-        };
+        return { anchorNode, anchorOffset, extentNode, extentOffset };
       }
 
       // Render the initial view.
