@@ -25,13 +25,7 @@
     signatureValue.classList.remove("valid", "invalid");
 
     let encoded = getMessageEncoding();
-    signature = await window.crypto.subtle.sign(
-      {
-        name: "Ed25519"
-      },
-      privateKey,
-      encoded
-    );
+    signature = await window.crypto.subtle.sign("Ed25519", privateKey, encoded);
 
     signatureValue.classList.add('fade-in');
     signatureValue.addEventListener('animationend', () => {
@@ -52,9 +46,7 @@
 
     let encoded = getMessageEncoding();
     let result = await window.crypto.subtle.verify(
-      {
-        name: "Ed25519",
-      },
+      "Ed25519",
       publicKey,
       signature,
       encoded
@@ -68,9 +60,7 @@
   on the "Sign" and "Verify" buttons.
   */
   window.crypto.subtle.generateKey(
-    {
-      name: "Ed25519",
-    },
+    "Ed25519",
     true,
     ["sign", "verify"]
   ).then((keyPair) => {
