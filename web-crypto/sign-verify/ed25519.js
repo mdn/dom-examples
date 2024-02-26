@@ -1,5 +1,4 @@
 (() => {
-
   /*
   Store the calculated signature here, so we can verify it later.
   */
@@ -27,9 +26,9 @@
     let encoded = getMessageEncoding();
     signature = await window.crypto.subtle.sign("Ed25519", privateKey, encoded);
 
-    signatureValue.classList.add('fade-in');
-    signatureValue.addEventListener('animationend', () => {
-      signatureValue.classList.remove('fade-in');
+    signatureValue.classList.add("fade-in");
+    signatureValue.addEventListener("animationend", () => {
+      signatureValue.classList.remove("fade-in");
     });
     let buffer = new Uint8Array(signature, 0, 5);
     signatureValue.textContent = `${buffer}...[${signature.byteLength} bytes total]`;
@@ -59,20 +58,17 @@
   Generate a sign/verify key, then set up event listeners
   on the "Sign" and "Verify" buttons.
   */
-  window.crypto.subtle.generateKey(
-    "Ed25519",
-    true,
-    ["sign", "verify"]
-  ).then((keyPair) => {
-    const signButton = document.querySelector(".ed25519 .sign-button");
-    signButton.addEventListener("click", () => {
-      signMessage(keyPair.privateKey);
-    });
+  window.crypto.subtle
+    .generateKey("Ed25519", true, ["sign", "verify"])
+    .then((keyPair) => {
+      const signButton = document.querySelector(".ed25519 .sign-button");
+      signButton.addEventListener("click", () => {
+        signMessage(keyPair.privateKey);
+      });
 
-    const verifyButton = document.querySelector(".ed25519 .verify-button");
-    verifyButton.addEventListener("click", () => {
-      verifyMessage(keyPair.publicKey);
+      const verifyButton = document.querySelector(".ed25519 .verify-button");
+      verifyButton.addEventListener("click", () => {
+        verifyMessage(keyPair.publicKey);
+      });
     });
-  });
-
 })();
