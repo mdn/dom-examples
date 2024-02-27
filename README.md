@@ -2,6 +2,13 @@
 
 Code examples that accompany various MDN DOM and Web API documentation pages.
 
+> [!NOTE]
+> You can include an example directly in MDN pages using [`{{EmbedLiveSample()}}` macros](https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Page_structures/Macros/Commonly_used_macros#code_samples) or regular Markdown code blocks.
+> These methods are simpler to maintain as the code lives beside the rest of the content.
+> Only add examples to this repository if your example doesn't easily run on MDN pages for technical or security reasons.
+
+## Repository contents
+
 - The "abort-api" directory contains an example of how to use the "Abort API" (aka [AbortSignal](https://dom.spec.whatwg.org/#interface-AbortSignal) and [AbortController](https://dom.spec.whatwg.org/#interface-abortcontroller)). [Run the example live](https://mdn.github.io/dom-examples/abort-api/).
 
 - The "audiocontext-setsinkid" directory contains an example of how to use the [`AudioContext.setSinkId()`](https://developer.mozilla.org/docs/Web/API/AudioContext/setSinkId) method and related features. [Run the example live](https://mdn.github.io/dom-examples/audiocontext-setsinkid/).
@@ -44,7 +51,7 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "popover-api" directory is for examples and demos of the [Popover API](https://developer.mozilla.org/docs/Web/API/Popover_API) standard. Go to the [Popover API demo index](popover-api/) to see what's available.
 
-- The "reporting-api" directory contains a couple of basic demos to show usage of the Reprting API. You can find more explanation of how the API works in the main MDN [Reporting API](https://developer.mozilla.org/docs/Web/API/Reporting_API) docs. [Run the deprecation report demo live](https://mdn.github.io/dom-examples/reporting-api/deprecation_report.html).
+- The "reporting-api" directory contains a couple of basic demos to show usage of the Reporting API. You can find more explanation of how the API works in the main MDN [Reporting API](https://developer.mozilla.org/docs/Web/API/Reporting_API) docs. [Run the deprecation report demo live](https://mdn.github.io/dom-examples/reporting-api/deprecation_report.html).
 
 - The "resize-event" directory contains a basic demo to show how you can use the [resize event](https://developer.mozilla.org/docs/Web/API/Window/resize_event). Resize the browser window either by height or width to see the size of your current window. [Run the demo live](https://mdn.github.io/dom-examples/resize-event).
 
@@ -79,3 +86,17 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 - The "webgpu-render-demo" directory contains an example that demonstrates basic usage of the [WebGPU API](https://developer.mozilla.org/docs/Web/API/WebGPU_API) render pipeline, which is used for rendering high-performance graphics via the GPU. [View the demo live](https://mdn.github.io/dom-examples/webgpu-render-demo/).
 
 - The "window-management-api" directory contains a basic demo to show usage of the [Window Management API](https://developer.mozilla.org/docs/Web/API/Window_Management_API). [View the demo live](https://mdn.github.io/dom-examples/window-management-api/).
+
+## Contribute to MDN Web Docs
+
+You can contribute to MDN Web Docs and be a part of our community through content contributions, engineering, or translation work.
+The MDN Web Docs project welcomes contributions from everyone who shares our goals and wants to contribute constructively and respectfully within our community.
+
+To find out how to get started, see the [CONTRIBUTING.md](CONTRIBUTING.md) document in this repository.
+By participating in and contributing to our projects and discussions, you acknowledge that you have read and agree to our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Get in touch
+
+You can communicate with the MDN Web Docs team and community using the [communication channels][].
+
+[communication channels]: https://developer.mozilla.org/en-US/docs/MDN/Community/Communication_channels
