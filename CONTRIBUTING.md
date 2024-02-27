@@ -23,10 +23,10 @@ You will need to have Git and GitHub set up to be able to contribute.
 ### Set up Git and GitHub
 
 For more information on setting up Git on your machine, [read this article](https://help.github.com/articles/set-up-git/).
-With the above dependencies satisfied, [create your new account on Github](https://github.com/join).
+With the above dependencies satisfied, [create your new account on GitHub](https://github.com/join).
 
 Next up, you need to fork and clone the repo to be able to contribute to it.
-You can [learn about forking on Github](https://help.github.com/articles/fork-a-repo).
+You can [learn about forking on GitHub](https://help.github.com/articles/fork-a-repo).
 Once you have your own fork, [clone it to your local machine](https://help.github.com/articles/cloning-a-repository/).
 
 ### Serving
