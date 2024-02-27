@@ -116,6 +116,17 @@ h1 {
   animation: fadein 0.5s;
 }
 
+.caution {
+  font-weight: bold;
+}
+
+.caution-list-item {
+  padding: 1em;
+  background-color: rgba(255, 42, 81, 0.1);
+  list-style-type: none;
+  border: 1px solid grey;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;
