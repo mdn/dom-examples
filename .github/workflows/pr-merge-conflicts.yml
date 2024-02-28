@@ -1,0 +1,14 @@
+name: "Label PRs with conflicts"
+
+on:
+  push:
+  pull_request_target:
+    types: [synchronize]
+
+jobs:
+  label-merge-conflicts:
+    uses: mdn/workflows/.github/workflows/pr-rebase-needed.yml@main
+    with:
+      target-repo: "mdn/dom-examples"
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
