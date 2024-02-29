@@ -4,19 +4,25 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width" />
-    <title>My page title</title>
+    <title>Page 2</title>
+    <style>
+      body {
+        background-color: aliceblue;
+        font-family: monospace;
+      }
+    </style>
   </head>
   <body>
-    <p class="output">iFrame body</p>
+    <p class="output">page2.html (iframe body)</p>
     <script>
       const output = document.querySelector(".output");
 
       window.addEventListener("message", onMessage);
 
       function onMessage(e) {
-        output.innerHTML = e.data;
-        // Use the transfered port to post a message back to the main frame
-        e.ports[0].postMessage("Message back from the IFrame");
+        output.innerText = e.data;
+        // Use the transferred port to post a message to the main frame
+        e.ports[0].postMessage("A message from the iframe in page2.html");
       }
     </script>
   </body>
