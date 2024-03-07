@@ -1,34 +1,18 @@
 html {
-  background-color: #7d2663;
+  background-color: rgb(230, 230, 230);
   font-family: sans-serif;
 }
 
-h1 {
-  margin: 0;
-  font-size: 20vmin;
-  letter-spacing: -0.2rem;
-  position: absolute;
-  top: 0;
-  z-index: -1;
-}
-
 p {
-  margin: 0;
+  margin: 0 0 1rem 0;
 }
 
 .controls {
   padding: 4vw;
   width: 75%;
-  margin: 10vw auto;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 5px solid black;
-  opacity: 0.3;
-  transition: 1s all;
-}
-
-.controls:hover,
-.controls:focus {
-  opacity: 1;
+  margin: 3vw auto;
+  border: 2px solid;
+  border-radius: 6px;
 }
 
 .controls label,
