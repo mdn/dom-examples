@@ -22,7 +22,7 @@ async function togglePictureInPicture() {
 		// Open a Picture-in-Picture window.
 		const pipWindow = await window.documentPictureInPicture.requestWindow({
 			width: videoPlayer.clientWidth,
-			height: videoPlayer.clientHeight,
+			height: videoPlayer.clientHeight + 50,
 		});
 
 		// Add pagehide listener to handle the case of the pip window being closed using the browser X button
