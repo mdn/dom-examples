@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   margin: 0;
 }
 
@@ -12,13 +13,16 @@ body {
   margin: 0 auto;
 }
 
-h1, p {
+h1,
+p {
   font-family: sans-serif;
   text-align: center;
   padding: 20px;
 }
 
-.txt, select, form > div {
+.txt,
+select,
+form > div {
   display: block;
   margin: 0 auto;
   font-family: sans-serif;
@@ -38,7 +42,8 @@ form > div {
   width: 81%;
 }
 
-.txt, form > div {
+.txt,
+form > div {
   margin-bottom: 10px;
   overflow: auto;
 }
@@ -53,13 +58,15 @@ label {
   line-height: 1.5;
 }
 
-.rate-value, .pitch-value {
+.rate-value,
+.pitch-value {
   float: right;
   width: 5%;
   line-height: 1.5;
 }
 
-#rate, #pitch {
+#rate,
+#pitch {
   float: right;
   width: 81%;
 }
