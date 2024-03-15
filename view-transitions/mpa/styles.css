@@ -1,0 +1,73 @@
+/* Example layout */
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: inherit;
+}
+
+img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+p {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 2rem;
+    padding: 20px;
+    margin: 0;
+    border-radius: 5px;
+    background-color: rgba(255 255 255 / 0.8);
+}
+
+/* Turn cross-document view-transitions on */
+/* Note that this at-rule is all that is needed to create the default cross-fade animation  */
+
+@view-transition {
+    navigation: auto;
+}
+
+/* Customize the default animation */
+
+/* ::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.5s;
+} */
+
+/* create a new animation */
+
+@keyframes move-out {
+    from {
+        transform: translateY(0%);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes move-in {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+::view-transition-old(root) {
+    animation: 0.4s ease-in both move-out;
+
+}
+
+::view-transition-new(root) {
+    animation: 0.4s ease-in both move-in;
+}
