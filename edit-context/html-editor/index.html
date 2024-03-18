@@ -18,10 +18,6 @@
 
     body {
       padding: 1rem;
-      display: grid;
-      grid-template-rows: 1fr min-content;
-      gap: 1rem;
-      place-items: center;
     }
 
     #html-editor {
@@ -40,10 +36,6 @@
       color: red;
     }
 
-    #html-editor.debug {
-      line-height: 2.4;
-    }
-
     #html-editor::selection {
       color: white;
       background: red;
@@ -56,29 +48,6 @@
     [data-token-pos] {
       margin: 0;
       transition: margin .2s;
-    }
-
-    .debug [data-token-pos] {
-      position: relative;
-      margin: 0 .2rem;
-    }
-
-    .debug [data-token-pos]::before {
-      position: absolute;
-      content: attr(data-token-pos);
-      color: #ddd;
-      font-size: .5rem;
-      top: -1rem;
-      left: 0;
-      line-height: 1;
-      padding: .1rem .1rem 1rem .1rem;
-      background-image:
-        linear-gradient(to bottom, #999 0 1px, transparent 1px .7rem, #999 .7rem calc(.7rem + 1px), transparent 0),
-        linear-gradient(to right, #999 0 1px, transparent 1px calc(100% - 1px), #999 0),
-        linear-gradient(to bottom, #333 0 .7rem, transparent 0),
-        linear-gradient(to right, #999 0 1px, transparent 0);
-      background-size: 100% 100%, 100% .7rem, 100% 100%, 100% 100%;
-      background-repeat: no-repeat;
     }
 
     .token-openTagStart,
@@ -176,12 +145,6 @@
       display: flex;
       align-items: center;
     }
-
-    .debug .debug-overlay {
-      position: absolute;
-      background: rgba(255, 0, 0, .2);
-      border: 1px solid red;
-    }
   </style>
 </head>
 
@@ -189,11 +152,6 @@
 
   <!-- The editor element -->
   <div id="html-editor" spellcheck="false"></div>
-
-  <!-- Some debug controls -->
-  <div class="controls">
-    <label><input type="checkbox" id="debug">Debug</label>
-  </div>
 
   <script type="module">
     import { tokenizeHTML } from "./tokenizer.js";
@@ -206,14 +164,6 @@
 
     // The current tokens from the html text.
     let currentTokens = [];
-
-    let isDebug = false;
-    const debugCheckbox = document.querySelector(".controls #debug");
-    debugCheckbox.addEventListener("change", e => {
-      editorEl.classList.toggle("debug", e.target.checked);
-      isDebug = e.target.checked;
-      render();
-    });
 
     // Instances of CSS custom Highlight objects, used to render
     // the IME composition text formats.
@@ -299,20 +249,6 @@
         // Convert it into a DOM selection.
         const { anchorNode, anchorOffset, extentNode, extentOffset } = convertFromOffsetsToSelection(selectionStart, selectionEnd);
         document.getSelection().setBaseAndExtent(anchorNode, anchorOffset, extentNode, extentOffset);
-
-        // Render the character bounds in debug mode.
-        if (isDebug) {
-          const bounds = editContext.characterBounds();
-          for (const bound of bounds) {
-            const overlay = document.createElement("div");
-            overlay.classList.add("debug-overlay");
-            overlay.style.top = `${bound.top}px`;
-            overlay.style.left = `${bound.left}px`;
-            overlay.style.width = `${bound.width}px`;
-            overlay.style.height = `${bound.height}px`;
-            editorEl.appendChild(overlay);
-          }
-        }
       }
 
       // Listen to the EditContext's textupdate event.
