@@ -85,15 +85,16 @@ if (IS_CUSTOM_HIGHLIGHT_SUPPORTED) {
     // Tokenize the text.
     currentTokens = tokenizeHTML(text);
 
-    // Render each token.
+    // Render each token as a DOM node.
     for (const token of currentTokens) {
       const span = document.createElement("span");
       span.classList.add(`token-${token.type}`);
       span.textContent = token.value;
-      span.dataset.tokenPos = token.pos;
       editorEl.appendChild(span);
 
-      // Store the node in the token so we can find it later.
+      // Store the new DOM node as a property of the token
+      // in the currentTokens array. We will need it again
+      // later in fromOffsetsToRenderedTokenNodes.
       token.node = span;
     }
 
@@ -146,24 +147,34 @@ if (IS_CUSTOM_HIGHLIGHT_SUPPORTED) {
     const formats = e.getTextFormats();
 
     for (const format of formats) {
-      const { rangeStart, rangeEnd, underlineStyle, underlineThickness } =
-        format;
+      // Find the DOM selection that corresponds to the format's range.
+      const selection = fromOffsetsToSelection(
+        format.rangeStart,
+        format.rangeEnd,
+        editorEl
+      );
 
-      // Find the nodes in the view that are in the range.
-      const { anchorNode, anchorOffset, extentNode, extentOffset } =
-        fromOffsetsToSelection(rangeStart, rangeEnd, editorEl);
-      const highlight =
-        imeHighlights[
-          `${format.underlineStyle.toLowerCase()}-${format.underlineThickness.toLowerCase()}`
-        ];
-      if (highlight) {
-        const range = document.createRange();
-        range.setStart(anchorNode, anchorOffset);
-        range.setEnd(extentNode, extentOffset);
-        highlight.add(range);
-      }
+      // Highlight the selection with the right style and thickness.
+      addHighlight(selection, format.underlineStyle, format.underlineThickness);
     }
   });
+
+  function addHighlight(selection, underlineStyle, underlineThickness) {
+    // Get the right CSS custom Highlight object depending on the
+    // underline style and thickness.
+    const highlight =
+      imeHighlights[
+        `${underlineStyle.toLowerCase()}-${underlineThickness.toLowerCase()}`
+      ];
+
+    if (highlight) {
+      // Add a range to the Highlight object.
+      const range = document.createRange();
+      range.setStart(selection.anchorNode, selection.anchorOffset);
+      range.setEnd(selection.extentNode, selection.extentOffset);
+      highlight.add(range);
+    }
+  }
 
   // Handle key presses that are not already handled by the EditContext.
   editorEl.addEventListener("keydown", (e) => {

@@ -1,25 +1,3 @@
-// The EditContext object only knows about character offsets. But out editor
-// view renders HTML tokens as DOM nodes. This function finds DOM node tokens
-// that are in the provided EditContext offset range.
-export function fromOffsetsToRenderedTokenNodes(renderedTokens, start, end) {
-  const tokenNodes = [];
-
-  for (let offset = start; offset < end; offset++) {
-    const token = renderedTokens.find(
-      (token) => token.pos <= offset && token.pos + token.value.length > offset
-    );
-    if (token) {
-      tokenNodes.push({
-        node: token.node,
-        nodeOffset: token.pos,
-        charOffset: offset,
-      });
-    }
-  }
-
-  return tokenNodes;
-}
-
 // The EditContext object only knows about a plain text string and about
 // character offsets. However, our editor view renders the text by using
 // DOM nodes. So we sometimes need to convert between the two.
@@ -93,4 +71,26 @@ export function fromOffsetsToSelection(start, end, editorEl) {
   }
 
   return { anchorNode, anchorOffset, extentNode, extentOffset };
+}
+
+// The EditContext object only knows about character offsets. But out editor
+// view renders HTML tokens as DOM nodes. This function finds DOM node tokens
+// that are in the provided EditContext offset range.
+export function fromOffsetsToRenderedTokenNodes(renderedTokens, start, end) {
+  const tokenNodes = [];
+
+  for (let offset = start; offset < end; offset++) {
+    const token = renderedTokens.find(
+      (token) => token.pos <= offset && token.pos + token.value.length > offset
+    );
+    if (token) {
+      tokenNodes.push({
+        node: token.node,
+        nodeOffset: token.pos,
+        charOffset: offset,
+      });
+    }
+  }
+
+  return tokenNodes;
 }
