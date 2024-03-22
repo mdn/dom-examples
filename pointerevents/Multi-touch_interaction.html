@@ -1,176 +1,186 @@
 <!DOCTYPE html>
-<html lang=en>
-<!--
+<html lang="en">
+  <!--
   This app demonstrates using Pointer Events (pointerdown, pointerup, 
   pointermove, pointercancel, etc.) for the following interactions:
    1. Single touch
    2. Two (simultaneous) touches
    3. More than two simultaneous touches
 -->
-<head>
-<title>Pointer Events multi-touch interaction</title>
-<meta name="viewport" content="width=device-width">
-<style>
-  div {
-    margin: 0em;
-    padding: 2em;
-  }
-  #target1 {
-    background: white;
-    border: 1px solid black;
-  }
-  #target2 {
-    background: white;
-    border: 1px solid black;
-  }
-  #target3 {
-    background: white;
-    border: 1px solid black;
-  }
-</style>
-</head>
+  <head>
+    <title>Pointer Events multi-touch interaction</title>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      div {
+        margin: 0em;
+        padding: 2em;
+      }
+      #target1 {
+        background: white;
+        border: 1px solid black;
+      }
+      #target2 {
+        background: white;
+        border: 1px solid black;
+      }
+      #target3 {
+        background: white;
+        border: 1px solid black;
+      }
+    </style>
 
-<script>
-// Log events flag
-var logEvents = false;
+    <script>
+      // Log events flag
+      var logEvents = false;
 
-// Event caches, one per touch target
-var evCache1 = new Array();
-var evCache2 = new Array();
-var evCache3 = new Array();
+      // Event caches, one per touch target
+      var evCache1 = new Array();
+      var evCache2 = new Array();
+      var evCache3 = new Array();
 
-function enableLog(ev) {
-  logEvents = logEvents ? false : true;
-}
+      function enableLog(ev) {
+        logEvents = logEvents ? false : true;
+      }
 
-function log(name, ev) {
-  var o = document.getElementsByTagName('output')[0];
-  var s = name + ": pointerID = " + ev.pointerId +
-                " ; pointerType = " + ev.pointerType +
-                " ; isPrimary = " + ev.isPrimary;
-  o.innerHTML += s + " <br>";
-} 
+      function log(name, ev) {
+        var o = document.getElementsByTagName("output")[0];
+        var s =
+          name +
+          ": pointerID = " +
+          ev.pointerId +
+          " ; pointerType = " +
+          ev.pointerType +
+          " ; isPrimary = " +
+          ev.isPrimary;
+        o.innerHTML += s + " <br>";
+      }
 
-function clearLog(event) {
- var o = document.getElementsByTagName('output')[0];
- o.innerHTML = "";
-}
+      function clearLog(event) {
+        var o = document.getElementsByTagName("output")[0];
+        o.innerHTML = "";
+      }
 
-function update_background(ev) {
- // Change background color based on the number simultaneous touches/pointers
- // currently down:
- //   white - target element has no touch points i.e. no pointers down
- //   yellow - one pointer down
- //   pink - two pointers down
- //   lightblue - three or more pointers down
- var evCache = get_cache(ev);
- switch (evCache.length) {
-   case 0:
-     // Target element has no touch points
-     ev.target.style.background = "white";
-     break;
-   case 1:
-     // Single touch point
-     ev.target.style.background = "yellow";
-     break;
-   case 2:
-     // Two simultaneous touch points
-     ev.target.style.background = "pink";
-     break;
-   default:
-     // Three or more simultaneous touches
-     ev.target.style.background = "lightblue";
- }
-}
+      function update_background(ev) {
+        // Change background color based on the number simultaneous touches/pointers
+        // currently down:
+        //   white - target element has no touch points i.e. no pointers down
+        //   yellow - one pointer down
+        //   pink - two pointers down
+        //   lightblue - three or more pointers down
+        var evCache = get_cache(ev);
+        switch (evCache.length) {
+          case 0:
+            // Target element has no touch points
+            ev.target.style.background = "white";
+            break;
+          case 1:
+            // Single touch point
+            ev.target.style.background = "yellow";
+            break;
+          case 2:
+            // Two simultaneous touch points
+            ev.target.style.background = "pink";
+            break;
+          default:
+            // Three or more simultaneous touches
+            ev.target.style.background = "lightblue";
+        }
+      }
 
-function pointerdown_handler(ev) {
- // The pointerdown event signals the start of a touch interaction.
- // Save this event for later processing (this could be part of a
- // multi-touch interaction) and update the background color
- push_event(ev);
- if (logEvents) log("pointerDown: name = " + ev.target.id, ev);
- update_background(ev);
-}
+      function pointerdown_handler(ev) {
+        // The pointerdown event signals the start of a touch interaction.
+        // Save this event for later processing (this could be part of a
+        // multi-touch interaction) and update the background color
+        push_event(ev);
+        if (logEvents) log("pointerDown: name = " + ev.target.id, ev);
+        update_background(ev);
+      }
 
-function pointermove_handler(ev) {
- // Note: if the user makes more than one "simultaneous" touch, most browsers 
- // fire at least one pointermove event and some will fire several pointermoves.
- //
- // This function sets the target element's border to "dashed" to visually
- // indicate the target received a move event.
- if (logEvents) log("pointerMove", ev);
- update_background(ev);
- ev.target.style.border = "dashed";
-}
+      function pointermove_handler(ev) {
+        // Note: if the user makes more than one "simultaneous" touch, most browsers
+        // fire at least one pointermove event and some will fire several pointermoves.
+        //
+        // This function sets the target element's border to "dashed" to visually
+        // indicate the target received a move event.
+        if (logEvents) log("pointerMove", ev);
+        update_background(ev);
+        ev.target.style.border = "dashed";
+      }
 
-function pointerup_handler(ev) {
-  if (logEvents) log(ev.type, ev);
-  // Remove this touch point from the cache and reset the target's
-  // background and border
-  remove_event(ev);
-  update_background(ev);
-  ev.target.style.border = "1px solid black";
-}
+      function pointerup_handler(ev) {
+        if (logEvents) log(ev.type, ev);
+        // Remove this touch point from the cache and reset the target's
+        // background and border
+        remove_event(ev);
+        update_background(ev);
+        ev.target.style.border = "1px solid black";
+      }
 
-function get_cache(ev) {
- // Return the cache for this event's target element
- switch(ev.target.id) {
-   case "target1": return evCache1;
-   case "target2": return evCache2;
-   case "target3": return evCache3;
-   default: log("Error with cache handling",ev);
- }
-}
+      function get_cache(ev) {
+        // Return the cache for this event's target element
+        switch (ev.target.id) {
+          case "target1":
+            return evCache1;
+          case "target2":
+            return evCache2;
+          case "target3":
+            return evCache3;
+          default:
+            log("Error with cache handling", ev);
+        }
+      }
 
-function push_event(ev) {
- // Save this event in the target's cache
- var cache = get_cache(ev);
- cache.push(ev);
-}
+      function push_event(ev) {
+        // Save this event in the target's cache
+        var cache = get_cache(ev);
+        cache.push(ev);
+      }
 
-function remove_event(ev) {
- // Remove this event from the target's cache
- var cache = get_cache(ev);
- for (var i = 0; i < cache.length; i++) {
-   if (cache[i].pointerId == ev.pointerId) {
-     cache.splice(i, 1);
-     break;
-   }
- }
-}
+      function remove_event(ev) {
+        // Remove this event from the target's cache
+        var cache = get_cache(ev);
+        for (var i = 0; i < cache.length; i++) {
+          if (cache[i].pointerId == ev.pointerId) {
+            cache.splice(i, 1);
+            break;
+          }
+        }
+      }
 
-function set_handlers(name) {
- // Install event handlers for the given element
- var el=document.getElementById(name);
- el.onpointerdown = pointerdown_handler;
- el.onpointermove = pointermove_handler;
+      function set_handlers(name) {
+        // Install event handlers for the given element
+        var el = document.getElementById(name);
+        el.onpointerdown = pointerdown_handler;
+        el.onpointermove = pointermove_handler;
 
- // Use same handler for pointer{up,cancel,out,leave} events since
- // the semantics for these events - in this app - are the same.
- el.onpointerup = pointerup_handler;
- el.onpointercancel = pointerup_handler;
- el.onpointerout = pointerup_handler;
- el.onpointerleave = pointerup_handler;
-}
+        // Use same handler for pointer{up,cancel,out,leave} events since
+        // the semantics for these events - in this app - are the same.
+        el.onpointerup = pointerup_handler;
+        el.onpointercancel = pointerup_handler;
+        el.onpointerout = pointerup_handler;
+        el.onpointerleave = pointerup_handler;
+      }
 
-function init() {
- set_handlers("target1");
- set_handlers("target2");
- set_handlers("target3");
-}
+      function init() {
+        set_handlers("target1");
+        set_handlers("target2");
+        set_handlers("target3");
+      }
+    </script>
+  </head>
+  <body onload="init();" style="touch-action: none">
+    <h1>Multi-touch interaction</h1>
+    <!-- Create some boxes to test various gestures. -->
+    <div id="target1">Tap, Hold or Swipe me 1</div>
+    <div id="target2">Tap, Hold or Swipe me 2</div>
+    <div id="target3">Tap, Hold or Swipe me 3</div>
 
-</script>
-<body onload="init();" style="touch-action:none">
-<h1>Multi-touch interaction</h1>
- <!-- Create some boxes to test various gestures. -->
- <div id="target1">Tap, Hold or Swipe me 1</div>
- <div id="target2">Tap, Hold or Swipe me 2</div>
- <div id="target3">Tap, Hold or Swipe me 3</div>
-
- <!-- UI for logging/bebugging -->
- <button id="log" onclick="enableLog(event);">Start/Stop event logging</button>
- <button id="clearlog" onclick="clearLog(event);">Clear the log</button>
- <p></p>
- <output></output>
-</body>
+    <!-- UI for logging/bebugging -->
+    <button id="log" onclick="enableLog(event);">
+      Start/Stop event logging
+    </button>
+    <button id="clearlog" onclick="clearLog(event);">Clear the log</button>
+    <p></p>
+    <output></output>
+  </body>
 </html>
