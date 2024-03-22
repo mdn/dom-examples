@@ -34,7 +34,7 @@
     signatureValue.classList.add('fade-in');
     signatureValue.addEventListener('animationend', () => {
       signatureValue.classList.remove('fade-in');
-    });
+    }, { once: true });
     let buffer = new Uint8Array(signature, 0, 5);
     signatureValue.textContent = `${buffer}...[${signature.byteLength} bytes total]`;
   }
