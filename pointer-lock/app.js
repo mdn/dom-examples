@@ -56,9 +56,18 @@ canvasDraw();
 
 canvas.addEventListener("click", async () => {
   if(!document.pointerLockElement) {
-    await canvas.requestPointerLock({
-      unadjustedMovement: true,
-    });
+    try {
+      await canvas.requestPointerLock({
+        unadjustedMovement: true,
+      });
+    } catch (error) {
+      if (error.name === "NotSupportedError") {
+        // Some platforms may not support unadjusted movement.
+        await canvas.requestPointerLock();
+      } else {
+        throw error;
+      }
+    }
   }
 });
 
