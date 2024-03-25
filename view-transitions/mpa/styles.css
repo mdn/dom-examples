@@ -34,14 +34,14 @@ p {
     navigation: auto;
 }
 
-/* Customize the default animation */
+/* Customize the default animation behavior */
 
-/* ::view-transition-old(root),
+::view-transition-old(root),
 ::view-transition-new(root) {
     animation-duration: 0.5s;
-} */
+}
 
-/* create a new animation */
+/* Create a custom animation */
 
 @keyframes move-out {
     from {
@@ -62,6 +62,8 @@ p {
         transform: translateY(0%);
     }
 }
+
+/* Apply the custom animation to the old and new page states */
 
 ::view-transition-old(root) {
     animation: 0.4s ease-in both move-out;
