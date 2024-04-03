@@ -21,33 +21,34 @@
     <h1>Fetch response clone example</h1>
     <img src="" class="img1" />
     <img src="" class="img2" />
-  </body>
-  <script>
-    const image1 = document.querySelector(".img1");
-    const image2 = document.querySelector(".img2");
 
-    fetch("flowers.jpg").then((response1) => {
-      if (!response1.ok) {
-        showError(image1, `HTTP error, status = ${response1.status}`);
-      } else {
-        const response2 = response1.clone();
-        useResponse(response1, image1);
-        useResponse(response2, image2);
+    <script>
+      const image1 = document.querySelector(".img1");
+      const image2 = document.querySelector(".img2");
+
+      fetch("flowers.jpg").then((response1) => {
+        if (!response1.ok) {
+          showError(image1, `HTTP error, status = ${response1.status}`);
+        } else {
+          const response2 = response1.clone();
+          useResponse(response1, image1);
+          useResponse(response2, image2);
+        }
+      });
+
+      function useResponse(response, image) {
+        response
+          .blob()
+          .then((myBlob) => {
+            const objectURL = URL.createObjectURL(myBlob);
+            image.src = objectURL;
+          })
+          .catch((error) => {
+            const p = document.createElement("p");
+            p.appendChild(document.createTextNode(`Error: ${error}`));
+            document.body.insertBefore(p, image);
+          });
       }
-    });
-
-    function useResponse(response, image) {
-      response
-        .blob()
-        .then((myBlob) => {
-          const objectURL = URL.createObjectURL(myBlob);
-          image.src = objectURL;
-        })
-        .catch((error) => {
-          const p = document.createElement("p");
-          p.appendChild(document.createTextNode(`Error: ${error}`));
-          document.body.insertBefore(p, image);
-        });
-    }
-  </script>
+    </script>
+  </body>
 </html>

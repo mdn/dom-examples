@@ -11,26 +11,27 @@
   <body>
     <h1>Fetch Request example</h1>
     <img src="" />
-  </body>
-  <script>
-    const myImage = document.querySelector("img");
-    const myRequest = new Request("flowers.jpg");
 
-    fetch(myRequest)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error, status = ${response.status}`);
-        }
-        return response.blob();
-      })
-      .then((myBlob) => {
-        const objectURL = URL.createObjectURL(myBlob);
-        myImage.src = objectURL;
-      })
-      .catch((error) => {
-        const p = document.createElement("p");
-        p.appendChild(document.createTextNode(`Error: ${error.message}`));
-        document.body.insertBefore(p, myImage);
-      });
-  </script>
+    <script>
+      const myImage = document.querySelector("img");
+      const myRequest = new Request("flowers.jpg");
+
+      fetch(myRequest)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error, status = ${response.status}`);
+          }
+          return response.blob();
+        })
+        .then((myBlob) => {
+          const objectURL = URL.createObjectURL(myBlob);
+          myImage.src = objectURL;
+        })
+        .catch((error) => {
+          const p = document.createElement("p");
+          p.appendChild(document.createTextNode(`Error: ${error.message}`));
+          document.body.insertBefore(p, myImage);
+        });
+    </script>
+  </body>
 </html>
