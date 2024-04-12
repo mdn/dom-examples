@@ -18,55 +18,58 @@
     <span class="error"></span>
 
     <pre></pre>
+
+    <script>
+      const pre = document.querySelector("pre");
+      const myScript = document.querySelector("script");
+      const play = document.querySelector(".play");
+      const stop = document.querySelector(".stop");
+      const errorDisplay = document.querySelector(".error");
+
+      // use fetch to load an audio track, and
+      // decodeAudioData to decode it and stick it in a buffer.
+      // Then we put the buffer into the source
+      function getData() {
+        const audioCtx = new AudioContext();
+
+        return fetch("viper.ogg")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error, status = ${response.status}`);
+            }
+            return response.arrayBuffer();
+          })
+          .then((buffer) => audioCtx.decodeAudioData(buffer))
+          .then((decodedData) => {
+            const source = new AudioBufferSourceNode(audioCtx);
+            source.buffer = decodedData;
+            source.connect(audioCtx.destination);
+            return source;
+          });
+      }
+
+      // wire up buttons to stop and play audio
+      play.onclick = () => {
+        getData()
+          .then((source) => {
+            errorDisplay.innerHTML = "";
+            source.start(0);
+            play.disabled = true;
+          })
+          .catch((error) => {
+            errorDisplay.appendChild(
+              document.createTextNode(`Error: ${error.message}`)
+            );
+          });
+      };
+
+      stop.onclick = () => {
+        source.stop(0);
+        play.disabled = false;
+      };
+
+      // dump script to pre element
+      pre.innerHTML = myScript.innerHTML;
+    </script>
   </body>
-  <script>
-    const pre = document.querySelector("pre");
-    const myScript = document.querySelector("script");
-    const play = document.querySelector(".play");
-    const stop = document.querySelector(".stop");
-    const errorDisplay = document.querySelector(".error");
-
-    // use fetch to load an audio track, and
-    // decodeAudioData to decode it and stick it in a buffer.
-    // Then we put the buffer into the source
-    function getData() {
-      const audioCtx = new AudioContext();
-
-      return fetch("viper.ogg")
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error, status = ${response.status}`);
-          }
-          return response.arrayBuffer();
-        })
-        .then((buffer) => audioCtx.decodeAudioData(buffer))
-        .then((decodedData) => {
-          const source = new AudioBufferSourceNode(audioCtx);
-          source.buffer = decodedData;
-          source.connect(audioCtx.destination);
-          return source;
-        });
-    }
-
-    // wire up buttons to stop and play audio
-    play.onclick = () => {
-      getData()
-        .then((source) => {
-          errorDisplay.innerHTML = "";
-          source.start(0);
-          play.disabled = true;
-        })
-        .catch((error) => {
-          errorDisplay.appendChild(document.createTextNode(`Error: ${error.message}`));
-        });
-    };
-
-    stop.onclick = () => {
-      source.stop(0);
-      play.disabled = false;
-    };
-
-    // dump script to pre element
-    pre.innerHTML = myScript.innerHTML;
-  </script>
 </html>
