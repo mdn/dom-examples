@@ -17,18 +17,19 @@
     <script>
       const myImage = document.querySelector("img");
 
-      const myHeaders = new Headers();
+      const reqHeaders = new Headers();
 
-      const myOptions = {
-        method: "GET",
-        headers: myHeaders,
-        mode: "cors",
-        cache: "default",
+      // a cached response is okay unless it's more than a week old
+      reqHeaders.set("Cache-Control", "max-age=604800");
+
+      const options = {
+        headers: reqHeaders,
       };
 
-      const myRequest = new Request("flowers.jpg", myOptions);
+      // pass init as an "options" object with our headers
+      const req = new Request("flowers.jpg", options);
 
-      fetch(myRequest)
+      fetch(req)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP error, status = ${response.status}`);
