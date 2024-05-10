@@ -13,36 +13,38 @@
   <body>
     <h1>Fetch Request with init example</h1>
     <img src="" />
+
+    <script>
+      const myImage = document.querySelector("img");
+
+      const reqHeaders = new Headers();
+
+      // a cached response is okay unless it's more than a week old
+      reqHeaders.set("Cache-Control", "max-age=604800");
+
+      const options = {
+        headers: reqHeaders,
+      };
+
+      // pass init as an "options" object with our headers
+      const req = new Request("flowers.jpg", options);
+
+      fetch(req)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error, status = ${response.status}`);
+          }
+          return response.blob();
+        })
+        .then((blob) => {
+          const objectURL = URL.createObjectURL(blob);
+          myImage.src = objectURL;
+        })
+        .catch((error) => {
+          const p = document.createElement("p");
+          p.appendChild(document.createTextNode(`Error: ${error.message}`));
+          document.body.insertBefore(p, myImage);
+        });
+    </script>
   </body>
-  <script>
-    const myImage = document.querySelector("img");
-
-    const myHeaders = new Headers();
-
-    const myOptions = {
-      method: "GET",
-      headers: myHeaders,
-      mode: "cors",
-      cache: "default",
-    };
-
-    const myRequest = new Request("flowers.jpg", myOptions);
-
-    fetch(myRequest)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error, status = ${response.status}`);
-        }
-        return response.blob();
-      })
-      .then((blob) => {
-        const objectURL = URL.createObjectURL(blob);
-        myImage.src = objectURL;
-      })
-      .catch((error) => {
-        const p = document.createElement("p");
-        p.appendChild(document.createTextNode(`Error: ${error.message}`));
-        document.body.insertBefore(p, myImage);
-      });
-  </script>
 </html>
