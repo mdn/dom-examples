@@ -20,6 +20,8 @@
       window.addEventListener("message", onMessage);
 
       function onMessage(e) {
+        if (!e.ports.length) return;
+
         output.innerText = e.data;
         // Use the transferred port to post a message to the main frame
         e.ports[0].postMessage("A message from the iframe in page2.html");
