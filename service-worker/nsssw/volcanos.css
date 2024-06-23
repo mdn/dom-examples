@@ -1,0 +1,17 @@
+div {
+  display: flex;
+  justify-content: center;
+}
+button {
+  display: flex;
+  align-items: center;
+  font-family: monospace;
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+}
+img {
+  object-fit: contain;
+}
+a {
+  font-size:1.5rem;
+}
