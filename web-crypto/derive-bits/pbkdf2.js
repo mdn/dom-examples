@@ -40,7 +40,7 @@
     derivedBitsValue.classList.add("fade-in");
     derivedBitsValue.addEventListener("animationend", () => {
       derivedBitsValue.classList.remove("fade-in");
-    });
+    }, { once: true });
     derivedBitsValue.textContent = `${buffer}...[${derivedBits.byteLength} bytes total]`;
   }
 
