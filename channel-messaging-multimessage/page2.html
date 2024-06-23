@@ -24,8 +24,10 @@
 
       // Setup the transfered port
       function initPort(e) {
-        port2 = e.ports[0];
-        port2.onmessage = onMessage;
+        if (e.ports[0]) {
+          port2 = e.ports[0];
+          port2.onmessage = onMessage;
+        }
       }
 
       // Handle messages received on port2
