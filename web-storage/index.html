@@ -1,49 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
 
     <title>Web Storage API example</title>
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Bitter|Ubuntu+Mono' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-  <div class="wrapper">
-    <h1>Web storage</h1>
+    <div class="wrapper">
+      <h1>Web storage</h1>
 
-    <p>This example is designed to demonstrate usage of the <a href="http://dev.w3.org/html5/webstorage/">W3C Web Storage API</a>. It should work as far back as IE8. Choose custom background colours, logos and fonts from the below drop down menus, then try closing and reopening the page — you will find that your choices are remembered, as they are stored using Web Storage. You can also visit the <a href="event.html" target="_blank">storage event output</a> (opens in new tab). Open this, change some values in the index page, then look at the events page — you'll see the storage changes reported.</p>
+      <p>
+        This example is designed to demonstrate usage of the
+        <a
+          href="https://html.spec.whatwg.org/multipage/webstorage.html#webstorage"
+          >W3C Web Storage API</a
+        >. It should work as far back as IE8. Choose custom background colours,
+        logos and fonts from the below drop down menus, then try closing and
+        reopening the page — you will find that your choices are remembered, as
+        they are stored using Web Storage. You can also visit the
+        <a href="event.html" target="_blank">storage event output</a> (opens in
+        new tab). Open this, change some values in the index page, then look at
+        the events page — you'll see the storage changes reported.
+      </p>
 
-    <form>
-      <div>
-        <label for="bgcolor">Choose background color:</label>
-	    <input class="color" id="bgcolor" value="FF0000">
-      </div>
-      <div>
-        <label for="font">Choose font style:</label>
-        <select id="font">
-        	<option value="'Open Sans Condensed', sans-serif" selected>Sans-serif</option>
-        	<option value="'Bitter', serif">Serif</option>
-        	<option value="'Ubuntu Mono'">Monospace</option>
-        </select>
-      </div>
-      <div>
-        <label for="image">Choose image:</label>
-        <select id="image">
-        	<option value="images/firefoxos.png" selected>Firefox</option>
-        	<option value="images/crocodile.png">Crocodile</option>
-        	<option value="images/tortoise.png">Tortoise</option>
-        </select>
-      </div>
-    </form>
+      <form>
+        <div>
+          <label for="bgcolor">Choose background color:</label>
+          <input class="color" id="bgcolor" value="FF0000" />
+        </div>
+        <div>
+          <label for="font">Choose font style:</label>
+          <select id="font">
+            <option value="sans-serif" selected>Sans-serif</option>
+            <option value="serif">Serif</option>
+            <option value="monospace">Monospace</option>
+          </select>
+        </div>
+        <div>
+          <label for="image">Choose image:</label>
+          <select id="image">
+            <option value="images/firefoxos.png" selected>Firefox</option>
+            <option value="images/crocodile.png">Crocodile</option>
+            <option value="images/tortoise.png">Tortoise</option>
+          </select>
+        </div>
+      </form>
 
-    <footer></footer>
-    <img src="images/firefoxos.png">
-  </div>
+      <footer></footer>
+      <img src="images/firefoxos.png" />
+    </div>
+
+    <script src="jscolor/jscolor.js"></script>
+    <script src="main.js"></script>
   </body>
-  <script src="jscolor/jscolor.js"></script>
-  <script src="main.js"></script>
 </html>

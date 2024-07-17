@@ -39,7 +39,7 @@
     ciphertextValue.classList.add("fade-in");
     ciphertextValue.addEventListener("animationend", () => {
       ciphertextValue.classList.remove("fade-in");
-    });
+    }, { once: true });
     ciphertextValue.textContent = `${buffer}...[${ciphertext.byteLength} bytes total]`;
   }
 
@@ -69,7 +69,7 @@
       decryptedValue.classList.add("fade-in");
       decryptedValue.addEventListener("animationend", () => {
         decryptedValue.classList.remove("fade-in");
-      });
+      }, { once: true });
       decryptedValue.textContent = dec.decode(decrypted);
     } catch (e) {
       decryptedValue.classList.add("error");

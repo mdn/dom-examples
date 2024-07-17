@@ -84,7 +84,7 @@ MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDD0tPV/du2vftjvXj1t/gXTK39sNBV
     signatureValue.classList.add('fade-in');
     signatureValue.addEventListener('animationend', () => {
       signatureValue.classList.remove('fade-in');
-    });
+    }, { once: true });
     const buffer = new Uint8Array(signature, 0, 5);
     signatureValue.textContent = `${buffer}...[${signature.byteLength} bytes total]`;
   }
@@ -96,7 +96,7 @@ MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDD0tPV/du2vftjvXj1t/gXTK39sNBV
     signButton.classList.add('fade-in');
     signButton.addEventListener('animationend', () => {
       signButton.classList.remove('fade-in');
-    });
+    }, { once: true });
     signButton.removeAttribute("disabled");
     signButton.classList.remove("hidden");
   }
