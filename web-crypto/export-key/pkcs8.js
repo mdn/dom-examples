@@ -24,7 +24,7 @@
     exportKeyOutput.classList.add("fade-in");
     exportKeyOutput.addEventListener("animationend", () => {
       exportKeyOutput.classList.remove("fade-in");
-    });
+    }, { once: true });
     exportKeyOutput.textContent = pemExported;
   }
 

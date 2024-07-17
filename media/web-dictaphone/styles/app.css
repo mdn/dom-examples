@@ -4,12 +4,13 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.8rem;
 }
 
@@ -19,7 +20,8 @@ body {
   flex-direction: column;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-size: 2rem;
   text-align: center;
   font-weight: normal;
@@ -57,16 +59,16 @@ button {
   padding: 0.5rem;
 }
 
-button:hover, button:focus {
+button:hover,
+button:focus {
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 1);
   background: #0ae;
 }
 
 button:active {
-  box-shadow: inset 0px 0px 20px rgba(0,0,0,0.5);
+  box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.5);
   transform: translateY(2px);
 }
-
 
 /* Make the clips use as much space as possible, and
  * also show a scrollbar when there are too many clips to show
@@ -76,7 +78,8 @@ button:active {
   overflow: auto;
 }
 
-section, article {
+section,
+article {
   display: block;
 }
 
@@ -119,9 +122,9 @@ label {
   border-radius: 10px;
 }
 
-input[type=checkbox] {
-   position: absolute;
-   top: -100px;
+input[type="checkbox"] {
+  position: absolute;
+  top: -100px;
 }
 
 aside {
@@ -146,7 +149,7 @@ aside a {
 }
 
 /* Toggled State of information box */
-input[type=checkbox]:checked ~ aside {
+input[type="checkbox"]:checked ~ aside {
   transform: translateX(0);
 }
 

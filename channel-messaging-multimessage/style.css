@@ -1,6 +1,7 @@
-html,body {
-	margin: 0;
-	font-family: 'Open Sans Condensed', sans-serif;
+html,
+body {
+  margin: 0;
+  font-family: "Open Sans Condensed", sans-serif;
 }
 
 body {
@@ -15,7 +16,7 @@ form {
 }
 
 form input {
-	width: 55%;
+  width: 55%;
 }
 
 form label {
@@ -24,7 +25,7 @@ form label {
 }
 
 form button {
-	width: 60%;
+  width: 60%;
   display: block;
   margin: 10px auto 0;
 }
@@ -33,12 +34,13 @@ p {
   margin: 10px 0;
 }
 
-h1, p {
+h1,
+p {
   text-align: center;
 }
 
 h1 {
-  font-family: 'Lobster Two', cursive;
+  font-family: "Lobster Two", cursive;
 }
 
 ul {

@@ -1,7 +1,7 @@
 /* resets */
 
 figure {
-  margin: 0
+  margin: 0;
 }
 
 /* layout */
@@ -32,7 +32,8 @@ a {
   outline: 0;
 }
 
-.thumbs a:hover img, .thumbs a:focus img {
+.thumbs a:hover img,
+.thumbs a:focus img {
   opacity: 1;
 }
 
@@ -46,10 +47,11 @@ a {
   border-radius: 7px;
 }
 
-footer, figcaption {
+footer,
+figcaption {
   position: absolute;
   padding: 5px 10px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 footer {
@@ -70,8 +72,10 @@ figcaption {
 
 /* text */
 
-h1, figcaption, a {
-  font-family: 'Roboto Slab', serif;
+h1,
+figcaption,
+a {
+  font-family: "Roboto Slab", serif;
 }
 
 h1 {
@@ -108,8 +112,7 @@ h1 {
 
 /* View Transitions CSS */
 
-::view-transition-old(root),
-::view-transition-new(root) {
+::view-transition-group(root) {
   animation-duration: 0.5s;
 }
 
@@ -119,8 +122,7 @@ figcaption {
 
 /* Simple final style */
 
-::view-transition-old(figure-caption),
-::view-transition-new(figure-caption) {
+::view-transition-group(figure-caption) {
   height: 100%;
 }
 
@@ -136,8 +138,7 @@ figcaption {
   to { transform: scaleX(0); }
 }
 
-::view-transition-old(figure-caption),
-::view-transition-new(figure-caption) {
+::view-transition-group(figure-caption) {
   height: auto;
   right: 0;
   left: auto;

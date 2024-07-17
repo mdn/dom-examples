@@ -16,7 +16,7 @@
     sharedSecretValue.classList.add("fade-in");
     sharedSecretValue.addEventListener("animationend", () => {
       sharedSecretValue.classList.remove("fade-in");
-    });
+    }, { once: true });
     sharedSecretValue.textContent = `${buffer}...[${sharedSecret.byteLength} bytes total]`;
   }
 
