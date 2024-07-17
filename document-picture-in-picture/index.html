@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Document Picture-in-Picture API Example</title>
+  <script src="main.js" async></script>
+  <link href="main.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="contents">
+    <h1>Document Picture-in-Picture API Example</h1>
+    <div id="container">
+      <p id="in-pip-message">Video player is currently in the separate Picture-in-Picture window.</p>
+      <div id="player">
+        <video src="assets/bigbuckbunny.mp4" id="video" controls width="320"></video>
+
+        <div id="credits"><a href="https://peach.blender.org/download/" target="_blank">Video by Blender</a>;
+          <a href="https://peach.blender.org/about/" target="_blank">licensed CC-BY 3.0</a>
+        </div>
+
+        <div id="controlbar">
+          <p class="no-picture-in-picture">
+            Document Picture-in-Picture API not available
+          <p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

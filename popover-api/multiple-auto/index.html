@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Multiple auto popovers example</title>
+    <style>
+      :popover-open {
+        position: absolute;
+        inset: unset;
+        top: 40px;
+      }
+
+      #mypopover-1 {
+        left: 8px;
+      }
+
+      #mypopover-2 {
+        left: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <button popovertarget="mypopover-1" popovertargetaction="show">
+      Show popover #1
+    </button>
+    <button popovertarget="mypopover-2" popovertargetaction="show">
+      Show popover #2
+    </button>
+
+    <div id="mypopover-1" popover>Popover content #1</div>
+    <div id="mypopover-2" popover>Popover content #2</div>
+  </body>
+</html>

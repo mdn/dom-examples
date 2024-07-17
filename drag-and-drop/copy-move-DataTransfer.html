@@ -17,13 +17,14 @@
   #src_copy, #src_move  {
     color: blue;
     border: 5px solid black;
-    width: 300px;
-    height: 50;
+    max-width: 300px;
+    width: fit-content;
+    height: 50px;
   }
   #dest_copy, #dest_move {
     border: 5px solid blue;
     width: 300px;
-    height: 50;
+    min-height: 50px;
   }
 </style>
 <script>
@@ -64,8 +65,6 @@ function dragend_handler(ev) {
   console.log("dragEnd");
   // Restore source's border
   ev.target.style.border = "solid black";
-  // Remove all of the drag data
-  ev.dataTransfer.clearData();
 }
 </script>
 </head>

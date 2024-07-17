@@ -1,0 +1,26 @@
+html {
+  background-color: rgb(230, 230, 230);
+  font-family: sans-serif;
+}
+
+p {
+  margin: 0 0 1rem 0;
+}
+
+.controls {
+  padding: 4vw;
+  width: 75%;
+  margin: 3vw auto;
+  border: 2px solid;
+  border-radius: 6px;
+}
+
+.controls label,
+.controls p,
+.controls input {
+  font-size: 3vw;
+}
+
+.controls div {
+  padding-bottom: 1rem;
+}

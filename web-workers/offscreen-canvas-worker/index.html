@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>OffscreenCanvas API</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>OffscreenCanvas and worker threads</h1>
+      <p>
+        <b>Note:</b> your browser must support
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas"
+          ><code>OffscreenCanvas</code></a
+        >.
+      </p>
+      <p>This example has two canvases with incrementing counters.</p>
+
+      <p>
+        Canvas A is being drawn to on the main thread. Canvas B uses an
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas"
+          ><code>OffscreenCanvas</code></a
+        >
+        so that we can draw to it in a worker thread. The purpose of this
+        example is to show how a worker thread can keep the rest of our UI
+        responsive.
+      </p>
+
+      <p>
+        The button below each canvas creates <b>blocking work</b> on either the
+        main thread (Canvas A) or a worker thread (Canvas B). When a thread is
+        blocked, incrementing the related counter from that thread is also
+        blocked.
+      </p>
+    </header>
+
+    <main>
+      <div class="canvases">
+        <div>
+          <span class="canvas-title">Canvas A</span>
+          <canvas id="main" width="200" height="200"></canvas>
+          <div>
+            <button id="main-button" onclick="slowMainThread()">
+              Block main thread
+            </button>
+          </div>
+        </div>
+        <div>
+          <span class="canvas-title">Canvas B</span>
+          <canvas id="worker" width="200" height="200"></canvas>
+
+          <div>
+            <button id="worker-button" onclick="slowdownWorker()">
+              Block worker thread
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="canvas-description">
+        <p>
+          <b>When the main thread is blocked</b>, all UI elements are frozen.<br />
+          The hover effect on buttons is also blocked:
+        </p>
+        <button>Example button</button>
+        <p>
+          <b>When the worker thread is blocked</b>, the main thread is free to
+          do work such as the element hover effects and animations. Blocking the
+          worker thread will still prevent Canvas B's counter from being
+          updated, but the rest of the UI stays responsive while this is true.
+        </p>
+      </div>
+
+      <footer>
+        <p>
+          This demo is based on an example by
+          <a href="https://glitch.com/@PicchiKevin">Kevin Picchi</a>.
+        </p>
+      </footer>
+    </main>
+
+    <script>
+      const canvasA = document.getElementById("main");
+      const canvasB = document.getElementById("worker");
+
+      const ctxA = canvasA.getContext("2d");
+      const canvasWidth = ctxA.width;
+      const canvasHeight = ctxA.height;
+
+      // Create a counter for Canvas A
+      let counter = 0;
+      setInterval(() => {
+        redrawCanvasA();
+        counter++;
+      }, 100);
+
+      // Redraw Canvas A counter
+      function redrawCanvasA() {
+        ctxA.clearRect(0, 0, canvasA.width, canvasA.height);
+        ctxA.font = "24px Verdana";
+        ctxA.textAlign = "center";
+        ctxA.fillText(counter, canvasA.width / 2, canvasA.height / 2);
+      }
+
+      // This function creates heavy (blocking) work on a thread
+      function fibonacci(num) {
+        if (num <= 1) {
+          return 1;
+        }
+        return fibonacci(num - 1) + fibonacci(num - 2);
+      }
+
+      // Call our Fibonacci function on the main thread
+      function slowMainThread() {
+        fibonacci(42);
+      }
+
+      // Set up a worker thread to render Canvas B
+      const worker = new Worker("worker.js");
+
+      // Use the OffscreenCanvas API and send to the worker thread
+      const canvasWorker = canvasB.transferControlToOffscreen();
+      worker.postMessage({ canvas: canvasWorker }, [canvasWorker]);
+
+      // A 'slowDown' message we can catch in the worker to start heavy work
+      function slowdownWorker() {
+        worker.postMessage("slowDown");
+      }
+    </script>
+  </body>
+</html>

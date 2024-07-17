@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=380" />
+    <title>Basic IDBKeyRange example — favourite things</title>
+    <link href="style/style.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>
+      Basic IDBKeyRange example<br />These are a few of my favourite things
+    </h1>
+
+    <ul></ul>
+
+    <form>
+      <div>
+        <div>
+          <label for="none">Don't filter values at all</label>
+          <input type="radio" name="value" value="none" id="none" checked />
+        </div>
+      </div>
+      <div>
+        <div>
+          <label for="only">Return <strong>only</strong> one value</label>
+          <input type="radio" name="value" value="only" id="only" />
+        </div>
+        <div>
+          <label for="onlytext">Key value for single value selection</label>
+          <input type="text" name="onlytext" id="onlytext" />
+        </div>
+      </div>
+      <div>
+        <div>
+          <label for="range">Return a <strong>range</strong> of values</label>
+          <input type="radio" name="value" value="range" id="range" />
+        </div>
+        <div>
+          <label for="rangelowertext">Lower limit for range</label>
+          <input type="text" name="rangelowertext" id="rangelowertext" />
+        </div>
+        <div>
+          <label for="rangeuppertext">Upper limit for range</label>
+          <input type="text" name="rangeuppertext" id="rangeuppertext" />
+        </div>
+      </div>
+      <div>
+        <div>
+          <label for="lower"
+            >Return values with a <strong>lower</strong> bound</label
+          >
+          <input type="radio" name="value" value="lower" id="lower" />
+        </div>
+        <div>
+          <label for="lowerboundtext">Lower bound limit for results</label>
+          <input type="text" name="lowerboundtext" id="lowerboundtext" />
+        </div>
+      </div>
+      <div>
+        <div>
+          <label for="upper"
+            >Return values with an <strong>upper</strong> bound</label
+          >
+          <input type="radio" name="value" value="upper" id="upper" />
+        </div>
+        <div>
+          <label for="upperboundtext">Upper bound limit for results</label>
+          <input type="text" name="upperboundtext" id="upperboundtext" />
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <input
+            type="radio"
+            name="filterIndex"
+            value="fThing"
+            id="thing"
+            checked
+          />
+          <label for="thing">Filter by name</label>
+        </div>
+        <div>
+          <input type="radio" name="filterIndex" value="fRating" id="rating" />
+          <label for="rating">Filter by rating</label>
+        </div>
+      </div>
+
+      <button class="run">Run query</button>
+    </form>
+
+
+  <script src="scripts/main.js"></script>
+  </body>
+</html>

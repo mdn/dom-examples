@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Toast popovers example</title>
+    <style>
+      .failure {
+        background: rgb(255, 100, 100);
+      }
+
+      .success {
+        background: rgb(50, 255, 50);
+      }
+
+      :popover-open {
+        position: absolute;
+        inset: unset;
+        right: 5px;
+        bottom: 5px;
+      }
+    </style>
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <button id="success-toast-btn">Generate success toast</button>
+    <button id="failure-toast-btn">Generate fail toast</button>
+
+    <p>Successes: 0. Failures: 0.</p>
+  </body>
+</html>

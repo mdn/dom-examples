@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fibonacci number generator</title>
+    <style>
+      body {
+        width: 500px;
+      }
+
+      div,
+      p {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <div>
+        <label for="number"
+          >Enter a number that is a zero-based index position in the fibonacci
+          sequence to see what number is in that position. For example, enter 6
+          and you'll get a result of 8 — the fibonacci number at index position
+          6 is 8.</label
+        >
+        <input type="number" id="number" />
+      </div>
+      <div>
+        <input type="submit" />
+      </div>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+      const form = document.querySelector("form");
+      const input = document.querySelector('input[type="number"]');
+      const result = document.querySelector("p#result");
+      const worker = new Worker("fibonacci.js");
+
+      worker.onmessage = function (event) {
+        result.textContent = event.data;
+        console.log("Got: " + event.data + "\n");
+      };
+
+      worker.onerror = function (error) {
+        console.log(`Worker error: ${error.message} \n`);
+        throw error;
+      };
+
+      form.onsubmit = function (event) {
+        event.preventDefault();
+        worker.postMessage(input.value);
+        input.value = "";
+      };
+    </script>
+  </body>
+</html>

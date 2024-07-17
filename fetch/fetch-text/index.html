@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Fetch text example</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1>Fetch text example</h1>
+    <ul>
+      <li><a data-page="page1">Page 1</a></li>
+      <li><a data-page="page2">Page 2</a></li>
+      <li><a data-page="page3">Page 3</a></li>
+    </ul>
+    <article></article>
+
+    <script>
+      const myArticle = document.querySelector("article");
+      const myLinks = document.querySelectorAll("ul a");
+      for (const link of myLinks) {
+        link.onclick = (e) => {
+          e.preventDefault();
+          const linkData = e.target.getAttribute("data-page");
+          getData(linkData);
+        };
+      }
+
+      function getData(pageId) {
+        console.log(pageId);
+        const myRequest = new Request(`${pageId}.txt`);
+
+        fetch(myRequest)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error, status = ${response.status}`);
+            }
+            return response.text();
+          })
+          .then((text) => {
+            myArticle.innerText = text;
+          })
+          .catch((error) => {
+            myArticle.innerText = `Error: ${error.message}`;
+          });
+      }
+    </script>
+  </body>
+</html>

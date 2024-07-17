@@ -1,5 +1,4 @@
 (() => {
-
   let iv;
   let ciphertext;
 
@@ -30,7 +29,7 @@
     ciphertext = await window.crypto.subtle.encrypt(
       {
         name: "AES-GCM",
-        iv: iv
+        iv: iv,
       },
       secretKey,
       encoded
@@ -60,7 +59,7 @@
       let decrypted = await window.crypto.subtle.decrypt(
         {
           name: "AES-GCM",
-          iv: iv
+          iv: iv,
         },
         secretKey,
         ciphertext
@@ -87,12 +86,12 @@
     return window.crypto.subtle.deriveKey(
       {
         name: "ECDH",
-        public: publicKey
+        public: publicKey,
       },
       privateKey,
       {
         name: "AES-GCM",
-        length: 256
+        length: 256,
       },
       false,
       ["encrypt", "decrypt"]
@@ -106,7 +105,7 @@
     let alicesKeyPair = await window.crypto.subtle.generateKey(
       {
         name: "ECDH",
-        namedCurve: "P-384"
+        namedCurve: "P-384",
       },
       false,
       ["deriveKey"]
@@ -115,17 +114,23 @@
     let bobsKeyPair = await window.crypto.subtle.generateKey(
       {
         name: "ECDH",
-        namedCurve: "P-384"
+        namedCurve: "P-384",
       },
       false,
       ["deriveKey"]
     );
 
     // Alice then generates a secret key using her private key and Bob's public key.
-    let alicesSecretKey = await deriveSecretKey(alicesKeyPair.privateKey, bobsKeyPair.publicKey);
+    let alicesSecretKey = await deriveSecretKey(
+      alicesKeyPair.privateKey,
+      bobsKeyPair.publicKey
+    );
 
     // Bob generates the same secret key using his private key and Alice's public key.
-    let bobsSecretKey = await deriveSecretKey(bobsKeyPair.privateKey, alicesKeyPair.publicKey);
+    let bobsSecretKey = await deriveSecretKey(
+      bobsKeyPair.privateKey,
+      alicesKeyPair.publicKey
+    );
 
     // Alice can then use her copy of the secret key to encrypt a message to Bob.
     let encryptButton = document.querySelector(".ecdh .encrypt-button");
@@ -141,5 +146,4 @@
   }
 
   agreeSharedSecretKey();
-
 })();

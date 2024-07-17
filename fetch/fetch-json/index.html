@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Fetch json example</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1>Fetch json example</h1>
+    <ul></ul>
+
+    <script>
+      const myList = document.querySelector("ul");
+
+      fetch("products.json")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error, status = ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          for (const product of data.products) {
+            const listItem = document.createElement("li");
+
+            const nameElement = document.createElement("strong");
+            nameElement.textContent = product.Name;
+
+            const priceElement = document.createElement("strong");
+            priceElement.textContent = `£${product.Price}`;
+
+            listItem.append(
+              nameElement,
+              ` can be found in ${product.Location}. Cost: `,
+              priceElement
+            );
+            myList.appendChild(listItem);
+          }
+        })
+        .catch((error) => {
+          const p = document.createElement("p");
+          p.appendChild(document.createTextNode(`Error: ${error.message}`));
+          document.body.insertBefore(p, myList);
+        });
+    </script>
+  </body>
+</html>

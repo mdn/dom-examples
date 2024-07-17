@@ -1,35 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Color picker | Canvas pixel manipulation</title>
 
-		<style>
-			.color-cell {
-				color: white;
-			}
-		</style>
+    <style>
+      .color-cell {
+        color: white;
+        text-align: center;
+      }
+      th {
+        width: 150px;
+      }
+    </style>
   </head>
   <body>
-
-	<table>
-		<thead>
-			<tr>
-				<th>Source</th>
-				<th width="150">Hovered color</th>
-				<th width="150">Selected color</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<canvas id="canvas" width="300" height="227"></canvas>
-				</td>
-				<td align="center" class="color-cell" id="hovered-color"></td>
-				<td align="center" class="color-cell" id="selected-color"></td>
-			</tr>
-		</tbody>
-	<table>
-	<script src="color-picker.js"></script>
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Hovered color</th>
+          <th>Selected color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <canvas id="canvas" width="300" height="227"></canvas>
+          </td>
+          <td class="color-cell" id="hovered-color"></td>
+          <td class="color-cell" id="selected-color"></td>
+        </tr>
+      </tbody>
+    </table>
+    <script src="color-picker.js"></script>
   </body>
 </html>

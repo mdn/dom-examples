@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Speech synthesiser</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1>Speech synthesiser</h1>
+
+    <p>
+      Enter some text in the input below and press return or the "play" button
+      to hear it. change voices using the dropdown menu.
+    </p>
+
+    <form>
+      <label for="txt">Enter text</label>
+      <input id="txt" type="text" class="txt" />
+      <div>
+        <label for="rate">Rate</label
+        ><input type="range" min="0.5" max="2" value="1" step="0.1" id="rate" />
+        <div class="rate-value">1</div>
+        <div class="clearfix"></div>
+      </div>
+      <div>
+        <label for="pitch">Pitch</label
+        ><input type="range" min="0" max="2" value="1" step="0.1" id="pitch" />
+        <div class="pitch-value">1</div>
+        <div class="clearfix"></div>
+      </div>
+      <select></select>
+      <div class="controls">
+        <button id="play" type="submit">Play</button>
+      </div>
+    </form>
+
+    <script src="script.js"></script>
+  </body>
+</html>

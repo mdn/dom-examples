@@ -2,82 +2,103 @@
 
 const RADIUS = 20;
 
-function degToRad(degrees) {
-  var result = Math.PI / 180 * degrees;
-  return result;
-}
-
 // setup of the canvas
 
-var canvas = document.querySelector('canvas');
-var ctx = canvas.getContext('2d');
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
 
-var x = 50;
-var y = 50;
+let x = 50;
+let y = 50;
 
 function canvasDraw() {
+  // Find center x and y for any partial balls
+  function find2ndCenter(pos, max) {
+    if (pos < RADIUS) {
+      pos += max;
+    }
+    else if (pos + RADIUS > max) {
+      pos -= max;
+    }
+    else {
+      pos = 0;
+    }
+    return pos;
+  }
+
+  function drawBall(x, y) {
+    ctx.beginPath();
+    ctx.arc(x, y, RADIUS, 0, 2 * Math.PI, true);
+    ctx.fill();
+  }
+
+  const x2 = find2ndCenter(x, canvas.width);
+  const y2 = find2ndCenter(y, canvas.height);
+
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "#f00";
-  ctx.beginPath();
-  ctx.arc(x, y, RADIUS, 0, degToRad(360), true);
-  ctx.fill();
-}
+
+  /* Draw the main ball (which may or may not be a full ball) and any
+   * partial balls that result from moving close to one of the edges */
+  drawBall(x, y); // main ball
+  if (x2) {
+    drawBall(x2, y); // partial ball
+  }
+  if (y2) {
+    drawBall(x, y2); // partial ball
+  }
+  if (x2 && y2) {
+    drawBall(x2, y2); // partial ball
+  }
+} // end of function canvasDraw
+
 canvasDraw();
 
-// pointer lock object forking for cross browser
-
-canvas.requestPointerLock = canvas.requestPointerLock ||
-                            canvas.mozRequestPointerLock;
-
-document.exitPointerLock = document.exitPointerLock ||
-                           document.mozExitPointerLock;
-
-canvas.onclick = function() {
-  canvas.requestPointerLock();
-};
+canvas.addEventListener("click", async () => {
+  if(!document.pointerLockElement) {
+    await canvas.requestPointerLock({
+      unadjustedMovement: true,
+    });
+  }
+});
 
 // pointer lock event listeners
 
-// Hook pointer lock state change events for different browsers
-document.addEventListener('pointerlockchange', lockChangeAlert, false);
-document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
+document.addEventListener("pointerlockchange", lockChangeAlert, false);
 
 function lockChangeAlert() {
-  if (document.pointerLockElement === canvas ||
-      document.mozPointerLockElement === canvas) {
-    console.log('The pointer lock status is now locked');
+  if (document.pointerLockElement === canvas) {
+    console.log("The pointer lock status is now locked");
     document.addEventListener("mousemove", updatePosition, false);
   } else {
-    console.log('The pointer lock status is now unlocked');  
+    console.log("The pointer lock status is now unlocked");
     document.removeEventListener("mousemove", updatePosition, false);
   }
 }
 
-var tracker = document.getElementById('tracker');
+const tracker = document.getElementById("tracker");
 
-var animation;
+let animation;
 function updatePosition(e) {
-  x += e.movementX;
-  y += e.movementY;
-  if (x > canvas.width + RADIUS) {
-    x = -RADIUS;
+  function updateCoord(pos, delta, max) {
+    pos += delta;
+    pos %= max;
+    if (pos < 0) {
+      pos += max;
+    }
+    return pos;
   }
-  if (y > canvas.height + RADIUS) {
-    y = -RADIUS;
-  }  
-  if (x < -RADIUS) {
-    x = canvas.width + RADIUS;
-  }
-  if (y < -RADIUS) {
-    y = canvas.height + RADIUS;
-  }
-  tracker.textContent = "X position: " + x + ", Y position: " + y;
+
+  x = updateCoord(x, e.movementX, canvas.width);
+  y = updateCoord(y, e.movementY, canvas.height);
+  
+  tracker.textContent = `X position: ${x}, Y position: ${y}`;
 
   if (!animation) {
-    animation = requestAnimationFrame(function() {
+    animation = requestAnimationFrame(function () {
       animation = null;
       canvasDraw();
     });
   }
 }
+

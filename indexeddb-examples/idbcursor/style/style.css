@@ -1,0 +1,44 @@
+/* || basic set up + sizing for containers */
+
+html,
+body {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 100%/1.5 sans-serif;
+}
+
+html {
+  background-color: rgb(200, 30, 30);
+}
+
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 5px rgb(150, 30, 30);
+}
+
+ul {
+  text-align: center;
+  list-style-type: none;
+}
+
+li {
+  font-size: 2rem;
+  padding-bottom: 1rem;
+  color: rgb(255, 255, 255);
+}
+
+li strong {
+  color: black;
+}

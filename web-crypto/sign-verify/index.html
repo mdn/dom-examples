@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Web Crypto API example</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
@@ -11,20 +11,62 @@
       <h1>Web Crypto: sign/verify</h1>
 
       <section class="description">
-        <p>This page shows the use of the <code>sign()</code> and <code>verify()</code> functions of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API">Web Crypto API</a>. It contains four separate examples, one for each signing algorithm supported:</p>
-        <ul>
+        <p>
+          This page shows how to use the <code>sign()</code> and
+          <code>verify()</code> functions of the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API"
+            >Web Crypto API</a
+          >. It contains examples for the following signing algorithms:
+        </p>
+        <ol>
           <li>"RSASSA-PKCS1-v1_5"</li>
           <li>"RSA-PSS"</li>
           <li>"ECDSA"</li>
           <li>"HMAC"</li>
-        </ul>
-        <hr/>
+          <li>
+            "Ed25519"
+            <ul>
+              <li class="caution-list-item">
+                <span class="caution">Caution: </span>For information about
+                Ed25519 support, see
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto#browser_compatibility"
+                  >SubtleCrypto: Browser compatibility</a
+                >
+                and
+                <a
+                  href="https://blogs.igalia.com/jfernandez/2023/06/20/secure-curves-in-the-web-cryptography-api/"
+                  >Secure Curves in the Web Cryptography API</a
+                >. Chrome requires the
+                <code>enable-experimental-web-platform-features</code>
+                preference to be set via
+                <a
+                  href="https://peter.sh/experiments/chromium-command-line-switches/#enable-experimental-web-platform-features"
+                  >command-line switch</a
+                >
+                or via
+                <code
+                  >chrome://flags/#enable-experimental-web-platform-features</code
+                >.
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <hr />
         <p>Each example has four components:</p>
         <ul>
           <li>A text box containing a message to sign.</li>
           <li>A representation of the signature.</li>
-          <li>A "Sign" button: this signs the text box contents, displays part of the signature, and stores the complete signature.</li>
-          <li>A "Verify" button: this verifies the text box contents against the stored signature, and styles the displayed signature according to the result.</li>
+          <li>
+            A "Sign" button: this signs the text box contents, displays part of
+            the signature, and stores the complete signature.
+          </li>
+          <li>
+            A "Verify" button: this verifies the text box contents against the
+            stored signature, and styles the displayed signature according to
+            the result.
+          </li>
         </ul>
         <p>Try it:</p>
         <ul>
@@ -41,12 +83,18 @@
           <section class="sign-verify-controls">
             <div class="message-control">
               <label for="rsassa-pkcs1-message">Enter a message to sign:</label>
-              <input type="text" id="rsassa-pkcs1-message" name="message" size="25"
-                     value="The owl hoots at midnight">
+              <input
+                type="text"
+                id="rsassa-pkcs1-message"
+                name="message"
+                size="25"
+                value="The owl hoots at midnight" />
             </div>
-            <div class="signature">Signature:<span class="signature-value"></span></div>
-            <input class="sign-button" type="button" value="Sign">
-            <input class="verify-button" type="button" value="Verify">
+            <div class="signature">
+              Signature:<span class="signature-value"></span>
+            </div>
+            <input class="sign-button" type="button" value="Sign" />
+            <input class="verify-button" type="button" value="Verify" />
           </section>
         </section>
 
@@ -55,12 +103,18 @@
           <section class="sign-verify-controls">
             <div class="message-control">
               <label for="rsa-pss-message">Enter a message to sign:</label>
-              <input type="text" id="rsa-pss-message" name="message" size="25"
-                     value="The tiger prowls at dawn">
+              <input
+                type="text"
+                id="rsa-pss-message"
+                name="message"
+                size="25"
+                value="The tiger prowls at dawn" />
             </div>
-            <div class="signature">Signature:<span class="signature-value"></span></div>
-            <input class="sign-button" type="button" value="Sign">
-            <input class="verify-button" type="button" value="Verify">
+            <div class="signature">
+              Signature:<span class="signature-value"></span>
+            </div>
+            <input class="sign-button" type="button" value="Sign" />
+            <input class="verify-button" type="button" value="Verify" />
           </section>
         </section>
 
@@ -69,12 +123,18 @@
           <section class="sign-verify-controls">
             <div class="message-control">
               <label for="ecdsa-message">Enter a message to sign:</label>
-              <input type="text" id="ecdsa-message" name="message" size="25"
-                     value="The eagle flies at twilight">
+              <input
+                type="text"
+                id="ecdsa-message"
+                name="message"
+                size="25"
+                value="The eagle flies at twilight" />
             </div>
-            <div class="signature">Signature:<span class="signature-value"></span></div>
-            <input class="sign-button" type="button" value="Sign">
-            <input class="verify-button" type="button" value="Verify">
+            <div class="signature">
+              Signature:<span class="signature-value"></span>
+            </div>
+            <input class="sign-button" type="button" value="Sign" />
+            <input class="verify-button" type="button" value="Verify" />
           </section>
         </section>
 
@@ -83,20 +143,47 @@
           <section class="sign-verify-controls">
             <div class="message-control">
               <label for="hmac-message">Enter a message to sign:</label>
-              <input type="text" id="hmac-message" name="message" size="25"
-                     value="The bunny hops at teatime">
+              <input
+                type="text"
+                id="hmac-message"
+                name="message"
+                size="25"
+                value="The bunny hops at teatime" />
             </div>
-            <div class="signature">Signature:<span class="signature-value"></span></div>
-            <input class="sign-button" type="button" value="Sign">
-            <input class="verify-button" type="button" value="Verify">
+            <div class="signature">
+              Signature:<span class="signature-value"></span>
+            </div>
+            <input class="sign-button" type="button" value="Sign" />
+            <input class="verify-button" type="button" value="Verify" />
+          </section>
+        </section>
+
+        <section class="sign-verify ed25519">
+          <h2 class="sign-verify-heading">Ed25519</h2>
+          <section class="sign-verify-controls">
+            <div class="message-control">
+              <label for="ed25519-message">Enter a message to sign:</label>
+              <input
+                type="text"
+                id="ed25519-message"
+                name="message"
+                size="25"
+                value="The lion roars near dawn" />
+            </div>
+            <div class="signature">
+              Signature:<span class="signature-value"></span>
+            </div>
+            <input class="sign-button" type="button" value="Sign" />
+            <input class="verify-button" type="button" value="Verify" />
           </section>
         </section>
       </section>
     </main>
 
+    <script src="rsassa-pkcs1.js"></script>
+    <script src="rsa-pss.js"></script>
+    <script src="ecdsa.js"></script>
+    <script src="hmac.js"></script>
+    <script src="ed25519.js"></script>
   </body>
-  <script src="rsassa-pkcs1.js"></script>
-  <script src="rsa-pss.js"></script>
-  <script src="ecdsa.js"></script>
-  <script src="hmac.js"></script>
 </html>
