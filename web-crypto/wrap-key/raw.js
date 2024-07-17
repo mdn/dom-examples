@@ -59,7 +59,7 @@
     wrappedKeyOutput.classList.add("fade-in");
     wrappedKeyOutput.addEventListener("animationend", () => {
       wrappedKeyOutput.classList.remove("fade-in");
-    });
+    }, { once: true });
     wrappedKeyOutput.textContent = `[${wrappedKeyBuffer}]`;
   }
 
