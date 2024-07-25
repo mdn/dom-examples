@@ -81,7 +81,7 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy3Xo3U13dc+xojwQYWoJLCbOQ5fOVY8Llnqc
     ciphertextValue.classList.add('fade-in');
     ciphertextValue.addEventListener('animationend', () => {
       ciphertextValue.classList.remove('fade-in');
-    });
+    }, { once: true });
     ciphertextValue.textContent = `${buffer}...[${ciphertext.byteLength} bytes total]`;
   }
 
@@ -92,7 +92,7 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy3Xo3U13dc+xojwQYWoJLCbOQ5fOVY8Llnqc
     encryptButton.classList.add('fade-in');
     encryptButton.addEventListener('animationend', () => {
       encryptButton.classList.remove('fade-in');
-    });
+    }, { once: true });
     encryptButton.removeAttribute("disabled");
     encryptButton.classList.remove("hidden");
   }
