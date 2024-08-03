@@ -1,0 +1,29 @@
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin-top: 50px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80vw);
+  grid-auto-rows: 200px;
+}
+
+.gridbox {
+  align-content: center;
+  text-align: center;
+  font-size: 2rem;
+  border: solid 1px black;
+}
+
+.note {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  border: solid 1px green;
+  background: lime;
+  padding: 5px;
+}
