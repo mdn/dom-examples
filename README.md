@@ -69,6 +69,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "touchevents" directory is for examples and demos of the [Touch Events](https://developer.mozilla.org/docs/Web/API/Touch_events) standard.
 
+- The "visual-viewport-api" directory contains a basic demo to show usage of the Visual Viewport API. For more details on how it works, read [Visual Viewport API](https://developer.mozilla.org/docs/Web/API/Visual_Viewport_API). [View the demo live](https://mdn.github.io/dom-examples/visual-viewport-api/).
+
 - The "web-animations-api" directory contains [Web Animation API](https://developer.mozilla.org/docs/Web/API/Web_Animations_API) demos. See the [web animations README](web-animations-api/README.md) for more information.
 
 - The "web-storage" directory contains a basic demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](https://mdn.github.io/dom-examples/web-storage/).

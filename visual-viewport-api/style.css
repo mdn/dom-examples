@@ -1,0 +1,23 @@
+html {
+  font-family: sans-serif;
+  height: 2000px;
+  width: 4000px;
+}
+
+p {
+  margin: 0;
+}
+
+#instructions {
+  position: relative;
+  top: 90px;
+}
+
+#output {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  border: solid 1px green;
+  background: lime;
+  padding: 5px;
+}
