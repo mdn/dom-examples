@@ -15,9 +15,11 @@ const scrollendUpdater = () => {
 };
 
 function updateText() {
-  visualInfo.innerText = `Visual viewport top: ${visualViewport.offsetTop.toFixed(2)} left: ${visualViewport.offsetLeft.toFixed(2)}`;
+  visualInfo.innerText = `Visual viewport left: ${visualViewport.offsetLeft.toFixed(2)} top: ${visualViewport.offsetTop.toFixed(2)}`;
   windowInfo.innerText = `Window scrollX: ${window.scrollX.toFixed(2)} scrollY: ${window.scrollY.toFixed(2)}`;
 }
+
+updateText();
 
 visualViewport.onresize = scrollUpdater;
 visualViewport.onscroll = scrollUpdater;
@@ -25,5 +27,3 @@ visualViewport.onscrollend = scrollendUpdater;
 window.onresize = scrollUpdater;
 window.onscroll = scrollUpdater;
 window.onscrollend = scrollendUpdater;
-
-updateText();
