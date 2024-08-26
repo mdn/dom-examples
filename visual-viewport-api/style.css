@@ -1,25 +1,19 @@
 html {
   font-family: sans-serif;
+  height: 2000px;
+  width: 4000px;
 }
 
-body {
-  margin-top: 50px;
+p {
+  margin: 0;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 80vw);
-  grid-auto-rows: 200px;
+#instructions {
+  position: relative;
+  top: 90px;
 }
 
-.gridbox {
-  align-content: center;
-  text-align: center;
-  font-size: 2rem;
-  border: solid 1px black;
-}
-
-.note {
+#output {
   position: fixed;
   top: 10px;
   left: 10px;

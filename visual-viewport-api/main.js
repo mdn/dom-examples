@@ -1,62 +1,22 @@
-const total = document.getElementById("total");
-const visibleBoxes = [];
+const output = document.getElementById("output");
+const visualInfo = document.getElementById("visual-info");
+const windowInfo = document.getElementById("window-info");
 
 const scrollUpdater = () => {
-  total.style.top = `${visualViewport.offsetTop + 10}px`;
-  total.style.left = `${visualViewport.offsetLeft + 10}px`;
-  total.style.background = "yellow";
+  output.style.top = `${visualViewport.offsetTop + 10}px`;
+  output.style.left = `${visualViewport.offsetLeft + 10}px`;
+  output.style.background = "yellow";
+  updateText();
 };
 
 const scrollendUpdater = () => {
-  total.style.background = "lime";
-  updateVisibleBoxes();
-  updateSum();
+  output.style.background = "lime";
+  updateText();
 };
 
-function isVisible(box) {
-  const x = box.offsetLeft;
-  const y = box.offsetTop;
-  const right = x + box.offsetWidth;
-  const bottom = y + box.offsetHeight;
-
-  const horLowerBound = window.scrollX + visualViewport.offsetLeft;
-  const horUpperBound = window.scrollX + visualViewport.offsetLeft + visualViewport.width;
-  const horizontal = (x > horLowerBound && x < horUpperBound) ||
-    (right > horLowerBound && right < horUpperBound);
-
-  const verLowerBound = window.scrollY + visualViewport.offsetTop;
-  const verUpperBound = window.scrollY + visualViewport.offsetTop + visualViewport.height;
-  const vertical = (y > verLowerBound && y < verUpperBound) ||
-    (bottom > verLowerBound && bottom < verUpperBound);
-
-  return horizontal && vertical;
-}
-
-function updateVisibleBoxes() {
-  const boxes = document.querySelectorAll(".gridbox");
-  visibleBoxes.length = 0;
-
-  for (const box of boxes) {
-    if (isVisible(box)) {
-      visibleBoxes.push(box);
-    }
-  }
-}
-
-function updateSum() {
-  let sumTotal = 0;
-  const summands = [];
-
-  for (const box of visibleBoxes) {
-    console.log(`${box.id} is visible`);
-
-    const n = parseInt(box.innerText);
-
-    sumTotal += n;
-    summands.push(n);
-  }
-
-  total.innerText = `Total: ${summands.join(" + ")} = ${sumTotal}`;
+function updateText() {
+  visualInfo.innerText = `Visual viewport top: ${visualViewport.offsetTop.toFixed(2)} left: ${visualViewport.offsetLeft.toFixed(2)}`;
+  windowInfo.innerText = `Window scrollX: ${window.scrollX.toFixed(2)} scrollY: ${window.scrollY.toFixed(2)}`;
 }
 
 visualViewport.onresize = scrollUpdater;
@@ -66,5 +26,4 @@ window.onresize = scrollUpdater;
 window.onscroll = scrollUpdater;
 window.onscrollend = scrollendUpdater;
 
-updateVisibleBoxes();
-updateSum();
+updateText();
