@@ -37,6 +37,7 @@ function init() {
   }) 
   
   galleryImg.src = `images/${ imageData[0].file }.jpg`;
+  galleryImg.alt = imageData[0].name; 
   galleryCaption.textContent = imageData[0].name;
 }
 
@@ -47,6 +48,7 @@ function updateView(event) {
   const displayNewImage = () => {
     const mainSrc = `${targetIdentifier.src.split("_th.jpg")[0]}.jpg`;
     galleryImg.src = mainSrc;
+    galleryImg.alt = targetIdentifier.alt;
     galleryCaption.textContent = targetIdentifier.alt;
   };
   
