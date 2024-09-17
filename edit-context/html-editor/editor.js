@@ -178,6 +178,11 @@ if (IS_CUSTOM_HIGHLIGHT_SUPPORTED) {
 
   // Handle key presses that are not already handled by the EditContext.
   editorEl.addEventListener("keydown", (e) => {
+    // keyCode === 229 is a special code that indicates an IME event.
+    // https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event#keydown_events_with_ime
+    if (e.keyCode === 229) {
+      return;
+    }
     const start = Math.min(
       editContext.selectionStart,
       editContext.selectionEnd
