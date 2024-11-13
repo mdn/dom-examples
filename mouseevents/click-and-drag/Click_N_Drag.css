@@ -1,0 +1,56 @@
+/* without these, the page ends after the content.
+	I want to drag all over the page. */
+html, body, main.arena {
+	width: 100%;
+	height: 100%;
+}
+
+html {
+	overflow: hidden;
+}
+
+/* wrapper for either a physicist or a slot */
+li {
+	list-style-type: none;
+	width: 400px;
+	padding: 2px;
+	margin: 13px;
+	border-radius: 5px;
+}
+
+/* a target for mousedown */
+.physicist {
+	cursor: grab;  // tells user they can grab it
+	line-height: 20px;
+	background-color: #488;
+	border: 2px outset #aca;
+	color: #fff;
+	text-align: center;
+}
+
+/* the physicist that the user is dragging around, after user has clicked to drag */
+.physicist.ghost {
+	position: absolute;
+	background-color: #266;
+	opacity: 0.7;  /* want to be able to see hilited slot underneath */
+	pointer-events: none;  /* so pointer events go thru to slot */
+}
+
+/* physicist, hidden after it's been picked up and only the ghost is visible */
+.physicist.original {
+	visibility: hidden;
+}
+
+/* where to drag a physicist */
+.slot {
+	height: 15px;
+	background-color:  #dfd;
+	border: 2px inset #aca;
+	/*color: black;*/
+}
+
+.slot.targeted {
+	/* When user moves ghost over a slot.  A BIG change in appearance;
+		this only happens for a fraction of a second and is otherwise hard to see */
+	background-color: #f80;
+}

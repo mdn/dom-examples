@@ -3,7 +3,7 @@ This example illustrates how to do interactive click-and-drag of objects in HTML
 WITHOUT having to use the drag&drop API.
 
 <iframe src=Click_N_Drag.html
-	style='width: 700px; height: 550px; border: 0; overflow: hidden; ' >
+	style='width: 700px; height: 550px; border: 1px solid black; overflow: hidden; ' >
 </iframe>
 
 So, normally, the user can move the mouse around without clicking and no physicists are disturbed.
@@ -11,9 +11,9 @@ The user expects to click down on a physicist, drag it to some kind of destinati
 The user might also want to cancel the operation after clicking down,
 so most of the surface should NOT be a place that's an active slot.
 
-Don't figure out what was clicked by doing arithmetic with coordinates.
+(Don't figure out what was clicked by doing arithmetic with coordinates.
 Even if you have little tiny things you think will be slow.
-Elements aready do that for you, and you get click down/up/move events dispatched to the element.
+Elements aready do that for you, and you get click down/up/move events dispatched to the element.)
 
 First, decide upon what elements do what.
 You'll have one or more objects that the user can drag around (physicists in this example)
@@ -141,8 +141,4 @@ so you have to switch to pointer event handling.
 Then you can add pointermove and pointerup handlers to the original clickdown object.
 Capture mode ends by itself when the user releases.
 
-
-<a href=Click_N_Drag.html download=Click_N_Drag.html >
-<h2>Download App</h2>
-</a>
 
