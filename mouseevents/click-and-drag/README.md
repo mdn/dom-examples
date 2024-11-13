@@ -1,9 +1,6 @@
-Examples:
-
-* [ClickNDrag program](https://mdn.github.com/dom-examples/mouseevents/Click_N_Drag.html).
-
-### Click N Drag
+# Click N Drag
 This example illustrates how to do interactive click-and-drag of objects in HTML.
+WITHOUT having to use the drag&drop API.
 
 <iframe src=Click_N_Drag.html
 	style='width: 700px; height: 550px; border: 0; overflow: hidden; ' >
@@ -143,4 +140,9 @@ You need to supply the pointer ID which is only available on pointer events,
 so you have to switch to pointer event handling.
 Then you can add pointermove and pointerup handlers to the original clickdown object.
 Capture mode ends by itself when the user releases.
+
+
+<a href=Click_N_Drag.html download=Click_N_Drag.html >
+<h2>Download App</h2>
+</a>
 
