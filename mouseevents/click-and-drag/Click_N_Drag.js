@@ -106,10 +106,13 @@ function mouseUpHandler(ev) {
 
 		originalElement.classList.remove('original');
 
-		arenaElement.style.cursor = '';
+		arenaElement.style.cursor = '';  // turns off grabbing hand
 
 		ghostElement.remove();
 		ghostElement = null;
+
+		// Now's when you might want to trigger off some animation,
+		// depicting objects moving around
 	}
 }
 
