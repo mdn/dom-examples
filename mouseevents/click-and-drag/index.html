@@ -9,19 +9,12 @@
 
 <style>
 	body {
-		background: radial-gradient(ellipse at top, #fdd, #ddd, #dfd);
-	}
-
-	iframe {
-		width: 700px;
-		height: 650px;
-		border: 1px solid black;
-		overflow: hidden; '
-		background: white;
+		background: #1b1b1b;
+		color: #fff;
 	}
 
 	pre {
-		color: #600;
+		color: #fcc;
 	}
 </style>
 
@@ -30,10 +23,6 @@
 This example illustrates how to do interactive click-and-drag of objects in HTML,
 using plain-old DOM events like mousedown and mouseleave.
 WITHOUT having to use the drag&drop API.</p>
-
-
-<iframe src=Click_N_Drag.html>
-</iframe>
 
 <p>
 So, normally, the user can move the mouse around without clicking and no physicist names are disturbed.
@@ -173,5 +162,30 @@ You need to supply the pointer ID which is only available on pointer events,
 so you have to switch to pointer event handling.
 Then you can add pointermove and pointerup handlers to the original clickdown object.
 Capture mode ends by itself when the user releases.</p>
+
+<p>
+The animation for picking up an object, dragging it over the page, and setting it down, can do anything you want.  </p>
+
+<p>
+In this program, whenever I use it, I get this awkward feeling when I drop a physicist into a new location,
+because the others shuffle around instantly, but I can't see that motion.
+It would be nice to have the items move around by themselves, slowly, so the user can see.
+The way it is now, the physicist boxes don't actually rearrange, just the text inside them.
+So the user is actually rearranging the data in the <tt>physicists</tt> table.
+Instead, you could move around the &lt;li&gt; elements themselves; and leave the text in each.
+In fact, you don't even have to use &lt;li&gt; and &lt;li&gt; elements,
+but for disabled people, it's better to keep the 'list' semantics.</p>
+
+<p>
+Instead of having the physicists and slots laid out normally, make them all absolutely positioned.
+You can use the Transitions CSS properties to smooth out motions to nice animations;
+in this case the transition-properties would be left or right, and top or bottom.
+You must do the calculations for all the locations of items and slots.
+When the user actually changes the order of the items, change the coordinates to the new locations.
+Transitions will smooth out the motions.
+Cool!
+
+</p>
+
 </body></html>
 
