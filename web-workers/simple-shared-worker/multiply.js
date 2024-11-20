@@ -6,15 +6,12 @@ const result1 = document.querySelector(".result1");
 if (!!window.SharedWorker) {
   const myWorker = new SharedWorker("worker.js");
 
-  first.onchange = function () {
-    myWorker.port.postMessage([first.value, second.value]);
-    console.log("Message posted to worker");
-  };
-
-  second.onchange = function () {
-    myWorker.port.postMessage([first.value, second.value]);
-    console.log("Message posted to worker");
-  };
+  [first, second].forEach(input => {
+    input.onchange = function() {
+      myWorker.postMessage([first.value, second.value]);
+      console.log('Message posted to worker');
+    }
+  })
 
   myWorker.port.onmessage = function (e) {
     result1.textContent = e.data;
