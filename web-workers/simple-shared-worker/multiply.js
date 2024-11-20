@@ -8,7 +8,7 @@ if (!!window.SharedWorker) {
 
   [first, second].forEach(input => {
     input.onchange = function() {
-      myWorker.postMessage([first.value, second.value]);
+      myWorker.port.postMessage([first.value, second.value]);
       console.log('Message posted to worker');
     }
   })
