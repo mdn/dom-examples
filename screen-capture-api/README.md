@@ -1,0 +1,5 @@
+Examples:
+
+- [Screen Capture API example](https://mdn.github.io/dom-examples/screen-capture-api/basic-screen-capture): A basic example showing how to use the [Screen Capture API](https://developer.mozilla.org/docs/Web/API/Screen_Capture_API) to capture a surface (such as a window or tab) and broascast the resulting stream in a `<video>` element.
+- [Element Capture API example](https://mdn.github.io/dom-examples/screen-capture-api/element-capture): The same example, but this time using the [Element Capture API](https://developer.mozilla.org/docs/Web/API/Screen_Capture_extensions/Element_Region_Capture#the_element_capture_api) to restrict the broadcast stream to one particular rendered element inside the same tab the app is running in.
+- [Region Capture API example](https://mdn.github.io/dom-examples/screen-capture-api/region-capture): The same example, but this time using the [Region Capture API](https://developer.mozilla.org/docs/Web/API/Screen_Capture_extensions/Element_Region_Capture#the_region_capture_api) to crop the broadcast stream to the screen area in which one particular element is rendered, inside the same tab the app is running in.
