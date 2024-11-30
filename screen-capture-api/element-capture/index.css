@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0 25px;
+}
+
+#main-app {
+  display: flex;
+  gap: 5%;
+  min-width: 980px;
+}
+
+#demo {
+  isolation: isolate;
+  /* Forms a stacking context. */
+  transform-style: flat;
+  /* Flattened. */
+  background-color: white;
+}
+
+video,
+#demo {
+  flex: 1;
+}
+
+video,
+#demo>p,
+#log {
+  border: 1px solid #CCC;
+  margin: 0;
+}
+
+video {
+  max-width: 50%;
+  aspect-ratio: 4/3;
+}
+
+#demo>h2 {
+  margin-top: 0;
+}
+
+#demo>p {
+  padding: 5px;
+  height: 320px;
+}
+
+#log {
+  height: 20rem;
+  padding: 0.5rem;
+  overflow: auto;
+}
