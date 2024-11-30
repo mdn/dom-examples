@@ -3,7 +3,10 @@ let physicists = ['Noether', 'Dirac', 'Bohr', 'Curie', 'Pauli'];
 
 // yes, using globals is a bad idea, in general.  But in this case, there's only
 // one mouse, so there'll never be two users of  these variables at once.
+// The arena is the whole area the user can drag around in.
+// all these are element refs.
 let arenaElement;
+let arenaUl;  // the <ul> element that encloses all the <li>s
 let physicistElements;
 let slotElements;
 let originalElement;
@@ -11,7 +14,6 @@ let targetSlot;
 
 // the image of the physicist being dragged.  If ghostElement is falsy, we're not  dragging
 let ghostElement;
-let ghostUl;
 let ghostOffsetX;
 let ghostOffsetY;
 
@@ -99,6 +101,9 @@ function mouseUpHandler(ev) {
 		// do we do it?  Only if they've been dragging over a slot
 		if (targetSlot) {
 			moveAPhysicist(originalElement.dataset.physicist, targetSlot.dataset.slot)
+
+			// Now's when you might want to trigger off some animation,
+			// depicting objects moving around
 		}
 
 		// remove any slot hiliting, like user dragged out of it
@@ -110,9 +115,6 @@ function mouseUpHandler(ev) {
 
 		ghostElement.remove();
 		ghostElement = null;
-
-		// Now's when you might want to trigger off some animation,
-		// depicting objects moving around
 	}
 }
 

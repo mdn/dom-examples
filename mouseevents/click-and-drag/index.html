@@ -11,10 +11,15 @@
 	body {
 		background: #1b1b1b;
 		color: #fff;
+		font: 16px 'Verdana', sans-serif;
 	}
 
 	pre {
 		color: #fcc;
+	}
+
+	a {
+		color: #77f;
 	}
 </style>
 
@@ -24,10 +29,21 @@ This example illustrates how to do interactive click-and-drag of objects in HTML
 using plain-old DOM events like mousedown and mouseleave.
 WITHOUT having to use the drag&drop API.</p>
 
+<h3>Run the Example</h3>
+<iframe src=Click_N_Drag.html width=500 height=600 ></iframe>
+
+<h3>Download the sources:</h3>
+<b>
+<a href=Click_N_Drag.html download>Click_N_Drag.html</a> &nbsp; | &nbsp;
+<a href=Click_N_Drag.js download>Click_N_Drag.js</a> &nbsp; | &nbsp;
+<a href=Click_N_Drag.css download>Click_N_Drag.css</a> &nbsp; | &nbsp;
+</b>
+
+<h3>Programming</h3>
 <p>
 So, normally, the user can move the mouse around without clicking and no physicist names are disturbed.
 The user expects to click down on a physicist, drag it to some kind of destination, and let go.
-The user might also want to cancel the operation after clicking down,
+The user might also want to cancel the operation after clicking down, by dragging away,
 so most of the surface should NOT be a place that's an active slot.</p>
 
 <p>
@@ -46,8 +62,10 @@ Your objects need  a mousedown handler, cuz the user will be clicking down on th
 The mousedown handler sets everything up for dragging.
 The original clickdown physicist is kept around,
 but we make a clone of it for the ghost - the image of what the user thinks they're dragging.
-<pre>
+ The arena is the whole area the user can drag around in.
+ <pre>
 let arenaElement;
+let arenaUl;  // the <ul> element that encloses all the <li>s
 let physicistElements;
 let slotElements;
 let originalElement;
@@ -69,14 +87,16 @@ function mouseDownHandler(ev) {
 	setGhostLocation(ev);
 }
 </pre>
+The margin on the buttons is 13px.
 
 <p>So all the mouse events have a few things in common:
 they all contain the coordinates of the mouse,
 and you have to move the ghost to match.
-So this does stuff that all the mouse handlers need to do.</p>
+(And, at the initial mousedown, the ghost  has to line up perfectly with the
+original so it looks like the original just turned into the ghost.)
+So setGhostLocation() does stuff that all the mouse handlers need to do.</p>
 <pre>
 let ghostElement;
-let ghostUl;
 let ghostOffsetX;
 let ghostOffsetY;
 
@@ -128,6 +148,9 @@ function mouseUpHandler(ev) {
 		// do we do it?  Only if they've been dragging over a slot
 		if (targetSlot) {
 			moveAPhysicist(originalElement.dataset.physicist, targetSlot.dataset.slot)
+
+			// Now's when you might want to trigger off some animation,
+			// depicting objects moving around
 		}
 
 		// remove any slot hiliting, like user dragged out of it
@@ -135,7 +158,7 @@ function mouseUpHandler(ev) {
 
 		originalElement.classList.remove('original');
 
-		arenaElement.style.cursor = '';
+		arenaElement.style.cursor = '';  // turns off grabbing hand
 
 		ghostElement.remove();
 		ghostElement = null;
@@ -147,12 +170,7 @@ function mouseUpHandler(ev) {
 <h3> Things to try</h3>
 
 <p>
-You can do exactly the same things with PointerEvents as with MouseEvents.
-Simply global replace `mouse` with `pointer`.
-They work exactly the same, although pointer events have more features.</p>
-
-<p>
-Instead of having move and up listeners in the arena set all the time,
+Instead of having move, enter, leave, and up listeners in the arena set all the time,
 you can add them in the mousedown handler, and then remove them in the mouseup handler.</p>
 
 <p>
@@ -164,25 +182,34 @@ Then you can add pointermove and pointerup handlers to the original clickdown ob
 Capture mode ends by itself when the user releases.</p>
 
 <p>
-The animation for picking up an object, dragging it over the page, and setting it down, can do anything you want.  </p>
+You can do exactly the same things with PointerEvents as with MouseEvents.
+Simply global-replace `mouse` with `pointer`.
+They work exactly the same, although pointer events have more features.</p>
+
+<p>
+The animation for picking up an object, dragging it over the page, and setting it down, can do anything you want.
+If you want to make the ghost transparent, set the `opaque` property on the top level to 0.5, or adjust to taste.
+If the user is copying instead of moving, you can leave the original object in place.</p>
 
 <p>
 In this program, whenever I use it, I get this awkward feeling when I drop a physicist into a new location,
 because the others shuffle around instantly, but I can't see that motion.
 It would be nice to have the items move around by themselves, slowly, so the user can see.
+Like, 200ms or 500ms, not 10ms or 20ms.
 The way it is now, the physicist boxes don't actually rearrange, just the text inside them.
 So the user is actually rearranging the data in the <tt>physicists</tt> table.
 Instead, you could move around the &lt;li&gt; elements themselves; and leave the text in each.
-In fact, you don't even have to use &lt;li&gt; and &lt;li&gt; elements,
+In fact, you don't even have to use &lt;ul&gt; and &lt;li&gt; elements,
 but for disabled people, it's better to keep the 'list' semantics.</p>
 
 <p>
-Instead of having the physicists and slots laid out normally, make them all absolutely positioned.
+One way to do this is, instead of having the physicists and slots laid out normally, make them all absolutely positioned.
 You can use the Transitions CSS properties to smooth out motions to nice animations;
-in this case the transition-properties would be left or right, and top or bottom.
+in this case the transition-properties would be top and/or bottom.
+(If you also use left or right, you can make the paths curve out some - cool!)
 You must do the calculations for all the locations of items and slots.
 When the user actually changes the order of the items, change the coordinates to the new locations.
-Transitions will smooth out the motions.
+Transitions will smooth out the motions and stop after the duration you chose.
 Cool!
 
 </p>
