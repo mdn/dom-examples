@@ -119,7 +119,7 @@ function visualize(stream) {
 
   const analyser = audioCtx.createAnalyser();
   analyser.fftSize = 2048;
-  const bufferLength = analyser.frequencyBinCount;
+  const bufferLength = analyser.fftSize;
   const dataArray = new Uint8Array(bufferLength);
 
   source.connect(analyser);
