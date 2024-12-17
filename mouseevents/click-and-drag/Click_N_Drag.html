@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="stylesheet" href="Click_N_Drag.css" />
+	<head>
+
+<body>
+	<!-- you need to decide upon an outer enclosure, called the arena.  The
+	user can drag the ghost around the arena, but if they move outside, it's
+	equivalent to a pointerUp event and dragging ends.  Otherwise, the ghost
+	and dragging state get stuck on, it's a mess.  Often, the body is the best choice.
+	-->
+	<main class="arena">
+		<h3>Click and Drag demo, using mouse events.
+			Drag a physicist's name into one of the green slots to rearrange</h3>
+		<ul>
+			<li class="slot" data-slot="0"> </li>
+			<li class="physicist" data-physicist="0"></li>
+			<li class="slot" data-slot="1"> </li>
+			<li class="physicist" data-physicist="1"></li>
+			<li class="slot" data-slot="2"> </li>
+			<li class="physicist" data-physicist="2"></li>
+			<li class="slot" data-slot="3"> </li>
+			<li class="physicist" data-physicist="3"></li>
+			<li class="slot" data-slot="4"> </li>
+			<li class="physicist" data-physicist="4"></li>
+			<li class="slot" data-slot="5"> </li>
+		</ul>
+	</main>
+
+<script src=Click_N_Drag.js></script>
+
+</body>
+</html>
