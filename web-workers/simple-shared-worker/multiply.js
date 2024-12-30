@@ -7,7 +7,7 @@ if (!!window.SharedWorker) {
   const myWorker = new SharedWorker("worker.js");
 
   [first, second].forEach(input => {
-    input.onchange = function() {
+    input.onchange = () => {
       myWorker.port.postMessage([first.value, second.value]);
       console.log('Message posted to worker');
     }
