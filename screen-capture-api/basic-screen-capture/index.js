@@ -9,6 +9,7 @@ const displayMediaOptions = {
     displaySurface: "window",
   },
   audio: false,
+  preferCurrentTab: true,
 };
 
 // Set event listeners for the start and stop buttons
