@@ -15,7 +15,7 @@ function addEventListeners(i) {
   });
 
   btns[i].addEventListener("blur", () => {
-    tooltips[i].showPopover();
+    tooltips[i].hidePopover();
   });
 }
 
