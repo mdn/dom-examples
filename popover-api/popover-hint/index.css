@@ -1,0 +1,148 @@
+/* General styling */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  height: 100%;
+}
+
+body {
+  height: inherit;
+  background: #ccc;
+  margin: 0;
+}
+
+#wrapper {
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Button bar styling */
+
+#button-bar {
+  height: 48px;
+  width: 30%;
+  min-width: 300px;
+  padding: 8px;
+  border-radius: 6px;
+  background: #eee;
+  box-shadow: 1px 1px 3px #999;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+/* Button styling */
+
+#button-bar button {
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #eee;
+  flex: 1;
+}
+
+#button-bar button:hover,
+#button-bar button:focus {
+  background: #ccc;
+}
+
+#button-bar button:active {
+  box-shadow: inset 1px 1px 2px #333, inset -1px -1px 2px #eee;
+}
+
+/* Anchoring and styling auto popovers */
+
+#menu-1 {
+  anchor-name: --menu-anchor-1, --tooltip-anchor-1;
+}
+
+#menu-2 {
+  anchor-name: --menu-anchor-2, --tooltip-anchor-2;
+}
+
+#menu-3 {
+  anchor-name: --menu-anchor-3, --tooltip-anchor-3;
+}
+
+[popover="auto"] {
+  inset: unset;
+  position: absolute;
+  bottom: calc(anchor(top) + 20px);
+  justify-self: anchor-center;
+  margin: 0;
+
+  width: 200px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+  background: #eee;
+  box-shadow: 1px 1px 3px #999;
+  border: none;
+}
+
+[popover="auto"] button {
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #eee;
+  width: 100%;
+  line-height: 1.5;
+}
+
+[popover="auto"] button:first-of-type {
+  margin-bottom: 8px;
+}
+
+[popover="auto"] button:hover,
+[popover="auto"] button:focus {
+  background: #ccc;
+}
+
+[popover="auto"] button:active {
+  box-shadow: inset 1px 1px 2px #333, inset -1px -1px 2px #eee;
+}
+
+#submenu-1 {
+  position-anchor: --menu-anchor-1;
+}
+
+#submenu-2 {
+  position-anchor: --menu-anchor-2;
+}
+
+#submenu-3 {
+  position-anchor: --menu-anchor-3;
+}
+
+/* Anchoring and styling hint popovers */
+
+#menu-1 {
+  position-anchor: --tooltip-anchor-1;
+}
+
+#tooltip-2 {
+  position-anchor: --tooltip-anchor-2;
+}
+
+#tooltip-3 {
+  position-anchor: --tooltip-anchor-3;
+}
+
+[popover="hint"] {
+  inset: unset;
+  position: absolute;
+  top: calc(anchor(bottom) + 5px);
+  justify-self: anchor-center;
+  margin: 0;
+
+  padding: 8px;
+  border-radius: 6px;
+  background: #271717;
+  color: whitesmoke;
+  box-shadow: 1px 1px 3px #999;
+  border: none;
+}
