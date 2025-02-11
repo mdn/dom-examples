@@ -1,37 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Element Capture API demo</title>
+    <link href="index.css" rel="stylesheet" />
+    <script defer src="index.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <title>Element Capture API demo</title>
-  <link href="index.css" rel="stylesheet">
-  <script defer src="index.js"></script>
-</head>
+  <body>
+    <h1>Element Capture API example</h1>
+    <p>
+      Click the "Start Capture" button to capture the demo container element
+      shown on the right as a video stream and broadcast it in the
+      <code>&lt;video&gt;</code> element on the left. This demo uses the Screen
+      Capture API and the Element Capture API.
+    </p>
 
-<body>
-  <h1>Element Capture API example</h1>
-  <p>
-    Click the "Start Capture" button to capture the demo container element shown on the right as a video stream and
-    broadcast it in the <code>&lt;video&gt;</code> element on the left. This demo uses the Screen Capture API and the
-    Element Capture API.
-  </p>
+    <p>
+      <button id="start">Start Capture</button>&nbsp;<button id="stop">
+        Stop Capture
+      </button>
+    </p>
 
-  <p>
-    <button id="start">Start Capture</button>&nbsp;<button id="stop">
-      Stop Capture
-    </button>
-  </p>
-
-  <div id="main-app">
-    <video autoplay></video>
-    <div id="demo">
-      <h2>Some kind of demo</h2>
-      <p>This container is a placeholder for some kind of demo that you might want to share with other participants.</p>
+    <div id="main-app">
+      <video autoplay></video>
+      <div id="demo">
+        <h2>Some kind of demo</h2>
+        <p>
+          This container is a placeholder for some kind of demo that you might
+          want to share with other participants.
+        </p>
+      </div>
     </div>
-  </div>
-
-  <h2>Log:</h2>
-  <pre id="log"></pre>
-</body>
-
+  </body>
 </html>
