@@ -119,8 +119,18 @@ body {
   top: 16px;
   left: 16px;
   background: #eee;
-  width: 300px;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  width: 50%;
+  max-width: 600px;
   margin: 0;
   padding: 16px;
   box-shadow: 1px 1px 3px #999;
+}
+
+@media (max-width: 640px) {
+  .help-para {
+    width: auto;
+    right: 16px;
+  }
 }
