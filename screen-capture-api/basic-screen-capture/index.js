@@ -1,5 +1,4 @@
 const videoElem = document.querySelector("video");
-const logElem = document.getElementById("log");
 const startElem = document.getElementById("start");
 const stopElem = document.getElementById("stop");
 
@@ -10,6 +9,7 @@ const displayMediaOptions = {
     displaySurface: "window",
   },
   audio: false,
+  preferCurrentTab: true,
 };
 
 // Set event listeners for the start and stop buttons
@@ -18,7 +18,7 @@ startElem.addEventListener(
   (evt) => {
     startCapture();
   },
-  false,
+  false
 );
 
 stopElem.addEventListener(
@@ -26,20 +26,14 @@ stopElem.addEventListener(
   (evt) => {
     stopCapture();
   },
-  false,
+  false
 );
 
-console.log = (msg) => (logElem.textContent = `${logElem.textContent}\n${msg}`);
-console.error = (msg) =>
-  (logElem.textContent = `${logElem.textContent}\nError: ${msg}`);
-
 async function startCapture() {
-  logElem.textContent = "";
-
   try {
-    videoElem.srcObject =
-      await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-    dumpOptionsInfo();
+    videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(
+      displayMediaOptions
+    );
   } catch (err) {
     console.error(err);
   }
@@ -51,13 +45,3 @@ function stopCapture(evt) {
   tracks.forEach((track) => track.stop());
   videoElem.srcObject = null;
 }
-
-function dumpOptionsInfo() {
-  const videoTrack = videoElem.srcObject.getVideoTracks()[0];
-
-  console.log("Track settings:");
-  console.log(JSON.stringify(videoTrack.getSettings(), null, 2));
-  console.log("Track constraints:");
-  console.log(JSON.stringify(videoTrack.getConstraints(), null, 2));
-}
-
