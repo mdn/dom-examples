@@ -3,7 +3,7 @@ const btns = document.querySelectorAll("#button-bar button");
 
 function addEventListeners(i) {
   btns[i].addEventListener("mouseover", () => {
-    tooltips[i].showPopover();
+    tooltips[i].showPopover({ source: btns[i] });
   });
 
   btns[i].addEventListener("mouseout", () => {
@@ -11,7 +11,7 @@ function addEventListeners(i) {
   });
 
   btns[i].addEventListener("focus", () => {
-    tooltips[i].showPopover();
+    tooltips[i].showPopover({ source: btns[i] });
   });
 
   btns[i].addEventListener("blur", () => {

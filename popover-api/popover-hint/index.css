@@ -55,19 +55,7 @@ body {
   box-shadow: inset 1px 1px 2px #333, inset -1px -1px 2px #eee;
 }
 
-/* Anchoring and styling auto popovers */
-
-#menu-1 {
-  anchor-name: --menu-anchor-1, --tooltip-anchor-1;
-}
-
-#menu-2 {
-  anchor-name: --menu-anchor-2, --tooltip-anchor-2;
-}
-
-#menu-3 {
-  anchor-name: --menu-anchor-3, --tooltip-anchor-3;
-}
+/* Styling auto popovers */
 
 [popover="auto"] {
   inset: unset;
@@ -106,31 +94,7 @@ body {
   box-shadow: inset 1px 1px 2px #333, inset -1px -1px 2px #eee;
 }
 
-#submenu-1 {
-  position-anchor: --menu-anchor-1;
-}
-
-#submenu-2 {
-  position-anchor: --menu-anchor-2;
-}
-
-#submenu-3 {
-  position-anchor: --menu-anchor-3;
-}
-
-/* Anchoring and styling hint popovers */
-
-#menu-1 {
-  position-anchor: --tooltip-anchor-1;
-}
-
-#tooltip-2 {
-  position-anchor: --tooltip-anchor-2;
-}
-
-#tooltip-3 {
-  position-anchor: --tooltip-anchor-3;
-}
+/* Styling hint popovers */
 
 [popover="hint"] {
   inset: unset;
