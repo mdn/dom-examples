@@ -25,6 +25,7 @@
       const play = document.querySelector(".play");
       const stop = document.querySelector(".stop");
       const errorDisplay = document.querySelector(".error");
+      let currentSource = null; 
 
       // use fetch to load an audio track, and
       // decodeAudioData to decode it and stick it in a buffer.
@@ -53,7 +54,8 @@
         getData()
           .then((source) => {
             errorDisplay.innerHTML = "";
-            source.start(0);
+            currentSource = source;
+            currentSource.start(0);
             play.disabled = true;
           })
           .catch((error) => {
@@ -64,8 +66,10 @@
       };
 
       stop.onclick = () => {
-        source.stop(0);
-        play.disabled = false;
+        if(currentSource){
+          currentSource.stop(0);
+          play.disabled = false;
+        }
       };
 
       // dump script to pre element
