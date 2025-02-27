@@ -31,6 +31,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "edit-context" directory contains examples demonstrating the [EditContext API](https://developer.mozilla.org/docs/Web/API/EditContext_API). See the [list of examples](https://github.com/mdn/dom-examples/tree/main/edit-context/).
 
+- The "filesystemobserver" directory contains an example demonstrating usage of the [FileSystemObserver](https://developer.mozilla.org/docs/Web/API/FileSystemObserver) API ([run the example live](https://mdn.github.io/dom-examples/filesystemobserver/)). This example was originally published on Glitch as [File System Observer Demo](https://file-system-observer.glitch.me/) by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
+
 - The "fullscreen-api" directory is for examples and demos of the [Fullscreen API](https://wiki.developer.mozilla.org/docs/Web/API/Fullscreen_API). Run the [example live](https://mdn.github.io/dom-examples/fullscreen-api/).
 
 - The "history-api" directory contains an example that demonstrates the [History API](https://developer.mozilla.org/docs/Web/API/History_API). [View the demo live](https://mdn.github.io/dom-examples/history-api/).
