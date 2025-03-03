@@ -1,10 +1,10 @@
 (async () => {
   const rootHandle = await navigator.storage.getDirectory();
-  await rootHandle.remove({ recursive: true });
   await startObserver();
 
   async function startObserver() {
     if ("FileSystemObserver" in self) {
+      await rootHandle.remove({ recursive: true });
       await import("./observer.js");
       demoOPFS();
     } else {
