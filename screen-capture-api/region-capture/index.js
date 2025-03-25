@@ -1,9 +1,7 @@
 const videoElem = document.querySelector("video");
-const logElem = document.getElementById("log");
 const startElem = document.getElementById("start");
 const stopElem = document.getElementById("stop");
 const demoArea = document.querySelector("#demo");
-
 
 // Options for getDisplayMedia()
 
@@ -21,7 +19,7 @@ startElem.addEventListener(
   (evt) => {
     startCapture();
   },
-  false,
+  false
 );
 
 stopElem.addEventListener(
@@ -29,26 +27,18 @@ stopElem.addEventListener(
   (evt) => {
     stopCapture();
   },
-  false,
+  false
 );
 
-console.log = (msg) => (logElem.textContent = `${logElem.textContent}\n${msg}`);
-console.error = (msg) =>
-  (logElem.textContent = `${logElem.textContent}\nError: ${msg}`);
-
 async function startCapture() {
-  logElem.textContent = "";
-
   try {
-    const stream =
-      await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+    const stream = await navigator.mediaDevices.getDisplayMedia(
+      displayMediaOptions
+    );
     const [track] = stream.getVideoTracks();
     const cropTarget = await CropTarget.fromElement(demoArea);
     await track.cropTo(cropTarget);
-
     videoElem.srcObject = stream;
-
-    dumpOptionsInfo();
   } catch (err) {
     console.error(err);
   }
@@ -60,13 +50,3 @@ function stopCapture(evt) {
   tracks.forEach((track) => track.stop());
   videoElem.srcObject = null;
 }
-
-function dumpOptionsInfo() {
-  const videoTrack = videoElem.srcObject.getVideoTracks()[0];
-
-  console.log("Track settings:");
-  console.log(JSON.stringify(videoTrack.getSettings(), null, 2));
-  console.log("Track constraints:");
-  console.log(JSON.stringify(videoTrack.getConstraints(), null, 2));
-}
-

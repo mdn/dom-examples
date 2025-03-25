@@ -1,0 +1,121 @@
+/* Document styles */
+
+html {
+  font-family: helvetica, arial, sans-serif;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background: #ffc8dd;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+}
+
+/* Layout for the two main panes */
+
+.list-view,
+.detail-view {
+  flex: 1;
+  margin: 20px;
+  background: white;
+}
+
+.list-view {
+  overflow: auto;
+  padding: 0 20px;
+  border-bottom: 20px solid white;
+  border-top: 20px solid white;
+}
+
+.detail-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 20px;
+  list-style-type: none;
+}
+
+a {
+  color: black;
+  display: block;
+  padding: 20px;
+  outline: none;
+  text-decoration: none;
+  border: 1px solid rgb(0 0 0 / 0.3);
+  transition: 0.4s all;
+}
+
+a:hover,
+a:focus {
+  border-left: 20px solid rgb(0 0 0 / 0.3);
+}
+
+ul li:nth-child(odd) {
+  background: #cdb4db;
+}
+
+ul li:nth-child(even) {
+  background: #ffafcc;
+}
+
+/* Heading and paragraph styles */
+
+h1 {
+  margin: 0 0 20px;
+}
+
+.posture-output {
+  background: #cdb4db;
+  padding: 20px;
+  margin: 0;
+  border: 1px solid rgb(0 0 0 / 0.3);
+}
+
+/* Media queries */
+
+@media (orientation: landscape) {
+  .wrapper {
+    flex-direction: row;
+  }
+
+  .detail-view {
+    margin-inline-start: 0;
+  }
+}
+
+@media (device-posture: folded) and (orientation: landscape) {
+  .list-view {
+    margin-inline-end: 60px;
+  }
+}
+
+@media (orientation: portrait) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .detail-view {
+    margin-block-start: 0;
+  }
+}
+
+@media (device-posture: folded) and (orientation: portrait) {
+  .list-view {
+    margin-block-end: 60px;
+  }
+}
