@@ -1,9 +1,8 @@
 // create an instance of a db object for us to store the IDB data in
-var db;
+let db;
+let activeIndex;
 
-var activeIndex;
-
-var contacts = [
+const contacts = [
   {
     id: 1,
     fName: "Brian",
@@ -108,7 +107,7 @@ var contacts = [
 
 // all the variables we need for the app
 
-var tableEntry = document.querySelector("tbody");
+const tableEntry = document.querySelector("tbody");
 
 window.onload = function () {
   // In the following line, you should include the prefixes of implementations you want to test.
@@ -117,7 +116,7 @@ window.onload = function () {
     window.mozIndexedDB ||
     window.webkitIndexedDB ||
     window.msIndexedDB;
-  // DON'T use "var indexedDB = ..." if you're not in a function.
+  // DON'T use "const indexedDB = ..." if you're not in a function.
   // Moreover, you may need references to some window.IDB* objects:
   window.IDBTransaction =
     window.IDBTransaction ||
@@ -127,7 +126,7 @@ window.onload = function () {
     window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
   // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
 
-  var DBOpenRequest = window.indexedDB.open("contactsList", 1);
+  const DBOpenRequest = window.indexedDB.open("contactsList", 1);
 
   DBOpenRequest.onsuccess = function (event) {
     db = DBOpenRequest.result;
@@ -135,13 +134,13 @@ window.onload = function () {
   };
 
   DBOpenRequest.onupgradeneeded = function (event) {
-    var db = event.target.result;
+    const db = event.target.result;
 
     db.onerror = function (event) {
       console.log("Error loading database.");
     };
 
-    var objectStore = db.createObjectStore("contactsList", { keyPath: "id" });
+    const objectStore = db.createObjectStore("contactsList", { keyPath: "id" });
     objectStore.createIndex("lName", "lName", { unique: false });
     objectStore.createIndex("fName", "fName", { unique: false });
     objectStore.createIndex("jTitle", "jTitle", { unique: false });
@@ -152,10 +151,10 @@ window.onload = function () {
   };
 
   function populateData() {
-    var transaction = db.transaction(["contactsList"], "readwrite");
-    var objectStore = transaction.objectStore("contactsList");
+    const transaction = db.transaction(["contactsList"], "readwrite");
+    const objectStore = transaction.objectStore("contactsList");
     for (i = 0; i < contacts.length; i++) {
-      var request = objectStore.put(contacts[i]);
+      objectStore.put(contacts[i]);
     }
 
     transaction.oncomplete = function () {
@@ -163,9 +162,9 @@ window.onload = function () {
     };
   }
 
-  var thControls = document.querySelectorAll("th");
+  const thControls = document.querySelectorAll("th");
   for (i = 0; i < thControls.length; i++) {
-    var activeThead = thControls[i];
+    const activeThead = thControls[i];
     activeThead.onclick = function (e) {
       activeIndex = e.target.innerHTML;
       if (activeIndex == "ID") {
@@ -192,13 +191,13 @@ window.onload = function () {
 
   function displayDataByKey() {
     tableEntry.innerHTML = "";
-    var transaction = db.transaction(["contactsList"], "readonly");
-    var objectStore = transaction.objectStore("contactsList");
+    const transaction = db.transaction(["contactsList"], "readonly");
+    const objectStore = transaction.objectStore("contactsList");
 
     objectStore.openCursor().onsuccess = function (event) {
-      var cursor = event.target.result;
+      const cursor = event.target.result;
       if (cursor) {
-        var tableRow = document.createElement("tr");
+        const tableRow = document.createElement("tr");
         tableRow.innerHTML =
           "<td>" +
           cursor.value.id +
@@ -235,10 +234,10 @@ window.onload = function () {
 
   function displayDataByIndex(activeIndex) {
     tableEntry.innerHTML = "";
-    var transaction = db.transaction(["contactsList"], "readonly");
-    var objectStore = transaction.objectStore("contactsList");
+    const transaction = db.transaction(["contactsList"], "readonly");
+    const objectStore = transaction.objectStore("contactsList");
 
-    var myIndex = objectStore.index(activeIndex);
+    const myIndex = objectStore.index(activeIndex);
 
     console.log(myIndex.name);
     console.log(myIndex.objectStore);
@@ -246,29 +245,29 @@ window.onload = function () {
     console.log(myIndex.multiEntry);
     console.log(myIndex.unique);
 
-    var countRequest = myIndex.count();
+    const countRequest = myIndex.count();
     countRequest.onsuccess = function () {
       console.log(countRequest.result);
     };
 
     if (activeIndex == "fName") {
-      var getRequest = myIndex.get("Mr");
+      const getRequest = myIndex.get("Mr");
       getRequest.onsuccess = function () {
         console.log(getRequest.result);
       };
     }
 
     if (activeIndex == "lName") {
-      var getKeyRequest = myIndex.getKey("Bungle");
+      const getKeyRequest = myIndex.getKey("Bungle");
       getKeyRequest.onsuccess = function () {
         console.log(getKeyRequest.result);
       };
     }
 
     myIndex.openCursor().onsuccess = function (event) {
-      var cursor = event.target.result;
+      const cursor = event.target.result;
       if (cursor) {
-        var tableRow = document.createElement("tr");
+        const tableRow = document.createElement("tr");
         tableRow.innerHTML =
           "<td>" +
           cursor.value.id +

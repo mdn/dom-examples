@@ -1,7 +1,7 @@
 // create an instance of a db object for us to store the IDB data in
-var db;
+let db;
 
-var records = [
+const records = [
   { albumTitle: "Power windows", year: 1985 },
   { albumTitle: "Grace under pressure", year: 1984 },
   { albumTitle: "Signals", year: 1982 },
@@ -17,12 +17,12 @@ var records = [
 
 // all the variables we need for the app
 
-var list = document.querySelector("ul");
-var advance = document.querySelector(".advance");
-var useContinue = document.querySelector(".continue");
-var useDelete = document.querySelector(".delete");
-var update = document.querySelector(".update");
-var changeDirection = document.querySelector(".direction");
+const list = document.querySelector("ul");
+const advance = document.querySelector(".advance");
+const useContinue = document.querySelector(".continue");
+const useDelete = document.querySelector(".delete");
+const update = document.querySelector(".update");
+const changeDirection = document.querySelector(".direction");
 
 window.onload = function () {
   // In the following line, you should include the prefixes of implementations you want to test.
@@ -31,7 +31,7 @@ window.onload = function () {
     window.mozIndexedDB ||
     window.webkitIndexedDB ||
     window.msIndexedDB;
-  // DON'T use "var indexedDB = ..." if you're not in a function.
+  // DON'T use "const indexedDB = ..." if you're not in a function.
   // Moreover, you may need references to some window.IDB* objects:
   window.IDBTransaction =
     window.IDBTransaction ||
@@ -41,7 +41,7 @@ window.onload = function () {
     window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
   // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
 
-  var DBOpenRequest = window.indexedDB.open("albumLists", 1);
+  const DBOpenRequest = window.indexedDB.open("albumLists", 1);
 
   DBOpenRequest.onsuccess = function (event) {
     db = DBOpenRequest.result;
@@ -49,23 +49,23 @@ window.onload = function () {
   };
 
   DBOpenRequest.onupgradeneeded = function (event) {
-    var db = event.target.result;
+    const db = event.target.result;
 
     db.onerror = function (event) {
       note.innerHTML += "<li>Error loading database.</li>";
     };
 
-    var objectStore = db.createObjectStore("rushAlbumList", {
+    const objectStore = db.createObjectStore("rushAlbumList", {
       keyPath: "albumTitle",
     });
     objectStore.createIndex("year", "year", { unique: false });
   };
 
   function populateData() {
-    var transaction = db.transaction(["rushAlbumList"], "readwrite");
-    var objectStore = transaction.objectStore("rushAlbumList");
+    const transaction = db.transaction(["rushAlbumList"], "readwrite");
+    const objectStore = transaction.objectStore("rushAlbumList");
     for (i = 0; i < records.length; i++) {
-      var request = objectStore.put(records[i]);
+      const request = objectStore.put(records[i]);
     }
 
     transaction.oncomplete = function () {
@@ -79,13 +79,13 @@ window.onload = function () {
 
   function displayData() {
     list.innerHTML = "";
-    var transaction = db.transaction(["rushAlbumList"], "readonly");
-    var objectStore = transaction.objectStore("rushAlbumList");
+    const transaction = db.transaction(["rushAlbumList"], "readonly");
+    const objectStore = transaction.objectStore("rushAlbumList");
 
     objectStore.openCursor().onsuccess = function (event) {
-      var cursor = event.target.result;
+      const cursor = event.target.result;
       if (cursor) {
-        var listItem = document.createElement("li");
+        const listItem = document.createElement("li");
         listItem.innerHTML =
           "<strong>" +
           cursor.value.albumTitle +
@@ -110,13 +110,13 @@ window.onload = function () {
 
   function advanceResult() {
     list.innerHTML = "";
-    var transaction = db.transaction(["rushAlbumList"], "readonly");
-    var objectStore = transaction.objectStore("rushAlbumList");
+    const transaction = db.transaction(["rushAlbumList"], "readonly");
+    const objectStore = transaction.objectStore("rushAlbumList");
 
     objectStore.openCursor().onsuccess = function (event) {
-      var cursor = event.target.result;
+      const cursor = event.target.result;
       if (cursor) {
-        var listItem = document.createElement("li");
+        const listItem = document.createElement("li");
         listItem.innerHTML =
           "<strong>" +
           cursor.value.albumTitle +
@@ -136,21 +136,21 @@ window.onload = function () {
 
   function deleteResult() {
     list.innerHTML = "";
-    var transaction = db.transaction(["rushAlbumList"], "readwrite");
-    var objectStore = transaction.objectStore("rushAlbumList");
+    const transaction = db.transaction(["rushAlbumList"], "readwrite");
+    const objectStore = transaction.objectStore("rushAlbumList");
 
     objectStore.openCursor().onsuccess = function (event) {
-      var cursor = event.target.result;
+      const cursor = event.target.result;
       if (cursor) {
         if (cursor.value.albumTitle === "Grace under pressure") {
-          var request = cursor.delete();
+          const request = cursor.delete();
           request.onsuccess = function () {
             console.log(
               "Deleted that mediocre album from 1984. Even Power windows is better."
             );
           };
         } else {
-          var listItem = document.createElement("li");
+          const listItem = document.createElement("li");
           listItem.innerHTML =
             "<strong>" +
             cursor.value.albumTitle +
@@ -171,23 +171,23 @@ window.onload = function () {
 
   function updateResult() {
     list.innerHTML = "";
-    var transaction = db.transaction(["rushAlbumList"], "readwrite");
-    var objectStore = transaction.objectStore("rushAlbumList");
+    const transaction = db.transaction(["rushAlbumList"], "readwrite");
+    const objectStore = transaction.objectStore("rushAlbumList");
 
     objectStore.openCursor().onsuccess = function (event) {
-      var cursor = event.target.result;
+      const cursor = event.target.result;
       if (cursor) {
         if (cursor.value.albumTitle === "A farewell to kings") {
-          var updateData = cursor.value;
+          const updateData = cursor.value;
 
           updateData.year = 2050;
-          var request = cursor.update(updateData);
+          const request = cursor.update(updateData);
           request.onsuccess = function () {
             console.log("A better album year?");
           };
         }
 
-        var listItem = document.createElement("li");
+        const listItem = document.createElement("li");
         listItem.innerHTML =
           "<strong>" +
           cursor.value.albumTitle +
@@ -208,13 +208,13 @@ window.onload = function () {
 
   function backwards() {
     list.innerHTML = "";
-    var transaction = db.transaction(["rushAlbumList"], "readonly");
-    var objectStore = transaction.objectStore("rushAlbumList");
+    const transaction = db.transaction(["rushAlbumList"], "readonly");
+    const objectStore = transaction.objectStore("rushAlbumList");
 
     objectStore.openCursor(null, "prev").onsuccess = function (event) {
-      var cursor = event.target.result;
+      const cursor = event.target.result;
       if (cursor) {
-        var listItem = document.createElement("li");
+        const listItem = document.createElement("li");
         listItem.innerHTML =
           "<strong>" +
           cursor.value.albumTitle +
