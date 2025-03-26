@@ -2,6 +2,7 @@
 
 html,
 body {
+  width: fit-content;
   font-family: sans-serif;
   margin: 1rem;
 }
@@ -17,6 +18,7 @@ h1 {
 }
 
 ul {
+  padding: 0;
   text-align: center;
   list-style-type: none;
 }

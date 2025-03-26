@@ -75,7 +75,7 @@ window.onload = function () {
     const transaction = db.transaction(["fThings"], "readwrite");
     const objectStore = transaction.objectStore("fThings");
     for (i = 0; i < things.length; i++) {
-      const request = objectStore.put(things[i]);
+      objectStore.put(things[i]);
     }
 
     transaction.oncomplete = function () {
@@ -141,7 +141,7 @@ window.onload = function () {
 
     list.innerHTML = "";
     const transaction = db.transaction(["fThings"], "readonly");
-    const objectStore = transaction.objectStore("fThings");
+    let objectStore = transaction.objectStore("fThings");
 
     const countRequest = objectStore.count();
     countRequest.onsuccess = function () {
