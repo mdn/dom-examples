@@ -153,7 +153,7 @@ window.onload = function () {
   function populateData() {
     const transaction = db.transaction(["contactsList"], "readwrite");
     const objectStore = transaction.objectStore("contactsList");
-    for (i = 0; i < contacts.length; i++) {
+    for (let i = 0; i < contacts.length; i++) {
       objectStore.put(contacts[i]);
     }
 

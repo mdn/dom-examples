@@ -74,7 +74,7 @@ window.onload = function () {
   function populateData() {
     const transaction = db.transaction(["fThings"], "readwrite");
     const objectStore = transaction.objectStore("fThings");
-    for (i = 0; i < things.length; i++) {
+    for (let i = 0; i < things.length; i++) {
       objectStore.put(things[i]);
     }
 
