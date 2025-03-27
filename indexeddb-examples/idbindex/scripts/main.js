@@ -163,7 +163,7 @@ window.onload = function () {
   }
 
   const thControls = document.querySelectorAll("th");
-  for (i = 0; i < thControls.length; i++) {
+  for (let i = 0; i < thControls.length; i++) {
     const activeThead = thControls[i];
     activeThead.onclick = function (e) {
       activeIndex = e.target.innerHTML;
