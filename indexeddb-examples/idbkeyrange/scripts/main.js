@@ -9,18 +9,18 @@ const things = [
   { fThing: "The web", fRating: 9 },
   { fThing: "Mozilla", fRating: 9 },
   { fThing: "Firefox OS", fRating: 9 },
-  { fThing: "Curry", fRating: 9 },
+  { fThing: "Curry", fRating: 2 },
   { fThing: "Paneer cheese", fRating: 8 },
   { fThing: "Mexican food", fRating: 8 },
-  { fThing: "Chocolate", fRating: 7 },
+  { fThing: "Chocolate", fRating: 1 },
   { fThing: "Heavy metal", fRating: 10 },
   { fThing: "Monty Python", fRating: 8 },
   { fThing: "Aphex Twin", fRating: 8 },
   { fThing: "Gaming", fRating: 7 },
-  { fThing: "Frank Zappa", fRating: 9 },
+  { fThing: "Frank Zappa", fRating: 10 },
   { fThing: "Open minds", fRating: 10 },
   { fThing: "Hugs", fRating: 9 },
-  { fThing: "Ale", fRating: 9 },
+  { fThing: "Ale", fRating: 5 },
   { fThing: "Christmas", fRating: 8 },
 ];
 
@@ -63,8 +63,8 @@ window.onload = function () {
   DBOpenRequest.onupgradeneeded = function (event) {
     const db = event.target.result;
 
-    db.onerror = function (event) {
-      note.innerHTML += "<li>Error loading database.</li>";
+    db.onerror = function () {
+      console.error(e);
     };
 
     const objectStore = db.createObjectStore("fThings", { keyPath: "fThing" });

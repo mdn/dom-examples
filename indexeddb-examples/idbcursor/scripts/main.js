@@ -43,7 +43,7 @@ window.onload = function () {
 
   const DBOpenRequest = window.indexedDB.open("albumLists", 1);
 
-  DBOpenRequest.onsuccess = function (event) {
+  DBOpenRequest.onsuccess = function () {
     db = DBOpenRequest.result;
     populateData();
   };
@@ -51,8 +51,8 @@ window.onload = function () {
   DBOpenRequest.onupgradeneeded = function (event) {
     const db = event.target.result;
 
-    db.onerror = function (event) {
-      note.innerHTML += "<li>Error loading database.</li>";
+    db.onerror = function (e) {
+      console.error(e);
     };
 
     const objectStore = db.createObjectStore("rushAlbumList", {
@@ -65,7 +65,7 @@ window.onload = function () {
     const transaction = db.transaction(["rushAlbumList"], "readwrite");
     const objectStore = transaction.objectStore("rushAlbumList");
     for (i = 0; i < records.length; i++) {
-      const request = objectStore.put(records[i]);
+      objectStore.put(records[i]);
     }
 
     transaction.oncomplete = function () {

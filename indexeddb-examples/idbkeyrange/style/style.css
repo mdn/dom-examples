@@ -38,7 +38,8 @@ form {
   margin-top: 1rem;
 }
 
-form > div {
+form > div,
+form > fieldset > div {
   margin-bottom: 1rem;
   padding: 1rem;
   background: white;

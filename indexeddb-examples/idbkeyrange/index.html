@@ -16,67 +16,12 @@
       <form>
         <div>
           <div>
-            <label for="none">Don't filter values at all</label>
-            <input type="radio" name="value" value="none" id="none" checked />
-          </div>
-        </div>
-        <div>
-          <div>
-            <label for="only">Return <strong>only</strong> one value</label>
-            <input type="radio" name="value" value="only" id="only" />
-          </div>
-          <div>
-            <label for="onlyText">Key value for single value selection</label>
-            <input type="text" name="onlyText" id="onlyText" />
-          </div>
-        </div>
-        <div>
-          <div>
-            <label for="range">Return a <strong>range</strong> of values</label>
-            <input type="radio" name="value" value="range" id="range" />
-          </div>
-          <div>
-            <label for="rangeLowerText">Lower limit for range</label>
-            <input type="text" name="rangeLowerText" id="rangeLowerText" />
-          </div>
-          <div>
-            <label for="rangeUpperText">Upper limit for range</label>
-            <input type="text" name="rangeUpperText" id="rangeUpperText" />
-          </div>
-        </div>
-        <div>
-          <div>
-            <label for="lower"
-              >Return values with a <strong>lower</strong> bound</label
-            >
-            <input type="radio" name="value" value="lower" id="lower" />
-          </div>
-          <div>
-            <label for="lowerBoundText">Lower bound limit for results</label>
-            <input type="text" name="lowerBoundText" id="lowerBoundText" />
-          </div>
-        </div>
-        <div>
-          <div>
-            <label for="upper"
-              >Return values with an <strong>upper</strong> bound</label
-            >
-            <input type="radio" name="value" value="upper" id="upper" />
-          </div>
-          <div>
-            <label for="upperBoundText">Upper bound limit for results</label>
-            <input type="text" name="upperBoundText" id="upperBoundText" />
-          </div>
-        </div>
-
-        <div>
-          <div>
             <input
               type="radio"
               name="filterIndex"
               value="fThing"
               id="thing"
-              checked />
+              checked="" />
             <label for="thing">Filter by name</label>
           </div>
           <div>
@@ -88,6 +33,69 @@
             <label for="rating">Filter by rating</label>
           </div>
         </div>
+        <fieldset>
+          <div>
+            <div>
+              <label for="none">Don't filter values at all</label>
+              <input
+                type="radio"
+                name="value"
+                value="none"
+                id="none"
+                checked="" />
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="only">Return <strong>only</strong> one value</label>
+              <input type="radio" name="value" value="only" id="only" />
+            </div>
+            <div>
+              <label for="onlyText">Key value for single value selection</label>
+              <input type="text" name="onlyText" id="onlyText" />
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="range"
+                >Return a <strong>range</strong> of values</label
+              >
+              <input type="radio" name="value" value="range" id="range" />
+            </div>
+            <div>
+              <label for="rangeLowerText">Lower limit for range</label>
+              <input type="text" name="rangeLowerText" id="rangeLowerText" />
+            </div>
+            <div>
+              <label for="rangeUpperText">Upper limit for range</label>
+              <input type="text" name="rangeUpperText" id="rangeUpperText" />
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="lower"
+                >Return values with a <strong>lower</strong> bound</label
+              >
+              <input type="radio" name="value" value="lower" id="lower" />
+            </div>
+            <div>
+              <label for="lowerBoundText">Lower bound limit for results</label>
+              <input type="text" name="lowerBoundText" id="lowerBoundText" />
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="upper"
+                >Return values with an <strong>upper</strong> bound</label
+              >
+              <input type="radio" name="value" value="upper" id="upper" />
+            </div>
+            <div>
+              <label for="upperBoundText">Upper bound limit for results</label>
+              <input type="text" name="upperBoundText" id="upperBoundText" />
+            </div>
+          </div>
+        </fieldset>
 
         <button class="run">Run query</button>
       </form>
