@@ -1,7 +1,7 @@
 // create an instance of a db object for us to store the IDB data in
-var db;
+let db;
 
-var things = [
+const things = [
   { fThing: "Drum kit", fRating: 10 },
   { fThing: "Family", fRating: 10 },
   { fThing: "Batman", fRating: 9 },
@@ -9,32 +9,32 @@ var things = [
   { fThing: "The web", fRating: 9 },
   { fThing: "Mozilla", fRating: 9 },
   { fThing: "Firefox OS", fRating: 9 },
-  { fThing: "Curry", fRating: 9 },
+  { fThing: "Curry", fRating: 2 },
   { fThing: "Paneer cheese", fRating: 8 },
   { fThing: "Mexican food", fRating: 8 },
-  { fThing: "Chocolate", fRating: 7 },
+  { fThing: "Chocolate", fRating: 1 },
   { fThing: "Heavy metal", fRating: 10 },
   { fThing: "Monty Python", fRating: 8 },
   { fThing: "Aphex Twin", fRating: 8 },
   { fThing: "Gaming", fRating: 7 },
-  { fThing: "Frank Zappa", fRating: 9 },
+  { fThing: "Frank Zappa", fRating: 10 },
   { fThing: "Open minds", fRating: 10 },
   { fThing: "Hugs", fRating: 9 },
-  { fThing: "Ale", fRating: 9 },
+  { fThing: "Ale", fRating: 5 },
   { fThing: "Christmas", fRating: 8 },
 ];
 
 // all the variables we need for the app
 
-var list = document.querySelector("ul");
+const list = document.querySelector("ul");
 
-var button = document.querySelector("button");
+const button = document.querySelector("button");
 
-var onlyText = document.querySelector("#onlytext");
-var rangeLowerText = document.querySelector("#rangelowertext");
-var rangeUpperText = document.querySelector("#rangeuppertext");
-var lowerBoundText = document.querySelector("#lowerboundtext");
-var upperBoundText = document.querySelector("#upperboundtext");
+const onlyText = document.querySelector("#onlyText");
+const rangeLowerText = document.querySelector("#rangeLowerText");
+const rangeUpperText = document.querySelector("#rangeUpperText");
+const lowerBoundText = document.querySelector("#lowerBoundText");
+const upperBoundText = document.querySelector("#upperBoundText");
 
 window.onload = function () {
   // In the following line, you should include the prefixes of implementations you want to test.
@@ -43,7 +43,7 @@ window.onload = function () {
     window.mozIndexedDB ||
     window.webkitIndexedDB ||
     window.msIndexedDB;
-  // DON'T use "var indexedDB = ..." if you're not in a function.
+  // DON'T use "const indexedDB = ..." if you're not in a function.
   // Moreover, you may need references to some window.IDB* objects:
   window.IDBTransaction =
     window.IDBTransaction ||
@@ -53,7 +53,7 @@ window.onload = function () {
     window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
   // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
 
-  var DBOpenRequest = window.indexedDB.open("fThings", 1);
+  const DBOpenRequest = window.indexedDB.open("fThings", 1);
 
   DBOpenRequest.onsuccess = function (event) {
     db = DBOpenRequest.result;
@@ -61,21 +61,21 @@ window.onload = function () {
   };
 
   DBOpenRequest.onupgradeneeded = function (event) {
-    var db = event.target.result;
+    const db = event.target.result;
 
-    db.onerror = function (event) {
-      note.innerHTML += "<li>Error loading database.</li>";
+    db.onerror = function () {
+      console.error(e);
     };
 
-    var objectStore = db.createObjectStore("fThings", { keyPath: "fThing" });
+    const objectStore = db.createObjectStore("fThings", { keyPath: "fThing" });
     objectStore.createIndex("fRating", "fRating", { unique: false });
   };
 
   function populateData() {
-    var transaction = db.transaction(["fThings"], "readwrite");
-    var objectStore = transaction.objectStore("fThings");
-    for (i = 0; i < things.length; i++) {
-      var request = objectStore.put(things[i]);
+    const transaction = db.transaction(["fThings"], "readwrite");
+    const objectStore = transaction.objectStore("fThings");
+    for (let i = 0; i < things.length; i++) {
+      objectStore.put(things[i]);
     }
 
     transaction.oncomplete = function () {
@@ -83,11 +83,11 @@ window.onload = function () {
     };
   }
 
-  var keyRangeValue = null;
+  let keyRangeValue = null;
 
   function displayData() {
     checkedValue = document.querySelector('input[name="value"]:checked').value;
-    var filterIndex = document.querySelector(
+    const filterIndex = document.querySelector(
       'input[name="filterIndex"]:checked'
     ).value;
 
@@ -140,10 +140,10 @@ window.onload = function () {
     }
 
     list.innerHTML = "";
-    var transaction = db.transaction(["fThings"], "readonly");
-    var objectStore = transaction.objectStore("fThings");
+    const transaction = db.transaction(["fThings"], "readonly");
+    let objectStore = transaction.objectStore("fThings");
 
-    var countRequest = objectStore.count();
+    const countRequest = objectStore.count();
     countRequest.onsuccess = function () {
       console.log(countRequest.result);
     };
@@ -154,9 +154,9 @@ window.onload = function () {
     }
 
     objectStore.openCursor(keyRangeValue).onsuccess = function (event) {
-      var cursor = event.target.result;
+      const cursor = event.target.result;
       if (cursor) {
-        var listItem = document.createElement("li");
+        const listItem = document.createElement("li");
         listItem.innerHTML =
           "<strong>" +
           cursor.value.fThing +

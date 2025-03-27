@@ -2,43 +2,47 @@
 
 html,
 body {
-  margin: 0;
+  width: fit-content;
   font-family: sans-serif;
-  font-size: 100%/1.5 sans-serif;
-}
-
-html {
-  background-color: rgb(200, 30, 30);
+  margin: 1rem;
 }
 
 body {
-  max-width: 800px;
   margin: 0 auto;
   padding: 30px 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0)
-  );
 }
 
 h1 {
   text-align: center;
-  font-size: 2.5rem;
-  text-shadow: 2px 2px 5px rgb(150, 30, 30);
+  font-size: 1.5rem;
 }
 
 ul {
+  padding: 0;
   text-align: center;
   list-style-type: none;
 }
 
 li {
-  font-size: 2rem;
-  padding-bottom: 1rem;
-  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  padding: 1rem;
 }
 
 li strong {
   color: black;
+}
+button {
+  margin: 1rem;
+  font-size: 1.2rem;
+}
+
+#container {
+  margin: 1rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+li:nth-child(odd) {
+  background-color: lightgrey;
 }
