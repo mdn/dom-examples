@@ -13,10 +13,11 @@ body {
 }
 
 #demo {
+  /* Forms a stacking context */
   isolation: isolate;
-  /* Forms a stacking context. */
+  /* Flattened */
   transform-style: flat;
-  /* Flattened. */
+  /* Explicit background color to stop the capture being transparent */
   background-color: white;
 }
 
@@ -26,9 +27,8 @@ video,
 }
 
 video,
-#demo>p,
-#log {
-  border: 1px solid #CCC;
+#demo > p {
+  border: 1px solid #ccc;
   margin: 0;
 }
 
@@ -37,17 +37,11 @@ video {
   aspect-ratio: 4/3;
 }
 
-#demo>h2 {
+#demo > h2 {
   margin-top: 0;
 }
 
-#demo>p {
+#demo > p {
   padding: 5px;
   height: 320px;
-}
-
-#log {
-  height: 20rem;
-  padding: 0.5rem;
-  overflow: auto;
 }

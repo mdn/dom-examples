@@ -23,11 +23,15 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "css-painting" directory contains examples demonstrating the [CSS Painting API](https://developer.mozilla.org/docs/Web/API/CSS_Painting_API). See the [examples live](https://mdn.github.io/dom-examples/css-painting).
 
+- The "device-posture-api" directory contains an example demonstrating how to use the [Device Posture API](https://developer.mozilla.org/docs/Web/API/Device_Posture_API). [Run the example live](https://mdn.github.io/dom-examples/device-posture-api/).
+
 - The "drag-and-drop" directory is for examples and demos of the [HTML Drag and Drop](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) standard.
 
 - The "document-picture-in-picture" directory contains an example showing usage of the [Document Picture-in-Picture API](http://developer.mozilla.org/docs/Web/API/Document_Picture-in-Picture_API/). [See the example live](https://mdn.github.io/dom-examples/document-picture-in-picture/).
 
 - The "edit-context" directory contains examples demonstrating the [EditContext API](https://developer.mozilla.org/docs/Web/API/EditContext_API). See the [list of examples](https://github.com/mdn/dom-examples/tree/main/edit-context/).
+
+- The "filesystemobserver" directory contains an example demonstrating usage of the [FileSystemObserver](https://developer.mozilla.org/docs/Web/API/FileSystemObserver) API ([run the example live](https://mdn.github.io/dom-examples/filesystemobserver/)). This example was originally published on Glitch as [File System Observer Demo](https://file-system-observer.glitch.me/) by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
 
 - The "fullscreen-api" directory is for examples and demos of the [Fullscreen API](https://wiki.developer.mozilla.org/docs/Web/API/Fullscreen_API). Run the [example live](https://mdn.github.io/dom-examples/fullscreen-api/).
 
@@ -49,7 +53,7 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "pointer-lock" directory contains a basic demo to show usage of the Pointer Lock API. You can find more explanation of how the demo works at the main MDN [Pointer Lock API](https://developer.mozilla.org/docs/Web/API/Pointer_Lock_API) page. [Run the demo live](https://mdn.github.io/dom-examples/pointer-lock/).
 
-- The "popover-api" directory is for examples and demos of the [Popover API](https://developer.mozilla.org/docs/Web/API/Popover_API) standard. Go to the [Popover API demo index](popover-api/) to see what's available.
+- The "popover-api" directory is for examples and demos of the [Popover API](https://developer.mozilla.org/docs/Web/API/Popover_API) standard. Go to the [Popover API demo index](https://mdn.github.io/dom-examples/popover-api/) to see what's available.
 
 - The "reporting-api" directory contains a couple of basic demos to show usage of the Reporting API. You can find more explanation of how the API works in the main MDN [Reporting API](https://developer.mozilla.org/docs/Web/API/Reporting_API) docs. [Run the deprecation report demo live](https://mdn.github.io/dom-examples/reporting-api/deprecation_report.html).
 
