@@ -1,0 +1,145 @@
+/* General styling */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: inherit;
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+  height: 80px;
+  line-height: 80px;
+}
+
+h2 {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+li {
+  overflow: hidden;
+}
+
+li .summary {
+  font-weight: bold;
+}
+
+li .body-text {
+  display: none;
+}
+
+li.active-item .body-text {
+  display: block;
+}
+
+li:nth-child(1) {
+  background-color: #cbc0d3;
+  border: 20px solid #cbc0d3;
+}
+
+li:nth-child(2) {
+  background-color: #efd3d7;
+  border: 20px solid #efd3d7;
+}
+
+li:nth-child(3) {
+  background-color: #feeafa;
+  border: 20px solid #feeafa;
+}
+
+li:nth-child(4) {
+  background-color: #dee2ff;
+  border: 20px solid #dee2ff;
+}
+
+/* Links */
+
+a {
+  text-decoration: none;
+  color: rgb(0 0 255 / 0.8);
+}
+
+a:hover,
+a:focus {
+  color: rgb(100 100 255);
+}
+
+/* Layout */
+
+main {
+  height: calc(100% - 80px);
+  display: flex;
+  gap: 10px;
+  position: relative;
+}
+
+ul {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+article {
+  flex: 1;
+}
+
+li {
+  flex: 1;
+}
+
+/* form/checkbox styles */
+
+form {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+/* UI update styles */
+
+.active-item {
+  position: absolute;
+  z-index: 1;
+  translate: 310px;
+  width: calc(100% - 310px);
+  height: 100%;
+}
+
+.match-element-applied li {
+  view-transition-name: match-element;
+}
+
+/* View Transitions CSS */
+
+/* Adjust view transition speed */
+
+::view-transition-group(*) {
+  animation-duration: 0.5s;
+}
+
+/* Work around the differences in aspect-ratio of the before and after snapshots */
+
+html::view-transition-old(*),
+html::view-transition-new(*) {
+  height: 100%;
+}
