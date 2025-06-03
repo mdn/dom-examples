@@ -100,3 +100,9 @@ rate.onchange = function () {
 voiceSelect.onchange = function () {
   speak();
 };
+
+window.addEventListener('beforeunload', (event) => {
+  if (synth.speaking) {
+    synth.cancel();
+  }
+});
