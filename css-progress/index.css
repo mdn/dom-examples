@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+}
+
+body {
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+article {
+  position: relative;
+  min-width: 320px;
+  max-width: 1200px;
+  width: 70%;
+  height: 600px;
+  border: 3px solid black;
+}
+
+.progress {
+  width: calc((progress(var(--container-width), 320, 1200)) * 100%);
+  height: 4px;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  background-image: url(https://mdn.github.io/shared-assets/images/examples/wide-background.jpg);
+  background-position-x: calc(
+    progress(var(--container-width), 320, 1200) * 100%
+  );
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+  background-color: rgb(
+    calc(255 * progress(var(--container-width), 320, 1200))
+      calc(255 * progress(var(--container-width), 320, 1200)) 255 / 0.5
+  );
+  opacity: calc((progress(var(--container-width), 320, 1200) / 2) + 0.5);
+
+  /* Works without calc */
+  /* opacity: progress(var(--container-width), 320, 1200); */
+}
+
+.content h1,
+.content p {
+  background-color: rgb(255 255 255 / 0.5);
+  padding: 5px;
+}
+
+.credit {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  font-size: 0.8rem;
+  margin: 0;
+}

@@ -23,6 +23,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "css-painting" directory contains examples demonstrating the [CSS Painting API](https://developer.mozilla.org/docs/Web/API/CSS_Painting_API). See the [examples live](https://mdn.github.io/dom-examples/css-painting).
 
+- The "css-progress" directory contains an example demonstrating the [CSS `progress()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/progress). See the [example live](https://mdn.github.io/dom-examples/css-progress).
+
 - The "device-posture-api" directory contains an example demonstrating how to use the [Device Posture API](https://developer.mozilla.org/docs/Web/API/Device_Posture_API). [Run the example live](https://mdn.github.io/dom-examples/device-posture-api/).
 
 - The "drag-and-drop" directory is for examples and demos of the [HTML Drag and Drop](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) standard.
