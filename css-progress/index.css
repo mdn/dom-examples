@@ -55,6 +55,12 @@ article {
   /* opacity: progress(var(--container-width), 320, 1200); */
 }
 
+.content h1,
+.content p {
+  background-color: rgb(255 255 255 / 0.5);
+  padding: 5px;
+}
+
 .credit {
   position: absolute;
   bottom: 20px;
