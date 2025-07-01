@@ -13,7 +13,7 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "audiocontext-setsinkid" directory contains an example of how to use the [`AudioContext.setSinkId()`](https://developer.mozilla.org/docs/Web/API/AudioContext/setSinkId) method and related features. [Run the example live](https://mdn.github.io/dom-examples/audiocontext-setsinkid/).
 
-- The "auxclick" directory contains a basic example demonstrating the new <code>auxclick</code> event type. See [GlobalEventHandlers.auxclick](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onauxclick) for more details, or [run the example live](https://mdn.github.io/dom-examples/auxclick/).
+- The "auxclick" directory contains a basic example demonstrating the new `auxclick` event type. See [GlobalEventHandlers.auxclick](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onauxclick) for more details, or [run the example live](https://mdn.github.io/dom-examples/auxclick/).
 
 - The "canvas" directory contains an example "chroma-keying" demonstrating how to use the Canvas API to manipulate videos: see [Manipulating video using canvas](https://developer.mozilla.org/docs/Web/API/Canvas_API/Manipulating_video_using_canvas) or [run the example live](https://mdn.github.io/dom-examples/canvas/chroma-keying/).
 
@@ -94,6 +94,9 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 - The "webgpu-compute-demo" directory contains an example that demonstrates basic usage of the [WebGPU API](https://developer.mozilla.org/docs/Web/API/WebGPU_API) compute pipeline, which is used for performing general computation on the GPU. [View the demo live](https://mdn.github.io/dom-examples/webgpu-compute-demo/).
 
 - The "webgpu-render-demo" directory contains an example that demonstrates basic usage of the [WebGPU API](https://developer.mozilla.org/docs/Web/API/WebGPU_API) render pipeline, which is used for rendering high-performance graphics via the GPU. [View the demo live](https://mdn.github.io/dom-examples/webgpu-render-demo/).
+
+- The "webxr" directory contains an example showing how to [start up a WebXR session](https://mdn.github.io/dom-examples/webxr/).
+  See [Starting up and shutting down a WebXR session](https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API/Startup_and_shutdown) for details.
 
 - The "window-management-api" directory contains a basic demo to show usage of the [Window Management API](https://developer.mozilla.org/docs/Web/API/Window_Management_API). [View the demo live](https://mdn.github.io/dom-examples/window-management-api/).
 
