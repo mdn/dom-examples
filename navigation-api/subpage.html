@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Navigation API demo: subpage</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>
+      <a href="https://github.com/WICG/navigation-api/">Navigation API</a> demo
+    </h1>
+
+    <main>
+      <p>I am <code>subpage.html</code>!</p>
+
+      <p>
+        You can use either your browser back button, or the following link or
+        button, to go back to index.html. Either will perform a single-page
+        navigation, in browsers that support the navigation API!
+      </p>
+
+      <p><a href="/navigation-api/">Back to index.html</a>.</p>
+
+      <p><button onclick="history.back()">history.back()</button></p>
+    </main>
+
+    <p>
+      If you see this, you did a normal multi-page navigation, not a navigation
+      API-mediated single-page navigation.
+    </p>
+
+    <footer>
+      <a href="https://github.com/mdn/dom-examples/tree/main/navigation-api"
+        >View source on GitHub</a
+      >
+    </footer>
+  </body>
+</html>
