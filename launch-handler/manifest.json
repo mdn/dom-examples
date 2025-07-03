@@ -1,0 +1,19 @@
+{
+  "name": "Musicr 2.0",
+  "short_name": "Musicr",
+  "start_url": "./",
+  "id": "./",
+  "theme_color": "#000",
+  "background_color": "#000",
+  "icons": [
+    {
+      "src": "images/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "257x257"
+    }
+  ],
+  "display": "standalone",
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  }
+}

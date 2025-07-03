@@ -33,7 +33,7 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "edit-context" directory contains examples demonstrating the [EditContext API](https://developer.mozilla.org/docs/Web/API/EditContext_API). See the [list of examples](https://github.com/mdn/dom-examples/tree/main/edit-context/).
 
-- The "filesystemobserver" directory contains an example demonstrating usage of the [FileSystemObserver](https://developer.mozilla.org/docs/Web/API/FileSystemObserver) API ([run the example live](https://mdn.github.io/dom-examples/filesystemobserver/)). This example was originally published on Glitch as [File System Observer Demo](https://file-system-observer.glitch.me/) by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
+- The "filesystemobserver" directory contains an example demonstrating usage of the [FileSystemObserver](https://developer.mozilla.org/docs/Web/API/FileSystemObserver) API ([run the example live](https://mdn.github.io/dom-examples/filesystemobserver/)). This example was originally published on Glitch by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
 
 - The "fullscreen-api" directory is for examples and demos of the [Fullscreen API](https://wiki.developer.mozilla.org/docs/Web/API/Fullscreen_API). Run the [example live](https://mdn.github.io/dom-examples/fullscreen-api/).
 
@@ -42,6 +42,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 - The "indexeddb-api" directory contains a demo for the [IndexedDB API](https://mdn.github.io/dom-examples/indexeddb-api/index.html).
 
 - The "insert-adjacent" directory contains basic demos for [insertAdjacentElement](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentElement.html) and [insertAdjacentText](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentText.html).
+
+- The "launch-handler" directory contains a demo for the [Launch Handler API](https://developer.mozilla.org/en-US/docs/Web/API/Launch_Handler_API). [View the demo live](https://mdn.github.io/dom-examples/launch-handler/). This example was originally published on Glitch by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
 
 - The "matchmedia" directory contains a basic demo to test matchMedia functionality. See [Window.matchMedia](https://developer.mozilla.org/docs/Web/API/Window/matchMedia) for more details. [Run the demo live](https://mdn.github.io/dom-examples/matchmedia/).
 
