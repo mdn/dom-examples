@@ -1,0 +1,33 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+  margin: 2em;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+.param-table {
+  width: 30em;
+  text-align: left;
+  border: 1px solid black;
+}
+
+.param-table tr:nth-child(even) {
+  background-color: #eef;
+}
+
+.param-table th {
+  border-bottom: 1px solid #888;
+}
+
+.param-table th:nth-child(1) {
+  width: 10em;
+}
+
+.param-table td {
+  font: 14px Menlo, Courier, Monaco, monospace;
+}
