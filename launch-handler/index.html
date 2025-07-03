@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="images/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+    <title>Musicr 2.0</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" type="module"></script>
+  </head>
+  <body>
+    <h1>
+      <a href="/">🎧 Musicr 2.0</a>
+    </h1>
+    <div hidden class="not-supported">
+      Your browser does not support the Launch Handler API.
+    </div>
+    <ol>
+      <li>Install the app on a Chrome OS device.</li>
+      <li>
+        Send yourself a link in a chat application of the form
+        <code
+          ><span></span>?track=<strong
+            >https://example.com/music.mp3</strong
+          ></code
+        >. (You can customize
+        <code><strong>https://example.com/music.mp3</strong></code> for any URL
+        pointing to an audio file). You can
+        <button
+          type="button"
+          onclick="navigator.clipboard.writeText(`${location.origin}?track=audio/file_example_MP3_700KB.mp3`)">
+          Copy an example link
+        </button>
+        to get started.
+      </li>
+      <li>
+        Click the link in your chat app and notice how <em>Musicr 2.0</em> opens
+        and plays the track.
+      </li>
+      <li>
+        Click the link in your chat app again and notice how always just one
+        instance of <em>Musicr 2.0</em> exists.
+      </li>
+    </ol>
+    <media-controller audio>
+      <audio slot="media" src="audio/sample-9s.mp3"></audio>
+      <media-control-bar>
+        <media-play-button></media-play-button>
+        <media-time-display show-duration></media-time-display>
+        <media-time-range></media-time-range>
+        <media-playback-rate-button></media-playback-rate-button>
+        <media-mute-button></media-mute-button>
+        <media-volume-range></media-volume-range>
+        <media-text-display></media-text-display>
+      </media-control-bar>
+    </media-controller>
+  </body>
+</html>
