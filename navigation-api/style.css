@@ -1,0 +1,65 @@
+:root {
+  font-family: -apple-system, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  --root-padding: 24px;
+  padding: 0 var(--root-padding);
+  background: white;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+header {
+  margin-bottom: 1em;
+}
+
+main {
+  flex: 1;
+  border: 1px dashed blue;
+  padding: 1em;
+}
+
+footer {
+  text-align: center;
+  border-top: 1px solid gray;
+  margin: 30px calc(-1 * var(--root-padding)) 0;
+  padding: var(--root-padding);
+}
+
+h1,
+h2 {
+  line-height: 1.3em;
+  margin: 0.5rem 0 0.75rem;
+  font-weight: normal;
+}
+
+#console {
+  position: relative;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin: 2em 0;
+  white-space: pre;
+  font-family: monospace;
+  min-height: 2rem;
+}
+
+#console::before {
+  content: "Error Console";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0.1em;
+  background: white;
+}
+
+:focus {
+  outline: 1px solid green;
+}
