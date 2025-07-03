@@ -21,6 +21,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "channel-messaging-multimessage" directory contains another channel messaging demo, showing how multiple messages can be sent between browsing contexts. See [Channel Messaging API](https://developer.mozilla.org/docs/Web/API/Channel_Messaging_API) for more details. [Run the demo live](https://mdn.github.io/dom-examples/channel-messaging-multimessage/).
 
+- The "contact-picker" directory contains an example showing usage of the [Contact Picker API](https://developer.mozilla.org/en-US/docs/Web/API/Contact_Picker_API). [See the example live](https://mdn.github.io/dom-examples/contact-picker/).
+
 - The "css-painting" directory contains examples demonstrating the [CSS Painting API](https://developer.mozilla.org/docs/Web/API/CSS_Painting_API). See the [examples live](https://mdn.github.io/dom-examples/css-painting).
 
 - The "css-progress" directory contains an example demonstrating the [CSS `progress()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/progress). See the [example live](https://mdn.github.io/dom-examples/css-progress).
