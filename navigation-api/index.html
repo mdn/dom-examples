@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Navigation API demo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>
+      <a href="https://github.com/WICG/navigation-api/">Navigation API</a> demo
+    </h1>
+
+    <main>
+      <p>
+        I am <code>index.html</code>! I contain a normal link to
+        <code>subpage.html</code>:
+      </p>
+
+      <p><a href="subpage.html">subpage.html</a></p>
+
+      <p>
+        This link works without JavaScript and in all browsers. If you
+        <kbd>Ctrl</kbd> click or middle-click or right-click to open in a new
+        tab, that will all work as usual.
+      </p>
+
+      <p>
+        But if you're using Chromium &geq;105, and just activate it without
+        trying to open it in a new window, then it will do a single-page app
+        navigation!
+      </p>
+
+      <p>
+        Here is another link, but it's a hash navigation, so it shouldn't get
+        intercepted. You can still watch the console to see what happens with
+        the <code>navigate</code> event:
+      </p>
+
+      <p><a href="#console">#console</a></p>
+
+      <p>
+        Here are some buttons for other tests; you can watch your console to see
+        what happens.
+      </p>
+
+      <p><button onclick="history.back()">history.back()</button></p>
+
+      <p><button onclick="location.reload()">location.reload()</button></p>
+
+      <p>
+        <button
+          onclick="setTimeout(() => location.href = 'subpage.html', 2_000)">
+          Go to subpage in 2 seconds
+        </button>
+      </p>
+    </main>
+
+    <div id="console"></div>
+
+    <label>
+      <input type="checkbox" id="cancel-navigation" />
+      Use event.preventDefault() to show a "please don't leave" dialog (Chromium
+      &geq;112.0.5613.0 for traversals)
+    </label>
+
+    <label>
+      <input type="checkbox" id="add-delay" />
+      Add an artificial two-second delay to all navigations (should impact the
+      loading spinner/scroll restoration/focus reset/accessibility
+      announcements).
+    </label>
+
+    <p>
+      (Note: loading spinner control does not yet work for back/forward
+      traversals; that's happening next.)
+    </p>
+
+    <footer>
+      <a href="https://github.com/mdn/dom-examples/tree/main/navigation-api"
+        >View source on GitHub</a
+      >
+    </footer>
+
+    <p>
+      <a href="https://example.com"
+        >example.com link for accessibility testing</a
+      >
+    </p>
+
+    <dialog id="are-you-sure">
+      <h2>Please don't leave this page</h2>
+
+      <p>I've canceled the navigation! Please don't leave!</p>
+
+      <p>
+        (You can still leave by changing the URL in the URL bar, or closing the
+        window, or using the back button twice in a row without clicking on the
+        page in between.)
+      </p>
+
+      <form method="dialog">
+        <input type="submit" value="OK" />
+      </form>
+    </dialog>
+
+    <script type="module">
+      const output = document.querySelector("#console");
+      window.addEventListener("error", (e) => {
+        output.textContent += e.error.message + "\n" + e.error.stack + "\n\n";
+      });
+    </script>
+
+    <script type="module">
+      const addDelay = document.querySelector("#add-delay");
+      const cancelNavigation = document.querySelector("#cancel-navigation");
+      const areYouSure = document.querySelector("#are-you-sure");
+
+      navigation.addEventListener("navigate", (e) => {
+        console.log(e);
+
+        if (!e.canIntercept || e.hashChange) {
+          return;
+        }
+
+        if (cancelNavigation.checked) {
+          if (!e.cancelable) {
+            console.log(
+              "Tried to cancel the navigation, but it was not cancelable. Maybe because of lack of user activation; maybe because of Chromium <112.0.5613.0 and traversal."
+            );
+          } else {
+            e.preventDefault();
+            areYouSure.showModal();
+            return;
+          }
+        }
+
+        e.intercept({
+          async handler() {
+            e.signal.addEventListener("abort", () => {
+              const newMain = document.createElement("main");
+              newMain.textContent =
+                "Navigation was aborted, potentially by the browser stop button!";
+              document.querySelector("main").replaceWith(newMain);
+            });
+
+            if (addDelay.checked) {
+              await delay(2_000, { signal: e.signal });
+            }
+
+            const body = await (
+              await fetch(e.destination.url, { signal: e.signal })
+            ).text();
+            const { title, main } = getResult(body);
+
+            document.title = title;
+            document.querySelector("main").replaceWith(main);
+          },
+        });
+      });
+
+      navigation.addEventListener("navigatesuccess", () => {
+        console.log("navigatesuccess");
+        areYouSure.close();
+      });
+      navigation.addEventListener("navigateerror", (ev) => {
+        console.log("navigateerror", ev.error);
+      });
+
+      function getResult(htmlString) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, "text/html");
+        return { title: doc.title, main: doc.querySelector("main") };
+      }
+
+      function delay(ms, { signal = null } = {}) {
+        signal?.throwIfAborted();
+        return new Promise((resolve, reject) => {
+          const id = setTimeout(resolve, ms);
+
+          signal.addEventListener("abort", () => {
+            clearTimeout(id);
+            reject(new DOMException("Aborted", "AbortError"));
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
