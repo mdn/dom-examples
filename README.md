@@ -21,6 +21,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "channel-messaging-multimessage" directory contains another channel messaging demo, showing how multiple messages can be sent between browsing contexts. See [Channel Messaging API](https://developer.mozilla.org/docs/Web/API/Channel_Messaging_API) for more details. [Run the demo live](https://mdn.github.io/dom-examples/channel-messaging-multimessage/).
 
+- The "css-carousels" directory contains two examples showing how to use the CSS Carousel features — [a basic example featuring scroll buttons and scroll markers](https://mdn.github.io/dom-examples/css-carousels/scroll-button-scroll-marker/), and an [example that also uses the `::columns` pseudo-class to paginate the content](https://mdn.github.io/dom-examples/css-carousels/scroll-button-scroll-marker-with-columns/).
+
 - The "css-painting" directory contains examples demonstrating the [CSS Painting API](https://developer.mozilla.org/docs/Web/API/CSS_Painting_API). See the [examples live](https://mdn.github.io/dom-examples/css-painting).
 
 - The "css-progress" directory contains an example demonstrating the [CSS `progress()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/progress). See the [example live](https://mdn.github.io/dom-examples/css-progress).
