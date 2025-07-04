@@ -63,6 +63,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "reporting-api" directory contains a couple of basic demos to show usage of the Reporting API. You can find more explanation of how the API works in the main MDN [Reporting API](https://developer.mozilla.org/docs/Web/API/Reporting_API) docs. [Run the deprecation report demo live](https://mdn.github.io/dom-examples/reporting-api/deprecation_report.html).
 
+- The "requestvideoframecallback" directory contains an example that demonstrates the [requestVideoFrameCallback() method](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement/requestVideoFrameCallback). [View the demo live](https://mdn.github.io/dom-examples/requestvideoframecallback/).
+
 - The "resize-event" directory contains a basic demo to show how you can use the [resize event](https://developer.mozilla.org/docs/Web/API/Window/resize_event). Resize the browser window either by height or width to see the size of your current window. [Run the demo live](https://mdn.github.io/dom-examples/resize-event).
 
 - The "screen-capture-api" directory contains demos to show typical usage of the [Screen Capture API](https://developer.mozilla.org/docs/Web/API/Screen_Capture_API) and [Screen Capture Extensions](https://developer.mozilla.org/docs/Web/API/Screen_Capture_extensions).
