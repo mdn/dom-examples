@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="application/javascript">
+      const crossOrigin = "https://worker-playground-crossorigin.glitch.me";
+      const syntaxScriptName = "bad-syntax-worker.js";
+      const idTypoWorkerScriptName = "id-typo-worker.js";
+      const topLevelThrowScriptName = "top-level-throw.js";
+      const topLevelPartialScriptName = "top-level-partial.js";
+      const methodThrowScriptName = "method-throws-worker.js";
+
+      function makeRedirectedUrl(scriptName) {
+        return `${crossOrigin}/redirects/script.js?script=${scriptName}&cookieCheck=true`;
+      }
+
+      const w = new Worker("dynamic-importer.js");
+      let iMsg = 0;
+      function sendAndAwait(data) {
+        data.iMsg = ++iMsg;
+        return new Promise((resolve) => {
+          w.addEventListener(
+            "message",
+            (evt) => {
+              resolve(evt.data);
+            },
+            { once: true }
+          );
+          w.postMessage(data);
+        });
+      }
+
+      async function workerDriver() {
+        let msg;
+        msg = await sendAndAwait({
+          script: makeRedirectedUrl(syntaxScriptName),
+        });
+        console.log("Syntax error:", msg);
+        msg = await sendAndAwait({
+          script: makeRedirectedUrl(idTypoWorkerScriptName),
+        });
+        console.log("Id typo error:", msg);
+        msg = await sendAndAwait({
+          script: makeRedirectedUrl(topLevelThrowScriptName),
+        });
+        console.log("Top level throw error:", msg);
+        msg = await sendAndAwait({
+          script: makeRedirectedUrl(topLevelPartialScriptName),
+        });
+        console.log("Top level method throw after top-level throw error:", msg);
+        msg = await sendAndAwait({
+          script: makeRedirectedUrl(methodThrowScriptName),
+        });
+        console.log("Method throw error:", msg);
+
+        w.terminate();
+      }
+      workerDriver();
+    </script>
+  </body>
+</html>

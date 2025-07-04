@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="application/javascript">
+      var sw;
+      if (window.SharedWorker) {
+        sw = new SharedWorker("bad-syntax-worker.js");
+        sw.onerror = function (evt) {
+          console.log("got SharedWorker error event", evt);
+        };
+      } else {
+        console.log("No SharedWorker support in this browser!");
+      }
+      var dw = new Worker("bad-syntax-worker.js");
+      dw.onerror = function (evt) {
+        console.log("got DedicatedWorker error event", evt);
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+body {
+  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+  margin: 2em;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}

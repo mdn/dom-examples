@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Worker Playground</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- import the webpage's javascript file -->
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Worker Playground!</h1>
+
+    <p>
+      Type your code into the following text area, and the app will
+      <code>eval()</code> it in a Dedicated Worker, Shared Worker, and Service
+      Worker, letting you know whether it is supported in those contexts.
+    </p>
+
+    <textarea id="inp" cols="80" rows="10"></textarea>
+
+    <h3>Dedicated Worker output:</h3>
+    <textarea id="dedicated" cols="80" rows="10"></textarea>
+    <h3>Shared Worker output:</h3>
+    <textarea id="shared" cols="80" rows="10"></textarea>
+    <h3>Service Worker output:</h3>
+    <textarea id="service" cols="80" rows="10"></textarea>
+  </body>
+</html>
