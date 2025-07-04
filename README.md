@@ -43,9 +43,9 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "insert-adjacent" directory contains basic demos for [insertAdjacentElement](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentElement.html) and [insertAdjacentText](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentText.html).
 
-- The "launch-handler" directory contains a demo for the [Launch Handler API](https://developer.mozilla.org/en-US/docs/Web/API/Launch_Handler_API). [View the demo live](https://mdn.github.io/dom-examples/local-font-access/). This example was originally published on Glitch by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
+- The "launch-handler" directory contains a demo for the [Launch Handler API](https://developer.mozilla.org/en-US/docs/Web/API/Launch_Handler_API). [View the demo live](https://mdn.github.io/dom-examples/launch-handler/). This example was originally published on Glitch by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
 
-- The "local-font-access" directory contains a demo for the [Local Font Access API](https://developer.mozilla.org/en-US/docs/Web/API/Local_Font_Access_API). [View the demo live](https://mdn.github.io/dom-examples/launch-handler/).
+- The "local-font-access" directory contains a demo for the [Local Font Access API](https://developer.mozilla.org/en-US/docs/Web/API/Local_Font_Access_API). [View the demo live](https://mdn.github.io/dom-examples/local-font-access/).
 
 - The "matchmedia" directory contains a basic demo to test matchMedia functionality. See [Window.matchMedia](https://developer.mozilla.org/docs/Web/API/Window/matchMedia) for more details. [Run the demo live](https://mdn.github.io/dom-examples/matchmedia/).
 
