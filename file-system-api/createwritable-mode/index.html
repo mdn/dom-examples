@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>createWritable() mode test</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ol>
+      <li>
+        Select a file to write to: <button class="select">Select file</button>
+      </li>
+      <li>
+        <label for="filetext">Enter text to write to the file:</label>
+        <input type="text" id="filetext" name="filetext" disabled />
+      </li>
+      <li>
+        Write your text to the file:
+        <button class="write" disabled>Write text</button>
+      </li>
+    </ol>
+    <footer>
+      <p>
+        Check out the
+        <a
+          href="https://github.com/mdn/dom-examples/tree/main/file-system-api/createwritable-mode"
+          >source code</a
+        >.
+      </p>
+    </footer>
+    <script>
+      const selectBtn = document.querySelector(".select");
+      const writeBtn = document.querySelector(".write");
+      const fileText = document.querySelector("#filetext");
+
+      let writableStream = null;
+
+      async function selectFile() {
+        // Create a new handle
+        const handle = await window.showSaveFilePicker();
+
+        // Create a FileSystemWritableFileStream to write to
+        try {
+          writableStream = await handle.createWritable({
+            keepExistingData: true,
+            mode: "exclusive",
+          });
+        } catch (e) {
+          if (e.name === "NoModificationAllowedError") {
+            console.log(
+              `You can't access that file right now; someone else is trying to modify it. Try again later.`
+            );
+          } else {
+            console.log(e.message);
+          }
+        }
+
+        // Enable text field and write button, disable select button
+        fileText.disabled = false;
+        writeBtn.disabled = false;
+        selectBtn.disabled = true;
+      }
+
+      async function writeFile() {
+        // Write text to our file and empty out the text field
+        await writableStream.write(fileText.value);
+        fileText.value = "";
+
+        // Close the file and write the contents to disk.
+        await writableStream.close();
+
+        // Disable text field and write button, enable select button
+        fileText.disabled = true;
+        writeBtn.disabled = true;
+        selectBtn.disabled = false;
+
+        // Set writableStream back to null
+        writableStream = null;
+      }
+
+      selectBtn.addEventListener("click", selectFile);
+      writeBtn.addEventListener("click", writeFile);
+    </script>
+  </body>
+</html>
