@@ -1,0 +1,14 @@
+h1,
+h2,
+p,
+li {
+  font-family: sans-serif;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+li button {
+  margin-left: 10px;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>createSyncAccessHandle() mode test</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ol>
+      <li>
+        <label for="filetext">Enter text to write to the file:</label>
+        <input type="text" id="filetext" name="filetext" />
+      </li>
+      <li>
+        Write your text to the file: <button class="write">Write text</button>
+      </li>
+      <li>
+        Empty the file if it gets too full:
+        <button class="empty">Empty file</button>
+      </li>
+    </ol>
+    <footer>
+      <p>
+        Check out the
+        <a
+          href="https://github.com/mdn/dom-examples/tree/main/file-system-api/createsyncaccesshandle-mode"
+          >source code</a
+        >.
+      </p>
+    </footer>
+    <script>
+      const writeBtn = document.querySelector(".write");
+      const emptyBtn = document.querySelector(".empty");
+      const fileText = document.querySelector("#filetext");
+
+      const opfsWorker = new Worker("worker.js");
+
+      function writeToOPFS() {
+        opfsWorker.postMessage({
+          command: "write",
+          content: fileText.value,
+        });
+        console.log("Main script: Text posted to worker");
+        fileText.value = "";
+      }
+
+      function emptyOPFS() {
+        opfsWorker.postMessage({
+          command: "empty",
+        });
+      }
+
+      writeBtn.addEventListener("click", writeToOPFS);
+      emptyBtn.addEventListener("click", emptyOPFS);
+    </script>
+  </body>
+</html>
