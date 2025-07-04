@@ -8,7 +8,7 @@ const sampleText = document.querySelector(".sample-text");
 selectElemContainer.style.display = "none";
 
 async function populatefonts() {
-  startButton.textContent = "Fetching fonts...";
+  startButton.textContent = "Fetching local fonts...";
   startButton.disabled = true;
 
   try {
