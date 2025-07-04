@@ -25,7 +25,7 @@ function ensureKeepAlive(evt) {
     new Promise((resolve) => {
       curKeepAliveResolve = resolve;
       curKeepAliveTimer = setTimeout(keepAliveTimerFired, extraKeepAliveMs);
-    })
+    }),
   );
 }
 
