@@ -1,0 +1,76 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font: 1.1rem "Verdana", helvetica, arial, sans-serif;
+  margin: 1rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  color: #373fff;
+}
+
+canvas {
+  background-color: black;
+  border: 2px solid black;
+  width: 640px;
+  height: 340px;
+  margin-bottom: 1em;
+}
+
+kbd {
+  border-radius: 4px 2px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 0 1px 0 1px;
+  background-color: #eee;
+}
+
+.matrix-box {
+  border: 1px solid #999;
+  box-shadow: 2px 4px 4px #bbb;
+  width: 320px;
+  height: 11em;
+  font: 1em Verdana, Helvetica, "Open Sans", sans-serif;
+  display: inline-block;
+}
+
+.matrix-box h2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+  text-align: center;
+}
+
+.matrix-box div {
+  font-size: 1rem;
+}
+
+.button-box {
+  background-color: #ddd;
+  color: #000;
+  width: 660px;
+  border-radius: 0.5em 0.5em;
+  padding-left: 1em;
+  padding-top: 0.5em;
+  margin-bottom: 1em;
+  margin-top: 1.2em;
+}
+
+.button-row {
+  margin-bottom: 0.7em;
+}
+
+.button-row button {
+  margin-bottom: 1em;
+}
+
+.click-here {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+math {
+  font: 1.1rem Verdana, Helvetica, "Open Sans", sans-serif;
+}

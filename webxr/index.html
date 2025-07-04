@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WebXR: Example with rotating object and user movement</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./gl-matrix.js"></script>
+    <script src="./webxr-polyfill.js"></script>
+    <script src="./script.js" type="module" defer></script>
+  </head>
+  <body>
+    <h1>WebXR: Example with rotating object and user movement</h1>
+
+    <p>
+      In this example, a 3D cube is textured and shaded, spinning in place in
+      the center of the world. The user can then move around the world and
+      adjust the direction in which they're looking.
+    </p>
+    <p>
+      Click the "Enter WebXR" button to begin the XR session. Use the
+      <kbd>W</kbd>, <kbd>A</kbd>, <kbd>S</kbd>, and <kbd>D</kbd> keys to move up
+      and down and to slide left and right, and the <kbd>↑</kbd> and
+      <kbd>↓</kbd> arrow keys to move forward and backward. Press
+      <kbd>R</kbd> to reset everything.
+    </p>
+
+    <div class="button-box">
+      <div class="button-row">
+        <button id="enter-xr" disabled>Enter WebXR</button>
+        <span class="click-here"> ← Click here to toggle on and off</span>
+        <canvas width="2602" height="1384"></canvas><br />
+      </div>
+    </div>
+
+    <hr />
+    <h2>Matrices used to generate the scene</h2>
+    <section class="matrix-box" id="projection-matrix">
+      <h2>Projection matrix</h2>
+      <div></div>
+    </section>
+    <section class="matrix-box" id="model-view-matrix">
+      <h2>Model view matrix</h2>
+      <div></div>
+    </section>
+    <br />
+    <section class="matrix-box" id="camera-matrix">
+      <h2>Camera matrix</h2>
+      <div></div>
+    </section>
+    <section class="matrix-box" id="normal-matrix">
+      <h2>Normal matrix</h2>
+      <div></div>
+    </section>
+    <br />
+    <section class="matrix-box" id="mouse-matrix">
+      <h2>Mouse tracking matrix</h2>
+      <div></div>
+    </section>
+    <br />
+  </body>
+</html>
