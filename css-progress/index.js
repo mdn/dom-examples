@@ -1,10 +1,10 @@
 const articleElem = document.querySelector("article");
 
 function setContainerWidth() {
-  const clientRect = articleElem.getBoundingClientRect();
+  const clientWidth = articleElem.getBoundingClientRect().width;
   articleElem.style.setProperty(
     "--container-width",
-    Math.floor(clientRect.width)
+    `${Math.floor(clientWidth)}px`
   );
 }
 
