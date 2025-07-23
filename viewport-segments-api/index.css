@@ -1,0 +1,194 @@
+/* Document styles */
+
+html {
+  font-family: helvetica, arial, sans-serif;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background: #ffc8dd;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+}
+
+.fold {
+  background-color: #999;
+}
+
+/* Layout for the two main panes */
+
+.wrapper,
+.list-view,
+.detail-view {
+  position: relative;
+}
+
+.list-view,
+.detail-view {
+  margin: 20px;
+  background: white;
+}
+
+.list-view {
+  overflow: auto;
+  padding: 0 20px;
+  border-bottom: 20px solid white;
+  border-top: 20px solid white;
+}
+
+.detail-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 20px;
+  list-style-type: none;
+}
+
+a {
+  color: black;
+  display: block;
+  padding: 20px;
+  outline: none;
+  text-decoration: none;
+  border: 1px solid rgb(0 0 0 / 0.3);
+  transition: 0.4s all;
+}
+
+a:hover,
+a:focus {
+  border-left: 20px solid rgb(0 0 0 / 0.3);
+}
+
+ul li:nth-child(odd) {
+  background: #cdb4db;
+}
+
+ul li:nth-child(even) {
+  background: #ffafcc;
+}
+
+/* Heading and paragraph styles */
+
+h1 {
+  margin: 0 0 20px;
+}
+
+.posture-output {
+  background: #cdb4db;
+  padding: 20px;
+  margin: 0;
+  border: 1px solid rgb(0 0 0 / 0.3);
+}
+
+.segment-output {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #663880;
+  color: white;
+  padding: 10px;
+  border: 1px solid rgb(0 0 0 / 0.3);
+}
+
+.segment-output h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.segment-output p {
+  margin: 10px 0 0 0;
+}
+
+/* Media queries */
+
+@media (horizontal-viewport-segments: 1) and (orientation: landscape) {
+  .wrapper {
+    flex-direction: row;
+  }
+
+  .list-view,
+  .detail-view {
+    flex: 1;
+  }
+
+  .fold {
+    height: 100%;
+    width: 20px;
+  }
+}
+
+@media (horizontal-viewport-segments: 1) and (orientation: portrait) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .list-view,
+  .detail-view {
+    flex: 1;
+  }
+
+  .fold {
+    height: 20px;
+  }
+}
+
+/* Segments are laid out horizontally. */
+@media (horizontal-viewport-segments: 2) {
+  .wrapper {
+    flex-direction: row;
+  }
+
+  .list-view {
+    width: env(viewport-segment-width 0 0);
+  }
+
+  .fold {
+    width: calc(
+      env(viewport-segment-left 1 0) - env(viewport-segment-right 0 0)
+    );
+    background-color: black;
+    height: 100%;
+  }
+
+  .detail-view {
+    width: env(viewport-segment-width 1 0);
+  }
+}
+
+/* Segments are laid out vertically. */
+@media (vertical-viewport-segments: 2) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .list-view {
+    flex: 0 0 env(viewport-segment-height 0 0);
+  }
+
+  .fold {
+    width: 100%;
+    height: calc(
+      env(viewport-segment-top 0 1) - env(viewport-segment-bottom 0 0)
+    );
+    background-color: black;
+  }
+
+  .detail-view {
+    flex: 0 0 env(viewport-segment-height 0 1);
+  }
+}
