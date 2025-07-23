@@ -233,10 +233,12 @@ const commands = [
 ];
 
 const buttons = document.querySelector(".buttons");
+
 commands.forEach((command) => {
   const button = document.createElement("button");
   const supported = document.queryCommandSupported(command.name);
-  button.class = `btn btn-xs btn-${supported ? "succes" : "error"}`;
+  button.className = `btn btn-xs btn-${supported ? "success" : "error"}`;
+
   button.addEventListener("mousedown", (e) => e.preventDefault());
   if (supported) {
     button.addEventListener("click", () => {
@@ -245,7 +247,11 @@ commands.forEach((command) => {
         : "";
       document.execCommand(command.name, false, val);
     });
+  } else {
+    button.setAttribute("disabled", "true");
   }
-  button.innerHTML = `<i class="${cmd.icon ? `fa fa-${cmd.icon}` : ""}"></i> ${command.name}`;
+  button.innerHTML = `<i class="${
+    command.icon ? `fa fa-${command.icon}` : ""
+  }"></i> ${command.name}`;
   buttons.appendChild(button);
 });
