@@ -177,7 +177,7 @@ h1 {
   }
 
   .list-view {
-    flex: 0 0 env(viewport-segment-height 0 0);
+    height: env(viewport-segment-height 0 0);
   }
 
   .fold {
@@ -189,6 +189,6 @@ h1 {
   }
 
   .detail-view {
-    flex: 0 0 env(viewport-segment-height 0 1);
+    height: env(viewport-segment-height 0 1);
   }
 }
