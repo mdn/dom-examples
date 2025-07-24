@@ -116,7 +116,7 @@ h1 {
 
 /* Media queries */
 
-@media (horizontal-viewport-segments: 1) and (vertical-viewport-segments: 1) and (orientation: landscape) {
+@media (orientation: landscape) {
   .wrapper {
     flex-direction: row;
   }
@@ -132,7 +132,7 @@ h1 {
   }
 }
 
-@media (horizontal-viewport-segments: 1) and (vertical-viewport-segments: 1) and (orientation: portrait) {
+@media (orientation: portrait) {
   .wrapper {
     flex-direction: column;
   }
