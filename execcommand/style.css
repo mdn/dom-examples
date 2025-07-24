@@ -3,20 +3,19 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 .jumbotron {
-  padding: 0 0 20px;
   font-family: "Inconsolata", monospace;
 }
-.btn-succes {
+.btn-success {
   background-color: green;
-  color: yellow;
+  color: white;
 }
 .btn-error {
   background-color: grey;
   color: black;
 }
 
-.btn-succes,
-.btn-succes {
+.btn-success,
+.btn-success {
   margin: 5px;
 }
 i {
