@@ -36,6 +36,7 @@ function addSegmentOutput(segments, i, elem) {
 }
 
 function reportSegments() {
+  console.log("change");
   // Remove all previous segment output elements before adding more
   document.querySelectorAll(".segment-output").forEach((elem) => elem.remove());
 
@@ -51,3 +52,5 @@ function reportSegments() {
 
 reportSegments();
 window.addEventListener("resize", reportSegments);
+navigator.devicePosture.addEventListener("change", reportSegments);
+window.screen.orientation.addEventListener("change", reportSegments);
