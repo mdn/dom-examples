@@ -45,7 +45,7 @@ function reportSegments() {
     addSegmentOutput(segments, 0, wrapperElem);
   } else {
     addSegmentOutput(segments, 0, listViewElem);
-    addSegmentOutput(segments, 1, listViewElem);
+    addSegmentOutput(segments, 1, detailViewElem);
   }
 }
 
