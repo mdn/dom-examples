@@ -12,7 +12,6 @@ list.addEventListener("click", (event) => {
 
 function reportPostureOutput() {
   postureOutput.textContent = `Device posture: ${navigator.devicePosture.type}`;
-  console.log("event fired");
 }
 
 reportPostureOutput();
@@ -24,21 +23,21 @@ const wrapperElem = document.querySelector(".wrapper");
 const listViewElem = document.querySelector(".list-view");
 const detailViewElem = document.querySelector(".detail-view");
 
-function addSegmentOutput(segments, index, elem) {
-  const segment = segments[index];
-  elem.innerHTML += `
-  <div class="segment-output">
-  <h2>Viewport segment ${index + 1}</h2>
-  <p>${segment.width}px x ${segment.height}px</p>
-  </div>
-  `;
+function addSegmentOutput(segments, i, elem) {
+  const segment = segments[i];
+
+  const divElem = document.createElement("div");
+  divElem.className = "segment-output";
+
+  elem.appendChild(divElem);
+
+  divElem.innerHTML = `<h2>Viewport segment ${i + 1}</h2>
+  <p>${segment.width}px x ${segment.height}px</p>`;
 }
 
 function reportSegments() {
   // Remove all previous segment output elements before adding more
-  document
-    .querySelectorAll(".segment-output")
-    .forEach((segment) => segment.remove());
+  document.querySelectorAll(".segment-output").forEach((elem) => elem.remove());
 
   const segments = window.viewport.segments;
 
