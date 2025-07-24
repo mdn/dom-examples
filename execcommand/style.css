@@ -1,0 +1,38 @@
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700|Open+Sans:400,800);
+body {
+  font-family: "Open Sans", sans-serif;
+}
+.jumbotron {
+  font-family: "Inconsolata", monospace;
+}
+.btn-success {
+  background-color: green;
+  color: white;
+}
+.btn-error {
+  background-color: grey;
+  color: black;
+}
+
+.btn-success,
+.btn-success {
+  margin: 5px;
+}
+i {
+  color: white;
+}
+.btn-error i {
+  color: black;
+}
+
+.btn {
+  user-select: none;
+}
+
+:focus {
+  outline: none;
+}
+
+img {
+  margin-top: 30px;
+}
