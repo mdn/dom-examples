@@ -36,7 +36,6 @@ function addSegmentOutput(segments, i, elem) {
 }
 
 function reportSegments() {
-  console.log("change");
   // Remove all previous segment output elements before adding more
   document.querySelectorAll(".segment-output").forEach((elem) => elem.remove());
 
