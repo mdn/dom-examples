@@ -52,4 +52,3 @@ function reportSegments() {
 reportSegments();
 window.addEventListener("resize", reportSegments);
 navigator.devicePosture.addEventListener("change", reportSegments);
-window.screen.orientation.addEventListener("change", reportSegments);
