@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="application/javascript">
+      var sw = new SharedWorker("id-typo-worker.js");
+      sw.onerror = function (evt) {
+        console.log("got SharedWorker error event", evt);
+      };
+    </script>
+  </body>
+</html>

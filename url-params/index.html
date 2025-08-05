@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>URL API demo | MDN Web Docs</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <p>
+      This page shows how to use the
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL_API"
+        >URL API</a
+      >
+      in JavaScript. The URL is parsed and the
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams"
+        ><code>searchParams</code></a
+      >
+      are sorted and placed in the table below.
+    </p>
+    <p>
+      Try loading this page with different parameter lists or try some of the
+      following examples:
+    </p>
+    <ul>
+      <li>
+        <a href="?dogName=yoshi"><code>?dogName=yoshi</code></a>
+      </li>
+      <li>
+        <a href="?from=MDN&excitement=high&likelihood=inconceivable">
+          <code>?from=MDN&excitement=high&likelihood=inconceivable</code>
+        </a>
+      </li>
+      <li>
+        <a href="?firstName=Ayse&food=rice%20pudding"
+          ><code>?firstName=Ayse&food=rice%20pudding</code></a
+        >
+      </li>
+    </ul>
+    <pre id="url-output"></pre>
+    <table class="param-table">
+      <thead>
+        <tr>
+          <th>Parameter</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+    </table>
+  </body>
+</html>
