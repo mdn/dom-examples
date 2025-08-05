@@ -1,11 +1,14 @@
-const list = document.querySelector("ul");
+const listLinks = document.querySelectorAll("ul a");
 const detailHeading = document.querySelector(".detail-view h1");
 const postureOutput = document.querySelector(".posture-output");
 
 // Update detail view when list item is clicked on
 
-list.addEventListener("click", (event) => {
-  detailHeading.textContent = event.target.textContent;
+listLinks.forEach(item => {
+  item.addEventListener("click", (event) => {
+    event.preventDefault();
+    detailHeading.textContent = event.target.textContent;
+  });
 });
 
 // Output device posture when the posture changes
