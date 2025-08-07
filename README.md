@@ -23,6 +23,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "contact-picker" directory contains an example showing usage of the [Contact Picker API](https://developer.mozilla.org/en-US/docs/Web/API/Contact_Picker_API). [See the example live](https://mdn.github.io/dom-examples/contact-picker/).
 
+- The "css-carousels" directory contains two examples showing how to use the CSS Carousel features — [a basic example featuring scroll buttons and scroll markers](https://mdn.github.io/dom-examples/css-carousels/scroll-button-scroll-marker/), and an [example that also uses the `::columns` pseudo-class to paginate the content](https://mdn.github.io/dom-examples/css-carousels/scroll-button-scroll-marker-with-columns/).
+
 - The "css-painting" directory contains examples demonstrating the [CSS Painting API](https://developer.mozilla.org/docs/Web/API/CSS_Painting_API). See the [examples live](https://mdn.github.io/dom-examples/css-painting).
 
 - The "css-progress" directory contains an example demonstrating the [CSS `progress()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/progress). See the [example live](https://mdn.github.io/dom-examples/css-progress).
