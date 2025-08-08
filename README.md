@@ -112,6 +112,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "webgpu-render-demo" directory contains an example that demonstrates basic usage of the [WebGPU API](https://developer.mozilla.org/docs/Web/API/WebGPU_API) render pipeline, which is used for rendering high-performance graphics via the GPU. [View the demo live](https://mdn.github.io/dom-examples/webgpu-render-demo/).
 
+- The "websockets" directory contains an example that demonstrates basic usage of the [WebSockets API](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
+
 - The "webxr" directory contains an example showing how to [start up a WebXR session](https://mdn.github.io/dom-examples/webxr/).
   See [Starting up and shutting down a WebXR session](https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API/Startup_and_shutdown) for details.
 
