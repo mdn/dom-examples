@@ -1,14 +1,16 @@
 /* Borrowed from Miriam Suzanne's custom CSS functions post
    https://www.oddbird.net/2025/04/11/custom-functions/  */
-@function --transparent(--color <color>, --alpha <number>: 0.8) {
+@function --transparent(--color <color>, --alpha <number>: 0.8) returns <color> {
   result: oklch(from var(--color) l c h / var(--alpha));
 }
 
-@function --lighter(--color <color>, --lightness-adjust <number>: 0.2) {
+@function --lighter(--color <color>, --lightness-adjust <number>: 0.2) returns
+  <color> {
   result: oklch(from var(--color) calc(l + var(--lightness-adjust)) c h);
 }
 
-@function --darker(--color <color>, --lightness-adjust <number>: 0.2) {
+@function --darker(--color <color>, --lightness-adjust <number>: 0.2) returns
+  <color> {
   result: oklch(from var(--color) calc(l - var(--lightness-adjust)) c h);
 }
 
