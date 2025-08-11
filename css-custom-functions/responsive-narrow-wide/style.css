@@ -1,0 +1,29 @@
+@function --narrow-wide(--narrow, --wide) {
+  result: var(--wide);
+  @media (width < 700px) {
+    result: var(--narrow);
+  }
+}
+
+/*
+This could also be written using a CSS if() function, like so:
+@function --narrow-wide(--narrow, --wide) {
+  result: if(media(width < 700px): var(--narrow) ; else: var(--wide));
+}
+*/
+
+body {
+  display: grid;
+  grid-template-columns: repeat(--narrow-wide(1, 3), 1fr);
+  gap: --narrow-wide(0, 20px);
+  padding: 0 20px;
+}
+
+h2 {
+  font-size: --narrow-wide(2.5rem, 2rem);
+}
+
+p {
+  font-size: --narrow-wide(1.4rem, 1rem);
+  line-height: 1.5;
+}

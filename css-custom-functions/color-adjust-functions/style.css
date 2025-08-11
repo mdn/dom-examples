@@ -1,0 +1,50 @@
+/* Borrowed from Miriam Suzanne's custom CSS functions post
+   https://www.oddbird.net/2025/04/11/custom-functions/  */
+@function --transparent(--color <color>, --alpha <number>: 0.8) {
+  result: oklch(from var(--color) l c h / var(--alpha));
+}
+
+@function --lighter(--color <color>, --lightness-adjust <number>: 0.2) {
+  result: oklch(from var(--color) calc(l + var(--lightness-adjust)) c h);
+}
+
+@function --darker(--color <color>, --lightness-adjust <number>: 0.2) {
+  result: oklch(from var(--color) calc(l - var(--lightness-adjust)) c h);
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 20px,
+    black 20px 40px
+  );
+}
+
+section {
+  width: 50%;
+  padding: 0 20px;
+  border-radius: 20px;
+  --base-color: #faa6ff;
+  background-color: --transparent(var(--base-color));
+  border: 3px solid --lighter(var(--base-color), 0.1);
+  color: --darker(var(--base-color), 0.55);
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1.4rem;
+  line-height: 1.5;
+}

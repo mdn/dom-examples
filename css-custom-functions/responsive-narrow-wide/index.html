@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Responsive narrow-wide function</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <section>
+      <h2>Responsive narrow-wide function</h2>
+      <p>
+        This example features a custom CSS function called
+        <code>--narrow-wide()</code>, which takes two parameters — a value to
+        apply to a narrow layout and a value to apply to a wide layout.
+      </p>
+    </section>
+    <section>
+      <h2>Usage</h2>
+      <p>
+        The custom function is very useful — you can use it as the value of just
+        about any property where you want to provide a choice of values — one
+        for a narrow layout and one for a wide layout.
+      </p>
+    </section>
+    <section>
+      <h2>Defining the function</h2>
+      <p>
+        The <code>--narrow-wide()</code> function is built using two CSS custom
+        properties and a media query to detect whether the viewport is narrower
+        or wider than the provided breakpoint, and return one value or the other
+        as appropriate.
+      </p>
+    </section>
+  </body>
+</html>
