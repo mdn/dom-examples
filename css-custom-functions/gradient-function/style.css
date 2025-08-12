@@ -30,6 +30,11 @@ section {
   border: 1px solid black;
 }
 
+h2, p {
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: rgb(255 255 255 / 80%);
+}
 h2 {
   font-size: 1.5rem;
 }
