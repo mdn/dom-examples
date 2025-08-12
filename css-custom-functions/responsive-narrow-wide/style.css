@@ -12,6 +12,16 @@ This could also be written using a CSS if() function, like so:
 }
 */
 
+/* Function that returns a value of none to hide a "not supported" banner
+if CSS custom functions are supported. If not, the banner will show. */
+@function --supports() {
+  result: none;
+}
+
+html {
+  font-family: system-ui;
+}
+
 body {
   display: grid;
   grid-template-columns: repeat(--narrow-wide(1, 3), 1fr);
@@ -26,4 +36,16 @@ h2 {
 p {
   font-size: --narrow-wide(1.4rem, 1rem);
   line-height: 1.5;
+}
+
+/* Styling for the support banner */
+.support {
+  border-radius: 0;
+  border: 6px dashed black;
+  background-color: #fef0c3;
+  font-size: 1.3rem;
+  padding: 1rem;
+  position: absolute;
+  inset: 25%;
+  display: --supports();
 }

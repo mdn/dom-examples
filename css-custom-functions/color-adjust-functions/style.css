@@ -14,8 +14,14 @@
   result: oklch(from var(--color) calc(l - var(--lightness-adjust)) c h);
 }
 
+/* Function that returns a value of none to hide a "not supported" banner
+if CSS custom functions are supported. If not, the banner will show. */
+@function --supports() {
+  result: none;
+}
+
 html {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui;
   height: 100%;
 }
 
@@ -49,4 +55,16 @@ h2 {
 p {
   font-size: 1.4rem;
   line-height: 1.5;
+}
+
+/* Styling for the support banner */
+.support {
+  border-radius: 0;
+  border: 6px dashed black;
+  background-color: #fef0c3;
+  font-size: 1.3rem;
+  padding: 1rem;
+  position: absolute;
+  inset: 25%;
+  display: --supports();
 }
