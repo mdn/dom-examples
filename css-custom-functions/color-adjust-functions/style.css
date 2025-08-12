@@ -28,7 +28,7 @@ body {
   background-image: repeating-linear-gradient(
     -45deg,
     transparent 0 20px,
-    black 20px 40px
+    lightgrey 20px 40px
   );
 }
 
