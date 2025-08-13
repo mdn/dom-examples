@@ -1,0 +1,78 @@
+/* CSS gradient code adapted from the Shippo pattern in Lea Verou's
+CSS3 patterns gallery: https://projects.verou.me/css3patterns/#shippo */
+@function --shippo-pattern(--size <length>, --tint <color>) {
+  result: radial-gradient(closest-side, transparent 98%, rgba(0 0 0 / 0.3) 99%)
+      0 0 / var(--size) var(--size),
+    radial-gradient(closest-side, transparent 98%, rgba(0 0 0 / 0.3) 99%)
+      calc(var(--size) / 2) calc(var(--size) / 2) / var(--size) var(--size)
+      var(--tint);
+}
+
+/* Function that returns a value of none to hide a "not supported" banner
+if CSS custom functions are supported. If not, the banner will show. */
+@function --supports() {
+  result: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: system-ui;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  height: inherit;
+  display: flex;
+  gap: 20px;
+}
+
+section {
+  border-radius: 20px;
+  flex: 1;
+  padding: 0 20px;
+  border: 1px solid black;
+}
+
+h2,
+p {
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: rgb(255 255 255 / 80%);
+}
+h2 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+#one {
+  background: --shippo-pattern(100px, #def);
+}
+
+#two {
+  background: --shippo-pattern(3.5rem, lime);
+}
+
+#three {
+  background: --shippo-pattern(10vw, purple);
+}
+
+/* Styling for the support banner */
+.support {
+  border-radius: 0;
+  border: 6px dashed black;
+  background-color: #fef0c3;
+  font-size: 1.3rem;
+  padding: 1rem;
+  position: absolute;
+  inset: 25%;
+  display: --supports();
+}
