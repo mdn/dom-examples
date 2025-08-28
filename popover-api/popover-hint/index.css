@@ -5,7 +5,7 @@
 }
 
 html {
-  font-family: sans-serif;
+  font-family: system-ui;
   height: 100%;
   overflow: hidden;
 }
@@ -14,20 +14,21 @@ body {
   height: inherit;
   background: #ccc;
   margin: 0;
-}
-
-#wrapper {
-  height: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#wrapper {
+  position: relative;
+  width: 60%;
+  max-width: 500px;
 }
 
 /* Button bar styling */
 
 #button-bar {
   height: 48px;
-  width: 30%;
   min-width: 300px;
   padding: 8px;
   border-radius: 6px;
@@ -36,6 +37,7 @@ body {
   display: flex;
   justify-content: space-around;
   gap: 10px;
+  z-index: 1;
 }
 
 /* Button styling */
@@ -61,6 +63,7 @@ body {
 [popover="auto"] {
   inset: unset;
   position: absolute;
+  bottom: 0;
   bottom: calc(anchor(top) + 20px);
   justify-self: anchor-center;
   margin: 0;
@@ -126,11 +129,24 @@ body {
   margin: 0;
   padding: 16px;
   box-shadow: 1px 1px 3px #999;
+  z-index: -1;
+}
+
+.help-para p {
+  margin: 0;
+}
+
+.help-para p:first-child {
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 640px) {
   .help-para {
     width: auto;
     right: 16px;
+  }
+
+  #wrapper {
+    width: 90%;
   }
 }
