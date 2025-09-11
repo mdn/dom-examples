@@ -23,19 +23,19 @@
   derive an AES-GCM key using HKDF.
   */
   function getKey(keyMaterial, salt) {
-    return window.crypto.subtle.deriveKey(
-      {
-        name: "HKDF",
-        salt: salt,
-        info: new Uint8Array("Encryption example"),
-        hash: "SHA-256",
-      },
-      keyMaterial,
-      { name: "AES-GCM", length: 256 },
-      true,
-      ["encrypt", "decrypt"]
-    );
-  }
+  return window.crypto.subtle.deriveKey(
+    {
+      name: "HKDF",
+      salt,   // ✅ shorthand
+      info: new Uint8Array("Encryption example"),
+      hash: "SHA-256",
+    },
+    keyMaterial,
+    { name: "AES-GCM", length: 256 },
+    true,
+    ["encrypt", "decrypt"]
+  );
+}
 
   /*
     Encrypt the message using the secret key.
