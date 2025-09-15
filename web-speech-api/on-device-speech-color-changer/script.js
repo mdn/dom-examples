@@ -1,9 +1,6 @@
 const colors = [
   "aqua",
-  "azure",
-  "beige",
   "bisque",
-  "black",
   "blue",
   "brown",
   "chocolate",
@@ -51,25 +48,13 @@ const colors = [
   "tomato",
   "turquoise",
   "violet",
-  "white",
   "yellow",
 ];
 
 const recognition = new SpeechRecognition();
-if (SpeechGrammarList) {
-  // SpeechGrammarList is not currently available in Safari, and does not have any effect in any other browser.
-  // This code is provided as a demonstration of possible capability. You may choose not to use it.
-  const speechRecognitionList = new SpeechGrammarList();
-  const grammar = `#JSGF V1.0; grammar colors; public <color> = ${colors.join(
-    " | "
-  )};`;
-  speechRecognitionList.addFromString(grammar, 1);
-  recognition.grammars = speechRecognitionList;
-}
 recognition.continuous = false;
 recognition.lang = "en-US";
 recognition.interimResults = false;
-// New processLocally property
 recognition.processLocally = true;
 
 const diagnostic = document.querySelector(".output");
@@ -81,7 +66,7 @@ colors.forEach(function (v, i, a) {
   console.log(v, i);
   colorHTML += `<span style="background-color: ${v};">${v}</span> `;
 });
-hints.innerHTML = `Tap/click then say a color to change the background color of the app. Try ${colorHTML}`;
+hints.innerHTML = `Tap/click then say a color to change the background color of the app. For example, you could try ${colorHTML}`;
 
 document.body.addEventListener("click", () => {
   // check availability of target language
