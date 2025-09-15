@@ -1,5 +1,6 @@
 const colors = [
   "aqua",
+  "azure",
   "bisque",
   "blue",
   "brown",
@@ -51,11 +52,24 @@ const colors = [
   "yellow",
 ];
 
+const phraseData = [
+  { phrase: "azure", boost: 10.0 },
+  { phrase: "khaki", boost: 3.0 },
+  { phrase: "tan", boost: 2.0 },
+];
+
+const phraseObjects = phraseData.map(
+  (p) => new SpeechRecognitionPhrase(p.phrase, p.boost)
+);
+
 const recognition = new SpeechRecognition();
 recognition.continuous = false;
 recognition.lang = "en-US";
 recognition.interimResults = false;
 recognition.processLocally = true;
+recognition.phrases = phraseObjects;
+
+recognition.phrases.push(new SpeechRecognitionPhrase("thistle", 5.0));
 
 const diagnostic = document.querySelector(".output");
 const bg = document.querySelector("html");
