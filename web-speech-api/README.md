@@ -20,6 +20,12 @@ This current works only on Chrome/Chrome Mobile. To get this code running succes
 
 [Run phrase matcher demo live](https://mdn.github.io/dom-examples/web-speech-api/phrase-matcher/)
 
+## Audio track recognition demo
+
+[Run audio track recognition demo live](https://mdn.github.io/dom-examples/web-speech-api/audio-track-recognition/)
+
+Press the button to load an audio file, run speech recognition on it, and output a transcript of the speech in the audio file to the UI.
+
 ## Speak easy synthesis demo
 
 [Run synthesis demo live](https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/)
