@@ -52,18 +52,18 @@ var colors = [
   "yellow",
 ];
 
-var recognition = new SpeechRecognition();
+const recognition = new SpeechRecognition();
 recognition.continuous = false;
 recognition.lang = "en-US";
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
-var diagnostic = document.querySelector(".output");
-var bg = document.querySelector("html");
-var hints = document.querySelector(".hints");
+const diagnostic = document.querySelector(".output");
+const bg = document.querySelector("html");
+const hints = document.querySelector(".hints");
 const startBtn = document.querySelector("button");
 
-var colorHTML = "";
+let colorHTML = "";
 colors.forEach(function (v, i, a) {
   console.log(v, i);
   colorHTML += '<span style="background-color:' + v + ';"> ' + v + " </span>";
@@ -79,7 +79,7 @@ startBtn.onclick = function () {
 };
 
 recognition.onresult = function (event) {
-  var color = event.results[0][0].transcript;
+  const color = event.results[0][0].transcript;
   diagnostic.textContent = "Result received: " + color + ".";
   bg.style.backgroundColor = color;
   console.log("Confidence: " + event.results[0][0].confidence);
