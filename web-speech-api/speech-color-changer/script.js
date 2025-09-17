@@ -61,6 +61,7 @@ recognition.maxAlternatives = 1;
 var diagnostic = document.querySelector(".output");
 var bg = document.querySelector("html");
 var hints = document.querySelector(".hints");
+const startBtn = document.querySelector("button");
 
 var colorHTML = "";
 colors.forEach(function (v, i, a) {
@@ -68,24 +69,16 @@ colors.forEach(function (v, i, a) {
   colorHTML += '<span style="background-color:' + v + ';"> ' + v + " </span>";
 });
 hints.innerHTML =
-  "Tap/click then say a color to change the background color of the app. Try " +
+  "Press the button then say a color to change the background color of the app. Try " +
   colorHTML +
   ".";
 
-document.body.onclick = function () {
+startBtn.onclick = function () {
   recognition.start();
   console.log("Ready to receive a color command.");
 };
 
 recognition.onresult = function (event) {
-  // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
-  // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
-  // It has a getter so it can be accessed like an array
-  // The first [0] returns the SpeechRecognitionResult at the last position.
-  // Each SpeechRecognitionResult object contains SpeechRecognitionAlternative objects that contain individual results.
-  // These also have getters so they can be accessed like arrays.
-  // The second [0] returns the SpeechRecognitionAlternative at position 0.
-  // We then return the transcript property of the SpeechRecognitionAlternative object
   var color = event.results[0][0].transcript;
   diagnostic.textContent = "Result received: " + color + ".";
   bg.style.backgroundColor = color;

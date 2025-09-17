@@ -12,7 +12,7 @@ body {
   overflow: hidden;
   max-width: 800px;
   margin: 0 auto;
-  font-family: sans-serif;
+  font-family: system-ui;
   text-align: center;
 }
 

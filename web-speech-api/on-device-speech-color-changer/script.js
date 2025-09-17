@@ -74,15 +74,16 @@ recognition.phrases.push(new SpeechRecognitionPhrase("thistle", 5.0));
 const diagnostic = document.querySelector(".output");
 const bg = document.querySelector("html");
 const hints = document.querySelector(".hints");
+const startBtn = document.querySelector("button");
 
 let colorHTML = "";
 colors.forEach(function (v, i, a) {
   console.log(v, i);
   colorHTML += `<span style="background-color: ${v};">${v}</span> `;
 });
-hints.innerHTML = `Tap/click then say a color to change the background color of the app. For example, you could try ${colorHTML}`;
+hints.innerHTML = `Press the button then say a color to change the background color of the app. For example, you could try ${colorHTML}`;
 
-document.body.addEventListener("click", () => {
+startBtn.addEventListener("click", () => {
   // check availability of target language
   SpeechRecognition.available({ langs: ["en-US"], processLocally: true }).then(
     (result) => {
@@ -109,14 +110,6 @@ document.body.addEventListener("click", () => {
 });
 
 recognition.addEventListener("result", (event) => {
-  // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
-  // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
-  // It has a getter so it can be accessed like an array
-  // The first [0] returns the SpeechRecognitionResult at the last position.
-  // Each SpeechRecognitionResult object contains SpeechRecognitionAlternative objects that contain individual results.
-  // These also have getters so they can be accessed like arrays.
-  // The second [0] returns the SpeechRecognitionAlternative at position 0.
-  // We then return the transcript property of the SpeechRecognitionAlternative object
   let color = event.results[0][0].transcript;
   // Remove whitespace from recognized speech
   color = color.replace(/\s+/g, "");
