@@ -20,7 +20,6 @@ body {
 }
 
 #wrapper {
-  position: relative;
   width: 60%;
   max-width: 500px;
 }
@@ -37,7 +36,8 @@ body {
   display: flex;
   justify-content: space-around;
   gap: 10px;
-  z-index: 1;
+  z-index: 2;
+  position: relative;
 }
 
 /* Button styling */
@@ -129,7 +129,7 @@ body {
   margin: 0;
   padding: 16px;
   box-shadow: 1px 1px 3px #999;
-  z-index: -1;
+  z-index: 1;
 }
 
 .help-para p {
