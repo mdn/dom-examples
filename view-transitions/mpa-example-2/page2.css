@@ -2,7 +2,7 @@
     navigation: auto;
 }
 
-@keyframes slideFromRight {
+@keyframes slide-from-right {
     from {
         transform: translateX(100vw);
     }
@@ -22,5 +22,5 @@
 }
 
 ::view-transition-new(root) {
-    animation: slideFromRight 0.3s;
+    animation: slide-from-right 0.3s;
 }
