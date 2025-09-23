@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Persistent notifications</title>
+    <script src="page.js" defer></script>
+  </head>
+
+  <body>
+    <button id="notify-me">Notify me!</button>
+
+    <p>This website shows how to make and handle persistent notifications.</p>
+
+    <p>
+      It registers a service worker, whose job is to handle notifications. When
+      the "Notify me!" button is clicked, the website does the following:
+    </p>
+    <ol>
+      <li>
+        Checks whether the website has permission to show notifications, asking
+        for permission if necessary.
+      </li>
+      <li>If permission is granted, starts a one-second timer.</li>
+      <li>
+        When the timer expires, gets the service worker registration, waiting
+        for it to become active if necessary.
+      </li>
+      <li>
+        Calls <code>registration.showNotification()</code>, passing in two
+        actions.
+      </li>
+    </ol>
+
+    <p>
+      The notification presents the actions to the user. If the user clicks the
+      notification, then the browser starts the service worker, if it is not
+      already running, and dispatches the
+      <code>notificationclick</code> event. If the user selected an action, then
+      the event object includes the selected action.
+    </p>
+
+    <p>
+      The service worker's <code>notificationclick</code> handler checks the
+      value of the event's <code>action</code>, and responds by opening the
+      appropriate web page.
+    </p>
+  </body>
+</html>
