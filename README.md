@@ -37,6 +37,8 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "document-picture-in-picture" directory contains an example showing usage of the [Document Picture-in-Picture API](http://developer.mozilla.org/docs/Web/API/Document_Picture-in-Picture_API/). [See the example live](https://mdn.github.io/dom-examples/document-picture-in-picture/).
 
+- The "dynamic-range-limit" directory contains an example demonstrating use of the [`dynamic-range-limit`](https://developer.mozilla.org/en-US/docs/Web/CSS/dynamic-range-limit) CSS property. See the [example live](https://mdn.github.io/dom-examples/dynamic-range-limit).
+
 - The "edit-context" directory contains examples demonstrating the [EditContext API](https://developer.mozilla.org/docs/Web/API/EditContext_API). See the [list of examples](https://github.com/mdn/dom-examples/tree/main/edit-context/).
 
 - The "file-system-api" directory contains multiple examples demonstrating usage of the [File System API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API):
