@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Non-persistent notifications</title>
+    <script src="page.js" defer></script>
+  </head>
+
+  <body>
+    <button id="notify-me">Notify me!</button>
+
+    <p>
+      This website shows how to make and handle non-persistent notifications.
+    </p>
+
+    <p>When we click the "Notify me!" button, the website:</p>
+    <ol>
+      <li>
+        Checks whether the website has permission to show notifications, asking
+        for permission if necessary.
+      </li>
+      <li>If permission is granted, starts a one-second timer.</li>
+      <li>
+        When the timer expires, creates a non-persistent notification using the
+        <code>Notification()</code> constructor.
+      </li>
+      <li>
+        Adds event handlers to the main events dispatched on the
+        <code>Notification</code> interface.
+      </li>
+    </ol>
+
+    <p>
+      When the notification is shown, the user clicks it, or the user closes it,
+      the corresponding event handler runs and just logs the event.
+    </p>
+  </body>
+</html>

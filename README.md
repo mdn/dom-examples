@@ -66,6 +66,11 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "navigation-api" directory contains a basic example that demonstrates some features of the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API). [Run the demo live](https://mdn.github.io/dom-examples/navigation-api/).
 
+- The "notifications" directory contains one example showing how to make and handle persistent notifications, and another showing how to make and handle non-persistent notifications, using the [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API).
+
+  - [Run the persistent notifications demo](https://mdn.github.io/dom-examples/notifications/non-persistent/).
+  - [Run the non-persistent notifications demo](https://mdn.github.io/dom-examples/notifications/non-persistent/)
+
 - The "payment-request" directory contains examples of the [Payment Request API](https://developer.mozilla.org/docs/Web/API/Payment_Request_API).
 
 - The "pointerevents" directory is for examples and demos of the [Pointer Events](https://developer.mozilla.org/docs/Web/API/Pointer_events) standard.
