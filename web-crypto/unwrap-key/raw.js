@@ -117,7 +117,7 @@
     const ciphertext = await window.crypto.subtle.encrypt(
       {
         name: "AES-GCM",
-        iv: iv
+        iv
       },
       secretKey,
       encoded
