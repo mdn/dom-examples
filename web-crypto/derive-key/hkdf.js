@@ -26,7 +26,7 @@
     return window.crypto.subtle.deriveKey(
       {
         name: "HKDF",
-        salt: salt,
+        salt,
         info: new Uint8Array("Encryption example"),
         hash: "SHA-256",
       },
