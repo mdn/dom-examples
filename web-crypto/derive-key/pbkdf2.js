@@ -70,7 +70,7 @@
     ciphertext = await window.crypto.subtle.encrypt(
       {
         name: "AES-GCM",
-        iv: iv
+        iv
       },
       key,
       encoded
@@ -104,7 +104,7 @@
       let decrypted = await window.crypto.subtle.decrypt(
         {
           name: "AES-GCM",
-          iv: iv
+          iv
         },
         key,
         ciphertext

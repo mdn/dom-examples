@@ -54,7 +54,7 @@
       wrappingKey,
       {
         name: "AES-GCM",
-        iv: iv
+        iv
       }
     );
 
