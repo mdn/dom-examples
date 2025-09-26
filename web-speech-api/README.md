@@ -22,6 +22,12 @@ Speak the phrase and then see if the recognition engine successfully recognises 
 
 [Run phrase matcher demo live](https://mdn.github.io/dom-examples/web-speech-api/phrase-matcher/)
 
+## Audio track recognition demo
+
+[Run audio track recognition demo live](https://mdn.github.io/dom-examples/web-speech-api/audio-track-recognition/)
+
+Press the button to load an audio file, run speech recognition on it, and output a transcript of the audio to the UI.
+
 ## Speak easy synthesis demo
 
 [Run synthesis demo live](https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/)
