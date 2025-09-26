@@ -1,0 +1,16 @@
+body {
+  font: 1em / 1.4 sans-serif;
+}
+
+img {
+  width: 50%;
+  border: 1px solid black;
+  dynamic-range-limit: standard;
+  transition: dynamic-range-limit 0.6s;
+}
+
+img:hover,
+img:focus {
+  dynamic-range-limit: no-limit;
+  /* dynamic-range-limit: dynamic-range-limit-mix(standard 70%, no-limit 30%); */
+}
