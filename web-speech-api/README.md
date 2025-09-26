@@ -24,7 +24,7 @@ This current works only on Chrome/Chrome Mobile. To get this code running succes
 
 [Run audio track recognition demo live](https://mdn.github.io/dom-examples/web-speech-api/audio-track-recognition/)
 
-Press the button to load an audio file, run speech recognition on it, and output a transcript of the speech in the audio file to the UI.
+Press the button to load an audio file, run speech recognition on it, and output a transcript of the audio to the UI.
 
 ## Speak easy synthesis demo
 
