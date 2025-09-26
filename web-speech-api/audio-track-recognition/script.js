@@ -19,7 +19,7 @@ startBtn.addEventListener("click", () => {
 
 recognition.addEventListener("result", (event) => {
   const speech = event.results[0][0].transcript;
-  diagnostic.textContent = "Speech recognized: " + speech + ".";
+  diagnostic.textContent = "Recognized speech: " + speech + ".";
   console.log("Confidence: " + event.results[0][0].confidence);
 });
 
