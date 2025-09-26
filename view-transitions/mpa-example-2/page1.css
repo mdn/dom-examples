@@ -1,28 +1,28 @@
 @view-transition {
-    navigation: auto;
+  navigation: auto;
 }
 
 @keyframes slide-to-right {
-    from {
-        transform: translateX(0);
-        z-index: 2;
-    }
+  from {
+    transform: translateX(0);
+    z-index: 2;
+  }
 
-    to {
-        transform: translateX(100vw);
-        z-index: 2;
-    }
+  to {
+    transform: translateX(100vw);
+    z-index: 2;
+  }
 }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-    mix-blend-mode: normal;
+  mix-blend-mode: normal;
 }
 
 ::view-transition-old(root) {
-    animation: slide-to-right 0.3s;
+  animation: slide-to-right 0.3s;
 }
 
 ::view-transition-new(root) {
-    animation: none;
+  animation: none;
 }
