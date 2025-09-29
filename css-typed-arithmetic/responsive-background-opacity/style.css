@@ -1,15 +1,12 @@
 :root {
   font-family: sans-serif;
-  --width-percentage: calc((100vw / 1500px));
+  --width-percentage: calc((100vw / 2000px));
 }
 
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: linear-gradient(
-      rgba(255, 255, 255, calc(1 - var(--width-percentage))),
-      rgba(255, 255, 255, calc(1 - var(--width-percentage)))
+      rgb(255 255 255 / calc(1 - var(--width-percentage))),
+      rgb(255 255 255 / calc(1 - var(--width-percentage)))
     ),
     url("https://mdn.github.io/shared-assets/images/examples/colorful-heart.png")
       no-repeat top 50px right 50px;
@@ -18,6 +15,7 @@ body {
 .wrapper {
   width: 480px;
   padding: 20px;
+  margin: 0 auto;
 }
 
 p {

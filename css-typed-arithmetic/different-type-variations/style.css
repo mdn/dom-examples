@@ -1,7 +1,6 @@
 :root {
-  --viewport-in-pixels: calc(100vw / 1px);
-  height: 100%;
   font-family: sans-serif;
+  --viewport-in-pixels: calc(100vw / 1px);
 }
 
 p {
