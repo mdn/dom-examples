@@ -1,0 +1,33 @@
+:root {
+  font-family: sans-serif;
+  --width-percentage: calc((100vw / 1500px));
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+      rgba(255, 255, 255, calc(1 - var(--width-percentage))),
+      rgba(255, 255, 255, calc(1 - var(--width-percentage)))
+    ),
+    url("https://mdn.github.io/shared-assets/images/examples/colorful-heart.png")
+      no-repeat top 50px right 50px;
+}
+
+.wrapper {
+  width: 480px;
+  padding: 20px;
+}
+
+p {
+  line-height: 1.5;
+}
+
+/* Support information */
+
+.support-info {
+  padding: 5px;
+  background-color: yellow;
+  border: 1px solid black;
+}
