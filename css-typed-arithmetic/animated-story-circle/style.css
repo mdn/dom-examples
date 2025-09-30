@@ -4,8 +4,8 @@
 }
 
 body {
-  margin: 0 auto;
   height: inherit;
+  margin: 0 auto;
   min-width: 400px;
   max-width: 1600px;
   display: flex;
@@ -14,11 +14,10 @@ body {
   container-type: inline-size;
 }
 
-.story-wheel {
-  position: relative;
+.story-circle {
   width: 1px;
   height: 1px;
-  --width-percentage: calc((100cqi / 1200px) - 0.33333);
+  --width-percentage: calc((100cqw / 1200px) - 0.33333);
 }
 
 p {
@@ -27,9 +26,10 @@ p {
   text-align: right;
   background: linear-gradient(to right, red, orange 50%);
   border-radius: 5px;
-  position: absolute;
 
+  position: absolute;
   transform-origin: center left;
+
   --angle: calc(
     ((sibling-index() - 1) * (360 / sibling-count())) * var(--width-percentage)
   );

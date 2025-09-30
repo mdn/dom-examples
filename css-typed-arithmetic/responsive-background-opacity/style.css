@@ -3,6 +3,12 @@
   --width-percentage: calc((100vw / 2000px));
 }
 
+.wrapper {
+  width: 480px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
 body {
   background: linear-gradient(
       rgb(255 255 255 / calc(1 - var(--width-percentage))),
@@ -10,12 +16,6 @@ body {
     ),
     url("https://mdn.github.io/shared-assets/images/examples/colorful-heart.png")
       no-repeat top 50px right 50px;
-}
-
-.wrapper {
-  width: 480px;
-  padding: 20px;
-  margin: 0 auto;
 }
 
 p {

@@ -4,12 +4,12 @@
 }
 
 p {
-  background-color: lch(
-    75% 50% calc((100 + (var(--viewport-in-pixels) / 10)) * 1deg)
-  );
   border: 5px solid black;
   text-align: center;
   font-size: calc(1em * (var(--viewport-in-pixels) / 200));
+  background-color: lch(
+    75% 50% calc((100 + (var(--viewport-in-pixels) / 10)) * 1deg)
+  );
 }
 
 /* Support information */
