@@ -111,10 +111,11 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "view-transitions" directory contains demos to show usage of the [View Transitions API](https://developer.mozilla.org/docs/Web/API/View_Transitions_API):
 
-  - [A single-page app](https://mdn.github.io/dom-examples/view-transitions/spa/) view transitions.
-  - [A multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa/) view transitions.
-  - [The `match-element` value](https://mdn.github.io/dom-examples/view-transitions/match-element/) for the `view-transition-name` property.
-  - [A simple homepage](https://mdn.github.io/dom-examples/view-transitions/mpa-homepage/) multiple-page view transitions.
+  - View transitions in a [single-page app](https://mdn.github.io/dom-examples/view-transitions/spa/)
+  - View transitions in a [multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa/)
+  - Another example of view transitions in a [simple multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa-homepage/)
+  - [The `match-element` value](https://mdn.github.io/dom-examples/view-transitions/match-element/) for the `view-transition-name` property
+
 
 - The "web-share" directory contains a basic demo to show usage of the [Web Share API](https://developer.mozilla.org/docs/Web/API/Navigator/share). [View the demo live](https://mdn.github.io/dom-examples/web-share/).
 
