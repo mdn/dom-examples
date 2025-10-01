@@ -109,7 +109,12 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "web-storage" directory contains a basic demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](https://mdn.github.io/dom-examples/web-storage/).
 
-- The "view-transitions" directory contains demos to show usage of the [View Transitions API](https://developer.mozilla.org/docs/Web/API/View_Transitions_API), for single-page app ([View the SPA demo live](https://mdn.github.io/dom-examples/view-transitions/spa/)) and multiple-page app ([View the MPA demo live](https://mdn.github.io/dom-examples/view-transitions/mpa/)) view transitions. We've also included a demo to demonstrate the effect of the `view-transition-name` property `match-element` value ([View the `match-element` demo live](https://mdn.github.io/dom-examples/view-transitions/match-element/)).
+- The "view-transitions" directory contains demos to show usage of the [View Transitions API](https://developer.mozilla.org/docs/Web/API/View_Transitions_API):
+
+  - [A single-page app](https://mdn.github.io/dom-examples/view-transitions/spa/) view transitions.
+  - [A multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa/) view transitions.
+  - [The `match-element` value](https://mdn.github.io/dom-examples/view-transitions/match-element/) for the `view-transition-name` property.
+  - [A simple homepage](https://mdn.github.io/dom-examples/view-transitions/mpa-homepage/) multiple-page view transitions.
 
 - The "web-share" directory contains a basic demo to show usage of the [Web Share API](https://developer.mozilla.org/docs/Web/API/Navigator/share). [View the demo live](https://mdn.github.io/dom-examples/web-share/).
 

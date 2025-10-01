@@ -1,7 +1,3 @@
-@view-transition {
-  navigation: auto;
-}
-
 @keyframes slide-to-right {
   from {
     transform: translateX(0);

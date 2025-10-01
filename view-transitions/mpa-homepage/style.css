@@ -1,7 +1,5 @@
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+@view-transition {
+  navigation: auto;
 }
 
 body {
@@ -10,6 +8,7 @@ body {
   padding: 20px;
   text-align: center;
   margin: auto;
+  box-sizing: border-box;
   line-height: 1.5;
 
   &.index {
