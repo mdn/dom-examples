@@ -54,7 +54,7 @@
       wrappingKey,
       {
         name: "AES-CBC",
-        iv: iv
+        iv
       }
     );
 

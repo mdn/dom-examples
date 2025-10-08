@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="application/javascript">
+      var sw = new SharedWorker("dynamic-error-shared-worker.js");
+      sw.onerror = function (evt) {
+        console.log("got SharedWorker error event", evt);
+      };
+      sw.port.postMessage("throw");
+    </script>
+  </body>
+</html>

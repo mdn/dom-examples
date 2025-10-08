@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script defer src="script.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>execCommands supported in your browser</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <div class="container">
+          <h2>execCommands supported in your browser</h2>
+          <div class="row">
+            <div class="col-md-6">
+              The <small class="btn btn-success btn-xs">Green</small> commands
+              are supported by your browser, where as the
+              <small class="btn btn-error btn-xs">Grey</small> ones, these are
+              not supported. <br />Try to select contents below and click
+              <small class="btn btn-success btn-xs">commands</small> to execute
+              the commands on it. <br />I use the HTML attribute
+              <code>contenteditable=true</code> to allow modifications to the
+              content. <code>Updated</code>: Added
+              <a href="https://fortawesome.github.io/Font-Awesome/icons/"
+                >font awesome icons</a
+              >. <br />
+              <br />Inspired by
+              <a href="https://css-tricks.com/cut-and-copy-from-javascript/"
+                >Cut and Copy (from JavaScript)</a
+              >
+            </div>
+            <div class="col-md-6">
+              <code>2017-06-04 updated:</code><br />
+              <em
+                >As pointed out by
+                <a href="https://twitter.com/Robvanhe">@Robvanhe</a> the pen did
+                not actually work in Safari. It was due to selection being
+                cleared after click, so no selection to apply command existed.
+                Fixed now. Rewritten also to vanilla javascript (no use for
+                Angular).</em
+              ><br /><br />
+              <code>2018-04-17 updated:</code><br />
+              <em
+                >Forked by Chris Mills to create a version of this demo with
+                clean content.</em
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 tags buttons"></div>
+        </div>
+        <div class="row" contenteditable="true">
+          <div class="col-md-3">
+            <img
+              src="https://mdn.github.io/shared-assets/images/examples/mdn.svg"
+              alt="abstract dinosaur head"
+              class="img-responsive" />
+          </div>
+          <div class="col-md-9">
+            <div class="row" contenteditable="true">
+              <div class="col-md-12">
+                <h3>
+                  Try to alter this text using the execCommands buttons above
+                </h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Praesent semper in nunc at mattis. Suspendisse metus augue,
+                  pellentesque finibus luctus dictum, tempor id nunc. Phasellus
+                  semper magna ac interdum scelerisque. Vestibulum laoreet
+                  sapien a nisi ullamcorper, nec luctus neque eleifend. Aliquam
+                  vel tortor justo. Nam aliquam dapibus mi ut volutpat. Donec
+                  eros turpis, gravida et neque nec, interdum pulvinar nibh. Ut
+                  vel sodales nulla, a tempus sem. Nunc facilisis pretium
+                  aliquam. Proin nulla ante, congue at purus sit amet, commodo
+                  placerat erat. Sed malesuada eros nulla, in cursus urna
+                  elementum finibus. Suspendisse posuere purus pellentesque
+                  rutrum tempor. Nunc nec tincidunt est. Sed convallis ligula
+                  quis dui laoreet maximus. Nulla pharetra placerat quam ut
+                  rutrum. Nullam sit amet vehicula nisi.
+                </p>
+              </div>
+
+              <div class="col-md-8">
+                <p>
+                  Pellentesque feugiat posuere fermentum. In ut varius odio, nec
+                  venenatis lorem. Pellentesque interdum odio tortor, ac
+                  hendrerit mauris venenatis nec. Maecenas finibus dapibus
+                  eleifend. Nulla rhoncus metus non nisi rutrum tempor. Cras
+                  luctus lacinia eros sed volutpat. Duis accumsan quam libero,
+                  non accumsan nisl faucibus sit amet.
+                </p>
+              </div>
+
+              <div class="col-md-4">
+                <p>
+                  Cras tincidunt magna malesuada maximus tristique. Sed a
+                  fringilla ipsum. Nam malesuada gravida commodo. In ut
+                  convallis neque. Nulla ut consequat nisi, a imperdiet ante.
+                </p>
+              </div>
+            </div>
+            <div class="row" contenteditable="true">
+              <div class="col-md-12">
+                Pellentesque feugiat posuere fermentum. In ut varius odio, nec
+                venenatis lorem. Pellentesque interdum odio tortor, ac hendrerit
+                mauris venenatis nec. Maecenas finibus dapibus eleifend. Nulla
+                rhoncus metus non nisi rutrum tempor. Cras luctus lacinia eros
+                sed volutpat. Duis accumsan quam libero, non accumsan nisl
+                faucibus sit amet.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

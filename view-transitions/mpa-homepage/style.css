@@ -1,0 +1,25 @@
+@view-transition {
+  navigation: auto;
+}
+
+body {
+  font-family: system-ui;
+  max-inline-size: 400px;
+  padding: 20px;
+  text-align: center;
+  margin: auto;
+  box-sizing: border-box;
+  line-height: 1.5;
+
+  &.index {
+    background-color: oklch(0.9529 0.0444 332);
+  }
+
+  &.hobbies {
+    background-color: oklch(0.9588 0.0617 184.24);
+  }
+}
+
+a {
+  color: oklch(0.0867 0.0419 261.53);
+}

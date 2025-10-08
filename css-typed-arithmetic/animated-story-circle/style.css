@@ -1,0 +1,49 @@
+:root {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+body {
+  height: inherit;
+  margin: 0 auto;
+  min-width: 400px;
+  max-width: 1600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  container-type: inline-size;
+}
+
+.story-circle {
+  width: 1px;
+  height: 1px;
+  --width-percentage: calc((100cqw / 1200px) - 0.33333);
+}
+
+p {
+  padding: 10px;
+  width: 150px;
+  text-align: right;
+  background: linear-gradient(to right, red, orange 50%);
+  border-radius: 5px;
+
+  position: absolute;
+  transform-origin: center left;
+
+  --angle: calc(
+    ((sibling-index() - 1) * (360 / sibling-count())) * var(--width-percentage)
+  );
+  rotate: calc(var(--angle) * 1deg);
+}
+
+/* Support information */
+
+.support-info {
+  padding: 5px;
+  background-color: yellow;
+  border: 1px solid black;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+}

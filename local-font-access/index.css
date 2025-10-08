@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 500px;
+  margin: 2rem auto;
+}
+
+button,
+select {
+  padding: 5px;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+}
+
+.sample-text {
+  line-height: 1.5;
+  font-size: 2rem;
+}

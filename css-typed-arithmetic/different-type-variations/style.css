@@ -1,0 +1,21 @@
+:root {
+  font-family: sans-serif;
+  --viewport-in-pixels: calc(100vw / 1px);
+}
+
+p {
+  border: 5px solid black;
+  text-align: center;
+  font-size: calc(1em * (var(--viewport-in-pixels) / 200));
+  background-color: lch(
+    75% 50% calc((100 + (var(--viewport-in-pixels) / 10)) * 1deg)
+  );
+}
+
+/* Support information */
+
+.support-info {
+  padding: 5px;
+  background-color: yellow;
+  border: 1px solid black;
+}

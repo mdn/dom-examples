@@ -1,0 +1,158 @@
+/* General styles */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  background-color: white;
+}
+
+/* General styling of list as scrolling carousel */
+
+ul {
+  width: 100%;
+  height: 400px;
+  padding: 10px;
+
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+
+  columns: 1;
+  text-align: center;
+}
+
+li {
+  list-style-type: none;
+
+  display: inline-block;
+  height: 100%;
+  aspect-ratio: 2/3;
+
+  background-color: #eee;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 0 20px;
+
+  text-align: left;
+
+  view-timeline: --inertChange inline;
+  animation-timeline: --inertChange;
+  animation-name: inert-change;
+  animation-fill-mode: both;
+}
+
+ul::column {
+  scroll-snap-align: center;
+}
+
+/* Keyframes for setting inertness on pages outside the scroller */
+
+@keyframes inert-change {
+  entry 0%,
+  exit 100% {
+    interactivity: inert;
+  }
+
+  entry 1%,
+  exit 99% {
+    interactivity: auto;
+  }
+}
+
+/* CSS scroll buttons */
+
+/* Style the scroll buttons */
+
+ul::scroll-button(*) {
+  border: 0;
+  font-size: 2rem;
+  background: none;
+  color: rgb(0 0 0 / 0.7);
+  cursor: pointer;
+}
+
+ul::scroll-button(*):hover,
+ul::scroll-button(*):focus {
+  color: rgb(0 0 0 / 1);
+}
+
+ul::scroll-button(*):active {
+  translate: 1px 1px;
+}
+
+ul::scroll-button(*):disabled {
+  color: rgb(0 0 0 / 0.2);
+}
+
+ul::scroll-button(left) {
+  content: "◄";
+}
+
+ul::scroll-button(right) {
+  content: "►";
+}
+
+/* Position the scroll buttons */
+
+ul {
+  anchor-name: --myCarousel;
+}
+
+ul::scroll-button(*) {
+  position: absolute;
+  position-anchor: --myCarousel;
+}
+
+ul::scroll-button(left) {
+  right: calc(anchor(left) - 70px);
+  bottom: calc(anchor(top) + 21px);
+}
+
+ul::scroll-button(right) {
+  left: calc(anchor(right) - 70px);
+  bottom: calc(anchor(top) + 21px);
+}
+
+/* Scroll marker styling */
+
+ul {
+  /* Needed for the pseudo to be generated */
+  scroll-marker-group: after;
+}
+
+/* Once tabbed to, the scroll marker group can then be moved through via the cursor keys */
+/* It in effect acts as a single control for tabbing purposes */
+ul::scroll-marker-group {
+  position: absolute;
+  position-anchor: --myCarousel;
+  top: calc(anchor(bottom) - 70px);
+  justify-self: anchor-center;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+ul::column::scroll-marker {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 10px;
+  /* This is needed because non-current targets are made inert */
+  interactivity: auto;
+}
+
+ul::column::scroll-marker:target-current {
+  background-color: black;
+}

@@ -12,23 +12,22 @@ body {
   overflow: hidden;
   max-width: 800px;
   margin: 0 auto;
-}
-
-h1,
-p {
-  font-family: sans-serif;
+  font-family: system-ui;
   text-align: center;
-  padding: 20px;
 }
 
-div {
+.output {
   height: 100px;
+  margin: 0;
   overflow: auto;
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   right: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255 255 255 / 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 ul {

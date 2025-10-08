@@ -1,0 +1,39 @@
+body,
+html {
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: inherit;
+  overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: system-ui;
+  text-align: center;
+}
+
+.output {
+  height: 100px;
+  margin: 0;
+  overflow: auto;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(255 255 255 / 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+  margin: 0;
+}
+
+.hints span {
+  text-shadow: 0px 0px 6px rgba(255 255 255 / 0.7);
+}

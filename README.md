@@ -13,7 +13,7 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "audiocontext-setsinkid" directory contains an example of how to use the [`AudioContext.setSinkId()`](https://developer.mozilla.org/docs/Web/API/AudioContext/setSinkId) method and related features. [Run the example live](https://mdn.github.io/dom-examples/audiocontext-setsinkid/).
 
-- The "auxclick" directory contains a basic example demonstrating the new <code>auxclick</code> event type. See [GlobalEventHandlers.auxclick](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onauxclick) for more details, or [run the example live](https://mdn.github.io/dom-examples/auxclick/).
+- The "auxclick" directory contains a basic example demonstrating the new `auxclick` event type. See [GlobalEventHandlers.auxclick](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onauxclick) for more details, or [run the example live](https://mdn.github.io/dom-examples/auxclick/).
 
 - The "canvas" directory contains an example "chroma-keying" demonstrating how to use the Canvas API to manipulate videos: see [Manipulating video using canvas](https://developer.mozilla.org/docs/Web/API/Canvas_API/Manipulating_video_using_canvas) or [run the example live](https://mdn.github.io/dom-examples/canvas/chroma-keying/).
 
@@ -21,9 +21,17 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "channel-messaging-multimessage" directory contains another channel messaging demo, showing how multiple messages can be sent between browsing contexts. See [Channel Messaging API](https://developer.mozilla.org/docs/Web/API/Channel_Messaging_API) for more details. [Run the demo live](https://mdn.github.io/dom-examples/channel-messaging-multimessage/).
 
+- The "contact-picker" directory contains an example showing usage of the [Contact Picker API](https://developer.mozilla.org/en-US/docs/Web/API/Contact_Picker_API). [See the example live](https://mdn.github.io/dom-examples/contact-picker/).
+
+- The "css-carousels" directory contains two examples showing how to use the CSS Carousel features — [a basic example featuring scroll buttons and scroll markers](https://mdn.github.io/dom-examples/css-carousels/scroll-button-scroll-marker/), and an [example that also uses the `::columns` pseudo-class to paginate the content](https://mdn.github.io/dom-examples/css-carousels/scroll-button-scroll-marker-with-columns/).
+
+- The "css-custom-functions" directory contains three examples showing how to use CSS custom functions — [a set of color adjustment functions](https://mdn.github.io/dom-examples/css-custom-functions/color-adjust-functions/), a [complex gradient background function](https://mdn.github.io/dom-examples/css-custom-functions/gradient-function/), and a [responsive narrow/wide value selection function](https://mdn.github.io/dom-examples/css-custom-functions/responsive-narrow-wide/).
+
 - The "css-painting" directory contains examples demonstrating the [CSS Painting API](https://developer.mozilla.org/docs/Web/API/CSS_Painting_API). See the [examples live](https://mdn.github.io/dom-examples/css-painting).
 
 - The "css-progress" directory contains an example demonstrating the [CSS `progress()` function](https://developer.mozilla.org/en-US/docs/Web/CSS/progress). See the [example live](https://mdn.github.io/dom-examples/css-progress).
+
+- The "css-typed-arithmetic" directory contains an example demonstrating [CSS typed arithmetic](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Values_and_Units/Using_CSS_typed_arithmetic) usage. See the [index page](https://mdn.github.io/dom-examples/css-typed-arithmetic) to access the live examples.
 
 - The "device-posture-api" directory contains an example demonstrating how to use the [Device Posture API](https://developer.mozilla.org/docs/Web/API/Device_Posture_API). [Run the example live](https://mdn.github.io/dom-examples/device-posture-api/).
 
@@ -31,9 +39,16 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "document-picture-in-picture" directory contains an example showing usage of the [Document Picture-in-Picture API](http://developer.mozilla.org/docs/Web/API/Document_Picture-in-Picture_API/). [See the example live](https://mdn.github.io/dom-examples/document-picture-in-picture/).
 
+- The "dynamic-range-limit" directory contains an example demonstrating the use of the [`dynamic-range-limit`](https://developer.mozilla.org/en-US/docs/Web/CSS/dynamic-range-limit) CSS property. See the [live demo](https://mdn.github.io/dom-examples/dynamic-range-limit).
+
 - The "edit-context" directory contains examples demonstrating the [EditContext API](https://developer.mozilla.org/docs/Web/API/EditContext_API). See the [list of examples](https://github.com/mdn/dom-examples/tree/main/edit-context/).
 
-- The "filesystemobserver" directory contains an example demonstrating usage of the [FileSystemObserver](https://developer.mozilla.org/docs/Web/API/FileSystemObserver) API ([run the example live](https://mdn.github.io/dom-examples/filesystemobserver/)). This example was originally published on Glitch as [File System Observer Demo](https://file-system-observer.glitch.me/) by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
+- The "file-system-api" directory contains multiple examples demonstrating usage of the [File System API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API):
+
+  - [createSyncAccessHandle() mode test](https://mdn.github.io/dom-examples/file-system-api/createsyncaccesshandle-mode/): Demonstrates usage of [FileSystemFileHandle.createSyncAccessHandle()](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileHandle/createSyncAccessHandle)
+  - [createWritable() mode test](https://mdn.github.io/dom-examples/file-system-api/createwritable-mode/): Demonstrates usage of [FileSystemFileHandle.createWritable()](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileHandle/createWritable)
+  - [FileSystemHandle.remove() demo](https://mdn.github.io/dom-examples/file-system-api/filesystemhandle-remove/): Demonstrates usage of [FileSystemHandle.remove()](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemHandle/remove)
+  - [File System Observer Demo](https://mdn.github.io/dom-examples/file-system-api/filesystemobserver/): Demonstrates usage of the [FileSystemObserver](https://developer.mozilla.org/docs/Web/API/FileSystemObserver) API. This example was originally published on Glitch by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
 
 - The "fullscreen-api" directory is for examples and demos of the [Fullscreen API](https://wiki.developer.mozilla.org/docs/Web/API/Fullscreen_API). Run the [example live](https://mdn.github.io/dom-examples/fullscreen-api/).
 
@@ -43,11 +58,22 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "insert-adjacent" directory contains basic demos for [insertAdjacentElement](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentElement.html) and [insertAdjacentText](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentText.html).
 
+- The "launch-handler" directory contains a demo for the [Launch Handler API](https://developer.mozilla.org/en-US/docs/Web/API/Launch_Handler_API). [View the demo live](https://mdn.github.io/dom-examples/launch-handler/). This example was originally published on Glitch by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
+
+- The "local-font-access" directory contains a demo for the [Local Font Access API](https://developer.mozilla.org/en-US/docs/Web/API/Local_Font_Access_API). [View the demo live](https://mdn.github.io/dom-examples/local-font-access/).
+
 - The "matchmedia" directory contains a basic demo to test matchMedia functionality. See [Window.matchMedia](https://developer.mozilla.org/docs/Web/API/Window/matchMedia) for more details. [Run the demo live](https://mdn.github.io/dom-examples/matchmedia/).
 
 - The "mediaquerylist" directory contains a basic demo to test more advanced matchMedia/mediaquerylist functionality. See [MediaQueryList](https://developer.mozilla.org/docs/Web/API/MediaQueryList) for more details. [Run the demo live](https://mdn.github.io/dom-examples/mediaquerylist/index.html).
 
 - The "media" directory contains examples and demos showing how to use HTML and DOM [media elements and APIs](https://developer.mozilla.org/docs/Web/Media).
+
+- The "navigation-api" directory contains a basic example that demonstrates some features of the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API). [Run the demo live](https://mdn.github.io/dom-examples/navigation-api/).
+
+- The "notifications" directory contains one example showing how to make and handle persistent notifications, and another showing how to make and handle non-persistent notifications, using the [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API).
+
+  - [Run the persistent notifications demo](https://mdn.github.io/dom-examples/notifications/persistent/).
+  - [Run the non-persistent notifications demo](https://mdn.github.io/dom-examples/notifications/non-persistent/)
 
 - The "payment-request" directory contains examples of the [Payment Request API](https://developer.mozilla.org/docs/Web/API/Payment_Request_API).
 
@@ -77,23 +103,36 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 
 - The "touchevents" directory is for examples and demos of the [Touch Events](https://developer.mozilla.org/docs/Web/API/Touch_events) standard.
 
+- The "viewport-segments-api" directory contains an example demonstrating how to use the [Viewport Segments API](https://developer.mozilla.org/docs/Web/API/Viewport_Segments_API). [Run the example live](https://mdn.github.io/dom-examples/viewport-segments-api/).
+
 - The "visual-viewport-api" directory contains a basic demo to show usage of the Visual Viewport API. For more details on how it works, read [Visual Viewport API](https://developer.mozilla.org/docs/Web/API/Visual_Viewport_API). [View the demo live](https://mdn.github.io/dom-examples/visual-viewport-api/).
 
 - The "web-animations-api" directory contains [Web Animation API](https://developer.mozilla.org/docs/Web/API/Web_Animations_API) demos. See the [web animations README](web-animations-api/README.md) for more information.
 
 - The "web-storage" directory contains a basic demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](https://mdn.github.io/dom-examples/web-storage/).
 
-- The "view-transitions" directory contains demos to show usage of the [View Transitions API](https://developer.mozilla.org/docs/Web/API/View_Transitions_API), for single-page app ([View the SPA demo live](https://mdn.github.io/dom-examples/view-transitions/spa/)) and multiple-page app ([View the MPA demo live](https://mdn.github.io/dom-examples/view-transitions/mpa/)) view transitions. We've also included a demo to demonstrate the effect of the `view-transition-name` property `match-element` value ([View the `match-element` demo live](https://mdn.github.io/dom-examples/view-transitions/match-element/)).
+- The "view-transitions" directory contains demos to show usage of the [View Transitions API](https://developer.mozilla.org/docs/Web/API/View_Transitions_API):
+
+  - View transitions in a [single-page app](https://mdn.github.io/dom-examples/view-transitions/spa/)
+  - View transitions in a [multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa/)
+  - Another example of view transitions in a [simple multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa-homepage/)
+  - [The `match-element` value](https://mdn.github.io/dom-examples/view-transitions/match-element/) for the `view-transition-name` property
+
 
 - The "web-share" directory contains a basic demo to show usage of the [Web Share API](https://developer.mozilla.org/docs/Web/API/Navigator/share). [View the demo live](https://mdn.github.io/dom-examples/web-share/).
 
-- The "web-workers" directory contains a basic web worker to demonstrate how [Web Workers](https://developer.mozilla.org/docs/Web/API/Web_Workers_API) work. [View the demo live](https://mdn.github.io/dom-examples/web-workers/simple-web-worker/).
+- The "web-workers" directory contains several demos that show how [Web Workers](https://developer.mozilla.org/docs/Web/API/Web_Workers_API) operate. For example, view the live [simple web worker demo](https://mdn.github.io/dom-examples/web-workers/simple-web-worker/).
 
 - The ["webgl-examples"](webgl-examples/README.md) directory contains a number of WebGL examples that demonstrate the [WebGL API](https://developer.mozilla.org/docs/Web/API/WebGL_API), which is used for 2D and 3D graphics on the web.
 
 - The "webgpu-compute-demo" directory contains an example that demonstrates basic usage of the [WebGPU API](https://developer.mozilla.org/docs/Web/API/WebGPU_API) compute pipeline, which is used for performing general computation on the GPU. [View the demo live](https://mdn.github.io/dom-examples/webgpu-compute-demo/).
 
 - The "webgpu-render-demo" directory contains an example that demonstrates basic usage of the [WebGPU API](https://developer.mozilla.org/docs/Web/API/WebGPU_API) render pipeline, which is used for rendering high-performance graphics via the GPU. [View the demo live](https://mdn.github.io/dom-examples/webgpu-render-demo/).
+
+- The "websockets" directory contains an example that demonstrates basic usage of the [WebSockets API](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
+
+- The "webxr" directory contains an example showing how to [start up a WebXR session](https://mdn.github.io/dom-examples/webxr/).
+  See [Starting up and shutting down a WebXR session](https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API/Startup_and_shutdown) for details.
 
 - The "window-management-api" directory contains a basic demo to show usage of the [Window Management API](https://developer.mozilla.org/docs/Web/API/Window_Management_API). [View the demo live](https://mdn.github.io/dom-examples/window-management-api/).
 
