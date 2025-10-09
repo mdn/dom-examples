@@ -7,3 +7,6 @@
 
 # Default
 * @mdn/core-yari-content
+
+/.github/workflows/ @mdn/engineering
+/.github/CODEOWNERS @mdn/core-yari-content @mdn/engineering
