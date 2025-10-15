@@ -20,9 +20,10 @@ if CSS custom functions are supported. If not, the banner will show. */
   result: none;
 }
 
-html {
+:root {
   font-family: system-ui;
   height: 100%;
+  --base-color: #faa6ff;
 }
 
 body {
@@ -42,7 +43,6 @@ section {
   width: 50%;
   padding: 0 20px;
   border-radius: 20px;
-  --base-color: #faa6ff;
   background-color: --transparent(var(--base-color));
   border: 3px solid --lighter(var(--base-color), 0.1);
   color: --darker(var(--base-color), 0.55);
