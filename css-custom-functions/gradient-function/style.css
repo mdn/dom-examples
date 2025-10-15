@@ -1,9 +1,9 @@
 /* CSS gradient code adapted from the Shippo pattern in Lea Verou's
 CSS3 patterns gallery: https://projects.verou.me/css3patterns/#shippo */
 @function --shippo-pattern(--size <length>, --tint <color>) {
-  result: radial-gradient(closest-side, transparent 98%, rgba(0 0 0 / 0.3) 99%)
-      0 0 / var(--size) var(--size),
-    radial-gradient(closest-side, transparent 98%, rgba(0 0 0 / 0.3) 99%)
+  result: radial-gradient(closest-side, transparent 98%, rgb(0 0 0 / 0.3) 99%) 0
+      0 / var(--size) var(--size),
+    radial-gradient(closest-side, transparent 98%, rgb(0 0 0 / 0.3) 99%)
       calc(var(--size) / 2) calc(var(--size) / 2) / var(--size) var(--size)
       var(--tint);
 }
