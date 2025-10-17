@@ -15,6 +15,7 @@
           popovertargetaction="toggle"
           id="menu-1">
           Menu A
+          <div id="tooltip-1" class="tooltip" popover="hint">Tooltip A</div>
         </button>
 
         <button
@@ -22,6 +23,7 @@
           popovertargetaction="toggle"
           id="menu-2">
           Menu B
+          <div id="tooltip-2" class="tooltip" popover="hint">Tooltip B</div>
         </button>
 
         <button
@@ -29,34 +31,48 @@
           popovertargetaction="toggle"
           id="menu-3">
           Menu C
+          <div id="tooltip-3" class="tooltip" popover="hint">Tooltip C</div>
         </button>
+
+        <div id="submenu-1" popover="auto">
+          <button>Option A</button><br /><button>Option B</button>
+        </div>
+        <div id="submenu-2" popover="auto">
+          <button>Option A</button><br /><button>Option B</button>
+        </div>
+        <div id="submenu-3" popover="auto">
+          <button>Option A</button><br /><button>Option B</button>
+        </div>
       </section>
     </div>
 
-    <p class="help-para">
-      Press the buttons to show the auto popovers. Hover or focus the buttons to
-      show the hint popovers. When an auto popover is shown, you can show the
-      hint popovers without hiding it. See
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using#using_hint_popover_state"
-        >Using "hint" popover state</a
-      >
-      for more information. Note that in non-supporting browsers, the position
-      of the popovers is broken.
-    </p>
-
-    <div id="submenu-1" popover="auto">
-      <button>Option A</button><br /><button>Option B</button>
+    <div class="help-para">
+      <p>
+        Press the buttons to show the auto popovers. Hover or focus the buttons
+        to show the hint popovers. When an auto popover is shown, you can show
+        the hint popovers without hiding it. See
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using#using_hint_popover_state"
+          >Using "hint" popover state</a
+        >
+        for more information.
+      </p>
+      <p>
+        Note that this demo uses both hint popovers and CSS anchor positioning.
+        Browsers that don't support the former will experience different tooltip
+        behavior. Browsers that don't support the latter will not see the menus
+        and tooltips appear in the correct position relative to each button on
+        the button bar. Check browser support for
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/popover#browser_compatibility"
+          >hint popovers</a
+        >
+        and
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/position-anchor#browser_compatibility"
+          >anchor-positioning</a
+        >.
+      </p>
     </div>
-    <div id="submenu-2" popover="auto">
-      <button>Option A</button><br /><button>Option B</button>
-    </div>
-    <div id="submenu-3" popover="auto">
-      <button>Option A</button><br /><button>Option B</button>
-    </div>
-
-    <div id="tooltip-1" class="tooltip" popover="hint">Tooltip A</div>
-    <div id="tooltip-2" class="tooltip" popover="hint">Tooltip B</div>
-    <div id="tooltip-3" class="tooltip" popover="hint">Tooltip C</div>
   </body>
 </html>
