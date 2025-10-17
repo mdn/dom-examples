@@ -63,7 +63,6 @@ body {
 [popover="auto"] {
   inset: unset;
   position: absolute;
-  bottom: 0;
   bottom: calc(anchor(top) + 20px);
   justify-self: anchor-center;
   margin: 0;
