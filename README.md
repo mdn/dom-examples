@@ -7,6 +7,11 @@ Code examples that accompany various MDN DOM and Web API documentation pages.
 > These methods are simpler to maintain as the code lives beside the rest of the content.
 > Only add examples to this repository if your example doesn't easily run on MDN pages for technical or security reasons.
 
+## Browser support
+
+When creating code examples for a technology that's not yet available in all major browsers, consider using [feature detection](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Testing/Feature_detection) to fall back to a simpler behavior or inform the user that their browser is not yet supported.
+Do not specify supported browsers and their versions in code comments or prose, as this information quickly becomes outdated.
+
 ## Repository contents
 
 - The "abort-api" directory contains an example of how to use the "Abort API" (aka [AbortSignal](https://dom.spec.whatwg.org/#interface-AbortSignal) and [AbortController](https://dom.spec.whatwg.org/#interface-abortcontroller)). [Run the example live](https://mdn.github.io/dom-examples/abort-api/).
