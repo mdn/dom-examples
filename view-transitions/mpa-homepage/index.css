@@ -10,11 +10,6 @@
   }
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  mix-blend-mode: normal;
-}
-
 ::view-transition-old(root) {
   animation: slide-to-right 0.3s;
 }
