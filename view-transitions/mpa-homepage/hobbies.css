@@ -8,11 +8,6 @@
   }
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  mix-blend-mode: normal;
-}
-
 ::view-transition-old(root) {
   animation: none;
 }
