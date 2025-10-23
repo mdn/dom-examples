@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Shared Worker Demo</title>
+    <style>
+      .main > h1 {
+        text-align: center;
+      }
+      .main > div {
+        width: 70vw;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h1>Shared Worker Demo</h1>
+      <div>
+        <h2>Username: <span id="user">user2</span></h2>
+        <div>
+          <label for="comment">Post a comment: </label>
+          <input type="textarea" id="comment" />
+          <button id="post">post</button>
+        </div>
+        <div>
+          <p>Result:</p>
+          <p id="result"></p>
+        </div>
+      </div>
+    </div>
+    <script src="postMessage.js"></script>
+  </body>
+</html>
