@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SharedWorkerGlobalScope Example</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>SharedWorkerGlobalScope Example</h1>
+  
+  <p>This example demonstrates the <code>SharedWorkerGlobalScope</code> interface, which represents the global execution context of a SharedWorker.</p>
+  
+  <div class="container">
+    <h2>Client 1</h2>
+    <div class="client">
+      <button id="connect1">Connect to SharedWorker</button>
+      <button id="getName1" disabled>Get Worker Name</button>
+      <button id="getConnections1" disabled>Get Connection Count</button>
+      <button id="sendMessage1" disabled>Send Message</button>
+      <button id="close1" disabled>Close Connection</button>
+      <div class="output" id="output1"></div>
+    </div>
+    
+    <h2>Client 2</h2>
+    <div class="client">
+      <button id="connect2">Connect to SharedWorker</button>
+      <button id="getName2" disabled>Get Worker Name</button>
+      <button id="getConnections2" disabled>Get Connection Count</button>
+      <button id="sendMessage2" disabled>Send Message</button>
+      <button id="close2" disabled>Close Connection</button>
+      <div class="output" id="output2"></div>
+    </div>
+  </div>
+  
+  <div class="info">
+    <h3>SharedWorkerGlobalScope Properties Demonstrated:</h3>
+    <ul>
+      <li><code>name</code> - The name given to the SharedWorker</li>
+      <li><code>onconnect</code> - Event handler for new connections</li>
+      <li><code>close()</code> - Method to close the worker</li>
+      <li><code>self</code> - Reference to the global scope</li>
+    </ul>
+    
+    <p><strong>Note:</strong> Open this page in multiple tabs to see how SharedWorker maintains state across different browsing contexts.</p>
+  </div>
+  
+  <script src="main.js"></script>
+</body>
+</html>
