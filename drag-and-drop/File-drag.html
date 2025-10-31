@@ -22,7 +22,7 @@
 <body>
   <h1>Drag and drop files</h1>
   
-  <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+  <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);">
     <p>Drag one or more files to this Drop Zone ...</p>
   </div>
 
@@ -33,6 +33,12 @@
 
       // Prevent default behavior (Prevent file from being opened)
       ev.preventDefault();
+      // Set dropEffect to indicate this is a copy operation
+      ev.dataTransfer.dropEffect = 'copy';
+    }
+
+    function dragLeaveHandler(ev) {
+      console.log('File(s) left drop zone');
     }
 
     function dropHandler(ev) {
@@ -57,17 +63,6 @@
         }
       }
 
-      // Pass event to removeDragData for cleanup
-      removeDragData(ev)
-    }
-
-    function removeDragData(ev) {
-      console.log('Removing drag data')
-
-      if (ev.dataTransfer.items) {
-        // Use DataTransferItemList interface to remove the drag data
-        ev.dataTransfer.items.clear();
-      }
     }
   </script>
 </body>
