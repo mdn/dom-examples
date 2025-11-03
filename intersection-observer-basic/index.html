@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="IntersectionObserver API demo on MDN - demonstrates lazy loading and visibility detection"
+    />
+    <title>IntersectionObserver API Demo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔍 IntersectionObserver API Demo</h1>
+
+      <div class="description">
+        <p>
+          The <code>IntersectionObserver</code> API provides a way to
+          asynchronously observe changes in the intersection of a target element
+          with an ancestor element or with the viewport. This demo shows:
+        </p>
+        <ul>
+          <li>
+            <strong>Visibility Detection:</strong> Boxes that animate when they
+            enter the viewport
+          </li>
+          <li>
+            <strong>Lazy Loading:</strong> Images that load only when scrolled
+            into view
+          </li>
+          <li>
+            <strong>Performance:</strong> Efficient tracking without scroll
+            event listeners
+          </li>
+        </ul>
+        <p><strong>Scroll down to see the magic! ✨</strong></p>
+      </div>
+
+      <!-- Stats panel showing real-time intersection data -->
+      <div class="stats">
+        <h2>📊 Intersection Stats</h2>
+        <p>Visible Elements: <strong id="visible-count">0</strong></p>
+        <p>Total Observed: <strong id="total-count">0</strong></p>
+        <p>
+          Last Event: <strong id="last-event">Waiting for intersection...</strong>
+        </p>
+      </div>
+
+      <!-- Spacer to create scroll space -->
+      <div class="spacer">⬇️ Scroll Down ⬇️</div>
+
+      <!-- Target boxes that will be observed -->
+      <div class="target-box" data-box="1">
+        <h3>📦 Box 1: Basic Intersection</h3>
+        <p>
+          This box uses IntersectionObserver to detect when it enters the
+          viewport. When visible, it animates in with a fade and slide effect.
+        </p>
+      </div>
+
+      <div class="spacer">Keep scrolling...</div>
+
+      <div class="target-box" data-box="2">
+        <h3>🎯 Box 2: Threshold Detection</h3>
+        <p>
+          The observer can trigger at different visibility thresholds. This demo
+          uses a 10% threshold, meaning the callback fires when at least 10% of
+          the element is visible.
+        </p>
+      </div>
+
+      <div class="spacer">Almost there...</div>
+
+      <div class="target-box" data-box="3">
+        <h3>⚡ Box 3: Performance Benefits</h3>
+        <p>
+          Unlike scroll event listeners, IntersectionObserver is optimized by
+          the browser and doesn't block the main thread. It's perfect for lazy
+          loading, infinite scroll, and animations.
+        </p>
+      </div>
+
+      <div class="spacer">One more section...</div>
+
+      <!-- Image lazy loading demonstration -->
+      <div class="image-container">
+        <h3>🖼️ Lazy Loading Image</h3>
+        <p>
+          This image loads only when you scroll it into view, saving bandwidth
+          and improving initial page load time.
+        </p>
+        <div
+          class="lazy-image"
+          data-src="https://picsum.photos/800/400?random=1"
+        >
+          Loading image...
+        </div>
+      </div>
+
+      <div class="spacer">🎉 You reached the end!</div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
