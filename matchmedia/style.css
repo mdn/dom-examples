@@ -1,0 +1,218 @@
+/**
+ * MATCHMEDIA DEMO - STYLES
+ * Demonstrates responsive design with Window.matchMedia()
+ */
+
+/* ============================================================================
+   BASE STYLES
+   ============================================================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  background-color: white;
+  height: 100%;
+}
+
+body {
+  padding: 20px;
+  margin: 10px;
+  min-height: calc(100vh - 20px);
+  border: 10px solid #333;
+  border-radius: 8px;
+  /* Default background - will be changed by JavaScript based on viewport width */
+  background-color: #3498db;
+  transition: background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ============================================================================ */
+
+h1 {
+  text-align: center;
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.description {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.description p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.description code {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+  color: #e74c3c;
+}
+
+/* ============================================================================
+   STATUS DISPLAY
+   ============================================================================ */
+
+.status {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+}
+
+.status-message {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.status-details {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-top: 10px;
+}
+
+.status-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+/* ============================================================================
+   MEDIA QUERY INDICATORS
+   ============================================================================ */
+
+.media-queries {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.media-queries h2 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.query-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 8px 0;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #ddd;
+}
+
+.query-item.active {
+  background: #d4edda;
+  border-left-color: #28a745;
+}
+
+.query-name {
+  font-weight: 600;
+  color: #495057;
+}
+
+.query-status {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.query-status.match {
+  background: #28a745;
+  color: white;
+}
+
+.query-status.no-match {
+  background: #6c757d;
+  color: white;
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+
+/* Narrow screens - Red background */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .status-message {
+    font-size: 1.2rem;
+  }
+
+  .description,
+  .status,
+  .media-queries {
+    padding: 15px;
+  }
+}
+
+/* Medium screens - Blue background (default) */
+@media (min-width: 601px) and (max-width: 1399px) {
+  /* Default styles apply */
+}
+
+/* Wide screens - Green background */
+@media (min-width: 1400px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  .status-message {
+    font-size: 1.8rem;
+  }
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+  body {
+    background-color: white !important;
+    border: none;
+  }
+
+  .description,
+  .status,
+  .media-queries {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}

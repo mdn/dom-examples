@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>matchMedia test file</title>
-    <style>
-      html {
-        font-family: sans-serif;
-        background-color: white;
-      }
-
-      body {
-        padding: 20px;
-        margin: 10px;
-        background-color: blue;
-        border: 10px solid black;
-      }
-
-      h1,
-      p {
-        text-align: center;
-      }
-
-      p {
-        font-size: 1.3rem;
-      }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Window.matchMedia() API demo - demonstrates responsive JavaScript with media queries"
+    />
+    <title>Window.matchMedia() Test</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>matchMedia test</h1>
+    <h1>Window.matchMedia() Demo</h1>
 
-    <p></p>
+    <div class="description">
+      <p>
+        The <code>window.matchMedia()</code> method returns a
+        <code>MediaQueryList</code> object that can be used to determine if the
+        document matches a media query string, and to monitor changes.
+      </p>
+      <p>
+        <strong>Try resizing your browser window</strong> to see how the page
+        responds to different viewport widths and updates in real-time!
+      </p>
+    </div>
 
-    <script>
-      var para = document.querySelector("p");
-      function screenTest() {
-        if (window.matchMedia("(max-width: 600px)").matches) {
-          /* the viewport is 600 pixels wide or less */
-          para.textContent =
-            "This is a narrow screen; " + window.innerWidth + "px wide.";
-          document.body.style.backgroundColor = "red";
-        } else if (window.matchMedia("(min-width: 1400px)").matches) {
-          /* the viewport is more than than 1400 pixels wide */
-          para.textContent =
-            "This is a REALLY wide screen; " + window.innerWidth + "px wide.";
-          document.body.style.backgroundColor = "green";
-        } else {
-          /* the viewport is more than than 400 pixels wide */
-          para.textContent =
-            "This is a wide screen; " + window.innerWidth + "px wide.";
-          document.body.style.backgroundColor = "blue";
-        }
-      }
+    <div class="status">
+      <span class="status-icon">💻</span>
+      <div class="status-message">Loading...</div>
+      <div class="status-details">Detecting viewport size...</div>
+    </div>
 
-      screenTest();
+    <div class="media-queries">
+      <h2>📊 Active Media Queries</h2>
 
-      document.body.onresize = screenTest;
-    </script>
+      <div class="query-item" id="narrow-item">
+        <span class="query-name">Narrow (≤ 600px)</span>
+        <span class="query-status" id="narrow-status">NO MATCH</span>
+      </div>
+
+      <div class="query-item" id="medium-item">
+        <span class="query-name">Medium (601px - 1399px)</span>
+        <span class="query-status" id="medium-status">NO MATCH</span>
+      </div>
+
+      <div class="query-item" id="wide-item">
+        <span class="query-name">Wide (≥ 1400px)</span>
+        <span class="query-status" id="wide-status">NO MATCH</span>
+      </div>
+
+      <div class="query-item" id="portrait-item">
+        <span class="query-name">Portrait Orientation</span>
+        <span class="query-status" id="portrait-status">NO MATCH</span>
+      </div>
+
+      <div class="query-item" id="landscape-item">
+        <span class="query-name">Landscape Orientation</span>
+        <span class="query-status" id="landscape-status">NO MATCH</span>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
