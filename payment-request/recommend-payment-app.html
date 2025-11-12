@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <title>Recommend a Payment App when User Has No Apps</title>
   <!--
-    If you select to pay with BobPay on this merchant page, it tries to call 
+    If you select to pay with BobBucks on this merchant page, it tries to call 
     `PaymentRequest.show()`, while intercepting the NOT_SUPPORTED_ERR exception. If this 
-    payment method is not supported, it redirects to the download page for BobPay.
+    payment method is not supported, it redirects to the download page for BobBucks
   -->
   <meta name="viewport" content="width=device-width">
   <style>
@@ -22,10 +22,10 @@
 
   <div id="intro">
     <p>
-      In this example, if you select to pay with BobPay on this merchant page, it tries to 
+      In this example, if you select to pay with BobBucks on this merchant page, it tries to 
       call <code>PaymentRequest.show()</code>, while intercepting the 
       <code>NOT_SUPPORTED_ERR exception</code>. If this payment method is not supported, 
-      it redirects to the download page for BobPay.
+      it redirects to the download page for BobBucks
     </p>      
     <p>
       For the purposes of the demo, imagine you have chosen an item and
@@ -78,13 +78,13 @@
 
           if (error.code == DOMException.NOT_SUPPORTED_ERR) {
 
-            // BobPay not currently supported. Usually we might now wish to redirect
+            // BobBucks not currently supported. Usually we might now wish to redirect
             // to a signup page and we could pass our current URL so it could redirect 
             // (or link) back to this page afterwards. For this demo, we are just 
-            // redirecting to the BobPay download page.
+            // redirecting to the BobBucks download page.
 
             window.location.href =
-              'https://bobpay.xyz/#download';
+              'https://bobbucks.dev/#download';
 
           } else {
             // Other kinds of errors; cancelled or failed payment. For demo purposes:
@@ -106,7 +106,7 @@
 
     function buildSupportedPaymentMethodData() {
       return [{
-        supportedMethods: 'https://emerald-eon.appspot.com/bobpay'
+        supportedMethods: 'https://bobbucks.dev'
       }];
     }
 
