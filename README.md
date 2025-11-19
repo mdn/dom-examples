@@ -63,6 +63,8 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "insert-adjacent" directory contains basic demos for [insertAdjacentElement](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentElement.html) and [insertAdjacentText](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentText.html).
 
+- The "interest-invokers" directory is for [interest invoker](https://developer.mozilla.org/docs/Web/API/Popover_API/Interest_invokers) examples. Go to the [Interest invoker examples index](https://mdn.github.io/dom-examples/interest-invokers/) to see what's available.
+
 - The "launch-handler" directory contains a demo for the [Launch Handler API](https://developer.mozilla.org/en-US/docs/Web/API/Launch_Handler_API). [View the demo live](https://mdn.github.io/dom-examples/launch-handler/). This example was originally published on Glitch by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
 
 - The "local-font-access" directory contains a demo for the [Local Font Access API](https://developer.mozilla.org/en-US/docs/Web/API/Local_Font_Access_API). [View the demo live](https://mdn.github.io/dom-examples/local-font-access/).
@@ -122,7 +124,6 @@ Do not specify supported browsers and their versions in code comments or prose, 
   - View transitions in a [multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa/)
   - Another example of view transitions in a [simple multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa-homepage/)
   - [The `match-element` value](https://mdn.github.io/dom-examples/view-transitions/match-element/) for the `view-transition-name` property
-
 
 - The "web-share" directory contains a basic demo to show usage of the [Web Share API](https://developer.mozilla.org/docs/Web/API/Navigator/share). [View the demo live](https://mdn.github.io/dom-examples/web-share/).
 
