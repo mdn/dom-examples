@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>interestfor example</title>
+
+    <link href="styles.css" rel="stylesheet" />
+    <script defer src="index.js"></script>
+  </head>
+  <body>
+    <p>
+      I think
+      <a href="https://github.com/chrisdavidmills/" interestfor="user-info"
+        >@chrisdavidmills</a
+      >
+      should know about this.
+    </p>
+
+    <div id="user-info" popover="hint">
+      <div class="wrapper">
+        <img src="chris-mills.jpg" alt="chris mills" />
+        <section>
+          <p><strong>Chris Mills</strong></p>
+          <p>
+            Independent tech writer and web technology tinkerer, working on MDN
+            on behalf of Google and Mozilla. A11y and open standards advocate.
+            Heavy metal drummer.
+          </p>
+          <p>🌍 Greenfield, UK</p>
+        </section>
+      </div>
+    </div>
+
+    <p><button interestfor="button-tooltip">Press me</button></p>
+
+    <div id="button-tooltip" popover="auto">
+      <p>This button does absolutely nothing.</p>
+    </div>
+  </body>
+</html>
