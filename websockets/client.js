@@ -5,45 +5,51 @@ let counter = 0;
 
 const logElement = document.querySelector("#log");
 function log(text) {
-	logElement.innerText = `${logElement.innerText}${text}\n`;
-	logElement.scrollTop = logElement.scrollHeight;
+  logElement.innerText = `${logElement.innerText}${text}\n`;
+  logElement.scrollTop = logElement.scrollHeight;
 }
 
-// Open the websocket when the page is shown
-window.addEventListener("pageshow", () => {
-	log("OPENING");
+function initializeWebSocketListeners(ws) {
+  ws.addEventListener("open", () => {
+    log("CONNECTED");
+    pingInterval = setInterval(() => {
+      log(`SENT: ping: ${counter}`);
+      ws.send("ping");
+    }, 1000);
+  });
 
-	websocket = new WebSocket(wsUri);
+  ws.addEventListener("close", () => {
+    log("DISCONNECTED");
+    clearInterval(pingInterval);
+  });
 
-	websocket.addEventListener("open", () => {
-		log("CONNECTED");
-		pingInterval = setInterval(() => {
-			log(`SENT: ping: ${counter}`);
-			websocket.send("ping");
-		}, 1000);
-	});
+  ws.addEventListener("message", (e) => {
+    log(`RECEIVED: ${e.data}: ${counter}`);
+    counter++;
+  });
 
-	websocket.addEventListener("close", () => {
-		log("DISCONNECTED");
-		clearInterval(pingInterval);
-	});
+  ws.addEventListener("error", (e) => {
+    log(`ERROR`);
+  });
+}
 
-	websocket.addEventListener("message", (e) => {
-		log(`RECEIVED: ${e.data}: ${counter}`);
-		counter++;
-	});
-
-	websocket.addEventListener("error", (e) => {
-		log(`ERROR: ${e.data}`);
-	});
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    websocket = new WebSocket(wsUri);
+    initializeWebSocketListeners(websocket);
+  }
 });
+
+log("OPENING");
+websocket = new WebSocket(wsUri);
+initializeWebSocketListeners(websocket);
 
 // Close the websocket when the user leaves.
 window.addEventListener("pagehide", () => {
-	if (websocket) {
-		log("CLOSING");
-		websocket.close();
-		websocket = null;
-		window.clearInterval(pingInterval);
-	}
+  if (websocket) {
+    log("CLOSING");
+    websocket.close();
+    websocket = null;
+    window.clearInterval(pingInterval);
+  }
 });
