@@ -9,34 +9,40 @@ function log(text) {
 	logElement.scrollTop = logElement.scrollHeight;
 }
 
-// Open the websocket when the page is shown
-window.addEventListener("pageshow", () => {
-	log("OPENING");
-
-	websocket = new WebSocket(wsUri);
-
-	websocket.addEventListener("open", () => {
+function initializeWebSocketListeners(ws) {
+	ws.addEventListener("open", () => {
 		log("CONNECTED");
 		pingInterval = setInterval(() => {
 			log(`SENT: ping: ${counter}`);
-			websocket.send("ping");
+			ws.send("ping");
 		}, 1000);
 	});
 
-	websocket.addEventListener("close", () => {
+	ws.addEventListener("close", () => {
 		log("DISCONNECTED");
 		clearInterval(pingInterval);
 	});
 
-	websocket.addEventListener("message", (e) => {
+	ws.addEventListener("message", (e) => {
 		log(`RECEIVED: ${e.data}: ${counter}`);
 		counter++;
 	});
 
-	websocket.addEventListener("error", (e) => {
-		log(`ERROR: ${e.data}`);
+	ws.addEventListener("error", (e) => {
+		log(`ERROR`);
 	});
+}
+
+window.addEventListener("pageshow", (event) => {
+	if (event.persisted) {
+		websocket = new WebSocket(wsUri);
+		initializeWebSocketListeners(websocket);
+	}
 });
+
+log("OPENING");
+websocket = new WebSocket(wsUri);
+initializeWebSocketListeners(websocket);
 
 // Close the websocket when the user leaves.
 window.addEventListener("pagehide", () => {
