@@ -6,7 +6,7 @@ async function createResponse(path, mimeType) {
 }
 
 Deno.serve({
-	port: 80,
+	port: 8080,
 	async handler(request) {
 		if (request.headers.get("upgrade") !== "websocket") {
 			const url = new URL(request.url);

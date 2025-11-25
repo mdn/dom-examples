@@ -1,4 +1,4 @@
-const wsUri = "ws://127.0.0.1/";
+const wsUri = "ws://127.0.0.1:8080/";
 let websocket = null;
 let pingInterval;
 let counter = 0;
