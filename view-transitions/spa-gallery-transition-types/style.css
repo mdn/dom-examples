@@ -1,0 +1,183 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: inherit;
+  font-family: sans-serif;
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  position: absolute;
+  margin: 0;
+  top: 0px;
+  right: 8px;
+}
+
+.full-img {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+figure {
+  width: 100%;
+}
+
+img {
+  border: 1px solid gray;
+}
+
+.full-img img {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+figcaption {
+  width: fit-content;
+  margin: 0 auto;
+  color: #333;
+  margin-top: 10px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 10px;
+}
+
+.thumb-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.thumb-bar img {
+  display: block;
+  width: 64px;
+  cursor: pointer;
+}
+
+.thumb-bar img:hover,
+.thumb-bar img:focus,
+.thumb-select-highlight {
+  outline: 2px solid blue;
+}
+
+/* View transition types */
+
+/* Determine what gets captured when the type is forwards, backwards, or upwards */
+html:active-view-transition-type(forwards, backwards, upwards) {
+  :root {
+    view-transition-name: none;
+  }
+  .displayed-img {
+    view-transition-name: image;
+  }
+  figcaption {
+    view-transition-name: caption;
+  }
+
+  &::view-transition-old(caption) {
+    animation-name: fade-out;
+  }
+  &::view-transition-new(caption) {
+    animation-name: fade-in;
+    animation-delay: 0.6s;
+  }
+}
+
+/* Animation styles for forwards type only */
+html:active-view-transition-type(forwards) {
+  &::view-transition-old(image) {
+    animation-name: slide-out-to-left;
+  }
+  &::view-transition-new(image) {
+    animation-name: slide-in-from-right;
+  }
+}
+
+/* Animation styles for backwards type only */
+html:active-view-transition-type(backwards) {
+  &::view-transition-old(image) {
+    animation-name: slide-out-to-right;
+  }
+  &::view-transition-new(image) {
+    animation-name: slide-in-from-left;
+  }
+}
+
+/* Animation styles for upwards type only */
+html:active-view-transition-type(upwards) {
+  &::view-transition-old(image) {
+    animation-name: slide-out-to-top;
+  }
+  &::view-transition-new(image) {
+    animation-name: slide-in-from-top;
+    animation-delay: 0.6s;
+  }
+}
+
+/* Keyframes for all the animations */
+@keyframes slide-in-from-left {
+  from {
+    translate: -100vw 0;
+    rotate: -360deg;
+  }
+}
+@keyframes slide-in-from-right {
+  from {
+    translate: 100vw 0;
+    rotate: 360deg;
+  }
+}
+@keyframes slide-out-to-left {
+  to {
+    translate: -100vw 0;
+    rotate: -360deg;
+  }
+}
+@keyframes slide-out-to-right {
+  to {
+    translate: 100vw 0;
+    rotate: 360deg;
+  }
+}
+@keyframes slide-out-to-top {
+  to {
+    translate: 0 -100vh;
+    rotate: x 360deg;
+  }
+}
+@keyframes slide-in-from-top {
+  from {
+    translate: 0 -100vh;
+    rotate: x 360deg;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Set custom duration on all view transitions */
+::view-transition-group(*) {
+  animation-duration: 0.6s;
+}

@@ -63,6 +63,8 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "insert-adjacent" directory contains basic demos for [insertAdjacentElement](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentElement.html) and [insertAdjacentText](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentText.html).
 
+- The "interest-invokers" directory is for [interest invoker](https://developer.mozilla.org/docs/Web/API/Popover_API/Interest_invokers) examples. Go to the [Interest invoker examples index](https://mdn.github.io/dom-examples/interest-invokers/) to see what's available.
+
 - The "launch-handler" directory contains a demo for the [Launch Handler API](https://developer.mozilla.org/en-US/docs/Web/API/Launch_Handler_API). [View the demo live](https://mdn.github.io/dom-examples/launch-handler/). This example was originally published on Glitch by [Thomas Steiner](https://front-end.social/@tomayac@toot.cafe).
 
 - The "local-font-access" directory contains a demo for the [Local Font Access API](https://developer.mozilla.org/en-US/docs/Web/API/Local_Font_Access_API). [View the demo live](https://mdn.github.io/dom-examples/local-font-access/).
@@ -110,19 +112,13 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "viewport-segments-api" directory contains an example demonstrating how to use the [Viewport Segments API](https://developer.mozilla.org/docs/Web/API/Viewport_Segments_API). [Run the example live](https://mdn.github.io/dom-examples/viewport-segments-api/).
 
+- The "view-transitions" directory contains examples and demos of the [View Transition API](https://developer.mozilla.org/docs/Web/API/View_Transition_API) standard. Go to the [View transition API demo index](https://mdn.github.io/dom-examples/view-transitions/) to see what's available.
+
 - The "visual-viewport-api" directory contains a basic demo to show usage of the Visual Viewport API. For more details on how it works, read [Visual Viewport API](https://developer.mozilla.org/docs/Web/API/Visual_Viewport_API). [View the demo live](https://mdn.github.io/dom-examples/visual-viewport-api/).
 
 - The "web-animations-api" directory contains [Web Animation API](https://developer.mozilla.org/docs/Web/API/Web_Animations_API) demos. See the [web animations README](web-animations-api/README.md) for more information.
 
 - The "web-storage" directory contains a basic demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](https://mdn.github.io/dom-examples/web-storage/).
-
-- The "view-transitions" directory contains demos to show usage of the [View Transitions API](https://developer.mozilla.org/docs/Web/API/View_Transitions_API):
-
-  - View transitions in a [single-page app](https://mdn.github.io/dom-examples/view-transitions/spa/)
-  - View transitions in a [multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa/)
-  - Another example of view transitions in a [simple multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa-homepage/)
-  - [The `match-element` value](https://mdn.github.io/dom-examples/view-transitions/match-element/) for the `view-transition-name` property
-
 
 - The "web-share" directory contains a basic demo to show usage of the [Web Share API](https://developer.mozilla.org/docs/Web/API/Navigator/share). [View the demo live](https://mdn.github.io/dom-examples/web-share/).
 
