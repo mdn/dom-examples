@@ -114,16 +114,11 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "visual-viewport-api" directory contains a basic demo to show usage of the Visual Viewport API. For more details on how it works, read [Visual Viewport API](https://developer.mozilla.org/docs/Web/API/Visual_Viewport_API). [View the demo live](https://mdn.github.io/dom-examples/visual-viewport-api/).
 
+- The "view-transitions" directory contains examples and demos of the [View Transition API](https://developer.mozilla.org/docs/Web/API/View_Transition_API) standard. Go to the [View transition API demo index](https://mdn.github.io/dom-examples/view-transitions/) to see what's available.
+
 - The "web-animations-api" directory contains [Web Animation API](https://developer.mozilla.org/docs/Web/API/Web_Animations_API) demos. See the [web animations README](web-animations-api/README.md) for more information.
 
 - The "web-storage" directory contains a basic demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](https://mdn.github.io/dom-examples/web-storage/).
-
-- The "view-transitions" directory contains demos to show usage of the [View Transitions API](https://developer.mozilla.org/docs/Web/API/View_Transitions_API):
-
-  - View transitions in a [single-page app](https://mdn.github.io/dom-examples/view-transitions/spa/)
-  - View transitions in a [multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa/)
-  - Another example of view transitions in a [simple multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa-homepage/)
-  - [The `match-element` value](https://mdn.github.io/dom-examples/view-transitions/match-element/) for the `view-transition-name` property
 
 - The "web-share" directory contains a basic demo to show usage of the [Web Share API](https://developer.mozilla.org/docs/Web/API/Navigator/share). [View the demo live](https://mdn.github.io/dom-examples/web-share/).
 
