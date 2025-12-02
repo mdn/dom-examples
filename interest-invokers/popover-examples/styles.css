@@ -1,0 +1,96 @@
+html {
+  font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Browser support banner */
+
+.no-interest-invokers body::before {
+  content: "Your browser doesn't support interest invokers.";
+  background-color: wheat;
+  display: block;
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* Link interestfor styles */
+
+a[interestfor] {
+  interest-delay: 1s 2s;
+}
+
+/* Shared styles across popovers */
+
+#user-info,
+#button-tooltip {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 0 10px;
+  margin: 5px;
+  background-color: white;
+  font-size: 0.8rem;
+}
+
+#user-info {
+  position-area: bottom right;
+}
+
+#user-info .wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 480px;
+  font-size: 0.8rem;
+}
+
+#user-info img {
+  margin: 10px 0;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+/* button interestfor styles */
+
+button[interestfor="button-tooltip"] {
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(200 0 0);
+}
+
+/* Applies styles to the interest invoker, but only when the user is showing interest */
+button:interest-source {
+  background-color: rgb(255 0 0);
+}
+
+button[interestfor="button-tooltip"]:active {
+  color: rgb(255 0 0);
+  border: 1px solid rgb(255 0 0);
+  background-color: white;
+}
+
+#button-tooltip {
+  position-area: right;
+}
+
+/* animation for interest targets */
+
+[popover]:interest-target {
+  opacity: 1;
+}
+
+[popover] {
+  opacity: 0;
+  transition: all 0.7s allow-discrete;
+}
+
+@starting-style {
+  [popover]:interest-target {
+    opacity: 0;
+  }
+}

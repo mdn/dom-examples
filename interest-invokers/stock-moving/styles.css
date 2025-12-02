@@ -1,0 +1,58 @@
+html {
+  font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Browser support banner */
+
+.no-interest-invokers body::before {
+  content: "Your browser doesn't support interest invokers.";
+  background-color: wheat;
+  display: block;
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* Layout styles */
+
+.wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.wrapper section {
+  flex: 1;
+}
+
+/* interestfor styles */
+
+h1,
+h2 {
+  text-align: center;
+}
+
+button[interestfor] {
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  width: 50%;
+  margin: 10px auto;
+  /* Needs to be set on the interest invoker element (with interestfor set on it), not the popover  */
+  interest-delay: 1s 0s;
+}
+
+#button-tooltip {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 1px;
+  background-color: white;
+  font-size: 0.8rem;
+  position-area: bottom;
+}
