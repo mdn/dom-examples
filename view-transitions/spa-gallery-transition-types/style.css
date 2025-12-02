@@ -78,7 +78,7 @@ figcaption {
 /* View transition types */
 
 /* Determine what gets captured when the type is forwards, backwards, or upwards */
-html:active-view-transition-type(forwards, backwards, upwards) {
+html:active-view-transition {
   :root {
     view-transition-name: none;
   }

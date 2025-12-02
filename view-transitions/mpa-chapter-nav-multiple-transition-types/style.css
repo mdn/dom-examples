@@ -77,7 +77,7 @@ figcaption {
 }
 
 /* Determine what gets captured when the type is forwards or backwards */
-html:active-view-transition-type(forwards, backwards) {
+html:active-view-transition {
   nav {
     view-transition-name: none;
   }
