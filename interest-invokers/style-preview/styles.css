@@ -1,0 +1,105 @@
+html {
+  font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Browser support banner */
+
+.no-interest-invokers body::before {
+  content: "Your browser doesn't support interest invokers.";
+  background-color: wheat;
+  display: block;
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* General styles */
+
+body {
+  width: 640px;
+  margin: 0 auto;
+}
+
+body > div {
+  display: flex;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+button {
+  flex: 1;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+#style-panel {
+  padding: 20px;
+  border-radius: 30px;
+  margin-top: 20px;
+  border-width: 10px;
+  corner-shape: scoop;
+}
+
+h2 {
+  margin-top: 0;
+  text-align: center;
+  letter-spacing: 5px;
+}
+
+p {
+  margin-bottom: 0;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+/* Color classes */
+
+.black-white {
+  color: black;
+  background-color: white;
+  border: 2px solid black;
+}
+
+.bubblegum {
+  color: #fff8f0;
+  background-color: #ef476f;
+  border: 2px solid #fff8f0;
+  box-shadow: 0 0 2px #ef476f;
+}
+
+.purple-haze {
+  color: #8a1c7c;
+  background-color: #f0bcd4;
+  border: 2px solid #8a1c7c;
+}
+
+.blaze {
+  color: #f2e94e;
+  background-color: #7e6b8f;
+  border: 2px solid #f2e94e;
+}
+
+.mint-brown {
+  color: #41463d;
+  background-color: #1cfeba;
+  border: 2px solid #41463d;
+}
+
+/* Applies styles to the interest invoker, but only when the user is showing interest */
+
+button:interest-source {
+  background-color: black;
+  color: white;
+  border: 2px solid black;
+}
+
+/* animation for style panel */
+
+#style-panel {
+  transition: all 0.7s;
+}
