@@ -120,6 +120,13 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "web-storage" directory contains a basic demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](https://mdn.github.io/dom-examples/web-storage/).
 
+- The "view-transitions" directory contains demos to show usage of the [View Transitions API](https://developer.mozilla.org/docs/Web/API/View_Transitions_API):
+
+  - View transitions in a [single-page app](https://mdn.github.io/dom-examples/view-transitions/spa/)
+  - View transitions in a [multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa/)
+  - Another example of view transitions in a [simple multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa-homepage/)
+  - [The `match-element` value](https://mdn.github.io/dom-examples/view-transitions/match-element/) for the `view-transition-name` property
+
 - The "web-share" directory contains a basic demo to show usage of the [Web Share API](https://developer.mozilla.org/docs/Web/API/Navigator/share). [View the demo live](https://mdn.github.io/dom-examples/web-share/).
 
 - The "web-workers" directory contains several demos that show how [Web Workers](https://developer.mozilla.org/docs/Web/API/Web_Workers_API) operate. For example, view the live [simple web worker demo](https://mdn.github.io/dom-examples/web-workers/simple-web-worker/).
