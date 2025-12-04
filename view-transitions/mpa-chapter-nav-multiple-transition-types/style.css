@@ -1,0 +1,112 @@
+body {
+  font: 1.2em / 1.5 system-ui;
+  width: 50%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+ol {
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 20px 0;
+  margin: 0;
+  background: white;
+}
+
+section {
+  padding-top: 60px;
+}
+
+a {
+  color: red;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+img {
+  width: 480px;
+  display: block;
+  margin: 0 auto;
+}
+
+figcaption {
+  text-align: center;
+  color: #333;
+  font-style: italic;
+}
+
+/* Turn cross-document view transitions on */
+@view-transition {
+  navigation: auto;
+}
+
+/* Keyframes for all the animations */
+@keyframes slide-in-from-left {
+  from {
+    translate: -100vw 0;
+  }
+}
+@keyframes slide-in-from-right {
+  from {
+    translate: 100vw 0;
+  }
+}
+@keyframes slide-out-to-left {
+  to {
+    translate: -100vw 0;
+  }
+}
+@keyframes slide-out-to-right {
+  to {
+    translate: 100vw 0;
+  }
+}
+
+/* Determine what gets captured when the type is forwards or backwards */
+html:active-view-transition {
+  nav {
+    view-transition-name: none;
+  }
+  section {
+    view-transition-name: chapter;
+  }
+}
+
+/* Animation styles for forwards type only */
+html:active-view-transition-type(forwards) {
+  &::view-transition-old(chapter) {
+    animation-name: slide-out-to-left;
+  }
+  &::view-transition-new(chapter) {
+    animation-name: slide-in-from-right;
+  }
+}
+
+/* Animation styles for backwards type only */
+html:active-view-transition-type(backwards) {
+  &::view-transition-old(chapter) {
+    animation-name: slide-out-to-right;
+  }
+  &::view-transition-new(chapter) {
+    animation-name: slide-in-from-left;
+  }
+}
+
+/* Set custom duration on all view transitions */
+::view-transition-group(*) {
+  animation-duration: 0.6s;
+}

@@ -1,0 +1,90 @@
+body {
+  font: 1.2em / 1.5 system-ui;
+  width: 50%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+ol {
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 20px 0;
+  margin: 0;
+  background: white;
+}
+
+section {
+  padding-top: 60px;
+}
+
+a {
+  color: red;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+img {
+  width: 480px;
+  display: block;
+  margin: 0 auto;
+}
+
+figcaption {
+  text-align: center;
+  color: #333;
+  font-style: italic;
+}
+
+/* Turn cross-document view transitions on and set types to slide */
+@view-transition {
+  navigation: auto;
+  types: slide;
+}
+
+/* Keyframes for all the animations */
+@keyframes slide-out-to-left {
+  to {
+    translate: -100vw 0;
+  }
+}
+
+@keyframes slide-in-from-right {
+  from {
+    translate: 100vw 0;
+  }
+}
+
+/* Animation styles for slide type only */
+html:active-view-transition-type(slide) {
+  :root {
+    view-transition-name: none;
+  }
+  section {
+    view-transition-name: chapter;
+  }
+  &::view-transition-old(chapter) {
+    animation-name: slide-out-to-left;
+  }
+  &::view-transition-new(chapter) {
+    animation-name: slide-in-from-right;
+  }
+}
+
+/* Set custom duration on all view transitions */
+::view-transition-group(*) {
+  animation-duration: 0.6s;
+}
