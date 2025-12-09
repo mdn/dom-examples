@@ -35,10 +35,6 @@ const determineTransitionType = (oldNavigationEntry, newNavigationEntry) => {
     return "backwards";
   } else if (currentPageIndex < destinationPageIndex) {
     return "forwards";
-  } else {
-    // If the page is reloaded, neither of the above conditions will be true
-    // In this case, we don't need a type, so return "no-type"
-    return "no-type";
   }
 };
 
@@ -63,8 +59,8 @@ window.addEventListener("pagereveal", async (e) => {
   );
 
   console.log(`pageReveal: ${transitionType}`);
-  // If the type is "no-type", don't add it to the transition types
-  if (transitionType !== "no-type") {
+  // If the type is undefined, don't add anything to the transition types
+  if (transitionType !== undefined) {
     // Add the type to the active ViewTransition via its types property
     e.viewTransition.types.add(transitionType);
   }
