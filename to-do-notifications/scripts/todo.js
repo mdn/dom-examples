@@ -180,9 +180,9 @@ window.onload = () => {
       title.value = '';
       hours.value = null;
       minutes.value = null;
-      day.value = 01;
+      day.value = '01';
       month.value = 'January';
-      year.value = 2020;
+      year.value = 2026;
     };
   };
 
