@@ -31,9 +31,13 @@ if (typeof HTMLGeolocationElement === "function") {
   }
 
   function notifyUserGrantPermission() {
-    if (geo.permissionStatus === "denied" || geo.permissionStatus === "prompt")
+    if (
+      geo.permissionStatus === "denied" ||
+      geo.permissionStatus === "prompt"
+    ) {
       statusElem.textContent =
-        'Please press the "Use location" button and allow location for this site.';
+        'Please press the "Use location" button again and allow location for this site.';
+    }
   }
 } else {
   const fallback = document.querySelector("button");
