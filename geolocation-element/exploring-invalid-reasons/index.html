@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Geolocation element exploring invalid reasons</title>
+    <script defer src="index.js"></script>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>Geolocation element exploring invalid reasons</h1>
+    <geolocation></geolocation>
+
+    <div id="cover">Cover element</div>
+    <p id="reason"></p>
+    <form>
+      <label for="invalidate"
+        >Choose a way to invalidate the &lt;geolocation&gt; element:</label
+      >
+      <select id="invalidate">
+        <option value="">None</option>
+        <option value="move-behind">Move behind element</option>
+        <option value="move-out">Move outside viewport</option>
+        <option value="bad-contrast">Bad contrast</option>
+      </select>
+    </form>
+  </body>
+</html>

@@ -4,10 +4,10 @@ const geo = document.querySelector("geolocation");
 
 if (geo.initialPermissionStatus === "prompt") {
   statusElem.textContent =
-    "Please press the button to allow access to your location data and start requesting data.";
+    "Please press the button to allow access to your location data and start requesting it.";
 } else if (geo.initialPermissionStatus === "denied") {
   statusElem.textContent =
-    "Permission previously denied. Please press the button to allow access to your location data and start requesting data.";
+    "Permission previously denied. Please press the button to allow access to your location data and start requesting it.";
 } else if (geo.initialPermissionStatus === "granted") {
   statusElem.textContent =
     "Permission previously granted. Please press the button to start requesting location data.";
