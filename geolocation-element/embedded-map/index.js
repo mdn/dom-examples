@@ -44,9 +44,14 @@ if (typeof HTMLGeolocationElement === "function") {
 
   // Fallback code
   fallback.addEventListener("click", () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      drawMap(position.coords.latitude, position.coords.longitude, fallback);
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        drawMap(position.coords.latitude, position.coords.longitude, fallback);
+      },
+      (error) => {
+        statusElem.textContent += `${error.message}, `;
+      }
+    );
   });
 }
 
