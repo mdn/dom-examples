@@ -1,4 +1,4 @@
-const statusElem = document.querySelector("p");
+const statusElem = document.querySelector("#status");
 
 if (typeof HTMLGeolocationElement === "function") {
   const geo = document.querySelector("geolocation");
@@ -40,7 +40,7 @@ if (typeof HTMLGeolocationElement === "function") {
     }
   }
 } else {
-  const fallback = document.querySelector("button");
+  const fallback = document.querySelector("#fallback");
 
   // Fallback code
   fallback.addEventListener("click", () => {

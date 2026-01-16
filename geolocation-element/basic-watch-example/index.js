@@ -1,4 +1,4 @@
-const outputElem = document.querySelector("p");
+const outputElem = document.querySelector("#output");
 
 if (typeof HTMLGeolocationElement === "function") {
   const geo = document.querySelector("geolocation");
@@ -10,7 +10,7 @@ if (typeof HTMLGeolocationElement === "function") {
     }
   });
 } else {
-  const fallback = document.querySelector("button");
+  const fallback = document.querySelector("#fallback");
   fallback.addEventListener("click", () => {
     navigator.geolocation.watchPosition(
       (position) => {
