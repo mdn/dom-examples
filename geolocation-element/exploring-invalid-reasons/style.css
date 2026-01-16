@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin-left: 50px;
+}
+
+geolocation {
+  font-size: small;
+  position: relative;
+  z-index: 1;
+}
+
+#cover {
+  position: absolute;
+  width: 200px;
+  height: 50px;
+  top: 72px;
+  left: 250px;
+  color: white;
+  background-color: darkblue;
+  padding: 10px;
+
+  z-index: 2;
+}
+
+.move-behind {
+  left: 150px;
+}
+
+.move-out {
+  right: 250px;
+}
+
+.bad-contrast {
+  background-color: red;
+  color: orange;
+}

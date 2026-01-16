@@ -57,6 +57,8 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "fullscreen-api" directory is for examples and demos of the [Fullscreen API](https://wiki.developer.mozilla.org/docs/Web/API/Fullscreen_API). Run the [example live](https://mdn.github.io/dom-examples/fullscreen-api/).
 
+- The "geolocation-element" directory is for examples and demos of the [`<geolocation>` element](https://developer.mozilla.org/docs/Web/HTML/Reference/Elements/geolocation). Go to the [`<geolocation>` element demo index](https://mdn.github.io/dom-examples/geolocation-element/) to see what's available.
+
 - The "history-api" directory contains an example that demonstrates the [History API](https://developer.mozilla.org/docs/Web/API/History_API). [View the demo live](https://mdn.github.io/dom-examples/history-api/).
 
 - The "indexeddb-api" directory contains a demo for the [IndexedDB API](https://mdn.github.io/dom-examples/indexeddb-api/index.html).
