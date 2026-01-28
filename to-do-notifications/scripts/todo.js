@@ -42,9 +42,22 @@ window.onload = () => {
     notificationBtn.style.display = "none";
   }
 
-  // Set year to current year on initial load
-  year.value = new Date().getFullYear();
-  note.appendChild(createListItem("App initialised."));
+  // Populate year options starting from the current year
+  // and 12 years into the future
+  const currentYear = new Date().getFullYear();
+  for (let i = 0; i <= 12; i++) {
+    const option = document.createElement("option");
+    const yearValue = currentYear + i;
+    option.value = yearValue;
+    option.textContent = yearValue;
+    year.appendChild(option);
+  }
+
+  // Set the year field to the current year on initial load
+  year.value = currentYear;
+
+  // Log app initialization status
+  note.appendChild(createListItem("App initialized."));
 
   // Let us open our database
   const DBOpenRequest = window.indexedDB.open("toDoList", 4);
@@ -55,7 +68,7 @@ window.onload = () => {
   };
 
   DBOpenRequest.onsuccess = (event) => {
-    note.appendChild(createListItem("Database initialised."));
+    note.appendChild(createListItem("Database initialized."));
 
     // Store the result of opening the database in the db variable. This is used a lot below
     db = DBOpenRequest.result;
@@ -185,7 +198,9 @@ window.onload = () => {
     // Report on the success of the transaction completing, when everything is done
     transaction.oncomplete = () => {
       note.appendChild(
-        createListItem("Transaction completed: database modification finished.")
+        createListItem(
+          "Transaction completed: database modification finished.",
+        ),
       );
 
       // Update the display of data to show the newly added item, by running displayData() again.
@@ -196,8 +211,8 @@ window.onload = () => {
     transaction.onerror = () => {
       note.appendChild(
         createListItem(
-          `Transaction not opened due to error: ${transaction.error}`
-        )
+          `Transaction not opened due to error: ${transaction.error}`,
+        ),
       );
     };
 
@@ -213,7 +228,7 @@ window.onload = () => {
     const objectStoreRequest = objectStore.add(newItem[0]);
     objectStoreRequest.onsuccess = (event) => {
       // Report the success of our request
-      // (to detect whether it has been succesfully
+      // (to detect whether it has been successfully
       // added to the database, you'd look at transaction.oncomplete)
       note.appendChild(createListItem("Request successful."));
 
@@ -223,7 +238,7 @@ window.onload = () => {
       minutes.value = null;
       day.value = "01";
       month.value = "January";
-      year.value = new Date().getFullYear();
+      year.value = currentYear;
     };
   }
 
