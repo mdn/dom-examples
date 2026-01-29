@@ -49,7 +49,6 @@ Do not specify supported browsers and their versions in code comments or prose, 
 - The "edit-context" directory contains examples demonstrating the [EditContext API](https://developer.mozilla.org/docs/Web/API/EditContext_API). See the [list of examples](https://github.com/mdn/dom-examples/tree/main/edit-context/).
 
 - The "file-system-api" directory contains multiple examples demonstrating usage of the [File System API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API):
-
   - [createSyncAccessHandle() mode test](https://mdn.github.io/dom-examples/file-system-api/createsyncaccesshandle-mode/): Demonstrates usage of [FileSystemFileHandle.createSyncAccessHandle()](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileHandle/createSyncAccessHandle)
   - [createWritable() mode test](https://mdn.github.io/dom-examples/file-system-api/createwritable-mode/): Demonstrates usage of [FileSystemFileHandle.createWritable()](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileHandle/createWritable)
   - [FileSystemHandle.remove() demo](https://mdn.github.io/dom-examples/file-system-api/filesystemhandle-remove/): Demonstrates usage of [FileSystemHandle.remove()](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemHandle/remove)
@@ -80,7 +79,6 @@ Do not specify supported browsers and their versions in code comments or prose, 
 - The "navigation-api" directory contains a basic example that demonstrates some features of the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API). [Run the demo live](https://mdn.github.io/dom-examples/navigation-api/).
 
 - The "notifications" directory contains one example showing how to make and handle persistent notifications, and another showing how to make and handle non-persistent notifications, using the [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API).
-
   - [Run the persistent notifications demo](https://mdn.github.io/dom-examples/notifications/persistent/).
   - [Run the non-persistent notifications demo](https://mdn.github.io/dom-examples/notifications/non-persistent/)
 
@@ -112,6 +110,8 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "touchevents" directory is for examples and demos of the [Touch Events](https://developer.mozilla.org/docs/Web/API/Touch_events) standard.
 
+- The "to-do-notifications" directory contains a to-do list notifications app demonstrating [IndexedDB API](https://developer.mozilla.org/docs/Web/API/IndexedDB_API) for data storage and [Notifications API](https://developer.mozilla.org/docs/Web/API/Notifications_API) for deadline alerts. See [Checking when a deadline is due](https://developer.mozilla.org/docs/Web/API/IndexedDB_API/Checking_when_a_deadline_is_due) for a detailed walkthrough.
+
 - The "viewport-segments-api" directory contains an example demonstrating how to use the [Viewport Segments API](https://developer.mozilla.org/docs/Web/API/Viewport_Segments_API). [Run the example live](https://mdn.github.io/dom-examples/viewport-segments-api/).
 
 - The "view-transitions" directory contains examples and demos of the [View Transition API](https://developer.mozilla.org/docs/Web/API/View_Transition_API) standard. Go to the [View transition API demo index](https://mdn.github.io/dom-examples/view-transitions/) to see what's available.
@@ -123,7 +123,6 @@ Do not specify supported browsers and their versions in code comments or prose, 
 - The "web-storage" directory contains a basic demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](https://mdn.github.io/dom-examples/web-storage/).
 
 - The "view-transitions" directory contains demos to show usage of the [View Transitions API](https://developer.mozilla.org/docs/Web/API/View_Transitions_API):
-
   - View transitions in a [single-page app](https://mdn.github.io/dom-examples/view-transitions/spa/)
   - View transitions in a [multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa/)
   - Another example of view transitions in a [simple multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa-homepage/)
