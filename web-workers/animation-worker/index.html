@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>worker demo</title>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
+      .container {
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Worker Demo</h1>
+    <div class="container">
+      <div>
+        <span>Animation: </span>
+        <button id="start">start</button> <button id="stop">stop</button>
+      </div>
+      <div>
+        <span>State: </span><span id="state">-</span>
+        <button id="block">block</button>
+        <button id="performance">Optimize</button>
+      </div>
+    </div>
+    <div id="box"></div>
+    <div id="element"></div>
+    <script src="animation.js"></script>
+  </body>
+</html>
