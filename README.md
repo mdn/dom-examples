@@ -77,6 +77,8 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "media" directory contains examples and demos showing how to use HTML and DOM [media elements and APIs](https://developer.mozilla.org/docs/Web/Media).
 
+- The "media-source-extensions" directory contains examples demonstrating the [Media Source Extensions API](https://developer.mozilla.org/docs/Web/API/Media_Source_Extensions_API). It includes a [ManagedMediaSource demo](https://mdn.github.io/dom-examples/media-source-extensions/managed-media-source/) showing how to set up a `ManagedMediaSource`, listen for `startstreaming`/`endstreaming` events, and log `bufferedchange` events.
+
 - The "navigation-api" directory contains a basic example that demonstrates some features of the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API). [Run the demo live](https://mdn.github.io/dom-examples/navigation-api/).
 
 - The "notifications" directory contains one example showing how to make and handle persistent notifications, and another showing how to make and handle non-persistent notifications, using the [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API).
