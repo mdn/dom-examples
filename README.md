@@ -75,7 +75,7 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "mediaquerylist" directory contains a basic demo to test more advanced matchMedia/mediaquerylist functionality. See [MediaQueryList](https://developer.mozilla.org/docs/Web/API/MediaQueryList) for more details. [Run the demo live](https://mdn.github.io/dom-examples/mediaquerylist/index.html).
 
-- The "media" directory contains examples and demos showing how to use HTML and DOM [media elements and APIs](https://developer.mozilla.org/docs/Web/Media).
+- The "media" directory contains examples and demos showing how to use HTML and DOM [media elements and APIs](https://developer.mozilla.org/docs/Web/Media). It includes a [getStartDate() demo](https://mdn.github.io/dom-examples/media/getstartdate/) showing how to retrieve the real-world start date of an HLS stream using `HTMLMediaElement.getStartDate()`.
 
 - The "media-source-extensions" directory contains examples demonstrating the [Media Source Extensions API](https://developer.mozilla.org/docs/Web/API/Media_Source_Extensions_API). It includes a [ManagedMediaSource demo](https://mdn.github.io/dom-examples/media-source-extensions/managed-media-source/) showing how to set up a `ManagedMediaSource`, listen for `startstreaming`/`endstreaming` events, and log `bufferedchange` events.
 
