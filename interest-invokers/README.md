@@ -1,6 +1,6 @@
 # MDN interest invoker examples
 
-This set of examples demonstrates usage of [Interest invokers](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Interest_invokers).
+This set of examples demonstrates usage of [Interest invokers](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using_interest_invokers).
 
 - [Popover examples](popover-examples/): Demonstrates a couple of examples of displaying popovers via interest invokers, including a typical link preview popover.
 - [Style preview](style-preview/): Demonstrates non-popover usage of interest invokers. In this example, several buttons can be pressed to apply different style themes to a style preview pane. Interest invokers have been used to progressively enhance the demo, making it so that hovering/focusing the buttons previews the styles on the pane without having to click to apply each one.
