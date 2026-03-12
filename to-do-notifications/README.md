@@ -1,10 +1,7 @@
-to-do-notifications
-===================
+# to-do-notifications
 
-This is an Enhanced version of my basic to-do app, which stores to-do items via IndexedDB, and then also aims to provide notifications when to-do item deadlines are up, via the Notification and Vibration APIs.
+This is a to-do list notifications application that stores to-do items via [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API) and provides notifications when to-do item deadlines are up via the [Notifications](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API) and [Vibration](https://developer.mozilla.org/docs/Web/API/Vibration_API) APIs.
 
-The IndexedDB and Notification API functionality all works on Firefox desktop, Firefox Android, Firefox OS, Chrome, and IE 10+.
+[View the demo live](https://mdn.github.io/dom-examples/to-do-notifications/).
 
-The Vibration API stuff works on Firefox OS and Firefox for Android.
-
-You can [try it out live](https://mdn.github.io/dom-examples/to-do-notifications/).
+See [Checking when a deadline is due](https://developer.mozilla.org/docs/Web/API/IndexedDB_API/Checking_when_a_deadline_is_due) for a detailed walkthrough explaining how this app works.
