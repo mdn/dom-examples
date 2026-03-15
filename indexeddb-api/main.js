@@ -187,9 +187,14 @@
           var img = $('<img id="' + img_id + '"/>');
           $(this).contents().find('body').html(img);
           var obj_url = window.URL.createObjectURL(blob);
-          $(this).contents().find('#' + img_id).attr('src', obj_url);
-          window.URL.revokeObjectURL(obj_url);
+          var imgEl = $(this).contents().find('#' + img_id);
+          // Ensure the image loads before revoking its url.
+          imgEl.load(function() {
+            window.URL.revokeObjectURL(obj_url);
+          });
+          imgEl.attr('src', obj_url);
         });
+        iframe.attr('src', 'about:blank');
       } else if (blob.type == 'application/pdf') {
         $('*').css('cursor', 'wait');
         var obj_url = window.URL.createObjectURL(blob);
