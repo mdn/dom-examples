@@ -10,7 +10,10 @@
   */
   function getMessageEncoding() {
     const messageBox = document.querySelector("#ed25519-message");
-    let message = messageBox.value;
+
+    if(!messageBox) return null;
+    
+    const message = messageBox.value;
     let enc = new TextEncoder();
     return enc.encode(message);
   }
@@ -44,7 +47,7 @@
     signatureValue.classList.remove("valid", "invalid");
 
     let encoded = getMessageEncoding();
-    let result = await window.crypto.subtle.verify(
+    const result = await window.crypto.subtle.verify(
       "Ed25519",
       publicKey,
       signature,
