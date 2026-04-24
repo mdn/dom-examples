@@ -34,20 +34,12 @@
       function log(prefix, ev) {
         if (!logEvents) return;
         var o = document.getElementsByTagName("output")[0];
-        var s =
-          prefix +
-          ": pointerID = " +
-          ev.pointerId +
-          " ; pointerType = " +
-          ev.pointerType +
-          " ; isPrimary = " +
-          ev.isPrimary;
-        o.innerHTML += s + " <br>";
+        o.innerText += `${prefix}: pointerID = ${ev.pointerId} ; pointerType = ${ev.pointerType} ; isPrimary = ${ev.isPrimary} \n`;
       }
 
       function clearLog(event) {
         var o = document.getElementsByTagName("output")[0];
-        o.innerHTML = "";
+        o.replaceChildren();
       }
 
       function pointerdown_handler(ev) {

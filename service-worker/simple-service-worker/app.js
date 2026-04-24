@@ -45,7 +45,7 @@ const createGalleryFigure = async (galleryImage) => {
     const myName = document.createElement('span');
     myName.textContent = `${galleryImage.name}: `;
     const myCredit = document.createElement('span');
-    myCredit.innerHTML = `Taken by ${galleryImage.credit}`;
+    myCredit.textContent = `Taken by ${galleryImage.credit}`;
     myCaption.append(myName, myCredit);
     myImage.src = window.URL.createObjectURL(imageBlob);
     myImage.setAttribute('alt', galleryImage.alt);

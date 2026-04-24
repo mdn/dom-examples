@@ -4411,7 +4411,7 @@ function RotateInstructions() {
   s.lineHeight = '24px';
   s.margin = '24px 25%';
   s.width = '50%';
-  text.innerHTML = 'Place your phone into your Cardboard viewer.';
+  text.textContent = 'Place your phone into your Cardboard viewer.';
   overlay.appendChild(text);
   var snackbar = document.createElement('div');
   var s = snackbar.style;
@@ -4426,10 +4426,10 @@ function RotateInstructions() {
   overlay.appendChild(snackbar);
   var snackbarText = document.createElement('div');
   snackbarText.style.float = 'left';
-  snackbarText.innerHTML = 'No Cardboard viewer?';
+  snackbarText.textContent = 'No Cardboard viewer?';
   var snackbarButton = document.createElement('a');
   snackbarButton.href = 'https://www.google.com/get/cardboard/get-cardboard/';
-  snackbarButton.innerHTML = 'get one';
+  snackbarButton.textContent = 'get one';
   snackbarButton.target = '_blank';
   var s = snackbarButton.style;
   s.float = 'right';
@@ -4591,7 +4591,7 @@ ViewerSelector.prototype.createH1_ = function (name) {
   s.fontWeight = 'bold';
   s.marginTop = 0;
   s.marginBottom = '24px';
-  h1.innerHTML = name;
+  h1.textContent = name;
   return h1;
 };
 ViewerSelector.prototype.createChoice_ = function (id, name) {
@@ -4607,14 +4607,14 @@ ViewerSelector.prototype.createChoice_ = function (id, name) {
   var label = document.createElement('label');
   label.style.marginLeft = '4px';
   label.setAttribute('for', id);
-  label.innerHTML = name;
+  label.textContent = name;
   div.appendChild(input);
   div.appendChild(label);
   return div;
 };
 ViewerSelector.prototype.createButton_ = function (label, onclick) {
   var button = document.createElement('button');
-  button.innerHTML = label;
+  button.textContent = label;
   var s = button.style;
   s.float = 'right';
   s.textTransform = 'uppercase';
