@@ -1,0 +1,57 @@
+section {
+  height: 500px;
+  border: 1px solid black;
+  padding: 20px;
+  margin-top: 60px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+p {
+  font-family: sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+div {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background: gray;
+  padding: 10px;
+}
+
+.fade-out {
+  animation: fade-out 0.3s linear both;
+}
+
+.fade-in {
+  animation: fade-in 0.3s linear both;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
