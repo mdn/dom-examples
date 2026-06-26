@@ -96,11 +96,13 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "resize-event" directory contains a basic demo to show how you can use the [resize event](https://developer.mozilla.org/docs/Web/API/Window/resize_event). Resize the browser window either by height or width to see the size of your current window. [Run the demo live](https://mdn.github.io/dom-examples/resize-event).
 
+- The "responsive-iframe-sizing" directory contains demos illustrating usage of the responsive iframe sizing features. See the [responsive iframe sizing README](responsive-iframe-sizing/README.md) for more information. Run the demos live: [Basic demo](https://mdn.github.io/dom-examples/responsive-iframe-sizing/basic/), [`requestResize()` demo](https://mdn.github.io/dom-examples/responsive-iframe-sizing/js-request-resize/).
+
 - The "screen-capture-api" directory contains demos to show typical usage of the [Screen Capture API](https://developer.mozilla.org/docs/Web/API/Screen_Capture_API) and [Screen Capture Extensions](https://developer.mozilla.org/docs/Web/API/Screen_Capture_extensions).
 
 - The "screenleft-screentop" directory contains a demo to show how you could use the [Window.screenLeft](https://developer.mozilla.org/docs/Web/API/Window/screenLeft) and [Window.screenTop](https://developer.mozilla.org/docs/Web/API/Window/screenTop) properties to draw a circle on a canvas that always stays in the same physical place on the screen when you move your browser window. [Run the demo live](https://mdn.github.io/dom-examples/screenleft-screentop/).
 
-- The "scroll-promises" directory contains demos illustrating usage of the promise-returning scroll methods (for example, `Element.scroll()`). See the [scroll promises README](scroll-promises/README.md) for more information.  Run the demos live: [Element methods](https://mdn.github.io/dom-examples/scroll-promises/element-methods/), [Window methods](https://mdn.github.io/dom-examples/scroll-promises/window-methods/).
+- The "scroll-promises" directory contains demos illustrating usage of the promise-returning scroll methods (for example, `Element.scroll()`). See the [scroll promises README](scroll-promises/README.md) for more information. Run the demos live: [Element methods](https://mdn.github.io/dom-examples/scroll-promises/element-methods/), [Window methods](https://mdn.github.io/dom-examples/scroll-promises/window-methods/).
 
 - The "scrolltooptions" directory contains a demo to show how you could use the [ScrollToOptions](https://developer.mozilla.org/docs/Web/API/ScrollToOptions) dictionary along with the [Window.ScrollTo()](https://developer.mozilla.org/docs/Web/API/Window/scrollTo) method to programmatically scroll a web page. [Run the demo live](https://mdn.github.io/dom-examples/scrolltooptions/).
 
