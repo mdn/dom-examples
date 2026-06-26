@@ -12,42 +12,41 @@ function supportsScrollPromises() {
   return test instanceof Promise;
 }
 
+function isInterrupted(interrupted) {
+  console.log(`Scroll finished;${interrupted ? " " : " not "}interrupted`);
+  if (interrupted) {
+    alert("Scroll interrupted!");
+  }
+}
+
 const supports = supportsScrollPromises();
 
 if (supports) {
   scrollBtn.addEventListener("click", async () => {
     toolbar.className = "fade-out";
     const result = await section.scroll(0, 1000);
-    console.log(
-      `Scroll finished;${result.interrupted ? " " : " not "}interrupted`,
-    );
+    isInterrupted(result.interrupted);
     toolbar.className = "fade-in";
   });
 
   scrollToBtn.addEventListener("click", async () => {
     toolbar.className = "fade-out";
     const result = await section.scrollTo(0, 0);
-    console.log(
-      `Scroll finished;${result.interrupted ? " " : " not "}interrupted`,
-    );
+    isInterrupted(result.interrupted);
     toolbar.className = "fade-in";
   });
 
   scrollByBtn.addEventListener("click", async () => {
     toolbar.className = "fade-out";
     const result = await section.scrollBy(0, 200);
-    console.log(
-      `Scroll finished;${result.interrupted ? " " : " not "}interrupted`,
-    );
+    isInterrupted(result.interrupted);
     toolbar.className = "fade-in";
   });
 
   scrollIntoViewBtn.addEventListener("click", async () => {
     toolbar.className = "fade-out";
     const result = await end.scrollIntoView();
-    console.log(
-      `Scroll finished;${result.interrupted ? " " : " not "}interrupted`,
-    );
+    isInterrupted(result.interrupted);
     toolbar.className = "fade-in";
   });
 } else {

@@ -9,33 +9,34 @@ function supportsScrollPromises() {
   return test instanceof Promise;
 }
 
+function isInterrupted(interrupted) {
+  console.log(`Scroll finished;${interrupted ? " " : " not "}interrupted`);
+  if (interrupted) {
+    alert("Scroll interrupted!");
+  }
+}
+
 const supports = supportsScrollPromises();
 
 if (supports) {
   scrollBtn.addEventListener("click", async () => {
     toolbar.className = "fade-out";
     const result = await window.scroll(0, 1000);
-    console.log(
-      `Scroll finished;${result.interrupted ? " " : " not "}interrupted`,
-    );
+    isInterrupted(result.interrupted);
     toolbar.className = "fade-in";
   });
 
   scrollToBtn.addEventListener("click", async () => {
     toolbar.className = "fade-out";
     const result = await window.scrollTo(0, 0);
-    console.log(
-      `Scroll finished;${result.interrupted ? " " : " not "}interrupted`,
-    );
+    isInterrupted(result.interrupted);
     toolbar.className = "fade-in";
   });
 
   scrollByBtn.addEventListener("click", async () => {
     toolbar.className = "fade-out";
     const result = await window.scrollBy(0, 200);
-    console.log(
-      `Scroll finished;${result.interrupted ? " " : " not "}interrupted`,
-    );
+    isInterrupted(result.interrupted);
     toolbar.className = "fade-in";
   });
 } else {
