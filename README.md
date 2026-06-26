@@ -100,6 +100,8 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "screenleft-screentop" directory contains a demo to show how you could use the [Window.screenLeft](https://developer.mozilla.org/docs/Web/API/Window/screenLeft) and [Window.screenTop](https://developer.mozilla.org/docs/Web/API/Window/screenTop) properties to draw a circle on a canvas that always stays in the same physical place on the screen when you move your browser window. [Run the demo live](https://mdn.github.io/dom-examples/screenleft-screentop/).
 
+- The "scroll-promises" directory contains demos illustrating usage of the promise-returning scroll methods (for example, `Element.scroll()`). See the [scroll promises README](scroll-promises/README.md) for more information.  Run the demos live: [Element methods](https://mdn.github.io/dom-examples/scroll-promises/element-methods/), [Window methods](https://mdn.github.io/dom-examples/scroll-promises/window-methods/).
+
 - The "scrolltooptions" directory contains a demo to show how you could use the [ScrollToOptions](https://developer.mozilla.org/docs/Web/API/ScrollToOptions) dictionary along with the [Window.ScrollTo()](https://developer.mozilla.org/docs/Web/API/Window/scrollTo) method to programmatically scroll a web page. [Run the demo live](https://mdn.github.io/dom-examples/scrolltooptions/).
 
 - The "server-sent-events" directory contains a very basic SSE demo that uses PHP to create the server. You can find more information in our [Using server-sent events](https://developer.mozilla.org/docs/Web/API/Server-sent_events/Using_server-sent_events) article. To run the demo you'll need to serve the files from a server that supports PHP; [MAMP](https://www.mamp.info/en/) is a good PHP test server environment.
