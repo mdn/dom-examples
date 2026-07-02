@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Responsive iframes — basic example</title>
+    <style>
+      iframe {
+        frame-sizing: content-block-size;
+        border: 2px solid gray;
+      }
+
+      @supports not (frame-sizing: content-block-size) {
+        body::before {
+          content: "Your browser does not support responsive iframe sizing.";
+          font-family: sans-serif;
+          background-color: wheat;
+          padding: 1rem 0;
+          text-align: center;
+          padding: 1rem 0;
+
+          z-index: 1;
+          position: fixed;
+          inset: 40% 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Responsive iframes — basic example</h1>
+
+    <iframe src="frame.html"></iframe>
+  </body>
+</html>
