@@ -675,25 +675,48 @@ function renderScene(gl, view, programInfo, buffers, texture, deltaTime) {
 // MathML-rendered matrix, because MathML is nifty!
 
 function displayMatrix(mat, rowLength, target) {
-  let outHTML = "";
 
   if (mat && rowLength && rowLength <= mat.length) {
-    let numRows = mat.length / rowLength;
-    outHTML =
-      "<math xmlns='http://www.w3.org/1998/Math/MathML' display='block'>\n<mrow>\n<mo>[</mo>\n<mtable>\n";
+    const numRows = mat.length / rowLength;
+
+    const math = document.createElementNS("http://www.w3.org/1998/Math/MathML", "math");
+    math.setAttribute("display", "block");
+
+    const mrow = document.createElementNS("http://www.w3.org/1998/Math/MathML", "mrow");
+
+    const openBracket = document.createElementNS("http://www.w3.org/1998/Math/MathML", "mo");
+    openBracket.textContent = "[";
+    mrow.appendChild(openBracket);
+
+    const mtable = document.createElementNS("http://www.w3.org/1998/Math/MathML", "mtable");
 
     for (let y = 0; y < numRows; y++) {
-      outHTML += "<mtr>\n";
+      const mtr = document.createElementNS("http://www.w3.org/1998/Math/MathML", "mtr");
+
       for (let x = 0; x < rowLength; x++) {
-        outHTML += `<mtd><mn>${mat[x * rowLength + y].toFixed(2)}</mn></mtd>\n`;
+        const mtd = document.createElementNS("http://www.w3.org/1998/Math/MathML", "mtd");
+        const mn = document.createElementNS("http://www.w3.org/1998/Math/MathML", "mn");
+
+        const value = mat[y * rowLength + x];
+        mn.textContent = Number(value).toFixed(2);
+
+        mtd.appendChild(mn);
+        mtr.appendChild(mtd);
       }
-      outHTML += "</mtr>\n";
+
+      mtable.appendChild(mtr);
     }
 
-    outHTML += "</mtable>\n<mo>]</mo>\n</mrow>\n</math>";
-  }
+    mrow.appendChild(mtable);
 
-  target.innerHTML = outHTML;
+    const closeBracket = document.createElementNS("http://www.w3.org/1998/Math/MathML", "mo");
+    closeBracket.textContent = "]";
+    mrow.appendChild(closeBracket);
+
+    math.appendChild(mrow);
+
+    target.replaceChildren(math);
+  }
 }
 
 //
