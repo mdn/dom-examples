@@ -18,6 +18,11 @@ if (localStorage.promptHistory) {
 
 let session;
 textarea.addEventListener("focus", () => {
+  if (!("LanguageModel" in window)) {
+    promptOutput.innerHTML = `<span class="error">Your browser doesn't support the Prompt API!</span>`;
+    return;
+  }
+
   if (!session) {
     init();
   }
