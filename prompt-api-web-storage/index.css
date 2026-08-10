@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+textarea,
+.prompt-output {
+  padding: 5px;
+}
+
+.prompt-output {
+  min-height: 150px;
+  border: 1px solid black;
+  width: 100%;
+  display: block;
+}
+
+.error {
+  color: red;
+}
+
+button {
+  margin-right: 10px;
+}
