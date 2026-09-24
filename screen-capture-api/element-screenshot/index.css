@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0 25px;
+}
+
+#demo {
+  /* Forms a stacking context */
+  isolation: isolate;
+  /* Flattened */
+  transform-style: flat;
+  /* Explicit background color to stop the capture being transparent */
+  background-color: white;
+}
+
+#demo > h2 {
+  margin-top: 0;
+}
+
+#demo > p {
+  border: 1px solid #ccc;
+  margin: 0;
+  padding: 5px;
+  height: 320px;
+}

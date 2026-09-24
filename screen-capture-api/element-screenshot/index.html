@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Element Capture screenshot demo</title>
+    <link href="index.css" rel="stylesheet" />
+    <script defer src="index.js"></script>
+  </head>
+
+  <body>
+    <h1>Element Capture screenshot example</h1>
+    <p>Click "Save screenshot" and select this tab in the browser's sharing dialog to download a PNG of the demo container below. This example uses the Screen Capture API, Element Capture API, and Image Capture API. Sharing stops after the screenshot is captured.</p>
+
+    <p>
+      <button id="screenshot">Save screenshot</button>
+      <a id="download" download="screenshot.png" hidden>Download screenshot</a>
+    </p>
+
+    <div id="demo">
+      <h2>Some kind of demo</h2>
+      <p>This container is a placeholder for some kind of demo that you might want to save as a screenshot.</p>
+    </div>
+  </body>
+</html>
