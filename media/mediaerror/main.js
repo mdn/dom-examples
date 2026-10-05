@@ -1,8 +1,13 @@
 
 window.addEventListener("load", startup, false);
 
-function displayErrorMessage(msg) {
-  document.getElementById("log").innerHTML += msg;
+function displayErrorMessage(code,msg) {
+  const p = document.createElement("p");
+  p.textContent = msg;
+  const strong = document.createElement("strong");
+  strong.textContent = "Error: "+ code +" ";
+  p.prepend(strong);
+  document.getElementById("log").appendChild(p);
 }
 
 function startup() {
@@ -46,6 +51,6 @@ function startup() {
       s += " " + message;
     }
     
-    displayErrorMessage("<strong>Error " + err.code + ":</strong> " + s + "<br>");
+    displayErrorMessage(err.code , s);
   };  
 }

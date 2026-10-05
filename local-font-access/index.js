@@ -15,7 +15,10 @@ async function populatefonts() {
     const availableFonts = await window.queryLocalFonts();
     console.log(availableFonts);
     for (const fontData of availableFonts) {
-      selectElem.innerHTML += `<option value="${fontData.family}">${fontData.fullName}</option>`;
+      const option = document.createElement('option');
+      option.value = fontData.family;
+      option.textContent = fontData.fullName;
+      selectElem.appendChild(option);
     }
 
     selectElemContainer.style.display = "block";

@@ -48,20 +48,20 @@
           ev.targetTouches.length +
           " ; changedTouches = " +
           ev.changedTouches.length;
-        o.innerHTML += s + " <br>";
+        o.innerText += s + " \n";
 
         if (printTargetIds) {
           s = "";
           for (var i = 0; i < ev.targetTouches.length; i++) {
-            s += "... id = " + ev.targetTouches[i].identifier + " <br>";
+            s += "... id = " + ev.targetTouches[i].identifier + " \n";
           }
-          o.innerHTML += s;
+          o.innerText += s;
         }
       }
 
       function clearLog(event) {
         var o = document.getElementsByTagName("output")[0];
-        o.innerHTML = "";
+        o.replaceChildren();
       }
 
       function update_background(ev) {

@@ -44,20 +44,12 @@
 
       function log(name, ev) {
         var o = document.getElementsByTagName("output")[0];
-        var s =
-          name +
-          ": pointerID = " +
-          ev.pointerId +
-          " ; pointerType = " +
-          ev.pointerType +
-          " ; isPrimary = " +
-          ev.isPrimary;
-        o.innerHTML += s + " <br>";
+        o.innerText += `${name}: pointerID = ${ev.pointerId} ; pointerType = ${ev.pointerType} ; isPrimary = ${ev.isPrimary} \n`;
       }
 
       function clearLog(event) {
         var o = document.getElementsByTagName("output")[0];
-        o.innerHTML = "";
+        o.replaceChildren();
       }
 
       function update_background(ev) {

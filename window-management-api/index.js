@@ -74,16 +74,26 @@ function createPopover() {
   popoverElem = document.createElement('div');
   popoverElem.id = "block-warning";
   popoverElem.popover = "manual";
-  popoverElem.innerHTML = `
-    <h2>Please disable popup blocking</h2>
-    <p>Your browser is blocking the app's popup windows. Please enable popups and then try again.
-    You can do this by clicking the icon to the right of your web address bar, selecting the "Always allow..."
-    option, then clicking "Done".</p>
-    
-    <img src="popups-blocked.png" alt="Browser dialog window with title Popups blocked, showing options to allow popups or keep blocking them, with Done and Manage buttons at the bottom">
+  const h2 = document.createElement("h2");
+  h2.textContent = "Please disable popup blocking";
 
-    <p><button id="popover-dismiss">OK, got it</button></p>
-  `;
+  const p1 = document.createElement("p");
+  p1.textContent = 
+    "Your browser is blocking the app's popup windows. Please enable popups and then try again. " +
+    'You can do this by clicking the icon to the right of your web address bar, selecting the "Always allow..." option, then clicking "Done".';
+
+  const img = document.createElement("img");
+  img.src = "popups-blocked.png";
+  img.alt = "Browser dialog window with title Popups blocked, showing options to allow popups or keep blocking them, with Done and Manage buttons at the bottom";
+
+  const button = document.createElement("button");
+  button.id = "popover-dismiss";
+  button.textContent = "OK, got it";
+
+  const p2 = document.createElement("p");
+  p2.append(button);
+
+  popoverElem.replaceChildren(h2, p1, img, p2);
 
   document.body.append(popoverElem);
 

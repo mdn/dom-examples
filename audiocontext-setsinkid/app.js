@@ -7,13 +7,13 @@ playBtn.disabled = true;
 
 mediaDeviceBtn.addEventListener('click', async () => {
   if ("setSinkId" in AudioContext.prototype) {
-    selectDiv.innerHTML = '';
+    selectDiv.replaceChildren();
     
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const devices = await navigator.mediaDevices.enumerateDevices();
 
     const label = document.createElement('label');
-    label.innerHTML = 'Select output device:';
+    label.textContent = 'Select output device:';
     label.htmlFor = 'output-device-select';
 
     const select = document.createElement('select');
@@ -54,8 +54,17 @@ mediaDeviceBtn.addEventListener('click', async () => {
     stream.getAudioTracks().forEach((track) => track.stop());
     
   } else {
+    const elem = (tag,props={})=> Object.assign(document.createElement(tag),props);
     const para = document.createElement('p');
-    para.innerHTML = 'Your browser doesn\'t support <code>AudioContext.setSinkId()</code>. Check the <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/setSinkId#browser_compatibility">browser compatibility information</a> to see which browsers support it.'
+    para.append(
+      "Your browser doesn\'t support ",
+      elem('code',{textContent:"AudioContext.setSinkId()"}),". Check the ",
+      elem('a',{
+        href:"https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/setSinkId#browser_compatibility",
+        textContent:"browser compatibility information"
+      }),
+      " to see which browsers support it."
+    );
     selectDiv.appendChild(para);
   }
 });
