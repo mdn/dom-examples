@@ -65,6 +65,8 @@ body {
   position: absolute;
   bottom: calc(anchor(top) + 20px);
   justify-self: anchor-center;
+  /* Not required if using position-area. */
+  position-anchor: auto;
   margin: 0;
 
   width: 200px;
