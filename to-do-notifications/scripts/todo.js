@@ -55,7 +55,7 @@ year.value = currentYear;
 // Log app initialization status
 note.appendChild(createListItem("App initialized."));
 
-// Track whether this page must stop using its database connection.
+// Track whether this page must stop using its database connection
 let databaseClosed = false;
 
 // Let us open our database
@@ -74,7 +74,7 @@ dbOpenRequest.onsuccess = (event) => {
   // Run the displayData() function to populate the task list with all the to-do list data already in the IndexedDB
   displayData(db);
 
-  // Start database operations only after the connection is ready.
+  // Start database operations only after the connection is ready
   taskForm.onsubmit = (event) => addData(db, event);
   const deadlineInterval = setInterval(() => checkDeadlines(db), 1000);
 
@@ -83,7 +83,7 @@ dbOpenRequest.onsuccess = (event) => {
     event.target.close();
     clearInterval(deadlineInterval);
 
-    // Stop user actions from starting transactions on the closed connection.
+    // Stop user actions from starting transactions on the closed connection
     taskForm.onsubmit = (event) => event.preventDefault();
     for (const control of taskForm.elements) {
       control.disabled = true;
@@ -109,7 +109,7 @@ dbOpenRequest.onupgradeneeded = (event) => {
   };
 
   if (event.oldVersion < 1) {
-    // Version 1: create the object store and its initial indexes.
+    // Version 1: create the object store and its initial indexes
     const objectStore = db.createObjectStore("toDoList", {
       keyPath: "taskTitle",
     });
@@ -122,7 +122,7 @@ dbOpenRequest.onupgradeneeded = (event) => {
   }
 
   if (event.oldVersion < 2) {
-    // Version 2: add an index to the existing object store.
+    // Version 2: add an index to the existing object store
     const objectStore = event.target.transaction.objectStore("toDoList");
     objectStore.createIndex("notified", "notified", { unique: false });
   }
