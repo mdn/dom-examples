@@ -14,10 +14,10 @@ This set of examples demonstrates usage of the [Popover API](https://developer.m
 
 ## Accessibility notes
 
-These examples show how the Popover API behaves; they are not complete accessible components. In particular:
+Some of these examples are not fully accessible; they were written to show how the Popover API behaves. The following notes comment on their accessibility status.
 
 - The [blur background example](blur-background/) only adds a visual effect with `::backdrop`. The popover is still non-modal, so the content behind it is not made inert and remains focusable and available to assistive technology. If the rest of the page should be inert, use a modal [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog) opened with `showModal()` instead.
 - The [nested popover menu example](nested-popovers/) is a set of nested lists of links; it doesn't have menu semantics (provided by ARIA roles such as [`menu`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/menu_role) or menu keyboard handling.
-- The [toast popovers example](toast-popovers/) does not use an [ARIA live region](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions), so screen readers are not guaranteed to announce new toasts.
+- The [toast popovers example](toast-popovers/) copies each new toast's message into a visually hidden [`<output>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/output) element. This element has an implicit ARIA [`status`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role) role, which makes it a [live region](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions), so screen readers announce it; this is based on the status message example in the [HTML specification](https://html.spec.whatwg.org/multipage/popover.html#the-popover-attribute). The toasts themselves are kept outside the `<output>`, because when several are shown at once some browsers re-announce all of them on every change. Frequent announcements can be disruptive, so consider how often your notifications appear.
 
 See [Popover accessibility features](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using#popover_accessibility_features) for what the API does provide.
