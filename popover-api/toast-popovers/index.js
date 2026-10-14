@@ -74,9 +74,10 @@ function moveToastsUp() {
 }
 
 function announce(msg) {
-  // The <output> element is a live region, so screen readers announce changes
-  // to its text. Clear it first, then set the new message after a short delay,
-  // so that the same message twice in a row is still announced
+  // The <output> element is implicitly a live region, because it has an
+  // implicit ARIA status role, so screen readers announce changes to its text.
+  // Clear it first, then set the new message after a short delay, so that the
+  // same message twice in a row is still announced
   announcer.textContent = "";
   setTimeout(() => {
     announcer.textContent = msg;
