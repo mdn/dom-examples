@@ -47,6 +47,7 @@ body {
   border-radius: 4px;
   background: #eee;
   flex: 1;
+  position: relative; /* 1 */
 }
 
 #button-bar button:hover,
@@ -55,18 +56,17 @@ body {
 }
 
 #button-bar button:active {
-  box-shadow: inset 1px 1px 2px #333, inset -1px -1px 2px #eee;
+  box-shadow:
+    inset 1px 1px 2px #333,
+    inset -1px -1px 2px #eee;
 }
 
 /* Styling auto popovers */
 
 [popover="auto"] {
-  inset: unset;
   position: absolute;
-  bottom: calc(anchor(top) + 20px);
-  justify-self: anchor-center;
-  margin: 0;
-
+  position-area: top;
+  margin-bottom: 15px;
   width: 200px;
   text-align: center;
   padding: 8px;
@@ -94,17 +94,19 @@ body {
 }
 
 [popover="auto"] button:active {
-  box-shadow: inset 1px 1px 2px #333, inset -1px -1px 2px #eee;
+  box-shadow:
+    inset 1px 1px 2px #333,
+    inset -1px -1px 2px #eee;
 }
 
 /* Styling hint popovers */
 
 [popover="hint"] {
-  inset: unset;
   position: absolute;
+  position-anchor: auto;
+  margin: 0; /* reset popover default */
   top: calc(anchor(bottom) + 5px);
   justify-self: anchor-center;
-  margin: 0;
 
   padding: 8px;
   border-radius: 6px;
