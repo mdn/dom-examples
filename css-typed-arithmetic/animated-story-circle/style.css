@@ -36,14 +36,26 @@ p {
   rotate: calc(var(--angle) * 1deg);
 }
 
-/* Support information */
+/* information */
 
-.support-info {
-  padding: 5px;
-  background-color: yellow;
-  border: 1px solid black;
+.info {
   position: absolute;
   top: 5px;
   left: 5px;
-  right: 5px;
+  line-height: 1.5;
+}
+
+/* feature detection */
+
+@supports not (opacity: calc((100cqw / 1200px) - 0.33333)) {
+  body::before {
+    content: "Your browser does not support typed arithmetic.";
+    background-color: wheat;
+    text-align: center;
+    padding: 1rem 0;
+
+    z-index: 1;
+    position: fixed;
+    inset: 40% 0 auto;
+  }
 }
