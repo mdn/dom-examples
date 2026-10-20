@@ -139,7 +139,7 @@ window.onload = function () {
       console.log(keyRangeValue.upperOpen);
     }
 
-    list.innerHTML = "";
+    list.replaceChildren();
     const transaction = db.transaction(["fThings"], "readonly");
     let objectStore = transaction.objectStore("fThings");
 
@@ -157,11 +157,9 @@ window.onload = function () {
       const cursor = event.target.result;
       if (cursor) {
         const listItem = document.createElement("li");
-        listItem.innerHTML =
-          "<strong>" +
-          cursor.value.fThing +
-          "</strong>, " +
-          cursor.value.fRating;
+        const strong = document.createElement('strong');
+        strong.textContent = cursor.value.fThing;
+        listItem.replaceChildren(strong,", ",cursor.value.fRating);
         list.appendChild(listItem);
 
         cursor.continue();

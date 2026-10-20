@@ -78,7 +78,7 @@ window.onload = function () {
   };
 
   function displayData() {
-    list.innerHTML = "";
+    list.replaceChildren();
     const transaction = db.transaction(["rushAlbumList"], "readonly");
     const objectStore = transaction.objectStore("rushAlbumList");
 
@@ -86,11 +86,9 @@ window.onload = function () {
       const cursor = event.target.result;
       if (cursor) {
         const listItem = document.createElement("li");
-        listItem.innerHTML =
-          "<strong>" +
-          cursor.value.albumTitle +
-          "</strong>, " +
-          cursor.value.year;
+        const strong = document.createElement('strong');
+        strong.textContent = cursor.value.albumTitle;
+        listItem.append(strong,", ",cursor.value.year);
         list.appendChild(listItem);
 
         //console.log(cursor.source);
@@ -109,7 +107,7 @@ window.onload = function () {
   };
 
   function advanceResult() {
-    list.innerHTML = "";
+    list.replaceChildren();
     const transaction = db.transaction(["rushAlbumList"], "readonly");
     const objectStore = transaction.objectStore("rushAlbumList");
 
@@ -117,11 +115,9 @@ window.onload = function () {
       const cursor = event.target.result;
       if (cursor) {
         const listItem = document.createElement("li");
-        listItem.innerHTML =
-          "<strong>" +
-          cursor.value.albumTitle +
-          "</strong>, " +
-          cursor.value.year;
+        const strong = document.createElement('strong');
+        strong.textContent = cursor.value.albumTitle;
+        listItem.append(strong,", ",cursor.value.year);
         list.appendChild(listItem);
         cursor.advance(2);
       } else {
@@ -135,7 +131,7 @@ window.onload = function () {
   };
 
   function deleteResult() {
-    list.innerHTML = "";
+    list.replaceChildren();
     const transaction = db.transaction(["rushAlbumList"], "readwrite");
     const objectStore = transaction.objectStore("rushAlbumList");
 
@@ -151,11 +147,9 @@ window.onload = function () {
           };
         } else {
           const listItem = document.createElement("li");
-          listItem.innerHTML =
-            "<strong>" +
-            cursor.value.albumTitle +
-            "</strong>, " +
-            cursor.value.year;
+          const strong = document.createElement('strong');
+          strong.textContent = cursor.value.albumTitle;
+          listItem.append(strong,", ",cursor.value.year);
           list.appendChild(listItem);
         }
         cursor.continue();
@@ -170,7 +164,7 @@ window.onload = function () {
   };
 
   function updateResult() {
-    list.innerHTML = "";
+    list.replaceChildren();
     const transaction = db.transaction(["rushAlbumList"], "readwrite");
     const objectStore = transaction.objectStore("rushAlbumList");
 
@@ -188,11 +182,9 @@ window.onload = function () {
         }
 
         const listItem = document.createElement("li");
-        listItem.innerHTML =
-          "<strong>" +
-          cursor.value.albumTitle +
-          "</strong>, " +
-          cursor.value.year;
+        const strong = document.createElement('strong');
+        strong.textContent = cursor.value.albumTitle;
+        listItem.append(strong,", ",cursor.value.year);
         list.appendChild(listItem);
 
         cursor.continue();
@@ -207,7 +199,7 @@ window.onload = function () {
   };
 
   function backwards() {
-    list.innerHTML = "";
+    list.replaceChildren();
     const transaction = db.transaction(["rushAlbumList"], "readonly");
     const objectStore = transaction.objectStore("rushAlbumList");
 
@@ -215,11 +207,9 @@ window.onload = function () {
       const cursor = event.target.result;
       if (cursor) {
         const listItem = document.createElement("li");
-        listItem.innerHTML =
-          "<strong>" +
-          cursor.value.albumTitle +
-          "</strong>, " +
-          cursor.value.year;
+        const strong = document.createElement('strong');
+        strong.textContent = cursor.value.albumTitle;
+        listItem.append(strong,", ",cursor.value.year);
         list.appendChild(listItem);
 
         console.log(cursor.direction);
