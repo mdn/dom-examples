@@ -6,9 +6,9 @@ export function fromSelectionToOffsets(selection, editorEl) {
   const treeWalker = document.createTreeWalker(editorEl, NodeFilter.SHOW_TEXT);
 
   let anchorNodeFound = false;
-  let extentNodeFound = false;
+  let focusNodeFound = false;
   let anchorOffset = 0;
-  let extentOffset = 0;
+  let focusOffset = 0;
 
   while (treeWalker.nextNode()) {
     const node = treeWalker.currentNode;
@@ -17,24 +17,24 @@ export function fromSelectionToOffsets(selection, editorEl) {
       anchorOffset += selection.anchorOffset;
     }
 
-    if (node === selection.extentNode) {
-      extentNodeFound = true;
-      extentOffset += selection.extentOffset;
+    if (node === selection.focusNode) {
+      focusNodeFound = true;
+      focusOffset += selection.focusOffset;
     }
 
     if (!anchorNodeFound) {
       anchorOffset += node.textContent.length;
     }
-    if (!extentNodeFound) {
-      extentOffset += node.textContent.length;
+    if (!focusNodeFound) {
+      focusOffset += node.textContent.length;
     }
   }
 
-  if (!anchorNodeFound || !extentNodeFound) {
+  if (!anchorNodeFound || !focusNodeFound) {
     return null;
   }
 
-  return { start: anchorOffset, end: extentOffset };
+  return { start: anchorOffset, end: focusOffset };
 }
 
 // The EditContext object only knows about a plain text string and about
@@ -47,8 +47,8 @@ export function fromOffsetsToSelection(start, end, editorEl) {
   let offset = 0;
   let anchorNode = null;
   let anchorOffset = 0;
-  let extentNode = null;
-  let extentOffset = 0;
+  let focusNode = null;
+  let focusOffset = 0;
 
   while (treeWalker.nextNode()) {
     const node = treeWalker.currentNode;
@@ -58,19 +58,19 @@ export function fromOffsetsToSelection(start, end, editorEl) {
       anchorOffset = start - offset;
     }
 
-    if (!extentNode && offset + node.textContent.length >= end) {
-      extentNode = node;
-      extentOffset = end - offset;
+    if (!focusNode && offset + node.textContent.length >= end) {
+      focusNode = node;
+      focusOffset = end - offset;
     }
 
-    if (anchorNode && extentNode) {
+    if (anchorNode && focusNode) {
       break;
     }
 
     offset += node.textContent.length;
   }
 
-  return { anchorNode, anchorOffset, extentNode, extentOffset };
+  return { anchorNode, anchorOffset, focusNode, focusOffset };
 }
 
 // The EditContext object only knows about character offsets. But out editor

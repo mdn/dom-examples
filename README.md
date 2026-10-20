@@ -49,7 +49,6 @@ Do not specify supported browsers and their versions in code comments or prose, 
 - The "edit-context" directory contains examples demonstrating the [EditContext API](https://developer.mozilla.org/docs/Web/API/EditContext_API). See the [list of examples](https://github.com/mdn/dom-examples/tree/main/edit-context/).
 
 - The "file-system-api" directory contains multiple examples demonstrating usage of the [File System API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API):
-
   - [createSyncAccessHandle() mode test](https://mdn.github.io/dom-examples/file-system-api/createsyncaccesshandle-mode/): Demonstrates usage of [FileSystemFileHandle.createSyncAccessHandle()](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileHandle/createSyncAccessHandle)
   - [createWritable() mode test](https://mdn.github.io/dom-examples/file-system-api/createwritable-mode/): Demonstrates usage of [FileSystemFileHandle.createWritable()](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileHandle/createWritable)
   - [FileSystemHandle.remove() demo](https://mdn.github.io/dom-examples/file-system-api/filesystemhandle-remove/): Demonstrates usage of [FileSystemHandle.remove()](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemHandle/remove)
@@ -75,12 +74,13 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "mediaquerylist" directory contains a basic demo to test more advanced matchMedia/mediaquerylist functionality. See [MediaQueryList](https://developer.mozilla.org/docs/Web/API/MediaQueryList) for more details. [Run the demo live](https://mdn.github.io/dom-examples/mediaquerylist/index.html).
 
-- The "media" directory contains examples and demos showing how to use HTML and DOM [media elements and APIs](https://developer.mozilla.org/docs/Web/Media).
+- The "media" directory contains examples and demos showing how to use HTML and DOM [media elements and APIs](https://developer.mozilla.org/docs/Web/Media). It includes a [getStartDate() demo](https://mdn.github.io/dom-examples/media/getstartdate/) showing how to retrieve the real-world start date of an HLS stream using `HTMLMediaElement.getStartDate()`.
+
+- The "media-source-extensions" directory contains examples demonstrating the [Media Source Extensions API](https://developer.mozilla.org/docs/Web/API/Media_Source_Extensions_API). It includes a [ManagedMediaSource demo](https://mdn.github.io/dom-examples/media-source-extensions/managed-media-source/) showing how to set up a `ManagedMediaSource`, listen for `startstreaming`/`endstreaming` events, and log `bufferedchange` events.
 
 - The "navigation-api" directory contains a basic example that demonstrates some features of the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API). [Run the demo live](https://mdn.github.io/dom-examples/navigation-api/).
 
 - The "notifications" directory contains one example showing how to make and handle persistent notifications, and another showing how to make and handle non-persistent notifications, using the [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API).
-
   - [Run the persistent notifications demo](https://mdn.github.io/dom-examples/notifications/persistent/).
   - [Run the non-persistent notifications demo](https://mdn.github.io/dom-examples/notifications/non-persistent/)
 
@@ -92,13 +92,19 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "popover-api" directory is for examples and demos of the [Popover API](https://developer.mozilla.org/docs/Web/API/Popover_API) standard. Go to the [Popover API demo index](https://mdn.github.io/dom-examples/popover-api/) to see what's available.
 
+- The "prompt-api-web-storage" directory contains an example showing how [Prompt API](https://developer.mozilla.org/docs/Web/API/Prompt_API) context can be saved in Web Storage and then restored again after a page reload. [Run the demo live](https://mdn.github.io/dom-examples/prompt-api-web-storage/).
+
 - The "reporting-api" directory contains a couple of basic demos to show usage of the Reporting API. You can find more explanation of how the API works in the main MDN [Reporting API](https://developer.mozilla.org/docs/Web/API/Reporting_API) docs. [Run the deprecation report demo live](https://mdn.github.io/dom-examples/reporting-api/deprecation_report.html).
 
 - The "resize-event" directory contains a basic demo to show how you can use the [resize event](https://developer.mozilla.org/docs/Web/API/Window/resize_event). Resize the browser window either by height or width to see the size of your current window. [Run the demo live](https://mdn.github.io/dom-examples/resize-event).
 
+- The "responsive-iframe-sizing" directory contains demos illustrating usage of the responsive iframe sizing features. See the [responsive iframe sizing README](responsive-iframe-sizing/README.md) for more information. Run the demos live: [Basic demo](https://mdn.github.io/dom-examples/responsive-iframe-sizing/basic/), [`requestResize()` demo](https://mdn.github.io/dom-examples/responsive-iframe-sizing/js-request-resize/).
+
 - The "screen-capture-api" directory contains demos to show typical usage of the [Screen Capture API](https://developer.mozilla.org/docs/Web/API/Screen_Capture_API) and [Screen Capture Extensions](https://developer.mozilla.org/docs/Web/API/Screen_Capture_extensions).
 
 - The "screenleft-screentop" directory contains a demo to show how you could use the [Window.screenLeft](https://developer.mozilla.org/docs/Web/API/Window/screenLeft) and [Window.screenTop](https://developer.mozilla.org/docs/Web/API/Window/screenTop) properties to draw a circle on a canvas that always stays in the same physical place on the screen when you move your browser window. [Run the demo live](https://mdn.github.io/dom-examples/screenleft-screentop/).
+
+- The "scroll-promises" directory contains demos illustrating usage of the promise-returning scroll methods (for example, `Element.scroll()`). See the [scroll promises README](scroll-promises/README.md) for more information. Run the demos live: [Element methods](https://mdn.github.io/dom-examples/scroll-promises/element-methods/), [Window methods](https://mdn.github.io/dom-examples/scroll-promises/window-methods/).
 
 - The "scrolltooptions" directory contains a demo to show how you could use the [ScrollToOptions](https://developer.mozilla.org/docs/Web/API/ScrollToOptions) dictionary along with the [Window.ScrollTo()](https://developer.mozilla.org/docs/Web/API/Window/scrollTo) method to programmatically scroll a web page. [Run the demo live](https://mdn.github.io/dom-examples/scrolltooptions/).
 
@@ -112,6 +118,8 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "touchevents" directory is for examples and demos of the [Touch Events](https://developer.mozilla.org/docs/Web/API/Touch_events) standard.
 
+- The "to-do-notifications" directory contains a to-do list notifications app demonstrating [IndexedDB API](https://developer.mozilla.org/docs/Web/API/IndexedDB_API) for data storage and [Notifications API](https://developer.mozilla.org/docs/Web/API/Notifications_API) for deadline alerts. See [Checking when a deadline is due](https://developer.mozilla.org/docs/Web/API/IndexedDB_API/Checking_when_a_deadline_is_due) for a detailed walkthrough.
+
 - The "viewport-segments-api" directory contains an example demonstrating how to use the [Viewport Segments API](https://developer.mozilla.org/docs/Web/API/Viewport_Segments_API). [Run the example live](https://mdn.github.io/dom-examples/viewport-segments-api/).
 
 - The "view-transitions" directory contains examples and demos of the [View Transition API](https://developer.mozilla.org/docs/Web/API/View_Transition_API) standard. Go to the [View transition API demo index](https://mdn.github.io/dom-examples/view-transitions/) to see what's available.
@@ -123,7 +131,6 @@ Do not specify supported browsers and their versions in code comments or prose, 
 - The "web-storage" directory contains a basic demo to show usage of the Web Storage API. For more detail on how it works, read [Using the Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API). [View the demo live](https://mdn.github.io/dom-examples/web-storage/).
 
 - The "view-transitions" directory contains demos to show usage of the [View Transitions API](https://developer.mozilla.org/docs/Web/API/View_Transitions_API):
-
   - View transitions in a [single-page app](https://mdn.github.io/dom-examples/view-transitions/spa/)
   - View transitions in a [multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa/)
   - Another example of view transitions in a [simple multiple-page app](https://mdn.github.io/dom-examples/view-transitions/mpa-homepage/)

@@ -1,6 +1,7 @@
 const successToastBtn = document.getElementById("success-toast-btn");
 const failureToastBtn = document.getElementById("failure-toast-btn");
 const counter = document.querySelector("p");
+const announcer = document.getElementById("toast-announcer");
 
 let successCount = 0;
 let failCount = 0;
@@ -35,6 +36,9 @@ function makeToast(result) {
   // Show the popover
   popover.showPopover();
 
+  // Announce the message to screen readers
+  announce(msg);
+
   // Update the counter paragraph
   updateCounter();
 
@@ -67,6 +71,17 @@ function moveToastsUp() {
       toast.style.bottom = `${newValue}px`;
     }
   });
+}
+
+function announce(msg) {
+  // The <output> element is implicitly a live region, because it has an
+  // implicit ARIA status role, so screen readers announce changes to its text.
+  // Clear it first, then set the new message after a short delay, so that the
+  // same message twice in a row is still announced
+  announcer.textContent = "";
+  setTimeout(() => {
+    announcer.textContent = msg;
+  }, 100);
 }
 
 function updateCounter() {

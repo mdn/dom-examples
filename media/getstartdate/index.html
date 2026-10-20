@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HTMLMediaElement.getStartDate() demo</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 460px;
+        margin: 1rem auto;
+        padding: 0 1rem;
+      }
+
+      video {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+        background: #000;
+      }
+
+      output {
+        display: block;
+        white-space: pre;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 0.5rem;
+      }
+
+      .not-supported {
+        padding: 1rem;
+        background: #fff3cd;
+        border: 1px solid #ffc107;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>getStartDate() demo</h1>
+    <video controls muted autoplay width="400" height="225">
+      <source src="stream.m3u8" />
+    </video>
+    <output></output>
+
+    <!--
+      Used in:
+      - https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/getStartDate
+    -->
+
+    <script>
+      const output = document.querySelector("output");
+      function log(msg) {
+        output.textContent += msg + "\n";
+        output.scrollTop = output.scrollHeight;
+      }
+
+      const video = document.querySelector("video");
+
+      if (typeof video.getStartDate !== "function") {
+        log("getStartDate() is not supported in this browser.");
+        video.style.display = "none";
+        output.classList.add("not-supported");
+      } else {
+        video.addEventListener("loadeddata", () => {
+          const startDate = video.getStartDate();
+
+          if (isNaN(startDate.getTime())) {
+            log("Start date: not available");
+          } else {
+            log(`Start date: ${startDate.toLocaleString()}`);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -5,9 +5,19 @@ This set of examples demonstrates usage of the [Popover API](https://developer.m
 - [Basic declarative popover example](basic-declarative/): Demonstrates a basic auto state popover.
 - [Blur background popover example](blur-background/): Shows how you can add styling to the content behind the popover using the `::backdrop` pseudo-element.
 - [Multiple auto popovers example](multiple-auto/): Demonstrates that, generally, only one auto popover can be displayed at once.
-- [Multiple manual popovers example](multiple-manual/): Demonstrates that multiple manual popovers can be displayed at once, bt they can't be light-dismissed.
+- [Multiple manual popovers example](multiple-manual/): Demonstrates that multiple manual popovers can be displayed at once, but they can't be light-dismissed.
 - [Nested popover menu example](nested-popovers/): Demonstrates the behavior of nested auto state popovers.
 - [popover="hint" example](popover-hint/): This example shows how to use the `popover="hint"` value to create tooltip popovers that show on button mouseover and focus, without dismissing the `auto` popovers shown when the buttons are clicked on. The `hint` popovers are controlled via JavaScript.
 - [Popover positioning example](popover-positioning/): An isolated example showing CSS overriding of the default popover positioning specified by the UA sylesheet.
 - [Toggle help UI example](toggle-help-ui/): Shows the basics of using JavaScript to control popover showing and hiding.
 - [Toast popovers example](toast-popovers/): Illustrates how to make a simple system of "toast" notifications with popovers, which automatically hide again after a certain time.
+
+## Accessibility notes
+
+Some of these examples are not fully accessible; they were written to show how the Popover API behaves. The following notes comment on their accessibility status.
+
+- The [blur background example](blur-background/) only adds a visual effect with `::backdrop`. The popover is still non-modal, so the content behind it is not made inert and remains focusable and available to assistive technology. If the rest of the page should be inert, use a modal [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog) opened with `showModal()` instead.
+- The [nested popover menu example](nested-popovers/) is a set of nested lists of links; it doesn't have menu semantics (provided by ARIA roles such as [`menu`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/menu_role) or menu keyboard handling.
+- The [toast popovers example](toast-popovers/) copies each new toast's message into a visually hidden [`<output>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/output) element. This element has an implicit ARIA [`status`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role) role, which makes it a [live region](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions), so screen readers announce it; this is based on the status message example in the [HTML specification](https://html.spec.whatwg.org/multipage/popover.html#the-popover-attribute). The toasts themselves are kept outside the `<output>`, because when several are shown at once some browsers re-announce all of them on every change. Frequent announcements can be disruptive, so consider how often your notifications appear.
+
+See [Popover accessibility features](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using#popover_accessibility_features) for what the API does provide.

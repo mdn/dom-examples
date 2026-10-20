@@ -102,11 +102,11 @@ if (IS_CUSTOM_HIGHLIGHT_SUPPORTED) {
     // It was lost when we updated the DOM.
     // The EditContext API gives us the selection as text offsets.
     // Convert it into a DOM selection.
-    const { anchorNode, anchorOffset, extentNode, extentOffset } =
+    const { anchorNode, anchorOffset, focusNode, focusOffset } =
       fromOffsetsToSelection(selectionStart, selectionEnd, editorEl);
     document
       .getSelection()
-      .setBaseAndExtent(anchorNode, anchorOffset, extentNode, extentOffset);
+      .setBaseAndExtent(anchorNode, anchorOffset, focusNode, focusOffset);
   }
 
   // Listen to the EditContext's textupdate event.
@@ -171,7 +171,7 @@ if (IS_CUSTOM_HIGHLIGHT_SUPPORTED) {
       // Add a range to the Highlight object.
       const range = document.createRange();
       range.setStart(selection.anchorNode, selection.anchorOffset);
-      range.setEnd(selection.extentNode, selection.extentOffset);
+      range.setEnd(selection.focusNode, selection.focusOffset);
       highlight.add(range);
     }
   }

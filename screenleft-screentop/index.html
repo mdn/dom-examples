@@ -30,15 +30,8 @@
 
     const pElem = document.querySelector('p');
 
-    let initialTop, initialLeft;
-
-    if(!window.screenLeft) {
-      window.screenLeft = window.screenX;
-      window.screenTop = window.screenY;
-    }
-
-    initialLeft = window.screenLeft + canvasElem.offsetLeft;
-    initialTop = window.screenTop + canvasElem.offsetTop;
+    let initialLeft = window.screenLeft + canvasElem.offsetLeft;
+    let initialTop = window.screenTop + canvasElem.offsetTop;
 
     function positionElem() {
       let newLeft = window.screenLeft + canvasElem.offsetLeft;

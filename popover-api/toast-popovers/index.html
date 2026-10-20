@@ -13,6 +13,16 @@
         background: rgb(50, 255, 50);
       }
 
+      /* Hide the <output> visually, but keep it available to screen readers */
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
       :popover-open {
         position: absolute;
         inset: unset;
@@ -27,5 +37,7 @@
     <button id="failure-toast-btn">Generate fail toast</button>
 
     <p>Successes: 0. Failures: 0.</p>
+
+    <output id="toast-announcer" class="visually-hidden"></output>
   </body>
 </html>
