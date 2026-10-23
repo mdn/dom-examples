@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>WebGPU HTML-in-Canvas demo</title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="webgpu-demo.js" type="module"></script>
+  </head>
+
+  <body>
+    <canvas id="gpu-canvas" width="640" height="480" content="drawable">
+      <form drawable>
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" />
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" />
+        </div>
+        <button>Submit</button>
+      </form>
+    </canvas>
+  </body>
+</html>
