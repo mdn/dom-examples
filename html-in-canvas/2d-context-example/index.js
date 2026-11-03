@@ -3,7 +3,7 @@ import { createPointerDistort } from "./pointer-distort.js";
 function main() {
   const canvas = document.querySelector("canvas");
   const form = document.querySelector("canvas form");
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  const ctx = canvas.getContext("2d");
 
   if (!ctx.drawElementImage) {
     alert(
