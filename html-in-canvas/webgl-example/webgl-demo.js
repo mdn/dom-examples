@@ -33,7 +33,7 @@ function main() {
   }
 
   // Set clear color to black, fully opaque
-  gl.clearColor(1.0, 0.0, 0.0, 1.0);
+  gl.clearColor(0.0, 0.0, 0.0, 1.0);
   // Clear the color buffer with specified clear color
   gl.clear(gl.COLOR_BUFFER_BIT);
 
@@ -94,30 +94,27 @@ function main() {
   // objects we'll be drawing.
   const buffers = initBuffers(gl);
   const texture = initTexture(gl);
-  let started = false;
 
-  canvas.onpaint = () => {
+  let then = performance.now() * 0.001; // seconds
+  let cubeRotation = 0;
+
+  canvas.addEventListener("paint", () => {
+    // 1. Re-upload the form's current rendering into the texture
     const ok = updateTextureFromElement(gl, canvas, texture, form);
-    if (ok && !started) {
-      started = true;
-      requestAnimationFrame(render);
-    }
-  };
-  canvas.requestPaint(); // make sure the first paint event fires
+    if (!ok) return; // same behaviour as before: stop if the update failed
 
-  let then = 0;
-  // Draw the scene repeatedly
-  function render(now) {
-    now *= 0.001; // convert to seconds
-    deltaTime = now - then;
+    // 2. Work out the time step
+    const now = performance.now() * 0.001; // convert to seconds
+    const deltaTime = now - then;
     then = now;
 
+    // 3. Draw the scene and advance the animation
     drawScene(gl, programInfo, buffers, texture, cubeRotation);
     cubeRotation += deltaTime;
 
-    raf = requestAnimationFrame(render);
-  }
-  raf = requestAnimationFrame(render);
+    // 4. Ask for the next paint event
+    canvas.requestPaint();
+  });
 }
 
 //
@@ -197,7 +194,6 @@ function updateTextureFromElement(gl, canvas, texture, element) {
   const scale = canvas.width / canvas.clientWidth;
   const w = Math.ceil(element.offsetWidth * scale);
   const h = Math.ceil(element.offsetHeight * scale);
-  console.log("element size:", w, h); // temporary diagnostic
 
   if (!(w > 0 && h > 0)) return false;
 

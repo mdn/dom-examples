@@ -182,7 +182,7 @@ async function main() {
   }
 
   // ---------------------------------------------------------------------
-  // Render loop
+  // Render loop, driven by the `paint` event
   // ---------------------------------------------------------------------
   const projection = perspective(
     (45 * Math.PI) / 180,
@@ -194,8 +194,15 @@ async function main() {
   let rotation = 0;
   let then = null;
 
-  function render(nowMs) {
-    const now = nowMs * 0.001;
+  canvas.addEventListener("paint", () => {
+    // No snapshot exists until the first paint, and the element may not have
+    // a usable size yet, so skip drawing but keep the loop alive.
+    if (!updateElementTexture()) {
+      canvas.requestPaint();
+      return;
+    }
+
+    const now = performance.now() * 0.001; // convert to seconds
     rotation += then === null ? 0 : now - then;
     then = now;
 
@@ -231,22 +238,8 @@ async function main() {
     pass.end();
     device.queue.submit([encoder.finish()]);
 
-    requestAnimationFrame(render);
-  }
-
-  // ---------------------------------------------------------------------
-  // HTML-in-Canvas wiring: upload in the `paint` event. No snapshot exists
-  // until the first paint, so only start rendering once an upload succeeds.
-  // ---------------------------------------------------------------------
-  let started = false;
-  canvas.onpaint = () => {
-    const ok = updateElementTexture();
-    if (ok && !started) {
-      started = true;
-      requestAnimationFrame(render);
-    }
-  };
-  canvas.requestPaint(); // make sure the first paint event fires
+    canvas.requestPaint(); // request the next paint
+  });
 }
 
 // --- Cube geometry -------------------------------------------------------

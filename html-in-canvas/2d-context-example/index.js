@@ -14,14 +14,13 @@ function main() {
 
   const fx = createPointerDistort(canvas, { radius: 120 });
 
-  function loop(t) {
+  canvas.addEventListener("paint", () => {
     ctx.fillStyle = "#7D82B8";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawElementImage(form, 100, 100);
-    fx.apply(t);
-    requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
+    fx.apply(performance.now());
+    canvas.requestPaint();
+  });
 }
 
 main();
