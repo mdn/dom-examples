@@ -76,6 +76,7 @@ dbOpenRequest.onsuccess = (event) => {
 
   // Start database operations only after the connection is ready
   taskForm.onsubmit = (event) => addData(db, event);
+  // Check task deadlines every second
   const deadlineInterval = setInterval(() => checkDeadlines(db), 1000);
 
   db.onversionchange = (event) => {
