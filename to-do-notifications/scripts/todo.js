@@ -93,7 +93,9 @@ dbOpenRequest.onsuccess = (event) => {
 
     note.appendChild(
       createListItem(
-        "A new version of the database is available. Reload the page before continuing.",
+        event.newVersion === null
+          ? "Database deletion requested. Reload the page to create a new database."
+          : "Database upgrade requested. Reload the page before continuing.",
       ),
     );
   };
