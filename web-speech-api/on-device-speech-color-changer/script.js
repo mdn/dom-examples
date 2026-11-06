@@ -76,12 +76,18 @@ const bg = document.querySelector("html");
 const hints = document.querySelector(".hints");
 const startBtn = document.querySelector("button");
 
-let colorHTML = "";
+let colorHTML = document.createDocumentFragment();
 colors.forEach(function (v, i, a) {
   console.log(v, i);
-  colorHTML += `<span style="background-color: ${v};">${v}</span> `;
+  const span = document.createElement('span');
+  span.textContent = v;
+  span.style.backgroundColor = v;
+  colorHTML.append(span," ");
 });
-hints.innerHTML = `Press the button then say a color to change the background color of the app. For example, you could try ${colorHTML}`;
+hints.replaceChildren(
+  `Press the button then say a color to change the background color of the app. For example, you could try`,
+  colorHTML
+ );
 
 startBtn.addEventListener("click", () => {
   // check availability of target language
