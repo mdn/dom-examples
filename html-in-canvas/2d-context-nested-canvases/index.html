@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>HTML-in-Canvas basic test</title>
+    <script type="module" defer src="index.js"></script>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <p><button>Change inner color</button></p>
+    <canvas id="parent-canvas" width="640" height="480" content="drawable">
+      <div id="parent-element" drawable>
+        Parent element content
+        <canvas id="child-canvas" width="300" height="200" content="drawable">
+          <div id="child-element" drawable>Child element content</div>
+        </canvas>
+      </div>
+    </canvas>
+  </body>
+</html>
