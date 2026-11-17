@@ -3,9 +3,13 @@
  * Call fx.apply() once per frame, AFTER your scene has been drawn.
  * Only pixels near the pointer are read and rewritten, so it stays cheap.
  *
- * const ctx = canvas.getContext('2d', { willReadFrequently: true });
+ * const ctx = canvas.getContext("2d", { willReadFrequently: true });
  * const fx = createPointerDistort(canvas);
- * function loop(t) { drawMyScene(ctx, t); fx.apply(t); requestAnimationFrame(loop); }
+ * canvas.addEventListener("paint", () => {
+ *   drawMyScene(ctx);
+ *   fx.apply(performance.now());
+ *   canvas.requestPaint();
+ * });
  */
 export function createPointerDistort(canvas, options = {}) {
   const o = {
