@@ -60,6 +60,8 @@ Do not specify supported browsers and their versions in code comments or prose, 
 
 - The "history-api" directory contains an example that demonstrates the [History API](https://developer.mozilla.org/docs/Web/API/History_API). [View the demo live](https://mdn.github.io/dom-examples/history-api/).
 
+- The "html-in-canvas" directory contains examples demonstrating the [HTML-in-canvas API](https://developer.mozilla.org/docs/Web/API/HTML-in-Canvas_API). See the [HTML-in-canvas README](html-in-canvas/README.md) for more information.
+
 - The "indexeddb-api" directory contains a demo for the [IndexedDB API](https://mdn.github.io/dom-examples/indexeddb-api/index.html).
 
 - The "insert-adjacent" directory contains basic demos for [insertAdjacentElement](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentElement.html) and [insertAdjacentText](https://mdn.github.io/dom-examples/insert-adjacent/insertAdjacentText.html).

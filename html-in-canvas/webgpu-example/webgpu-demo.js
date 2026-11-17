@@ -1,9 +1,5 @@
 // A spinning cube with an HTML element as the texture on every face,
-// using WebGPU and the HTML-in-Canvas proposal
-// (https://github.com/WICG/html-in-canvas).
-//
-// Requires a Chromium build with HTML-in-Canvas enabled
-// (chrome://flags/#canvas-draw-element, or the origin trial).
+// using WebGPU and HTML-in-Canvas
 
 main();
 

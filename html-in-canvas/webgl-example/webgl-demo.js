@@ -1,9 +1,5 @@
 // A spinning cube with an HTML element as the texture on every face,
-// using WebGL 2 and the HTML-in-Canvas proposal
-// (https://github.com/WICG/html-in-canvas).
-//
-// Requires a Chromium build with HTML-in-Canvas enabled
-// (chrome://flags/#canvas-draw-element, or the origin trial).
+// using WebGL and HTML-in-Canvas
 
 main();
 
@@ -363,10 +359,22 @@ function elementToCanvasTransform(
   const hw = canvasW / 2;
   const hh = canvasH / 2;
   const viewport = new Float32Array([
-    hw, 0, 0, 0,
-    0, -hh, 0, 0,
-    0, 0, 1, 0,
-    hw, hh, 0, 1,
+    hw,
+    0,
+    0,
+    0,
+    0,
+    -hh,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    hw,
+    hh,
+    0,
+    1,
   ]);
 
   const m = multiply(viewport, multiply(mvp, toFace));
