@@ -1,16 +1,4 @@
 (function () {
-  var COMPAT_ENVS = [
-    ['Firefox', ">= 16.0"],
-    ['Google Chrome',
-     ">= 24.0 (you may need to get Google Chrome Canary), NO Blob storage support"]
-  ];
-  var compat = $('#compat');
-  compat.empty();
-  compat.append('<ul id="compat-list"></ul>');
-  COMPAT_ENVS.forEach(function(val, idx, array) {
-    $('#compat-list').append('<li>' + val[0] + ': ' + val[1] + '</li>');
-  });
-
   const DB_NAME = 'mdn-demo-indexeddb-epublications';
   const DB_VERSION = 1; // Use a long long for this value (don't use a float)
   const DB_STORE_NAME = 'publications';
@@ -83,10 +71,10 @@
     if (typeof store == 'undefined')
       store = getObjectStore(DB_STORE_NAME, 'readonly');
 
-    var pub_msg = $('#pub-msg');
-    pub_msg.empty();
-    var pub_list = $('#pub-list');
-    pub_list.empty();
+    var pub_msg = document.querySelector('#pub-msg');
+    pub_msg.replaceChildren();
+    var pub_list = document.querySelector('#pub-list');
+    pub_list.replaceChildren();
     // Resetting the iframe so that it doesn't display previous content
     newViewerFrame();
 
@@ -97,8 +85,12 @@
     // Thus the count text below will be displayed before the actual pub list
     // (not that it is algorithmically important in this case).
     req.onsuccess = function(evt) {
-      pub_msg.append('<p>There are <strong>' + evt.target.result +
-                     '</strong> record(s) in the object store.</p>');
+      var countMessage = document.createElement('p');
+      countMessage.append('There are ');
+      var count = document.createElement('strong');
+      count.textContent = evt.target.result;
+      countMessage.append(count, ' record(s) in the object store.');
+      pub_msg.append(countMessage);
     };
     req.onerror = function(evt) {
       console.error("add error", this.error);
@@ -113,23 +105,28 @@
       // If the cursor is pointing at something, ask for the data
       if (cursor) {
         console.log("displayPubList cursor:", cursor);
-        req = store.get(cursor.key);
+        const key = cursor.key;
+        req = store.get(key);
         req.onsuccess = function (evt) {
           var value = evt.target.result;
-          var list_item = $('<li>' +
-                            '[' + cursor.key + '] ' +
-                            '(biblioid: ' + value.biblioid + ') ' +
-                            value.title +
-                            '</li>');
+          var list_item = document.createElement('li');
+          list_item.textContent = '[' + key + '] ' +
+                                  '(biblioid: ' + value.biblioid + ') ' +
+                                  value.title;
           if (value.year != null)
-            list_item.append(' - ' + value.year);
+            list_item.append(' - ', value.year);
 
           if (value.hasOwnProperty('blob') &&
               typeof value.blob != 'undefined') {
-            var link = $('<a href="' + cursor.key + '">File</a>');
-            link.on('click', function() { return false; });
-            link.on('mouseenter', function(evt) {
-                      setInViewer(evt.target.getAttribute('href')); });
+            var link = document.createElement('a');
+            link.setAttribute('href', key);
+            link.textContent = 'File';
+            link.addEventListener('click', function(evt) {
+              evt.preventDefault();
+            });
+            link.addEventListener('mouseenter', function(evt) {
+              setInViewer(evt.currentTarget.getAttribute('href'));
+            });
             list_item.append(' / ');
             list_item.append(link);
           } else {
@@ -150,11 +147,17 @@
   }
 
   function newViewerFrame() {
-    var viewer = $('#pub-viewer');
-    viewer.empty();
-    var iframe = $('<iframe />');
+    var viewer = document.querySelector('#pub-viewer');
+    viewer.replaceChildren();
+    var iframe = document.createElement('iframe');
     viewer.append(iframe);
     return iframe;
+  }
+
+  function setPageCursor(cursor) {
+    document.querySelectorAll('*').forEach(function(element) {
+      element.style.cursor = cursor;
+    });
   }
 
   function setInViewer(key) {
@@ -174,39 +177,41 @@
       // blob to provide a mean to directly download it.
       if (blob.type == 'text/html') {
         var reader = new FileReader();
-        reader.onload = (function(evt) {
+        reader.onload = function(evt) {
           var html = evt.target.result;
-          iframe.load(function() {
-            $(this).contents().find('html').html(html);
-          });
-        });
+          iframe.addEventListener('load', function() {
+            iframe.contentDocument.documentElement.innerHTML = html;
+          }, { once: true });
+          iframe.src = 'about:blank';
+        };
         reader.readAsText(blob);
       } else if (blob.type.indexOf('image/') == 0) {
-        iframe.load(function() {
+        iframe.addEventListener('load', function() {
           var img_id = 'image-' + key;
-          var img = $('<img id="' + img_id + '"/>');
-          $(this).contents().find('body').html(img);
+          var img = iframe.contentDocument.createElement('img');
+          img.id = img_id;
+          iframe.contentDocument.body.replaceChildren(img);
           var obj_url = window.URL.createObjectURL(blob);
-          var imgEl = $(this).contents().find('#' + img_id);
           // Ensure the image loads before revoking its url.
-          imgEl.load(function() {
+          img.addEventListener('load', function() {
             window.URL.revokeObjectURL(obj_url);
           });
-          imgEl.attr('src', obj_url);
-        });
-        iframe.attr('src', 'about:blank');
+          img.src = obj_url;
+        }, { once: true });
+        iframe.src = 'about:blank';
       } else if (blob.type == 'application/pdf') {
-        $('*').css('cursor', 'wait');
+        setPageCursor('wait');
         var obj_url = window.URL.createObjectURL(blob);
-        iframe.load(function() {
-          $('*').css('cursor', 'auto');
-        });
-        iframe.attr('src', obj_url);
-        window.URL.revokeObjectURL(obj_url);
+        iframe.addEventListener('load', function() {
+          setPageCursor('auto');
+          window.URL.revokeObjectURL(obj_url);
+        }, { once: true });
+        iframe.src = obj_url;
       } else {
-        iframe.load(function() {
-          $(this).contents().find('body').html("No view available");
-        });
+        iframe.addEventListener('load', function() {
+          iframe.contentDocument.body.textContent = "No view available";
+        }, { once: true });
+        iframe.src = 'about:blank';
       }
 
     });
@@ -241,25 +246,6 @@
       }
     };
     xhr.send();
-
-    // We can't use jQuery here because as of jQuery 1.8.3 the new "blob"
-    // responseType is not handled.
-    // http://bugs.jquery.com/ticket/11461
-    // http://bugs.jquery.com/ticket/7248
-    // $.ajax({
-    //   url: url,
-    //   type: 'GET',
-    //   xhrFields: { responseType: 'blob' },
-    //   success: function(data, textStatus, jqXHR) {
-    //     console.log("Blob retrieved");
-    //     console.log("Blob:", data);
-    //     // addPublication(biblioid, title, year, data);
-    //   },
-    //   error: function(jqXHR, textStatus, errorThrown) {
-    //     console.error(errorThrown);
-    //     displayActionFailure("Error during blob retrieval");
-    //   }
-    // });
   }
 
   /**
@@ -359,34 +345,42 @@
 
   function displayActionSuccess(msg) {
     msg = typeof msg != 'undefined' ? "Success: " + msg : "Success";
-    $('#msg').html('<span class="action-success">' + msg + '</span>');
+    var status = document.querySelector('#msg');
+    var statusMessage = document.createElement('span');
+    statusMessage.className = 'action-success';
+    statusMessage.textContent = msg;
+    status.replaceChildren(statusMessage);
   }
   function displayActionFailure(msg) {
     msg = typeof msg != 'undefined' ? "Failure: " + msg : "Failure";
-    $('#msg').html('<span class="action-failure">' + msg + '</span>');
+    var status = document.querySelector('#msg');
+    var statusMessage = document.createElement('span');
+    statusMessage.className = 'action-failure';
+    statusMessage.textContent = msg;
+    status.replaceChildren(statusMessage);
   }
   function resetActionStatus() {
     console.log("resetActionStatus ...");
-    $('#msg').empty();
+    document.querySelector('#msg').replaceChildren();
     console.log("resetActionStatus DONE");
   }
 
   function addEventListeners() {
     console.log("addEventListeners");
 
-    $('#register-form-reset').click(function(evt) {
+    document.querySelector('#register-form-reset').addEventListener('click', function() {
       resetActionStatus();
     });
 
-    $('#add-button').click(function(evt) {
+    document.querySelector('#add-button').addEventListener('click', function() {
       console.log("add ...");
-      var title = $('#pub-title').val();
-      var biblioid = $('#pub-biblioid').val();
+      var title = document.querySelector('#pub-title').value;
+      var biblioid = document.querySelector('#pub-biblioid').value;
       if (!title || !biblioid) {
         displayActionFailure("Required field(s) missing");
         return;
       }
-      var year = $('#pub-year').val();
+      var year = document.querySelector('#pub-year').value;
       if (year != '') {
         // Better use Number.isInteger if the engine has EcmaScript 6
         if (isNaN(year))  {
@@ -398,14 +392,14 @@
         year = null;
       }
 
-      var file_input = $('#pub-file');
-      var selected_file = file_input.get(0).files[0];
+      var file_input = document.querySelector('#pub-file');
+      var selected_file = file_input.files[0];
       console.log("selected_file:", selected_file);
       // Keeping a reference on how to reset the file input in the UI once we
       // have its value, but instead of doing that we rather use a "reset" type
       // input in the HTML form.
-      //file_input.val(null);
-      var file_url = $('#pub-file-url').val();
+      //file_input.value = '';
+      var file_url = document.querySelector('#pub-file-url').value;
       if (selected_file) {
         addPublication(biblioid, title, year, selected_file);
       } else if (file_url) {
@@ -416,10 +410,10 @@
 
     });
 
-    $('#delete-button').click(function(evt) {
+    document.querySelector('#delete-button').addEventListener('click', function() {
       console.log("delete ...");
-      var biblioid = $('#pub-biblioid-to-delete').val();
-      var key = $('#key-to-delete').val();
+      var biblioid = document.querySelector('#pub-biblioid-to-delete').value;
+      var key = document.querySelector('#key-to-delete').value;
 
       if (biblioid != '') {
         deletePublicationFromBib(biblioid);
@@ -434,12 +428,12 @@
       }
     });
 
-    $('#clear-store-button').click(function(evt) {
+    document.querySelector('#clear-store-button').addEventListener('click', function() {
       clearObjectStore();
     });
 
-    var search_button = $('#search-list-button');
-    search_button.click(function(evt) {
+    var search_button = document.querySelector('#search-list-button');
+    search_button.addEventListener('click', function() {
       displayPubList();
     });
 
