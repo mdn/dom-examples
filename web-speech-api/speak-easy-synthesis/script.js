@@ -26,7 +26,7 @@ function populateVoiceList() {
   });
   const selectedIndex =
     voiceSelect.selectedIndex < 0 ? 0 : voiceSelect.selectedIndex;
-  voiceSelect.innerHTML = "";
+  voiceSelect.replaceChildren();
 
   for (let i = 0; i < voices.length; i++) {
     const option = document.createElement("option");

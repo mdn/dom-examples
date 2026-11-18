@@ -250,8 +250,8 @@ commands.forEach((command) => {
   } else {
     button.setAttribute("disabled", "true");
   }
-  button.innerHTML = `<i class="${
-    command.icon ? `fa fa-${command.icon}` : ""
-  }"></i> ${command.name}`;
+  const i = document.createElement("i");
+  i.className = command.icon ? `fa fa-${command.icon}` : "";
+  button.append(i, ` ${command.name}`);
   buttons.appendChild(button);
 });

@@ -61,7 +61,7 @@ async function getContacts() {
 function handleResults(contacts) {
   ulResults.classList.toggle("success", true);
   ulResults.classList.toggle("error", false);
-  ulResults.innerHTML = "";
+  ulResults.replaceChildren();
   renderResults(contacts);
 }
 
@@ -72,24 +72,32 @@ function enableProp(cbox) {
 
 function renderResults(contacts) {
   contacts.forEach((contact) => {
-    const lines = [];
-    if (contact.name) lines.push(`<b>Name:</b> ${contact.name.join(", ")}`);
-    if (contact.email) lines.push(`<b>E-mail:</b> ${contact.email.join(", ")}`);
-    if (contact.tel) lines.push(`<b>Telephone:</b> ${contact.tel.join(", ")}`);
+    const li = document.createElement("li");
+    function newLine(key,value){
+      li.appendChild(document.createElement('b')).textContent = key + ": ";
+      if(value instanceof Node) li.appendChild(value);
+      else if(value != null && value !== "") li.appendChild(document.createTextNode(value));
+      li.appendChild(document.createElement('br'));
+    }
+    if (contact.name) newLine("Name",contact.name.join(", "));
+    if (contact.email) newLine("E-Mail",contact.email.join(", "));
+    if (contact.tel) newLine("Telephone",contact.tel.join(", "));
     if (contact.address) {
       contact.address.forEach((address) => {
-        lines.push(`<b>Address:</b> ${JSON.stringify(address)}`);
+        newLine("Address",JSON.stringify(address));
       });
     }
     if (contact.icon) {
       contact.icon.forEach((icon) => {
         const imgURL = URL.createObjectURL(icon);
-        lines.push(`<b>Icon:</b> <img src="${imgURL}">`);
+        const img = document.createElement("img");
+        img.src=imgURL;
+        newLine("Icon", img);
       });
     }
-    lines.push(`<b>Raw:</b> <code>${JSON.stringify(contact)}</code>`);
-    const li = document.createElement("li");
-    li.innerHTML = lines.join("<br>");
+    const code = document.createElement('code');
+    code.textContent = JSON.stringify(contact);
+    newLine("Raw",code);
     ulResults.appendChild(li);
   });
   const strContacts = JSON.stringify(contacts, null, 2);

@@ -80,7 +80,7 @@ if (IS_CUSTOM_HIGHLIGHT_SUPPORTED) {
   // The render function's job is to update the view when the model changes.
   function render(text, selectionStart, selectionEnd) {
     // Empty the editor. We're re-rendering everything.
-    editorEl.innerHTML = "";
+    editorEl.replaceChildren();
 
     // Tokenize the text.
     currentTokens = tokenizeHTML(text);

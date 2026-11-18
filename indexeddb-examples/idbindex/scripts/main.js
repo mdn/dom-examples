@@ -166,7 +166,7 @@ window.onload = function () {
   for (let i = 0; i < thControls.length; i++) {
     const activeThead = thControls[i];
     activeThead.onclick = function (e) {
-      activeIndex = e.target.innerHTML;
+      activeIndex = e.target.textContent;     
       if (activeIndex == "ID") {
         displayDataByKey();
       } else {
@@ -190,7 +190,7 @@ window.onload = function () {
   }
 
   function displayDataByKey() {
-    tableEntry.innerHTML = "";
+    tableEntry.replaceChildren();
     const transaction = db.transaction(["contactsList"], "readonly");
     const objectStore = transaction.objectStore("contactsList");
 
@@ -198,31 +198,23 @@ window.onload = function () {
       const cursor = event.target.result;
       if (cursor) {
         const tableRow = document.createElement("tr");
-        tableRow.innerHTML =
-          "<td>" +
-          cursor.value.id +
-          "</td>" +
-          "<td>" +
-          cursor.value.lName +
-          "</td>" +
-          "<td>" +
-          cursor.value.fName +
-          "</td>" +
-          "<td>" +
-          cursor.value.jTitle +
-          "</td>" +
-          "<td>" +
-          cursor.value.company +
-          "</td>" +
-          "<td>" +
-          cursor.value.eMail +
-          "</td>" +
-          "<td>" +
-          cursor.value.phone +
-          "</td>" +
-          "<td>" +
-          cursor.value.age +
-          "</td>";
+        const fields = [
+          cursor.value.id,
+          cursor.value.lName,
+          cursor.value.fName,
+          cursor.value.jTitle,
+          cursor.value.company,
+          cursor.value.eMail,
+          cursor.value.phone,
+          cursor.value.age
+        ];
+
+        fields.forEach(value => {
+          const td = document.createElement("td");
+          td.textContent = value;
+          tableRow.appendChild(td);
+        });
+
         tableEntry.appendChild(tableRow);
 
         cursor.continue();
@@ -233,7 +225,7 @@ window.onload = function () {
   }
 
   function displayDataByIndex(activeIndex) {
-    tableEntry.innerHTML = "";
+    tableEntry.replaceChildren();
     const transaction = db.transaction(["contactsList"], "readonly");
     const objectStore = transaction.objectStore("contactsList");
 
@@ -268,31 +260,24 @@ window.onload = function () {
       const cursor = event.target.result;
       if (cursor) {
         const tableRow = document.createElement("tr");
-        tableRow.innerHTML =
-          "<td>" +
-          cursor.value.id +
-          "</td>" +
-          "<td>" +
-          cursor.value.lName +
-          "</td>" +
-          "<td>" +
-          cursor.value.fName +
-          "</td>" +
-          "<td>" +
-          cursor.value.jTitle +
-          "</td>" +
-          "<td>" +
-          cursor.value.company +
-          "</td>" +
-          "<td>" +
-          cursor.value.eMail +
-          "</td>" +
-          "<td>" +
-          cursor.value.phone +
-          "</td>" +
-          "<td>" +
-          cursor.value.age +
-          "</td>";
+
+        const values = [
+          cursor.value.id,
+          cursor.value.lName,
+          cursor.value.fName,
+          cursor.value.jTitle,
+          cursor.value.company,
+          cursor.value.eMail,
+          cursor.value.phone,
+          cursor.value.age
+        ];
+
+        values.forEach(val => {
+          const td = document.createElement("td");
+          td.textContent = val;
+          tableRow.appendChild(td);
+        });
+        
         tableEntry.appendChild(tableRow);
 
         cursor.continue();

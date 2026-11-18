@@ -34,8 +34,11 @@ function addSegmentOutput(segments, i, elem) {
 
   elem.appendChild(divElem);
 
-  divElem.innerHTML = `<h2>Viewport segment ${i + 1}</h2>
-  <p>${segment.width}px x ${segment.height}px</p>`;
+  const h2 = document.createElement('h2');
+  h2.textContent = `Viewport segment ${i + 1}`;
+  const p = document.createElement('p');
+  p.textContent = `${segment.width}px x ${segment.height}px`;
+  divElem.append(h2,p);
 }
 
 function reportSegments() {
