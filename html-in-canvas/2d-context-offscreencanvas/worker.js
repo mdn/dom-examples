@@ -2,7 +2,7 @@ const x = 100;
 const y = 100;
 let ctx;
 
-self.onmessage = ({ data }) => {
+self.addEventListener("message", ({ data }) => {
   if (data.canvas) {
     ctx = data.canvas.getContext("2d");
     if (!ctx.drawElementImage) self.postMessage({ unsupported: true });
@@ -27,4 +27,4 @@ self.onmessage = ({ data }) => {
 
     img.close(); // release the snapshot
   }
-};
+});
